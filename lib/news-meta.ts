@@ -1,4 +1,4 @@
-export type TopicKey = "general" | "finance" | "ai-tech";
+export type TopicKey = "general" | "finance" | "ai-tech" | "science" | "crypto";
 
 export type TopicMeta = {
   key: TopicKey;
@@ -39,6 +39,26 @@ export const TOPICS: TopicMeta[] = [
     accent: "var(--color-accent-rose)",
     commandPath: ".cursor/commands/aitech-news.md",
     scriptPath: "scripts/run-aitech-news.sh",
+  },
+  {
+    key: "science",
+    label: "科学与研究",
+    shortLabel: "科学",
+    description: "科学发现、航天、生物医药、气候与环境研究。",
+    folder: "science",
+    accent: "var(--color-accent-green)",
+    commandPath: ".cursor/commands/science-news.md",
+    scriptPath: "scripts/run-science-news.sh",
+  },
+  {
+    key: "crypto",
+    label: "加密与 Web3",
+    shortLabel: "Crypto",
+    description: "加密货币、监管、DeFi、机构与市场要闻。",
+    folder: "crypto",
+    accent: "var(--color-accent-violet)",
+    commandPath: ".cursor/commands/crypto-news.md",
+    scriptPath: "scripts/run-crypto-news.sh",
   },
 ];
 

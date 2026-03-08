@@ -19,7 +19,7 @@ const bodyFont = Instrument_Sans({
 
 export const metadata: Metadata = {
   title: "S-News",
-  description: "Cursor-native local-first daily intelligence reader.",
+  description: "Local-first daily news desk.",
 };
 
 const themeScript = `

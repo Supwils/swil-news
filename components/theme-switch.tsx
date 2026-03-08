@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { Monitor, Moon, Sun } from "lucide-react";
 
 const STORAGE_KEY = "s-news-theme";
@@ -36,6 +35,10 @@ const THEME_LABELS: Record<Theme, string> = {
   dark: "深色",
   system: "跟随系统",
 };
+
+function subscribeToHydration() {
+  return () => {};
+}
 
 function ThemeButton({
   theme,
@@ -79,13 +82,8 @@ function ThemeButton({
 }
 
 export function ThemeSwitch() {
-  const [theme, setTheme] = useState<Theme>("system");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setTheme(getStoredTheme());
-    setMounted(true);
-  }, []);
+  const [theme, setTheme] = useState<Theme>(() => getStoredTheme());
+  const mounted = useSyncExternalStore(subscribeToHydration, () => true, () => false);
 
   useEffect(() => {
     if (!mounted) return;
@@ -93,12 +91,12 @@ export function ThemeSwitch() {
     localStorage.setItem(STORAGE_KEY, theme);
   }, [mounted, theme]);
 
-  const button = (
-    <div className="fixed right-3 top-3 z-[9999] sm:right-6 sm:top-4 md:top-5" style={{ pointerEvents: "auto" }}>
+  return (
+    <div
+      className="fixed right-3 top-3 z-[9999] sm:right-6 sm:top-4 md:top-5"
+      style={{ pointerEvents: "auto" }}
+    >
       <ThemeButton theme={theme} setTheme={setTheme} mounted={mounted} />
     </div>
   );
-
-  if (typeof document === "undefined") return null;
-  return createPortal(button, document.body);
 }

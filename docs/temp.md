@@ -1,0 +1,1 @@
+App（本机 / 自建机）里点一下调 Cursor CLI	可行	后端/API 里 child_process 调现有脚本，且仅在本机或自建机启用
