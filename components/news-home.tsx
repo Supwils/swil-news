@@ -8,6 +8,7 @@ import { NewsDeskIllustration } from "@/components/home/news-desk-illustration";
 import { TodayPulse } from "@/components/home/today-pulse";
 import { copy } from "@/data/copy";
 import { NewsCard } from "@/components/news-card";
+import { RuntimeNavLink } from "@/components/runtime-nav-link";
 import { TopicIcon } from "@/components/topic-icon";
 import { formatDisplayDate, groupPreviewsByDate, searchEntries } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
@@ -55,12 +56,9 @@ export function NewsHome({ entries }: NewsHomeProps) {
               >
                 {copy.home.nav.about}
               </Link>
-              <Link
-                href="/runtime"
-                className="rounded-full border border-[var(--color-border)] px-3 py-1.5 transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-text-primary)]"
-              >
+              <RuntimeNavLink className="rounded-full border border-[var(--color-border)] px-3 py-1.5 transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-text-primary)]">
                 {copy.home.nav.runtime}
-              </Link>
+              </RuntimeNavLink>
               <span className="rounded-full border border-[var(--color-border)] px-3 py-1.5">{copy.home.nav.localFirst}</span>
               <span className="rounded-full border border-[var(--color-border)] px-3 py-1.5">{copy.home.nav.dateArchive}</span>
             </nav>
@@ -104,12 +102,9 @@ export function NewsHome({ entries }: NewsHomeProps) {
                   >
                     {copy.home.hero.ctaAbout}
                   </Link>
-                  <Link
-                    href="/runtime"
-                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-5 py-3 text-sm font-medium text-[var(--color-text-primary)] transition hover:border-[var(--color-border-strong)]"
-                  >
+                  <RuntimeNavLink className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-5 py-3 text-sm font-medium text-[var(--color-text-primary)] transition hover:border-[var(--color-border-strong)]">
                     {copy.home.hero.ctaRuntime}
-                  </Link>
+                  </RuntimeNavLink>
                 </div>
               </div>
 

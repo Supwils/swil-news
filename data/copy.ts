@@ -69,6 +69,13 @@ export const copy = {
     },
   },
 
+  /** Runtime page when execution is not allowed (e.g. deployed / read-only) */
+  runtime: {
+    readOnlyHeading: "本站为只读展示",
+    readOnlyBody: "日报生成仅在本地或配置的自建环境下可用。请返回首页浏览已归档的日报。",
+    backToNews: "返回首页看新闻",
+  },
+
   /** Home (news-home, today-pulse, news-desk-illustration) */
   home: {
     siteName: "S-News",

@@ -18,7 +18,7 @@ const TOPIC_SCRIPT_MAP: Record<string, string> = {
   all: "run_all_news.sh",
 };
 
-const RUN_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
+const RUN_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
 
 function isAllowedHost(request: NextRequest): boolean {
   if (process.env.VERCEL) {

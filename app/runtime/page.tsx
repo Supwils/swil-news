@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowLeft, CheckCircle2, Loader2, Play, XCircle } from "lucide-react";
 
+import { copy } from "@/data/copy";
 import { TOPICS } from "@/lib/news-meta";
 import type { TopicKey } from "@/lib/news-meta";
 
@@ -101,58 +102,70 @@ export default function RuntimePage() {
         </header>
 
         <main className="space-y-8 pb-12">
-          <section className="rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-hero)] sm:p-8 lg:p-10">
-            <h1 className="font-display text-3xl leading-tight tracking-[-0.03em] text-[var(--color-text-primary)] sm:text-4xl">
-              运行日报生成
-            </h1>
-            <p className="mt-3 max-w-2xl text-[var(--color-text-secondary)] sm:text-base">
-              选择主题后点击运行，将调用本机 agent CLI 执行对应脚本并写入 NEWS 目录。仅在本地或配置的自建环境下可用。
-            </p>
+          {allowed !== true ? (
+            <section className="rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-hero)] sm:p-8 lg:p-10">
+              <h1 className="font-display text-3xl leading-tight tracking-[-0.03em] text-[var(--color-text-primary)] sm:text-4xl">
+                {copy.runtime.readOnlyHeading}
+              </h1>
+              <p className="mt-3 max-w-2xl text-[var(--color-text-secondary)] sm:text-base">
+                {copy.runtime.readOnlyBody}
+              </p>
+              <Link
+                href="/"
+                className="mt-6 inline-flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-text-primary)] px-5 py-3 text-sm font-medium !text-[var(--color-bg-primary)] transition hover:opacity-90"
+              >
+                <ArrowLeft size={18} />
+                {copy.runtime.backToNews}
+              </Link>
+            </section>
+          ) : (
+            <>
+              <section className="rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-hero)] sm:p-8 lg:p-10">
+                <h1 className="font-display text-3xl leading-tight tracking-[-0.03em] text-[var(--color-text-primary)] sm:text-4xl">
+                  运行日报生成
+                </h1>
+                <p className="mt-3 max-w-2xl text-[var(--color-text-secondary)] sm:text-base">
+                  选择主题后点击运行，将调用本机 agent CLI 执行对应脚本并写入 NEWS 目录。仅在本地或配置的自建环境下可用。
+                </p>
 
-            {allowed === false && (
-              <div className="mt-6 rounded-2xl border border-[var(--color-border-strong)] bg-[var(--color-surface-muted)] px-5 py-4 text-sm text-[var(--color-text-secondary)]">
-                当前环境不允许执行生成（仅 localhost 或 ALLOWED_RUNTIME_HOST 可运行）。请在本地打开本应用后再使用此功能。
-              </div>
-            )}
+                <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                  {RUNTIME_OPTIONS.map((opt) => {
+                    const isRunning = runningTopic === opt.value;
+                    const disabled = state === "running";
+                    return (
+                      <div
+                        key={opt.value}
+                        className="rounded-[28px] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-5 shadow-[var(--shadow-card)] transition hover:border-[var(--color-border-strong)]"
+                      >
+                        <p className="font-medium text-[var(--color-text-primary)]">{opt.label}</p>
+                        <p className="mt-1 text-xs text-[var(--color-text-muted)]">
+                          {opt.value === "all" ? "scripts/run_all_news.sh" : `scripts/run-${opt.value === "ai-tech" ? "aitech" : opt.value}-news.sh`}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => run(opt.value)}
+                          disabled={disabled}
+                          className="mt-4 flex w-full items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm font-medium text-[var(--color-text-primary)] transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-muted)] disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          {isRunning ? (
+                            <>
+                              <Loader2 size={18} className="animate-spin" />
+                              运行中…
+                            </>
+                          ) : (
+                            <>
+                              <Play size={18} />
+                              运行
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {RUNTIME_OPTIONS.map((opt) => {
-                const isRunning = runningTopic === opt.value;
-                const disabled = !allowed || state === "running";
-                return (
-                  <div
-                    key={opt.value}
-                    className="rounded-[28px] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-5 shadow-[var(--shadow-card)] transition hover:border-[var(--color-border-strong)]"
-                  >
-                    <p className="font-medium text-[var(--color-text-primary)]">{opt.label}</p>
-                    <p className="mt-1 text-xs text-[var(--color-text-muted)]">
-                      {opt.value === "all" ? "scripts/run_all_news.sh" : `scripts/run-${opt.value === "ai-tech" ? "aitech" : opt.value}-news.sh`}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => run(opt.value)}
-                      disabled={disabled}
-                      className="mt-4 flex w-full items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm font-medium text-[var(--color-text-primary)] transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-muted)] disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      {isRunning ? (
-                        <>
-                          <Loader2 size={18} className="animate-spin" />
-                          运行中…
-                        </>
-                      ) : (
-                        <>
-                          <Play size={18} />
-                          运行
-                        </>
-                      )}
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-
-          {result && (
+              {result && (
             <section className="rounded-[32px] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-card)] sm:p-8">
               <div className="flex items-center gap-3">
                 {result.ok ? (
@@ -177,6 +190,8 @@ export default function RuntimePage() {
                 </pre>
               )}
             </section>
+              )}
+            </>
           )}
         </main>
       </div>

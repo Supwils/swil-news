@@ -17,11 +17,22 @@ S-News 是一个本地优先的多主题日报阅读器。你用 Cursor 的 Comm
 
 ---
 
+## 本地 vs 部署
+
+| 场景 | 行为 |
+|------|------|
+| **本地运行** | 可访问 **Runtime** 页面，在 Web 内一键触发生成脚本；新闻从本机 `NEWS/` 读取。 |
+| **公共部署（如 Vercel）** | **无 Runtime**：不执行脚本，仅展示已提交的 `NEWS/` 日报；导航中不显示「Runtime」入口，访问 `/runtime` 会看到只读说明并引导回首页。 |
+
+数据流：**本地生成 → 写入 `NEWS/` → 提交并推送 → 部署时打包进站点 → 访客只读**。部署环境通过 `VERCEL` 等变量关闭执行权限，安全且简单。
+
+---
+
 ## 思路与流程
 
 1. **定义日报**：在 `.cursor/commands/` 里为每个主题写一份「说明书」（步骤、模板、输出路径）。
-2. **触发生成**：手动或定时执行 `scripts/run-*-news.sh`，通过 Cursor CLI 调用对应 Command，完成搜索与成文，写入 `NEWS/<topic>/`。
-3. **阅读与检索**：本地跑 Next.js 应用，从文件系统读 Markdown，在浏览器里按日期/主题浏览、搜索标题与摘要。
+2. **触发生成**：本地手动或定时执行 `scripts/run-*-news.sh`，或在本机打开应用后从 Runtime 页点击运行；脚本通过 Cursor CLI 调用对应 Command，完成搜索与成文，写入 `NEWS/<topic>/`。
+3. **阅读与检索**：本地或部署后的 Next.js 应用从文件系统（或构建包内的 `NEWS/`）读 Markdown，在浏览器里按日期/主题浏览、搜索标题与摘要。
 
 数据流：**人 / cron → 脚本 → Cursor CLI → NEWS/*.md → Next.js 展示**。
 
@@ -33,18 +44,26 @@ S-News 是一个本地优先的多主题日报阅读器。你用 Cursor 的 Comm
 ├── .cursor/commands/     # 各主题日报的 Command 定义
 │   ├── general-news.md   # 日常通用
 │   ├── finance-news.md   # 金融股市
-│   └── aitech-news.md    # AI 与科技
-├── NEWS/                 # 日报产出（按主题分子目录）
+│   ├── aitech-news.md    # AI 与科技
+│   └── …
+├── NEWS/                 # 日报产出（按主题分子目录，可提交 Git）
 │   ├── general/
 │   ├── finance/
-│   └── ai-tech/
+│   ├── ai-tech/
+│   └── …
 ├── scripts/              # 调用 Cursor CLI 的 Shell 脚本
-│   └── run-aitech-news.sh
+│   ├── run-all_news.sh   # 依次跑全部主题
+│   ├── run-general-news.sh
+│   ├── run-aitech-news.sh
+│   └── …
 ├── app/                   # Next.js App Router
 │   ├── page.tsx           # 首页：日期索引 + 今日摘要
+│   ├── runtime/           # 本地可用的「运行日报生成」页
 │   ├── news/[topic]/[date]/  # 日报正文
-│   └── api/news/          # 读 NEWS 的 API
-├── components/            # 首页、卡片、主题切换等
+│   └── api/
+│       ├── news/          # 读 NEWS 的 API
+│       └── runtime/generate/  # 仅本地/受控环境可 POST 触发生成
+├── components/            # 首页、卡片、Runtime 链接（按环境显隐）等
 ├── lib/                   # 读 md、解析、索引（news-client, news-meta）
 └── docs/
     └── s-news.md          # 设计与架构说明（扩展与协作用）
@@ -61,22 +80,45 @@ S-News 是一个本地优先的多主题日报阅读器。你用 Cursor 的 Comm
 
 ### 生成日报
 
-在项目根目录执行对应脚本，例如：
+在项目根目录执行对应脚本，例如单主题：
 
 ```bash
 ./scripts/run-aitech-news.sh
 ```
 
-脚本会调用 `agent`，按 `.cursor/commands/aitech-news.md` 的流程做多轮搜索并写出 `NEWS/ai-tech/YYYY-MM-DD_*.md`。可仿照该脚本为 `general-news`、`finance-news` 写 `run-general-news.sh`、`run-finance-news.sh`，或用 cron 定时执行。
+或一次跑完全部主题（耗时较长，建议本机或自建环境执行）：
 
-### 本地阅读
+```bash
+./scripts/run_all_news.sh
+```
+
+脚本会调用 `agent`，按 `.cursor/commands/*.md` 的流程做多轮搜索并写出 `NEWS/<topic>/YYYY-MM-DD_*.md`。可配合 cron/launchd 定时执行。
+
+### 本地阅读与 Runtime
 
 ```bash
 pnpm install   # 或 npm install
 pnpm dev       # 默认 http://localhost:3011
 ```
 
-浏览器打开后即可按日期、主题浏览，使用搜索框过滤标题/摘要/简评。
+浏览器打开后即可按日期、主题浏览，使用搜索框过滤；若在本机运行，导航中会出现 **Runtime**，可在此页选择主题并点击运行，触发生成脚本并写入 `NEWS/`。
+
+### 本地运行生产构建
+
+构建并启动生产服务器（用于验证部署效果或性能）：
+
+```bash
+pnpm build
+pnpm start     # 默认端口 3000；若需与 dev 一致可：pnpm start -- -p 3011
+```
+
+生产模式下仍从当前目录的 `NEWS/` 读取；在本机时 Runtime 接口可用，行为与 `pnpm dev` 一致。
+
+### 部署（如 Vercel + GitHub）
+
+1. 将仓库连接 Vercel，按需配置构建命令（默认 `next build`）与输出。
+2. 日常流程：在**本地**运行上述脚本生成日报 → 将 `NEWS/` 的变更 **commit 并 push** → Vercel 自动重新部署，新站点即包含最新日报。
+3. 部署后的站点**不提供 Runtime**：不执行脚本，仅展示已打包的 `NEWS/` 内容；导航中不显示「Runtime」入口，访问 `/runtime` 会看到只读说明。
 
 ---
 
@@ -91,8 +133,7 @@ pnpm dev       # 默认 http://localhost:3011
 ## 后续可做
 
 - **全文检索**：在现有关键词搜索上加强，或加轻量索引。
-- **Runbook 与一键触发**：在 Web 内展示/复制运行命令，或（在受控环境）通过 API 触发本机脚本。
-- **多脚本与定时**：补全 `run-general-news.sh`、`run-finance-news.sh` 及 `run_all_news.sh`，并写 cron/launchd 示例。
+- **多脚本与定时**：补全各主题脚本及 `run_all_news.sh`，并写 cron/launchd 示例。
 - **周报/月报**：若新增对应 Command 与产出格式，在应用中加列表与正文路由。
 
 设计与规范细节见 **docs/s-news.md**。

@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { NewsDeskIllustration } from "@/components/home/news-desk-illustration";
 import { copy } from "@/data/copy";
+import { RuntimeNavLink } from "@/components/runtime-nav-link";
 import { TopicIcon } from "@/components/topic-icon";
 import { getAllNewsPreviews, formatDisplayDate } from "@/lib/news";
 import { TOPICS } from "@/lib/news-meta";
@@ -41,12 +42,9 @@ export default async function AboutPage() {
               <span className="rounded-full border border-[var(--color-border-strong)] bg-[var(--color-surface-muted)] px-3 py-1.5">
                 {copy.about.nav.about}
               </span>
-              <Link
-                href="/runtime"
-                className="rounded-full border border-[var(--color-border)] px-3 py-1.5 transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-text-primary)]"
-              >
+              <RuntimeNavLink className="rounded-full border border-[var(--color-border)] px-3 py-1.5 transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-text-primary)]">
                 {copy.about.nav.runtime}
-              </Link>
+              </RuntimeNavLink>
             </nav>
           </div>
         </header>
@@ -190,12 +188,9 @@ export default async function AboutPage() {
                 >
                   {copy.about.cta.backHome}
                 </Link>
-                <Link
-                  href="/runtime"
-                  className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-5 py-3 text-sm font-medium text-[var(--color-text-primary)] transition hover:border-[var(--color-border-strong)]"
-                >
+                <RuntimeNavLink className="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-5 py-3 text-sm font-medium text-[var(--color-text-primary)] transition hover:border-[var(--color-border-strong)]">
                   {copy.about.cta.toRuntime}
-                </Link>
+                </RuntimeNavLink>
               </div>
             </div>
           </section>
