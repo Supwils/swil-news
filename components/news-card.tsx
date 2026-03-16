@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowUpRight, Clock3, FileText, Layers3 } from "lucide-react";
+
+import { SelectableLink } from "@/components/SelectableLink";
 
 import { useLocale } from "@/components/locale-context";
 import { InlineMarkdown } from "@/components/news-markdown";
@@ -26,13 +27,21 @@ export function NewsCard({ entry, compact = false, className }: NewsCardProps) {
     return null;
   }
 
+  const newsHref = `/news/${entry.topic}/${entry.date}`;
+
   return (
-    <article
-      className={[
-        "group relative overflow-hidden rounded-[28px] border border-(--color-border) bg-(--color-surface)/92 p-5 shadow-(--shadow-card) transition duration-300 hover:-translate-y-[3px] hover:border-(--color-border-strong) hover:shadow-(--shadow-card-hover) sm:p-6",
-        className ?? "",
-      ].join(" ")}
+    <SelectableLink
+      href={newsHref}
+      className="block cursor-pointer"
+      aria-label={copy.ui.newsCard.viewEntry(entry.title)}
     >
+      <article
+        className={[
+          "group relative overflow-hidden rounded-[28px] border border-(--color-border) bg-(--color-surface)/92 p-5 shadow-(--shadow-card) transition duration-300 hover:-translate-y-[3px] hover:border-(--color-border-strong) hover:shadow-(--shadow-card-hover) sm:p-6",
+          className ?? "",
+        ].join(" ")}
+      >
+      <div className="select-text">
       <div
         className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 translate-x-[-140%] bg-[linear-gradient(90deg,transparent,var(--color-card-sheen),transparent)] opacity-0 transition duration-500 group-hover:translate-x-[430%] group-hover:opacity-100"
         aria-hidden="true"
@@ -74,13 +83,12 @@ export function NewsCard({ entry, compact = false, className }: NewsCardProps) {
           </div>
         </div>
 
-        <Link
-          href={`/news/${entry.topic}/${entry.date}`}
-          className="hidden rounded-full border border-(--color-border) bg-(--color-surface-muted) p-3 text-(--color-text-primary) transition duration-200 hover:border-(--color-border-strong) hover:bg-(--color-surface) hover:translate-x-0.5 sm:inline-flex"
-          aria-label={copy.ui.newsCard.viewEntry(entry.title)}
+        <span
+          className="hidden rounded-full border border-(--color-border) bg-(--color-surface-muted) p-3 text-(--color-text-primary) transition duration-200 group-hover:border-(--color-border-strong) group-hover:bg-(--color-surface) group-hover:translate-x-0.5 sm:inline-flex"
+          aria-hidden
         >
           <ArrowUpRight size={16} />
-        </Link>
+        </span>
       </div>
 
       <div className="mt-5 flex flex-wrap items-center gap-2 text-xs text-(--color-text-muted)">
@@ -120,13 +128,12 @@ export function NewsCard({ entry, compact = false, className }: NewsCardProps) {
         </div>
       ) : null}
 
-      <Link
-        href={`/news/${entry.topic}/${entry.date}`}
-        className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-(--color-text-primary) transition hover:gap-3 sm:hidden"
-      >
+      <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-(--color-text-primary) transition group-hover:gap-3 sm:hidden">
         {copy.ui.newsCard.readFull}
         <ArrowUpRight size={15} />
-      </Link>
+      </span>
+      </div>
     </article>
+    </SelectableLink>
   );
 }
