@@ -16,6 +16,16 @@ if ! command -v agent &> /dev/null; then
   exit 1
 fi
 
+# 第一个参数若提供则视为模型名（覆盖 NEWS_AGENT_MODEL）。
+# 与 daily-news-and-commit.sh 一致：NEWS_AGENT_MODEL_DEFAULT 默认 composer-2，CLI 恢复 auto 后改为 auto。
+if [[ -n "${1:-}" ]]; then
+  export NEWS_AGENT_MODEL="$1"
+fi
+: "${NEWS_AGENT_MODEL_DEFAULT:=composer-2}"
+export NEWS_AGENT_MODEL="${NEWS_AGENT_MODEL:-$NEWS_AGENT_MODEL_DEFAULT}"
+export NEWS_AGENT_MODEL_DEFAULT
+
+echo ">>> Agent 模型: $NEWS_AGENT_MODEL"
 echo "=== 开始依次生成全部主题日报 ==="
 
 for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-science-news.sh run-crypto-news.sh run-energy-climate-news.sh run-auto-mobility-news.sh run-gaming-news.sh run-supply-chain-news.sh; do

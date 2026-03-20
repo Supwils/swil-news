@@ -15,6 +15,8 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 cd "$PROJECT_ROOT"
 
+AGENT_MODEL="${NEWS_AGENT_MODEL:-${NEWS_AGENT_MODEL_DEFAULT:-composer-2}}"
+
 TODAY=$(date +%Y-%m-%d)
 TODAY_CN=$(date +%Y年%m月%d日)
 
@@ -29,5 +31,5 @@ fi
 echo "项目目录: $PROJECT_ROOT"
 echo "执行 command: $COMMAND_FILE"
 echo "---"
-agent -p --force --model auto "@${COMMAND_FILE}" "${INSTRUCTION}"
+agent -p --force --model "$AGENT_MODEL" "@${COMMAND_FILE}" "${INSTRUCTION}"
 echo "执行完成"
