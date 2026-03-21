@@ -15,6 +15,7 @@ const TOPIC_SCRIPT_MAP: Record<string, string> = {
   "auto-mobility": "run-auto-mobility-news.sh",
   gaming: "run-gaming-news.sh",
   "supply-chain": "run-supply-chain-news.sh",
+  "sports-health-nutrition": "run-sports-health-nutrition-news.sh",
   all: "run_all_news.sh",
 };
 
@@ -29,6 +30,7 @@ const ALL_TOPICS_ORDER: string[] = [
   "auto-mobility",
   "gaming",
   "supply-chain",
+  "sports-health-nutrition",
 ];
 
 const RUN_TIMEOUT_MS = 20 * 60 * 1000; // 20 minutes (single-topic)
@@ -66,7 +68,7 @@ export async function POST(request: NextRequest) {
   const scriptName = topic && TOPIC_SCRIPT_MAP[topic];
   if (!scriptName) {
     return NextResponse.json(
-      { ok: false, error: "Missing or invalid topic. Use: general | finance | ai-tech | science | crypto | energy-climate | auto-mobility | gaming | supply-chain | all" },
+      { ok: false, error: "Missing or invalid topic. Use: general | finance | ai-tech | science | crypto | energy-climate | auto-mobility | gaming | supply-chain | sports-health-nutrition | all" },
       { status: 400 },
     );
   }

@@ -9,7 +9,8 @@ export type TopicKey =
   | "energy-climate"
   | "auto-mobility"
   | "gaming"
-  | "supply-chain";
+  | "supply-chain"
+  | "sports-health-nutrition";
 
 export type TopicMeta = {
   key: TopicKey;
@@ -143,6 +144,19 @@ const TOPICS_RAW: TopicMetaRaw[] = [
     accent: "var(--color-accent-slate)",
     commandPath: ".cursor/commands/supply-chain-news.md",
     scriptPath: "scripts/run-supply-chain-news.sh",
+  },
+  {
+    key: "sports-health-nutrition",
+    label: "运动健康营养",
+    shortLabel: "运动/健康",
+    description: "运动健身、健康养生、营养学与膳食知识。",
+    labelEn: "Sports, health & nutrition",
+    shortLabelEn: "Sports/Health",
+    descriptionEn: "Fitness, wellness, nutrition science and dietary knowledge.",
+    folder: "sports-health-nutrition",
+    accent: "var(--color-accent-emerald)",
+    commandPath: ".cursor/commands/sports-health-nutrition-news.md",
+    scriptPath: "scripts/run-sports-health-nutrition-news.sh",
   },
 ];
 

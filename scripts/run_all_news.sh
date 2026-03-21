@@ -28,7 +28,7 @@ export NEWS_AGENT_MODEL_DEFAULT
 echo ">>> Agent 模型: $NEWS_AGENT_MODEL"
 echo "=== 开始依次生成全部主题日报 ==="
 
-for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-science-news.sh run-crypto-news.sh run-energy-climate-news.sh run-auto-mobility-news.sh run-gaming-news.sh run-supply-chain-news.sh; do
+for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-science-news.sh run-crypto-news.sh run-energy-climate-news.sh run-auto-mobility-news.sh run-gaming-news.sh run-supply-chain-news.sh run-sports-health-nutrition-news.sh; do
   path="$SCRIPT_DIR/$script"
   if [[ -x "$path" ]]; then
     echo ""

@@ -165,5 +165,11 @@ function renderGlyph(topic: TopicKey) {
           <path d="M16 6v2" />
         </>
       );
+    case "sports-health-nutrition":
+      return (
+        <>
+          <path d="M3 12h3l2-4 2 8 2-4h4" />
+        </>
+      );
   }
 }
