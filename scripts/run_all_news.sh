@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# 依次执行全部主题的日报生成脚本（通用、金融、AI 科技、科学、加密、能源气候、汽车出行、游戏、供应链）
+# 依次执行全部主题的日报生成脚本（通用、金融、AI 科技、科学、加密、能源气候、汽车出行、游戏、供应链、运动健康营养）
 # 依赖：已安装并登录 Cursor CLI (agent)
 #
 
@@ -28,6 +28,7 @@ export NEWS_AGENT_MODEL_DEFAULT
 echo ">>> Agent 模型: $NEWS_AGENT_MODEL"
 echo "=== 开始依次生成全部主题日报 ==="
 
+export SKIP_NEWS_INDEX_REFRESH=1
 for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-science-news.sh run-crypto-news.sh run-energy-climate-news.sh run-auto-mobility-news.sh run-gaming-news.sh run-supply-chain-news.sh run-sports-health-nutrition-news.sh; do
   path="$SCRIPT_DIR/$script"
   if [[ -x "$path" ]]; then
@@ -38,6 +39,9 @@ for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-sci
     echo ">>> 跳过 $script (不存在或不可执行)" >&2
   fi
 done
+unset SKIP_NEWS_INDEX_REFRESH
+
+bash "$SCRIPT_DIR/refresh-news-index.sh"
 
 echo ""
 echo "=== 全部主题日报生成完成 ==="

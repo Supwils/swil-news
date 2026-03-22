@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { BookOpenText, Command, Search, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
@@ -9,6 +10,15 @@ import { TopicIcon } from "@/components/topic-icon";
 import { getLocaleFromCookie } from "@/lib/get-locale";
 import { getAllNewsPreviews, formatDisplayDate } from "@/lib/news";
 import { TOPICS, getTopicMeta } from "@/lib/news-meta";
+import { SITE_NAME } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: `About ${SITE_NAME}, its editorial workflow, archive structure, and runtime generation flow.`,
+  alternates: {
+    canonical: "/about",
+  },
+};
 
 export default async function AboutPage() {
   const locale = await getLocaleFromCookie();

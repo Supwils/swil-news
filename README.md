@@ -2,7 +2,7 @@
 
 **把 Cursor 生成的日报，变成一份真正值得每天打开的信息界面。**
 
-S-News 是一个本地优先的多主题日报阅读器。你用 Cursor 的 Command 生成通用、金融、AI 科技等日报，以 Markdown 存盘；用本仓库里的 Next.js 应用按日期、主题浏览和检索，让「命令产出」从散落文件夹升级为可读、可查的每日信息中枢。
+S-News 是一个本地优先的多主题日报阅读器。你用 Cursor 的 Command 生成通用、金融、AI 科技、运动健康营养等日报，以 Markdown 存盘；用本仓库里的 Next.js 应用按日期、主题浏览和检索，让「命令产出」从散落文件夹升级为可读、可查的每日信息中枢。
 
 ---
 
@@ -50,11 +50,13 @@ S-News 是一个本地优先的多主题日报阅读器。你用 Cursor 的 Comm
 │   ├── general/
 │   ├── finance/
 │   ├── ai-tech/
+│   ├── sports-health-nutrition/
 │   └── …
 ├── scripts/              # 调用 Cursor CLI 的 Shell 脚本
 │   ├── run-all_news.sh   # 依次跑全部主题
 │   ├── run-general-news.sh
 │   ├── run-aitech-news.sh
+│   ├── run-sports-health-nutrition-news.sh
 │   └── …
 ├── app/                   # Next.js App Router
 │   ├── page.tsx           # 首页：日期索引 + 今日摘要

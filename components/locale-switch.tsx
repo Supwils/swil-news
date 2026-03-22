@@ -3,27 +3,19 @@
 import { useRouter } from "next/navigation";
 import { Languages } from "lucide-react";
 
-import { useLocale } from "@/components/locale-context";
-
-const COOKIE_NAME = "s-news-locale";
-const COOKIE_PATH = "/";
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
-
-function setLocaleCookie(locale: "zh" | "en") {
-  if (typeof document === "undefined") return;
-  document.cookie = `${COOKIE_NAME}=${locale}; path=${COOKIE_PATH}; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
-}
+import { useLocale, useSetLocale } from "@/components/locale-context";
 
 export function LocaleSwitch() {
   const router = useRouter();
   const locale = useLocale();
+  const setLocale = useSetLocale();
   const nextLocale = locale === "zh" ? "en" : "zh";
 
   const label = locale === "zh" ? "中文" : "EN";
   const ariaLabel = locale === "zh" ? "Switch to English" : "切换到中文";
 
   const handleClick = () => {
-    setLocaleCookie(nextLocale);
+    setLocale(nextLocale);
     router.refresh();
   };
 

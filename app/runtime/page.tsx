@@ -60,7 +60,7 @@ export default function RuntimePage() {
     setResult(null);
     setState("running");
     setRunningTopic(topic);
-    setRunProgress(topic === "all" ? { done: 0, total: TOPICS.length, current: null } : null);
+    setRunProgress(topic === "all" ? { done: 0, total: 10, current: null } : null);
     try {
       const res = await fetch("/api/runtime/generate", {
         method: "POST",

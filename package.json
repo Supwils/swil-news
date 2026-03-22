@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build:news-index": "node scripts/build-news-index.mjs",
     "dev": "next dev --port 3011",
+    "predev": "pnpm build:news-index",
+    "prebuild": "pnpm build:news-index",
     "build": "next build",
+    "prestart": "pnpm build:news-index",
     "start": "next start",
     "lint": "eslint ."
   },

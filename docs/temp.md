@@ -47,3 +47,38 @@ App（本机 / 自建机）里点一下调 Cursor CLI	可行	后端/API 里 chil
 ---
 
 **建议优先**：先做 **1（Runtime 体验）** 或 **4（文档 + cron）**，再视时间做 **2（高亮）** 或 **3（今日简报）**。
+
+
+
+想做到“专业网站”，优先补这些
+
+可信度层：每条内容补 source_count、主信源类型、生成时间、更新时间、AI 生成标识、人工复核状态、置信度、失效链接检测。
+SEO 层：加 sitemap.xml、robots.txt、RSS、Open Graph、Twitter Card、schema.org/NewsArticle、canonical、topic archive 元信息。
+性能层：把 NEWS 预编译成索引 JSON，首页/主题页尽量静态化，详情页做按需读取，归档分页或按月分段。
+安全层：Runtime 默认只在本地 dev 启用；自建环境必须加 auth、origin 校验、rate limit、审计日志；隐藏原始 stdout/stderr。
+运营层：加“编辑标准 / 数据来源说明 / AI 免责声明 / 勘误记录 / 更新时间线”页面。
+开源层：补 LICENSE、CONTRIBUTING.md、GitHub Actions、最小示例数据、截图、部署说明、架构图。
+最值得加的功能
+
+每个主题的 RSS / 邮件订阅 / Telegram 或微信推送。
+“今天 vs 昨天”变化摘要，能明显提升日报价值。
+Source filter、region filter、importance filter。
+“本条新闻来自哪些主信源”与“相似历史事件”。
+周报、专题深读、事件时间线、关键词 watchlist。
+导出 JSON / CSV / API token，方便二次消费。
+付费内容怎么加，且不打乱现有逻辑
+
+最稳的做法是：保留现在所有“每日基础日报”为免费层，不动现有路由和阅读逻辑。
+新增付费层做在“增量价值”上：周度深度报告、行业专题、历史对比、个性化 watchlist、邮件/推送、数据导出、API、无广告、提前看。
+内容模型上加一个很轻的 tier 概念：free | member | pro。现有内容默认 free，不影响现在站点。
+支付体系建议用 Stripe + Auth.js/Clerk + Postgres。先做 entitlement 判断，不先动 NEWS 读取逻辑。
+SEO 上不要整站硬锁。保留标题、摘要、前 20%-30% 预览公开，把“深度分析”“数据附录”“历史对比”设为会员可见。
+如果想做商业合作，可以加 Sponsor 卡位，但必须明确标注 Sponsored，不要混进 AI 新闻正文。
+不打乱现有功能的修改计划
+
+第 1 阶段，先补底座：SEO 资产、安全头、Runtime 权限边界、日志脱敏、License/CI/README 补齐。
+第 2 阶段，只做性能重构，不改 UI 逻辑：把 Markdown 读取改为构建期索引，减少动态渲染和重复 I/O。
+第 3 阶段，补内容可信度：source 校验、坏链检查、生成元数据、勘误与更新时间。
+第 4 阶段，加专业功能：RSS、邮件订阅、周报、变化追踪、历史关联。
+第 5 阶段，再上付费：先做会员专区和深度内容，不碰现有免费日报；验证后再加 API、导出、个性化订阅。
+如果你愿意，我下一步可以直接按这个项目现状，给你再细化一版“可执行实施清单”，拆成 P0 / P1 / P2，精确到页面、接口、数据结构和上线顺序。

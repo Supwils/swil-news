@@ -23,8 +23,22 @@ export type NewsPreview = Omit<NewsEntry, "content" | "filePath"> & {
   searchText: string;
 };
 
+type IndexedNewsPreview = NewsPreview & {
+  relativePath: string;
+  archiveMonth: string;
+};
+
+type NewsIndex = {
+  version: number;
+  generatedAt: string;
+  entries: IndexedNewsPreview[];
+};
+
 const TOPIC_ORDER = TOPICS.map((topic) => topic.key);
 const NEWS_ROOT = path.join(process.cwd(), "NEWS");
+const NEWS_INDEX_PATH = path.join(process.cwd(), ".generated", "news-index.json");
+
+let cachedIndex: { mtimeMs: number; data: NewsIndex } | null = null;
 
 function countMatches(content: string, pattern: RegExp) {
   return content.match(pattern)?.length ?? 0;
@@ -39,11 +53,9 @@ function extractDescription(content: string, fallback: string) {
 }
 
 function extractTakeaway(content: string) {
-  // 优先：带标签的总体定性/今日定性（支持冒号在粗体内或外）
   const match = content.match(/\*\*(总体定性|今日定性)(：\*\*|\*\*：)\s*(.+)/);
   if (match?.[3]) return match[3].trim();
 
-  // 回退：取 ## 今日小结 下最后一段非 bullet 的段落作为定性
   const summaryHeading = content.match(/^##\s+今日小结$/m);
   if (summaryHeading?.index === undefined) return undefined;
   const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
@@ -92,6 +104,48 @@ function getReadingMinutes(content: string) {
 
 type NewsFallbacks = { untitled: string; noDescription: string };
 
+function getRelativeNewsPath(topic: TopicMeta, fileName: string) {
+  return path.posix.join("NEWS", topic.folder, fileName);
+}
+
+function resolveRelativeNewsPath(relativePath: string) {
+  return path.join(process.cwd(), ...relativePath.split("/"));
+}
+
+function toIndexedPreview(entry: NewsEntry, topic: TopicMeta): IndexedNewsPreview {
+  return {
+    ...toNewsPreview(entry),
+    relativePath: getRelativeNewsPath(topic, entry.fileName),
+    archiveMonth: entry.date.slice(0, 7),
+  };
+}
+
+function fromIndexedPreview(entry: IndexedNewsPreview): NewsPreview {
+  const { relativePath: _relativePath, archiveMonth: _archiveMonth, ...preview } = entry;
+  return preview;
+}
+
+async function loadNewsIndex() {
+  try {
+    const stat = await fs.stat(NEWS_INDEX_PATH);
+    if (cachedIndex && cachedIndex.mtimeMs === stat.mtimeMs) {
+      return cachedIndex.data;
+    }
+
+    const raw = await fs.readFile(NEWS_INDEX_PATH, "utf8");
+    const parsed = JSON.parse(raw) as NewsIndex;
+    const data = {
+      ...parsed,
+      entries: sortEntries(parsed.entries),
+    };
+    cachedIndex = { mtimeMs: stat.mtimeMs, data };
+    return data;
+  } catch {
+    cachedIndex = null;
+    return null;
+  }
+}
+
 async function readTopicEntries(topic: TopicMeta, fallbacks: NewsFallbacks) {
   const directory = path.join(NEWS_ROOT, topic.folder);
   const files = (await readDirectorySafe(directory)).filter((file) => file.endsWith(".md"));
@@ -124,6 +178,34 @@ async function readTopicEntries(topic: TopicMeta, fallbacks: NewsFallbacks) {
   return sortEntries(entries);
 }
 
+async function readEntryFromTopicByDate(topic: TopicMeta, date: string, fallbacks: NewsFallbacks) {
+  const directory = path.join(NEWS_ROOT, topic.folder);
+  const files = await readDirectorySafe(directory);
+  const fileName = files.find((file) => file.startsWith(`${date}_`) && file.endsWith(".md"));
+
+  if (!fileName) {
+    return null;
+  }
+
+  const filePath = path.join(directory, fileName);
+  const content = await fs.readFile(filePath, "utf8");
+
+  return {
+    topic: topic.key,
+    date,
+    fileName,
+    filePath,
+    content,
+    title: extractTitle(content, fallbacks.untitled),
+    description: extractDescription(content, fallbacks.noDescription),
+    articleCount: countMatches(content, /^###\s+/gm),
+    sectionCount: countMatches(content, /^##\s+/gm),
+    readingMinutes: getReadingMinutes(content),
+    highlights: extractHighlights(content),
+    takeaway: extractTakeaway(content),
+  } satisfies NewsEntry;
+}
+
 export async function getAllNewsEntries(locale: Locale = "zh") {
   const fallbacks = getCopy(locale).news;
   const nested = await Promise.all(
@@ -133,6 +215,11 @@ export async function getAllNewsEntries(locale: Locale = "zh") {
 }
 
 export async function getAllNewsPreviews(locale: Locale = "zh") {
+  const index = await loadNewsIndex();
+  if (index) {
+    return index.entries.map(fromIndexedPreview);
+  }
+
   const entries = await getAllNewsEntries(locale);
   return entries.map(toNewsPreview);
 }
@@ -148,17 +235,81 @@ export async function getEntriesByTopic(topic: TopicKey, locale: Locale = "zh") 
 }
 
 export async function getEntryPreviewsByTopic(topic: TopicKey, locale: Locale = "zh") {
+  const index = await loadNewsIndex();
+  if (index) {
+    return index.entries
+      .filter((entry) => entry.topic === topic)
+      .map(fromIndexedPreview);
+  }
+
   const entries = await getEntriesByTopic(topic, locale);
   return entries.map(toNewsPreview);
 }
 
-export async function getNewsEntry(topic: TopicKey, date: string, locale: Locale = "zh") {
-  const entries = await getEntriesByTopic(topic, locale);
-  return entries.find((entry) => entry.date === date) ?? null;
+export async function getEntryPreviewsByMonth(month: string, locale: Locale = "zh") {
+  const index = await loadNewsIndex();
+  if (index) {
+    return index.entries
+      .filter((entry) => entry.archiveMonth === month)
+      .map(fromIndexedPreview);
+  }
+
+  const entries = await getAllNewsEntries(locale);
+  return entries
+    .filter((entry) => entry.date.startsWith(`${month}-`))
+    .map(toNewsPreview);
 }
 
-/** Returns topic keys that have a news entry for the given date (same-day quick links). */
+export async function getArchiveMonths(locale: Locale = "zh") {
+  const index = await loadNewsIndex();
+  if (index) {
+    return [...new Set(index.entries.map((entry) => entry.archiveMonth))].sort((left, right) => right.localeCompare(left));
+  }
+
+  const entries = await getAllNewsPreviews(locale);
+  return [...new Set(entries.map((entry) => entry.date.slice(0, 7)))].sort((left, right) => right.localeCompare(left));
+}
+
+export async function getNewsEntry(topic: TopicKey, date: string, locale: Locale = "zh") {
+  const meta = getTopicMeta(topic, locale);
+  if (!meta) {
+    return null;
+  }
+
+  const index = await loadNewsIndex();
+  const indexedEntry = index?.entries.find((entry) => entry.topic === topic && entry.date === date);
+  if (indexedEntry) {
+    const filePath = resolveRelativeNewsPath(indexedEntry.relativePath);
+    const content = await fs.readFile(filePath, "utf8");
+    return {
+      ...fromIndexedPreview(indexedEntry),
+      filePath,
+      content,
+    } satisfies NewsEntry;
+  }
+
+  const fallbacks = getCopy(locale).news;
+  return readEntryFromTopicByDate(meta, date, fallbacks);
+}
+
+export async function getAllNewsParams() {
+  const previews = await getAllNewsPreviews();
+  return previews.map((entry) => ({
+    topic: entry.topic,
+    date: entry.date,
+  }));
+}
+
 export async function getTopicsWithNewsForDate(date: string, locale: Locale = "zh"): Promise<TopicKey[]> {
+  const index = await loadNewsIndex();
+  if (index) {
+    return sortEntries(
+      index.entries
+        .filter((entry) => entry.date === date)
+        .map((entry) => ({ topic: entry.topic, date: entry.date })),
+    ).map((entry) => entry.topic);
+  }
+
   const results = await Promise.all(
     TOPICS.map(async (t) => ({ key: t.key, has: !!(await getNewsEntry(t.key, date, locale)) })),
   );
@@ -205,6 +356,19 @@ export function toNewsPreview(entry: NewsEntry): NewsPreview {
       .join(" ")
       .toLowerCase(),
   };
+}
+
+export async function getIndexedNewsPreviewsForBuild(locale: Locale = "zh") {
+  const fallbacks = getCopy(locale).news;
+  const nested = await Promise.all(
+    TOPICS.map(async (topicDef) => {
+      const topic = getTopicMeta(topicDef.key, locale)!;
+      const entries = await readTopicEntries(topic, fallbacks);
+      return entries.map((entry) => toIndexedPreview(entry, topic));
+    }),
+  );
+
+  return sortEntries(nested.flat());
 }
 
 export function groupPreviewsByDate(entries: NewsPreview[]) {

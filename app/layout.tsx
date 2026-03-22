@@ -6,9 +6,9 @@ import { LocaleProvider } from "@/components/locale-context";
 import { LocaleSwitch } from "@/components/locale-switch";
 import { ThemeSwitch } from "@/components/theme-switch";
 import "./global.css";
-import { getLocaleFromCookie } from "@/lib/get-locale";
+import { absoluteUrl, getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const displayFont = Cormorant_Garamond({
   subsets: ["latin"],
@@ -23,11 +23,52 @@ const bodyFont = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "S-News",
-  description: "Local-first daily news desk.",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": absoluteUrl("/feed.xml"),
+    },
+  },
+  keywords: [
+    "AI news",
+    "daily digest",
+    "news archive",
+    "local-first",
+    "technology news",
+    "finance news",
+    "science news",
+  ],
   icons: {
     icon: "/snew-logo1.svg",
     apple: "/snew-logo1.svg",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: absoluteUrl("/opengraph-image"),
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} open graph image`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [absoluteUrl("/twitter-image")],
   },
 };
 
@@ -39,15 +80,12 @@ const themeScript = `
 })();
 `;
 
-export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-  const locale = await getLocaleFromCookie();
-  const lang = locale === "en" ? "en" : "zh-CN";
-
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
       <body className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <LocaleProvider initialLocale={locale}>
+        <LocaleProvider>
           <div className="fixed right-3 top-3 z-[9999] flex items-center gap-2 sm:right-6 sm:top-4 md:top-5" style={{ pointerEvents: "auto" }}>
             <LocaleSwitch />
             <ThemeSwitch />

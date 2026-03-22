@@ -11,7 +11,7 @@ import { getCopy } from "@/data/copy";
 import { NewsCard } from "@/components/news-card";
 import { RuntimeNavLink } from "@/components/runtime-nav-link";
 import { TopicIcon } from "@/components/topic-icon";
-import { formatDisplayDate, groupPreviewsByDate, searchEntries } from "@/lib/news-client";
+import { formatArchiveMonth, formatDisplayDate, groupDateSectionsByMonth, groupPreviewsByDate, searchEntries } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
 import { TOPICS, getTopicMeta, type TopicKey } from "@/lib/news-meta";
 
@@ -35,6 +35,7 @@ export function NewsHome({ entries }: NewsHomeProps) {
   );
 
   const groups = useMemo(() => groupPreviewsByDate(filtered), [filtered]);
+  const monthSections = useMemo(() => groupDateSectionsByMonth(groups), [groups]);
   const latestDate = entries[0]?.date;
   const latestEntries = latestDate ? entries.filter((entry) => entry.date === latestDate) : [];
   const archiveCount = groups.length;
@@ -236,26 +237,41 @@ export function NewsHome({ entries }: NewsHomeProps) {
           </section>
 
           <section id="date-archive" className="space-y-8">
-            {groups.map((group) => (
-              <div key={group.date} className="space-y-4">
-                <div className="flex flex-wrap items-end justify-between gap-3">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">{copy.home.dateArchive.badge}</p>
-                    <h2 className="font-(--font-display) text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary)">
-                      {formatDisplayDate(group.date, locale)}
-                    </h2>
-                  </div>
-                  <div className="inline-flex items-center gap-2 rounded-full border border-(--color-border) px-3 py-1.5 text-xs text-(--color-text-secondary)">
-                    <Newspaper size={14} />
-                    {group.entries.length} {group.entries.length > 1 ? copy.home.dateArchive.issues : copy.home.dateArchive.issue}
-                  </div>
+            {monthSections.map((monthSection) => (
+              <div key={monthSection.month} className="space-y-6">
+                <div className="border-b border-(--color-border) pb-3">
+                  <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">
+                    {copy.home.dateArchive.badge}
+                  </p>
+                  <Link
+                    href={`/archive/${monthSection.month}`}
+                    className="mt-2 inline-flex font-display text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary) transition hover:text-(--color-accent-sky)"
+                  >
+                    {formatArchiveMonth(monthSection.month, locale)}
+                  </Link>
                 </div>
 
-                <div className="grid gap-4 xl:grid-cols-2">
-                  {group.entries.map((entry) => (
-                    <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
-                  ))}
-                </div>
+                {monthSection.groups.map((group) => (
+                  <div key={group.date} className="space-y-4">
+                    <div className="flex flex-wrap items-end justify-between gap-3">
+                      <div>
+                        <h3 className="font-(--font-display) text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary)">
+                          {formatDisplayDate(group.date, locale)}
+                        </h3>
+                      </div>
+                      <div className="inline-flex items-center gap-2 rounded-full border border-(--color-border) px-3 py-1.5 text-xs text-(--color-text-secondary)">
+                        <Newspaper size={14} />
+                        {group.entries.length} {group.entries.length > 1 ? copy.home.dateArchive.issues : copy.home.dateArchive.issue}
+                      </div>
+                    </div>
+
+                    <div className="grid gap-4 xl:grid-cols-2">
+                      {group.entries.map((entry) => (
+                        <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             ))}
           </section>

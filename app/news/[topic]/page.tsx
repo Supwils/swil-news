@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
-import { NewsCard } from "@/components/news-card";
+import { StructuredData } from "@/components/structured-data";
+import { TopicPageContent } from "@/components/topic-page-content";
 import { getCopy } from "@/data/copy";
-import { getLocaleFromCookie } from "@/lib/get-locale";
 import { getEntryPreviewsByTopic } from "@/lib/news";
-import { getTopicMeta, isTopicKey } from "@/lib/news-meta";
+import { getTopicMeta, isTopicKey, TOPICS } from "@/lib/news-meta";
+import { absoluteUrl, SITE_NAME } from "@/lib/site";
 
 type TopicPageProps = {
   params: Promise<{ topic: string }>;
 };
+
+export const dynamic = "force-static";
 
 export async function generateMetadata({ params }: TopicPageProps): Promise<Metadata> {
   const { topic } = await params;
@@ -20,14 +21,44 @@ export async function generateMetadata({ params }: TopicPageProps): Promise<Meta
     return {};
   }
 
-  const locale = await getLocaleFromCookie();
-  const copy = getCopy(locale);
-  const meta = getTopicMeta(topic, locale);
+  const copy = getCopy("zh");
+  const meta = getTopicMeta(topic, "zh");
 
   return {
-    title: `${meta?.label ?? copy.ui.topicPage.defaultTitle} | ${copy.about.siteName}`,
+    title: meta?.label ?? copy.ui.topicPage.defaultTitle,
     description: meta?.description,
+    alternates: {
+      canonical: `/news/${topic}`,
+      types: {
+        "application/rss+xml": absoluteUrl(`/news/${topic}/feed.xml`),
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: `/news/${topic}`,
+      siteName: SITE_NAME,
+      title: meta?.label ?? copy.ui.topicPage.defaultTitle,
+      description: meta?.description,
+      images: [
+        {
+          url: absoluteUrl("/opengraph-image"),
+          width: 1200,
+          height: 630,
+          alt: `${meta?.label ?? copy.ui.topicPage.defaultTitle} open graph image`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: meta?.label ?? copy.ui.topicPage.defaultTitle,
+      description: meta?.description,
+      images: [absoluteUrl("/twitter-image")],
+    },
   };
+}
+
+export function generateStaticParams() {
+  return TOPICS.map((topic) => ({ topic: topic.key }));
 }
 
 export default async function TopicPage({ params }: TopicPageProps) {
@@ -37,42 +68,42 @@ export default async function TopicPage({ params }: TopicPageProps) {
     notFound();
   }
 
-  const locale = await getLocaleFromCookie();
-  const copy = getCopy(locale);
-  const meta = getTopicMeta(topic, locale);
-  const entries = await getEntryPreviewsByTopic(topic, locale);
+  const meta = getTopicMeta(topic, "zh");
+  const entries = await getEntryPreviewsByTopic(topic);
 
   if (!meta) {
     notFound();
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${meta.label} | ${SITE_NAME}`,
+    description: meta.description,
+    url: absoluteUrl(`/news/${topic}`),
+    inLanguage: "zh-CN",
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: absoluteUrl("/"),
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: entries.length,
+      itemListElement: entries.slice(0, 20).map((entry, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: absoluteUrl(`/news/${entry.topic}/${entry.date}`),
+        name: entry.title,
+      })),
+    },
+  };
+
   return (
-    <main className="min-h-screen bg-(--color-bg-primary) px-4 py-6 text-(--color-text-primary) sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1200px] space-y-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 rounded-full border border-(--color-border) px-4 py-2 text-sm text-(--color-text-secondary) transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
-        >
-          <ArrowLeft size={16} />
-          {copy.ui.topicPage.backHome}
-        </Link>
-
-        <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-6 shadow-(--shadow-card) sm:p-8">
-          <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">{copy.ui.topicPage.badge}</p>
-          <h1 className="font-display mt-3 text-4xl leading-none tracking-[-0.04em] sm:text-5xl">
-            {meta.label}
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-(--color-text-secondary)">
-            {meta.description}
-          </p>
-        </section>
-
-        <section className="grid gap-4 xl:grid-cols-2">
-          {entries.map((entry) => (
-            <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
-          ))}
-        </section>
-      </div>
-    </main>
+    <>
+      <StructuredData data={structuredData} />
+      <TopicPageContent topic={topic} entries={entries} />
+    </>
   );
 }

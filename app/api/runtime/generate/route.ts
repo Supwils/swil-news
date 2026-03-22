@@ -74,6 +74,7 @@ export async function POST(request: NextRequest) {
   }
 
   const projectRoot = process.cwd();
+  const refreshScriptPath = path.join(projectRoot, "scripts", "refresh-news-index.sh");
 
   // Run all topics as a stream: one exec per topic, progress events + terminal logs
   if (topic === "all") {
@@ -100,6 +101,7 @@ export async function POST(request: NextRequest) {
                 cwd: projectRoot,
                 timeout: RUN_ALL_PER_TOPIC_TIMEOUT_MS,
                 maxBuffer: 5 * 1024 * 1024,
+                env: { ...process.env, SKIP_NEWS_INDEX_REFRESH: "1" },
               });
               aggregateStdout += (stdout ?? "") + "\n";
               if (stderr) aggregateStderr += stderr + "\n";
@@ -125,6 +127,13 @@ export async function POST(request: NextRequest) {
               return;
             }
           }
+          const { stdout: refreshStdout, stderr: refreshStderr } = await execAsync(`bash "${refreshScriptPath}"`, {
+            cwd: projectRoot,
+            timeout: 60 * 1000,
+            maxBuffer: 2 * 1024 * 1024,
+          });
+          aggregateStdout += (refreshStdout ?? "") + "\n";
+          if (refreshStderr) aggregateStderr += `${refreshStderr}\n`;
           write({
             type: "done",
             ok: true,

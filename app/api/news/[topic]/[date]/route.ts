@@ -20,5 +20,6 @@ export async function GET(_: Request, context: RouteContext) {
     return NextResponse.json({ error: "Issue not found" }, { status: 404 });
   }
 
-  return NextResponse.json(entry);
+  const { filePath: _filePath, ...payload } = entry;
+  return NextResponse.json(payload);
 }

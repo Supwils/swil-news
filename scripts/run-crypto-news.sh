@@ -32,4 +32,7 @@ echo "项目目录: $PROJECT_ROOT"
 echo "执行 command: $COMMAND_FILE"
 echo "---"
 agent -p --force --model "$AGENT_MODEL" "@${COMMAND_FILE}" "${INSTRUCTION}"
+if [[ "${SKIP_NEWS_INDEX_REFRESH:-0}" != "1" ]]; then
+  bash "$SCRIPT_DIR/refresh-news-index.sh"
+fi
 echo "执行完成"

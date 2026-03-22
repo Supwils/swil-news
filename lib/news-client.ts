@@ -29,6 +29,34 @@ export function groupPreviewsByDate(entries: NewsPreview[]) {
     }, []);
 }
 
+export function groupDateSectionsByMonth(
+  groups: Array<{
+    date: string;
+    entries: NewsPreview[];
+  }>,
+) {
+  return groups.reduce<
+    Array<{
+      month: string;
+      groups: Array<{
+        date: string;
+        entries: NewsPreview[];
+      }>;
+    }>
+  >((months, group) => {
+    const month = group.date.slice(0, 7);
+    const current = months.at(-1);
+
+    if (!current || current.month !== month) {
+      months.push({ month, groups: [group] });
+      return months;
+    }
+
+    current.groups.push(group);
+    return months;
+  }, []);
+}
+
 export function searchEntries(
   entries: NewsPreview[],
   query: string,
@@ -55,6 +83,18 @@ const MONTH_NAMES_EN = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
+
+export function formatArchiveMonth(month: string, locale: Locale = "zh") {
+  const [year, monthValue] = month.split("-").map(Number);
+  if (!year || !monthValue) {
+    return month;
+  }
+
+  if (locale === "en") {
+    return `${MONTH_NAMES_EN[monthValue - 1]} ${year}`;
+  }
+  return `${year}年${monthValue}月`;
+}
 
 export function formatDisplayDate(date: string, locale: Locale = "zh") {
   const [year, month, day] = date.split("-").map(Number);
