@@ -6,3 +6,5 @@ dist
 *.log
 .pnpm-store
 .generated
+logs/
+*.plist
