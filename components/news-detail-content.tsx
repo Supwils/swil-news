@@ -114,6 +114,18 @@ export function NewsDetailContent({
             ) : null}
           </aside>
         </div>
+
+        <QuickTopicLinks
+          date={date}
+          currentTopic={topic}
+          availableTopics={availableTopics}
+          topicLabels={topicLabels}
+          copy={{
+            quickLinkHeading: copy.ui.detailPage.quickLinkHeading,
+            quickLinkCurrent: copy.ui.detailPage.quickLinkCurrent,
+            noNewsHint: copy.ui.detailPage.noNewsHint,
+          }}
+        />
       </div>
     </main>
   );
