@@ -4,7 +4,7 @@
 # 依赖：已安装并登录 Cursor CLI (agent)
 #
 
-set -e
+set -Eeuo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -25,23 +25,54 @@ fi
 export NEWS_AGENT_MODEL="${NEWS_AGENT_MODEL:-$NEWS_AGENT_MODEL_DEFAULT}"
 export NEWS_AGENT_MODEL_DEFAULT
 
-echo ">>> Agent 模型: $NEWS_AGENT_MODEL"
-echo "=== 开始依次生成全部主题日报 ==="
+LOG_TS() { date '+%Y-%m-%d %H:%M:%S'; }
+log_info() { echo "[$(LOG_TS)] [INFO] $*"; }
+log_warn() { echo "[$(LOG_TS)] [WARN] $*"; }
+log_error() { echo "[$(LOG_TS)] [ERROR] $*" >&2; }
+trim() {
+  local s="$1"
+  s="${s#"${s%%[![:space:]]*}"}"
+  s="${s%"${s##*[![:space:]]}"}"
+  printf '%s' "$s"
+}
+
+DEBUG_DIR="$PROJECT_ROOT/logs/debug"
+mkdir -p "$DEBUG_DIR"
+
+log_info "Generate all topics started model=${NEWS_AGENT_MODEL}"
 
 export SKIP_NEWS_INDEX_REFRESH=1
 for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-science-news.sh run-crypto-news.sh run-energy-climate-news.sh run-auto-mobility-news.sh run-gaming-news.sh run-supply-chain-news.sh run-sports-health-nutrition-news.sh; do
   path="$SCRIPT_DIR/$script"
   if [[ -x "$path" ]]; then
-    echo ""
-    echo ">>> 执行 $script"
-    "$path" || { echo ">>> $script 执行失败，退出码 $?" >&2; exit 1; }
+    topic="${script#run-}"
+    topic="${topic%.sh}"
+    run_id="$(date '+%Y%m%d-%H%M%S')"
+    debug_log="$DEBUG_DIR/${run_id}-${topic}.log"
+
+    log_info "Topic start topic=${topic}"
+    started_at="$(date +%s)"
+    if "$path" >"$debug_log" 2>&1; then
+      ended_at="$(date +%s)"
+      duration="$((ended_at - started_at))"
+      log_info "Topic success topic=${topic} duration_sec=${duration} debug_log=${debug_log}"
+    else
+      exit_code="$?"
+      ended_at="$(date +%s)"
+      duration="$((ended_at - started_at))"
+      reason="$(awk 'NF{line=$0} END{print line}' "$debug_log" 2>/dev/null || true)"
+      reason="$(trim "${reason:-unknown_error}")"
+      log_error "Topic failed topic=${topic} duration_sec=${duration} exit_code=${exit_code} reason=${reason} debug_log=${debug_log}"
+      exit "$exit_code"
+    fi
   else
-    echo ">>> 跳过 $script (不存在或不可执行)" >&2
+    log_warn "Topic skipped script=${script} reason=missing_or_not_executable"
   fi
 done
 unset SKIP_NEWS_INDEX_REFRESH
 
+log_info "Step start: refresh_news_index"
 bash "$SCRIPT_DIR/refresh-news-index.sh"
+log_info "Step success: refresh_news_index"
 
-echo ""
-echo "=== 全部主题日报生成完成 ==="
+log_info "Generate all topics finished status=success"
