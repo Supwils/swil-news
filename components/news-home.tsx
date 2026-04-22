@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { CalendarDays, Newspaper, Search } from "lucide-react";
+import { CalendarDays, Github, Newspaper, Search } from "lucide-react";
 
 import { NewsDeskIllustration } from "@/components/home/news-desk-illustration";
 import { TodayPulse } from "@/components/home/today-pulse";
@@ -113,6 +113,15 @@ export function NewsHome({ entries }: NewsHomeProps) {
                   <RuntimeNavLink className="inline-flex items-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface-muted) px-5 py-3 text-sm font-medium text-(--color-text-primary) transition hover:border-(--color-border-strong)">
                     {copy.home.hero.ctaRuntime}
                   </RuntimeNavLink>
+                  <a
+                    href="https://github.com/Supwils/s-news"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface-muted) px-5 py-3 text-sm font-medium text-(--color-text-primary) transition hover:border-(--color-border-strong)"
+                  >
+                    <Github size={16} />
+                    GitHub
+                  </a>
                 </div>
               </div>
 
