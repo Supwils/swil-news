@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { StructuredData } from "@/components/structured-data";
 import { NewsHome } from "@/components/news-home";
 import { getAllNewsPreviews } from "@/lib/news";
+import type { TopicKey } from "@/lib/news-meta";
 import { absoluteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -20,6 +21,20 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const entries = await getAllNewsPreviews();
+
+  const todayDate = entries[0]?.date ?? null;
+  const todayEntries = todayDate ? entries.filter((entry) => entry.date === todayDate) : [];
+  const previousDate = todayDate
+    ? entries.find((entry) => entry.date !== todayDate)?.date ?? null
+    : null;
+  const previousEntries = previousDate
+    ? entries.filter((entry) => entry.date === previousDate)
+    : [];
+
+  const topicCounts = entries.reduce<Partial<Record<TopicKey, number>>>((acc, entry) => {
+    acc[entry.topic] = (acc[entry.topic] ?? 0) + 1;
+    return acc;
+  }, {});
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -53,7 +68,14 @@ export default async function HomePage() {
   return (
     <>
       <StructuredData data={structuredData} />
-      <NewsHome entries={entries} />
+      <NewsHome
+        entries={entries}
+        todayDate={todayDate}
+        todayEntries={todayEntries}
+        previousDate={previousDate}
+        previousEntries={previousEntries}
+        topicCounts={topicCounts}
+      />
     </>
   );
 }

@@ -29,7 +29,7 @@ export type RuntimeCopy = {
 
 const copyZh = {
   about: {
-    siteName: "S-News",
+    siteName: "Swil-News",
     headerSubtitle: "What this thing is, and why it exists",
     nav: {
       home: "首页",
@@ -37,11 +37,11 @@ const copyZh = {
       runtime: "Runtime",
     },
     hero: {
-      badge: "About S-News",
+      badge: "About Swil-News",
       titleLine1: '它不是一个"会写字的工具页"。',
       titleLine2: "它更像一张每天自动摊开的报桌。",
       intro:
-        "S-News 把本地生成的多主题日报整理成可长期打开的阅读界面。你不需要记住脚本名，也不用回忆文件夹埋在哪一层。打开首页，今天的内容就已经站好了队。",
+        "Swil-News 把本地生成的多主题日报整理成可长期打开的阅读界面。你不需要记住脚本名，也不用回忆文件夹埋在哪一层。打开首页，今天的内容就已经站好了队。",
     },
     metrics: {
       totalLabel: "总日报数",
@@ -106,7 +106,7 @@ const copyZh = {
     navHome: "首页",
     navAbout: "About",
     navRuntime: "Runtime",
-    siteTitle: "S-News",
+    siteTitle: "Swil-News",
     siteSubtitle: "Run scripts, refill the news desk",
     allTopics: "全部主题",
     progressStep: (step: number, total: number) => `第 ${step} / ${total} 步`,
@@ -114,7 +114,7 @@ const copyZh = {
     progressPercent: (pct: number) => `已完成 ${pct}%`,
   } satisfies RuntimeCopy,
   home: {
-    siteName: "S-News",
+    siteName: "Swil-News",
     headerSubtitle: "Daily news desk, minus the folder chaos",
     nav: {
       about: "About",
@@ -226,13 +226,13 @@ const copyZh = {
     badge: "404 / Missing issue",
     title: "这份日报不存在",
     body: "可能还没有生成对应日期的文件，或链接中的主题与日期不正确。你可以先回到首页继续浏览已有归档。",
-    backLink: "返回 S-News 首页",
+    backLink: "返回 Swil-News 首页",
   },
 } as const;
 
 const copyEn = {
   about: {
-    siteName: "S-News",
+    siteName: "Swil-News",
     headerSubtitle: "What this thing is, and why it exists",
     nav: {
       home: "Home",
@@ -240,11 +240,11 @@ const copyEn = {
       runtime: "Runtime",
     },
     hero: {
-      badge: "About S-News",
+      badge: "About Swil-News",
       titleLine1: 'It\'s not a "tool page that types."',
       titleLine2: "It\'s more like a daily news desk that opens by itself.",
       intro:
-        "S-News turns locally generated multi-topic digests into a reading interface you can keep open. No need to remember script names or folder paths. Open the home page and today\'s content is already lined up.",
+        "Swil-News turns locally generated multi-topic digests into a reading interface you can keep open. No need to remember script names or folder paths. Open the home page and today\'s content is already lined up.",
     },
     metrics: {
       totalLabel: "Total digests",
@@ -309,7 +309,7 @@ const copyEn = {
     navHome: "Home",
     navAbout: "About",
     navRuntime: "Runtime",
-    siteTitle: "S-News",
+    siteTitle: "Swil-News",
     siteSubtitle: "Run scripts, refill the news desk",
     allTopics: "All topics",
     progressStep: (step: number, total: number) => `Step ${step} of ${total}`,
@@ -317,7 +317,7 @@ const copyEn = {
     progressPercent: (pct: number) => `${pct}% complete`,
   } satisfies RuntimeCopy,
   home: {
-    siteName: "S-News",
+    siteName: "Swil-News",
     headerSubtitle: "Daily news desk, minus the folder chaos",
     nav: {
       about: "About",
@@ -429,7 +429,7 @@ const copyEn = {
     badge: "404 / Missing issue",
     title: "This digest doesn\'t exist",
     body: "The file for this date may not exist yet, or the topic/date in the URL may be wrong. You can go back to the home page to browse the archive.",
-    backLink: "Back to S-News home",
+    backLink: "Back to Swil-News home",
   },
 } as const;
 

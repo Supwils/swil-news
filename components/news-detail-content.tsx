@@ -5,6 +5,8 @@ import { ArrowLeft, Clock3, Command, FileText, Layers3 } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { InlineMarkdown, NewsMarkdown } from "@/components/news-markdown";
+import { NewspaperFooter } from "@/components/newspaper/footer";
+import { NewspaperMasthead } from "@/components/newspaper/masthead";
 import { QuickTopicLinks } from "@/components/quick-topic-links";
 import { useLocale } from "@/components/locale-context";
 import { getCopy } from "@/data/copy";
@@ -37,8 +39,9 @@ export function NewsDetailContent({
   }
 
   return (
-    <main className="min-h-screen bg-(--color-bg-primary) px-4 py-6 text-(--color-text-primary) sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1380px] space-y-6">
+    <div className="np-root">
+      <NewspaperMasthead date={date} archiveMonth={date.slice(0, 7)} />
+      <main className="mx-auto w-full" style={{ maxWidth: 1280, padding: 40 }}>
         <QuickTopicLinks
           date={date}
           currentTopic={topic}
@@ -50,52 +53,132 @@ export function NewsDetailContent({
             noNewsHint: copy.ui.detailPage.noNewsHint,
           }}
         />
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Link
-            href={`/news/${topic}`}
-            className="inline-flex items-center gap-2 rounded-full border border-(--color-border) px-4 py-2 text-sm text-(--color-text-secondary) transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
-          >
-            <ArrowLeft size={16} />
+
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            gap: 12,
+            margin: "24px 0",
+          }}
+        >
+          <Link href={`/news/${topic}`} className="np-btn-secondary">
+            <ArrowLeft size={14} />
             {copy.ui.topicPage.backToTopic(meta.label)}
           </Link>
-
-          <Link
-            href="/"
-            className="inline-flex items-center rounded-full border border-(--color-border) px-4 py-2 text-sm text-(--color-text-secondary) transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
-          >
+          <Link href="/" className="np-btn-secondary">
             {copy.ui.topicPage.backHome}
           </Link>
         </div>
 
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
-          <article className="rounded-[36px] border border-(--color-border) bg-(--color-surface) p-6 shadow-(--shadow-card) sm:p-8 lg:p-10">
+        <div
+          className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]"
+          style={{ marginTop: 8 }}
+        >
+          <article
+            style={{
+              border: "1px solid var(--color-border)",
+              padding: 32,
+              background: "var(--color-surface)",
+            }}
+          >
             <NewsMarkdown content={entry.content} />
           </article>
 
-          <aside className="space-y-5 xl:sticky xl:top-6 xl:h-fit">
-            <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-5 shadow-(--shadow-card) sm:p-6">
-              <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">{copy.ui.detailPage.issueDetails}</p>
-              <h2 className="font-display mt-3 text-3xl leading-none tracking-[-0.03em]">
+          <aside className="space-y-6 xl:sticky xl:top-6 xl:h-fit">
+            <section
+              style={{
+                border: "1px solid var(--color-border)",
+                padding: 24,
+                background: "var(--color-surface)",
+              }}
+            >
+              <p
+                className="np-mono"
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.24em",
+                  textTransform: "uppercase",
+                  color: "var(--color-text-muted)",
+                }}
+              >
+                <span
+                  style={{
+                    display: "inline-block",
+                    width: 6,
+                    height: 6,
+                    background: meta.accent,
+                    borderRadius: 999,
+                    marginRight: 8,
+                    verticalAlign: "1px",
+                  }}
+                />
+                {copy.ui.detailPage.issueDetails}
+              </p>
+              <h2
+                className="np-serif"
+                style={{
+                  fontSize: 28,
+                  letterSpacing: "-0.02em",
+                  fontWeight: 600,
+                  margin: "10px 0 10px",
+                  color: "var(--color-text-primary)",
+                }}
+              >
                 {formatDisplayDate(entry.date, locale)}
               </h2>
-              <p className="mt-3 text-sm leading-7 text-(--color-text-secondary)">{meta.description}</p>
+              <p
+                className="np-sans"
+                style={{
+                  fontSize: 13.5,
+                  lineHeight: 1.7,
+                  color: "var(--color-text-secondary)",
+                  margin: 0,
+                }}
+              >
+                {meta.description}
+              </p>
 
-              <div className="mt-5 space-y-3 text-sm text-(--color-text-secondary)">
-                <InfoRow icon={<Clock3 size={15} />} label={copy.ui.detailPage.minRead(entry.readingMinutes)} />
-                <InfoRow icon={<Layers3 size={15} />} label={`${entry.sectionCount} ${copy.ui.newsCard.sections}`} />
-                <InfoRow icon={<FileText size={15} />} label={`${entry.articleCount} ${copy.ui.newsCard.stories}`} />
-                <InfoRow icon={<Command size={15} />} label={meta.commandPath} mono />
+              <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 8 }}>
+                <InfoRow icon={<Clock3 size={14} />} label={copy.ui.detailPage.minRead(entry.readingMinutes)} />
+                <InfoRow icon={<Layers3 size={14} />} label={`${entry.sectionCount} ${copy.ui.newsCard.sections}`} />
+                <InfoRow icon={<FileText size={14} />} label={`${entry.articleCount} ${copy.ui.newsCard.stories}`} />
+                <InfoRow icon={<Command size={14} />} label={meta.commandPath} mono />
               </div>
             </section>
 
             {entry.highlights.length > 0 ? (
-              <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-5 shadow-(--shadow-card) sm:p-6">
-                <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">{copy.ui.detailPage.keyHighlights}</p>
-                <div className="mt-4 space-y-3">
+              <section
+                style={{
+                  border: "1px solid var(--color-border)",
+                  padding: 24,
+                  background: "var(--color-surface)",
+                }}
+              >
+                <p
+                  className="np-mono"
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.24em",
+                    textTransform: "uppercase",
+                    color: "var(--color-text-muted)",
+                  }}
+                >
+                  {copy.ui.detailPage.keyHighlights}
+                </p>
+                <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 12 }}>
                   {entry.highlights.map((highlight) => (
                     <div
                       key={highlight}
-                      className="rounded-2xl border border-(--color-border-soft) bg-(--color-surface-muted) px-4 py-3 text-sm leading-7 text-(--color-text-secondary)"
+                      className="np-sans"
+                      style={{
+                        fontSize: 14,
+                        lineHeight: 1.7,
+                        color: "var(--color-text-secondary)",
+                        paddingLeft: 14,
+                        borderLeft: "2px solid var(--color-border-soft)",
+                      }}
                     >
                       <InlineMarkdown content={highlight} />
                     </div>
@@ -105,9 +188,35 @@ export function NewsDetailContent({
             ) : null}
 
             {entry.takeaway ? (
-              <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-5 shadow-(--shadow-card) sm:p-6">
-                <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">{copy.ui.detailPage.dailyFraming}</p>
-                <div className="mt-4 text-base leading-8 text-(--color-text-primary)">
+              <section
+                style={{
+                  border: "1px solid var(--color-border)",
+                  padding: 24,
+                  background: "var(--color-surface-muted)",
+                  borderLeft: "3px solid var(--color-text-primary)",
+                }}
+              >
+                <p
+                  className="np-mono"
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.24em",
+                    textTransform: "uppercase",
+                    color: "var(--color-text-muted)",
+                  }}
+                >
+                  {copy.ui.detailPage.dailyFraming}
+                </p>
+                <div
+                  className="np-serif"
+                  style={{
+                    marginTop: 10,
+                    fontStyle: "italic",
+                    fontSize: 16,
+                    lineHeight: 1.6,
+                    color: "var(--color-text-primary)",
+                  }}
+                >
                   <InlineMarkdown content={entry.takeaway} />
                 </div>
               </section>
@@ -115,19 +224,23 @@ export function NewsDetailContent({
           </aside>
         </div>
 
-        <QuickTopicLinks
-          date={date}
-          currentTopic={topic}
-          availableTopics={availableTopics}
-          topicLabels={topicLabels}
-          copy={{
-            quickLinkHeading: copy.ui.detailPage.quickLinkHeading,
-            quickLinkCurrent: copy.ui.detailPage.quickLinkCurrent,
-            noNewsHint: copy.ui.detailPage.noNewsHint,
-          }}
-        />
-      </div>
-    </main>
+        <div style={{ marginTop: 32 }}>
+          <QuickTopicLinks
+            date={date}
+            currentTopic={topic}
+            availableTopics={availableTopics}
+            topicLabels={topicLabels}
+            copy={{
+              quickLinkHeading: copy.ui.detailPage.quickLinkHeading,
+              quickLinkCurrent: copy.ui.detailPage.quickLinkCurrent,
+              noNewsHint: copy.ui.detailPage.noNewsHint,
+            }}
+          />
+        </div>
+
+        <NewspaperFooter />
+      </main>
+    </div>
   );
 }
 
@@ -141,9 +254,22 @@ function InfoRow({
   mono?: boolean;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-2xl border border-(--color-border-soft) bg-(--color-surface-muted) px-4 py-3">
-      <span className="mt-1 text-(--color-text-primary)">{icon}</span>
-      <span className={mono ? "text-xs font-medium break-all font-mono" : ""}>{label}</span>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 10,
+        fontSize: 13,
+        color: "var(--color-text-secondary)",
+      }}
+    >
+      <span style={{ marginTop: 2, color: "var(--color-text-primary)" }}>{icon}</span>
+      <span
+        className={mono ? "np-mono" : "np-sans"}
+        style={mono ? { fontSize: 12, wordBreak: "break-all" } : { lineHeight: 1.5 }}
+      >
+        {label}
+      </span>
     </div>
   );
 }

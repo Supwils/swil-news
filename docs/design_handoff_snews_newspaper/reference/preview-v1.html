@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>S-News · Redesign v1 (Newspaper) — Reference</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #f4ede0; }
+  body { font-family: "Inter", "PingFang SC", -apple-system, sans-serif; }
+
+  /* Developer banner — remove in production */
+  .__ref_banner {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: #0b0905; color: #f3ece0;
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 8px 20px; display: flex; justify-content: space-between;
+  }
+  .__ref_banner a { color: #fb923c; text-decoration: none; }
+  .__ref_content { margin-top: 36px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="__ref_banner">
+  <span>S—News · Redesign v1 · Reference only — not production code</span>
+  <span>See HANDOFF.md</span>
+</div>
+<div class="__ref_content"><div id="root"></div></div>
+
+<script type="text/babel" src="redesign-v1.jsx"></script>
+<script type="text/babel" data-presets="react">
+  ReactDOM.createRoot(document.getElementById('root')).render(<RedesignV1 />);
+</script>
+</body>
+</html>

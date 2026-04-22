@@ -1,377 +1,904 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { CalendarDays, Github, Newspaper, Search } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { Bookmark, Check, ExternalLink, RotateCcw, Search } from "lucide-react";
 
-import { NewsDeskIllustration } from "@/components/home/news-desk-illustration";
-import { TodayPulse } from "@/components/home/today-pulse";
 import { useLocale } from "@/components/locale-context";
-import { getCopy } from "@/data/copy";
-import { NewsCard } from "@/components/news-card";
-import { RuntimeNavLink } from "@/components/runtime-nav-link";
-import { TopicIcon } from "@/components/topic-icon";
-import { formatArchiveMonth, formatDisplayDate, groupDateSectionsByMonth, groupPreviewsByDate, searchEntries } from "@/lib/news-client";
+import { InlineMarkdown } from "@/components/news-markdown";
+import { NewspaperFooter } from "@/components/newspaper/footer";
+import { NewspaperMasthead } from "@/components/newspaper/masthead";
+import { formatDisplayDate } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
-import { TOPICS, getTopicMeta, type TopicKey } from "@/lib/news-meta";
+import { TOPICS, getTopicMeta, isTopicKey, type TopicKey } from "@/lib/news-meta";
 
 type NewsHomeProps = {
   entries: NewsPreview[];
+  todayDate: string | null;
+  todayEntries: NewsPreview[];
+  previousDate: string | null;
+  previousEntries: NewsPreview[];
+  topicCounts: Partial<Record<TopicKey, number>>;
 };
 
-export function NewsHome({ entries }: NewsHomeProps) {
+type ReadingSession = {
+  articleId: string;
+  articleTitle: string;
+  topic: TopicKey;
+  progress: number;
+  lastReadAt: number;
+};
+
+type TopicFilter = TopicKey | "all";
+
+const READ_THRESHOLD = 0.9;
+const READING_SESSION_KEY = "s-news-reading-session";
+const READ_SET_KEY = "s-news-read-articles";
+const CONTINUE_DISMISSED_KEY = "s-news-continue-dismissed";
+
+const MONTHS_EN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+const TOPIC_COLOR_VAR: Record<TopicKey, string> = {
+  general: "var(--np-t-general)",
+  finance: "var(--np-t-finance)",
+  "ai-tech": "var(--np-t-ai-tech)",
+  science: "var(--np-t-science)",
+  crypto: "var(--np-t-crypto)",
+  "energy-climate": "var(--np-t-energy-climate)",
+  "auto-mobility": "var(--np-t-auto-mobility)",
+  gaming: "var(--np-t-gaming)",
+  "supply-chain": "var(--np-t-supply-chain)",
+  "sports-health-nutrition": "var(--np-t-sports-health-nutrition)",
+};
+
+function articleHref(entry: NewsPreview) {
+  return `/news/${entry.topic}/${entry.date}`;
+}
+
+function stripInlineMarkdown(text: string) {
+  return text
+    .replace(/\*\*([\s\S]+?)\*\*/g, "$1")
+    .replace(/\*([^*\n]+?)\*/g, "$1")
+    .replace(/`([^`\n]+?)`/g, "$1")
+    .replace(/\[([^\]]+?)\]\([^)]+?\)/g, "$1");
+}
+
+function articleId(entry: Pick<NewsPreview, "topic" | "date">) {
+  return `${entry.topic}:${entry.date}`;
+}
+
+export function NewsHome(props: NewsHomeProps) {
+  const { entries, todayDate, todayEntries, previousDate, previousEntries, topicCounts } = props;
   const locale = useLocale();
-  const copy = getCopy(locale);
+  const searchParams = useSearchParams();
+  const topicParam = searchParams.get("topic");
+  const activeTopic: TopicFilter = topicParam && isTopicKey(topicParam) ? topicParam : "all";
+
   const topicsWithLocale = useMemo(
     () => TOPICS.map((t) => getTopicMeta(t.key, locale)!),
     [locale],
   );
-  const [query, setQuery] = useState("");
-  const [activeTopic, setActiveTopic] = useState<TopicKey | "all">("all");
 
-  const filtered = useMemo(
-    () => searchEntries(entries, query, activeTopic, locale),
-    [activeTopic, entries, locale, query],
-  );
+  const totalCount = entries.length;
 
-  const groups = useMemo(() => groupPreviewsByDate(filtered), [filtered]);
-  const monthSections = useMemo(() => groupDateSectionsByMonth(groups), [groups]);
-  const latestDate = entries[0]?.date;
-  const latestEntries = latestDate ? entries.filter((entry) => entry.date === latestDate) : [];
-  const archiveCount = groups.length;
+  // Derive the sections for the current filter.
+  const {
+    leadEntry,
+    briefEntries,
+    briefMoreCount,
+    tabloidBig,
+    tabloidSmall,
+    tabloidDate,
+  } = useMemo(() => {
+    if (activeTopic === "all") {
+      const lead =
+        todayEntries.find((e) => e.topic === "general") ?? todayEntries[0] ?? null;
+      const briefPool = todayEntries.filter((e) => !lead || articleId(e) !== articleId(lead));
+      const briefs = briefPool.slice(0, 5);
+      const more = Math.max(0, todayEntries.length - 1 - briefs.length);
+
+      const tabBig =
+        previousEntries.find((e) => e.topic === "general") ?? previousEntries[0] ?? null;
+      const tabSmallPool = previousEntries.filter(
+        (e) => !tabBig || articleId(e) !== articleId(tabBig),
+      );
+      return {
+        leadEntry: lead,
+        briefEntries: briefs,
+        briefMoreCount: more,
+        tabloidBig: tabBig,
+        tabloidSmall: tabSmallPool.slice(0, 4),
+        tabloidDate: previousDate,
+      };
+    }
+
+    const topicEntries = entries.filter((e) => e.topic === activeTopic);
+    const lead = topicEntries[0] ?? null;
+    const briefs = topicEntries.slice(1, 6);
+    const tabBig = topicEntries[6] ?? null;
+    const tabSmall = topicEntries.slice(7, 11);
+    return {
+      leadEntry: lead,
+      briefEntries: briefs,
+      briefMoreCount: Math.max(0, topicEntries.length - 1 - briefs.length),
+      tabloidBig: tabBig,
+      tabloidSmall: tabSmall,
+      tabloidDate: tabBig?.date ?? null,
+    };
+  }, [activeTopic, entries, previousDate, previousEntries, todayEntries]);
+
+  // localStorage-backed client state. Kept in a single object so we can hydrate
+  // in one setState call.
+  const [clientState, setClientState] = useState<{
+    readSet: Set<string>;
+    session: ReadingSession | null;
+    continueDismissed: boolean;
+  }>({ readSet: new Set(), session: null, continueDismissed: false });
+  const { readSet, session, continueDismissed } = clientState;
+
+  useEffect(() => {
+    try {
+      let readSetNext = new Set<string>();
+      let sessionNext: ReadingSession | null = null;
+      const readRaw = localStorage.getItem(READ_SET_KEY);
+      if (readRaw) {
+        readSetNext = new Set(JSON.parse(readRaw) as string[]);
+      }
+      const sessRaw = localStorage.getItem(READING_SESSION_KEY);
+      if (sessRaw) {
+        const parsed = JSON.parse(sessRaw) as ReadingSession;
+        if (parsed.progress < READ_THRESHOLD) sessionNext = parsed;
+      }
+      const dismissed = sessionStorage.getItem(CONTINUE_DISMISSED_KEY) === "1";
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot hydration from browser storage
+      setClientState({ readSet: readSetNext, session: sessionNext, continueDismissed: dismissed });
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleDismissContinue = () => {
+    sessionStorage.setItem(CONTINUE_DISMISSED_KEY, "1");
+    setClientState((s) => ({ ...s, continueDismissed: true }));
+  };
+
+  const currentMonth = todayDate?.slice(0, 7) ?? null;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-(--color-bg-primary) text-(--color-text-primary)">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(193,166,111,0.22),_transparent_30%),radial-gradient(circle_at_top_right,_rgba(96,161,255,0.18),_transparent_28%),radial-gradient(circle_at_bottom,_rgba(236,72,153,0.14),_transparent_25%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,_rgba(255,255,255,0.04),_transparent_18%),linear-gradient(to_right,_rgba(255,255,255,0.02)_1px,_transparent_1px),linear-gradient(to_bottom,_rgba(255,255,255,0.02)_1px,_transparent_1px)] bg-[size:auto,24px_24px,24px_24px] opacity-40" />
+    <div className="np-root">
+      <NewspaperMasthead active="today" date={todayDate ?? undefined} archiveMonth={currentMonth ?? undefined} />
+      <TopicRail
+        activeTopic={activeTopic}
+        totalCount={totalCount}
+        topicCounts={topicCounts}
+        topics={topicsWithLocale}
+        locale={locale}
+      />
 
-      <div className="relative mx-auto flex w-full max-w-[1400px] flex-col px-4 py-4 sm:px-6 lg:px-8">
-        <header className="sticky top-0 z-20 mb-6 rounded-full border border-(--color-border) bg-[color-mix(in_srgb,var(--color-bg-primary)_75%,transparent)] px-4 py-3 backdrop-blur-xl sm:px-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <p className="font-display text-xl tracking-[0.18em] uppercase text-(--color-text-primary)">
-                {copy.home.siteName}
-              </p>
-              <p className="text-xs uppercase tracking-[0.25em] text-(--color-text-muted)">
-                {copy.home.headerSubtitle}
-              </p>
-            </div>
+      <main className="mx-auto w-full" style={{ maxWidth: 1280, padding: 40 }}>
+        <HeroGrid
+          lead={leadEntry}
+          briefs={briefEntries}
+          moreCount={briefMoreCount}
+          locale={locale}
+          activeTopic={activeTopic}
+          currentMonth={currentMonth}
+          todayDate={todayDate}
+        />
 
-            <nav className="flex flex-wrap items-center gap-2 text-xs text-(--color-text-secondary)">
-              <Link
-                href="/about"
-                className="rounded-full border border-(--color-border) px-3 py-1.5 transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
-              >
-                {copy.home.nav.about}
-              </Link>
-              <RuntimeNavLink className="rounded-full border border-(--color-border) px-3 py-1.5 transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)">
-                {copy.home.nav.runtime}
-              </RuntimeNavLink>
-              <span className="rounded-full border border-(--color-border) px-3 py-1.5">{copy.home.nav.localFirst}</span>
-              <span className="rounded-full border border-(--color-border) px-3 py-1.5">{copy.home.nav.dateArchive}</span>
-            </nav>
-          </div>
-        </header>
+        {session && !continueDismissed ? (
+          <ContinueStrip session={session} onDismiss={handleDismissContinue} locale={locale} />
+        ) : null}
 
-        <main className="space-y-8 pb-12">
-          <section className="relative overflow-hidden rounded-[32px] border border-(--color-border) bg-(--color-surface) p-6 shadow-(--shadow-hero) sm:p-8 lg:p-10">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(184,137,45,0.85),rgba(47,126,232,0.8),transparent)] opacity-80" />
+        {tabloidBig ? (
+          <YesterdayTabloid
+            big={tabloidBig}
+            small={tabloidSmall}
+            date={tabloidDate}
+            locale={locale}
+            readSet={readSet}
+            activeTopic={activeTopic}
+          />
+        ) : null}
 
-            <div className="grid gap-8 xl:grid-cols-[0.98fr_1.02fr] xl:items-center">
-              <div className="max-w-4xl space-y-5">
-                <div className="soft-reveal inline-flex items-center rounded-full border border-(--color-border) bg-(--color-surface-muted) px-3 py-1.5 text-[10px] uppercase tracking-[0.32em] text-(--color-accent-gold)">
-                  {copy.home.hero.badge}
-                </div>
-                <h1 className="soft-reveal font-display text-4xl leading-none tracking-[-0.03em] text-(--color-text-primary) sm:text-5xl lg:text-7xl">
-                  {copy.home.hero.titleLine1}
-                  <br />
-                  {copy.home.hero.titleLine2}
-                </h1>
-                <p
-                  className="soft-reveal max-w-3xl text-base leading-8 text-(--color-text-secondary) sm:text-lg"
-                  style={{ animationDelay: "80ms" }}
-                >
-                  {copy.home.hero.intro}
-                </p>
+        <NewspaperFooter />
+      </main>
+    </div>
+  );
+}
 
-                <div
-                  className="soft-reveal mt-8 flex flex-wrap gap-3"
-                  style={{ animationDelay: "140ms" }}
-                >
-                  <a
-                    href={latestEntries.length > 0 ? "#latest-drop" : "#date-archive"}
-                    className="inline-flex items-center gap-2 rounded-full border border-(--color-border-strong) bg-(--color-text-primary) px-5 py-3 text-sm font-medium !text-(--color-bg-primary) transition hover:opacity-90"
-                  >
-                    {copy.home.hero.ctaToday}
-                  </a>
-                  <Link
-                    href="/about"
-                    className="inline-flex items-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface-muted) px-5 py-3 text-sm font-medium text-(--color-text-primary) transition hover:border-(--color-border-strong)"
-                  >
-                    {copy.home.hero.ctaAbout}
-                  </Link>
-                  <RuntimeNavLink className="inline-flex items-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface-muted) px-5 py-3 text-sm font-medium text-(--color-text-primary) transition hover:border-(--color-border-strong)">
-                    {copy.home.hero.ctaRuntime}
-                  </RuntimeNavLink>
-                  <a
-                    href="https://github.com/Supwils/s-news"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface-muted) px-5 py-3 text-sm font-medium text-(--color-text-primary) transition hover:border-(--color-border-strong)"
-                  >
-                    <Github size={16} />
-                    GitHub
-                  </a>
-                </div>
-              </div>
+// --- Sub-components --------------------------------------------------------
 
-              <div className="soft-reveal xl:justify-self-end xl:translate-x-2" style={{ animationDelay: "180ms" }}>
-                <NewsDeskIllustration entryCount={entries.length} topicCount={TOPICS.length} />
-              </div>
-            </div>
+function TopicRail({
+  activeTopic,
+  totalCount,
+  topicCounts,
+  topics,
+  locale,
+}: {
+  activeTopic: TopicFilter;
+  totalCount: number;
+  topicCounts: Partial<Record<TopicKey, number>>;
+  topics: Array<{ key: TopicKey; shortLabel: string }>;
+  locale: "zh" | "en";
+}) {
+  return (
+    <div
+      id="topics"
+      style={{
+        background: "var(--np-paper-warm)",
+        borderBottom: "1px solid var(--np-rule)",
+        padding: "8px 40px",
+      }}
+    >
+      <div
+        className="mx-auto flex w-full flex-wrap items-center"
+        style={{ maxWidth: 1280, gap: 6 }}
+      >
+        <Link
+          href="/"
+          className="np-chip"
+          data-active={activeTopic === "all" || undefined}
+          style={{ ["--_dot" as string]: "var(--np-ink)" } as CSSProperties}
+        >
+          <span className="np-chip-dot" />
+          <span>{locale === "zh" ? "全部" : "All"}</span>
+          <span className="np-chip-count">{totalCount}</span>
+        </Link>
 
-            <div className="soft-reveal mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4" style={{ animationDelay: "220ms" }}>
-              <MetricCard label={copy.home.metrics.totalLabel} value={`${entries.length}`} hint={copy.home.metrics.totalHint} />
-              <MetricCard
-                label={copy.home.metrics.todayLabel}
-                value={`${latestEntries.length}`}
-                hint={latestDate ? formatDisplayDate(latestDate, locale) : copy.home.metrics.todayNoData}
-              />
-              <MetricCard label={copy.home.metrics.topicLabel} value={`${TOPICS.length}`} hint={topicsWithLocale.map((t) => t.shortLabel).join(" / ")} />
-              <MetricCard label={copy.home.metrics.archiveLabel} value={`${archiveCount}`} hint={copy.home.metrics.archiveHint} />
-            </div>
-          </section>
+        {topics.map((t) => (
+          <Link
+            key={t.key}
+            href={`/?topic=${t.key}`}
+            className="np-chip"
+            data-active={activeTopic === t.key || undefined}
+            style={{ ["--_dot" as string]: TOPIC_COLOR_VAR[t.key] } as CSSProperties}
+          >
+            <span className="np-chip-dot" />
+            <span>{t.shortLabel}</span>
+            <span className="np-chip-count">{topicCounts[t.key] ?? 0}</span>
+          </Link>
+        ))}
 
-          <TodayPulse latestEntries={latestEntries} latestDate={latestDate} />
-
-          {latestEntries.length > 0 ? (
-            <section
-              id="latest-drop"
-              className="rounded-[32px] border border-(--color-border) bg-(--color-surface)/95 p-5 shadow-(--shadow-card) sm:p-6 lg:p-8"
-            >
-              <div className="flex flex-wrap items-end justify-between gap-4">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">{copy.home.todayStack.badge}</p>
-                  <h2 className="mt-2 font-(--font-display) text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary) sm:text-4xl">
-                    {formatDisplayDate(latestDate!, locale)}{copy.home.todayStack.headlineSuffix}
-                  </h2>
-                  <p className="mt-3 max-w-2xl text-sm leading-7 text-(--color-text-secondary) sm:text-base">
-                    {copy.home.todayStack.body}
-                  </p>
-                </div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-(--color-border) px-4 py-2 text-sm text-(--color-text-secondary)">
-                  <CalendarDays size={15} />
-                  {copy.home.todayStack.countLabel} {latestEntries.length} {copy.home.todayStack.countSuffix}
-                </div>
-              </div>
-
-              <div className="mt-6 grid gap-4 xl:grid-cols-3">
-                {latestEntries.map((entry, index) => (
-                  <div
-                    key={`${entry.topic}-${entry.date}`}
-                    className="soft-reveal"
-                    style={{ animationDelay: `${index * 110}ms` }}
-                  >
-                    <NewsCard entry={entry} compact />
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface)/95 p-5 shadow-(--shadow-card) sm:p-6 lg:p-8">
-            <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface-muted) px-3 py-1.5 text-[10px] uppercase tracking-[0.32em] text-(--color-accent-gold)">
-                  <Search size={12} />
-                  {copy.home.signalFilter.badge}
-                </div>
-                <h2 className="font-display text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary) sm:text-4xl">
-                  {copy.home.signalFilter.titleLine1}
-                  <br />
-                  {copy.home.signalFilter.titleLine2}
-                </h2>
-                <p className="text-sm leading-8 text-(--color-text-secondary) sm:text-base">
-                  {copy.home.signalFilter.body}
-                </p>
-                <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                  <OverviewCard title={copy.home.signalFilter.cards[0].title} description={copy.home.signalFilter.cards[0].description} />
-                  <OverviewCard title={copy.home.signalFilter.cards[1].title} description={copy.home.signalFilter.cards[1].description} />
-                  <OverviewCard
-                    title={copy.home.signalFilter.cards[2].title}
-                    description={`${copy.home.signalFilter.cards[2].descriptionPrefix}${filtered.length}${copy.home.signalFilter.cards[2].descriptionSuffix}`}
-                  />
-                </div>
-              </div>
-
-              <div className="rounded-[28px] border border-(--color-border) bg-(--color-surface-muted)/70 p-5 sm:p-6">
-                <label className="block">
-                  <span className="sr-only">{copy.home.signalFilter.searchA11y}</span>
-                  <div className="flex items-center gap-3 rounded-2xl border border-(--color-border) bg-(--color-surface) px-4 py-3">
-                    <Search size={16} className="text-(--color-text-muted)" />
-                    <input
-                      value={query}
-                      onChange={(event) => setQuery(event.target.value)}
-                      placeholder={copy.home.signalFilter.searchPlaceholder}
-                      className="w-full bg-transparent text-sm text-(--color-text-primary) outline-none placeholder:text-(--color-text-muted)"
-                    />
-                  </div>
-                </label>
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <FilterButton
-                    active={activeTopic === "all"}
-                    onClick={() => setActiveTopic("all")}
-                    topic="all"
-                    label={copy.home.signalFilter.filterAllTopics}
-                  />
-                  {topicsWithLocale.map((topic) => (
-                    <FilterButton
-                      key={topic.key}
-                      active={activeTopic === topic.key}
-                      onClick={() => setActiveTopic(topic.key)}
-                      topic={topic.key}
-                      label={topic.label}
-                    />
-                  ))}
-                </div>
-
-                <p className="mt-4 text-sm leading-7 text-(--color-text-secondary)">
-                  {copy.home.signalFilter.resultSummaryPrefix}
-                  <span className="font-semibold text-(--color-text-primary)">{filtered.length}</span>
-                  {copy.home.signalFilter.resultSummarySuffix}
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section id="date-archive" className="space-y-8">
-            {monthSections.map((monthSection) => (
-              <div key={monthSection.month} className="space-y-6">
-                <div className="border-b border-(--color-border) pb-3">
-                  <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">
-                    {copy.home.dateArchive.badge}
-                  </p>
-                  <Link
-                    href={`/archive/${monthSection.month}`}
-                    className="mt-2 inline-flex font-display text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary) transition hover:text-(--color-accent-sky)"
-                  >
-                    {formatArchiveMonth(monthSection.month, locale)}
-                  </Link>
-                </div>
-
-                {monthSection.groups.map((group) => (
-                  <div key={group.date} className="space-y-4">
-                    <div className="flex flex-wrap items-end justify-between gap-3">
-                      <div>
-                        <h3 className="font-(--font-display) text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary)">
-                          {formatDisplayDate(group.date, locale)}
-                        </h3>
-                      </div>
-                      <div className="inline-flex items-center gap-2 rounded-full border border-(--color-border) px-3 py-1.5 text-xs text-(--color-text-secondary)">
-                        <Newspaper size={14} />
-                        {group.entries.length} {group.entries.length > 1 ? copy.home.dateArchive.issues : copy.home.dateArchive.issue}
-                      </div>
-                    </div>
-
-                    <div className="grid gap-4 xl:grid-cols-2">
-                      {group.entries.map((entry) => (
-                        <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </section>
-
-          {groups.length === 0 ? (
-            <section className="rounded-[32px] border border-dashed border-(--color-border-strong) bg-(--color-surface) p-8 text-center shadow-(--shadow-card)">
-              <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">{copy.home.noResults.badge}</p>
-              <h2 className="mt-3 font-(--font-display) text-3xl text-(--color-text-primary)">
-                {copy.home.noResults.heading}
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-(--color-text-secondary)">
-                {copy.home.noResults.body}
-              </p>
-              <Link
-                href="/"
-                className="mt-6 inline-flex items-center rounded-full border border-(--color-border-strong) px-4 py-2 text-sm font-medium text-(--color-text-primary) transition hover:bg-(--color-surface-muted)"
-              >
-                {copy.home.noResults.backLink}
-              </Link>
-            </section>
-          ) : null}
-        </main>
+        <span className="ml-auto np-mono" style={{ fontSize: 11, color: "var(--np-ink3)", letterSpacing: "0.14em" }}>
+          <Search size={12} style={{ display: "inline", verticalAlign: "-1px", marginRight: 6 }} />
+          {locale === "zh" ? "搜索归档" : "Search digests"}
+        </span>
       </div>
     </div>
   );
 }
 
-function MetricCard({ label, value, hint }: { label: string; value: string; hint: string }) {
-  return (
-    <div className="rounded-[22px] border border-(--color-border) bg-(--color-surface-muted) p-4">
-      <p className="text-[11px] uppercase tracking-[0.28em] text-(--color-text-muted)">{label}</p>
-      <p className="font-display mt-3 text-3xl leading-none tracking-[-0.04em] text-(--color-text-primary)">
-        {value}
-      </p>
-      <p className="mt-2 text-sm leading-6 text-(--color-text-secondary)">{hint}</p>
-    </div>
-  );
-}
-
-function OverviewCard({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="rounded-[24px] border border-(--color-border) bg-(--color-surface-muted)/75 p-4 sm:p-5">
-      <h3 className="text-lg font-semibold text-(--color-text-primary)">{title}</h3>
-      <p className="mt-2 text-sm leading-7 text-(--color-text-secondary)">{description}</p>
-    </div>
-  );
-}
-
-function FilterButton({
-  active,
-  label,
-  topic,
-  onClick,
+function HeroGrid({
+  lead,
+  briefs,
+  moreCount,
+  locale,
+  activeTopic,
+  currentMonth,
+  todayDate,
 }: {
-  active: boolean;
-  label: string;
-  topic: TopicKey | "all";
-  onClick: () => void;
+  lead: NewsPreview | null;
+  briefs: NewsPreview[];
+  moreCount: number;
+  locale: "zh" | "en";
+  activeTopic: TopicFilter;
+  currentMonth: string | null;
+  todayDate: string | null;
+}) {
+  if (!lead) {
+    return (
+      <section style={{ paddingBottom: 40, borderBottom: "1px solid var(--np-rule)" }}>
+        <p className="np-serif" style={{ fontSize: 28, color: "var(--np-ink2)", margin: 0 }}>
+          {locale === "zh" ? "今日暂无新日报。" : "No issue published yet today."}
+        </p>
+      </section>
+    );
+  }
+
+  const leadMeta = getTopicMeta(lead.topic, locale)!;
+  const kickerLabel =
+    locale === "zh" ? (activeTopic === "all" ? "今日头条" : leadMeta.label) : leadMeta.label.toUpperCase();
+  const kickerTime = activeTopic === "all"
+    ? (locale === "zh" ? "今日" : "TODAY")
+    : (locale === "zh" ? formatDisplayDate(lead.date, locale) : lead.date);
+
+  return (
+    <section
+      className="np-hero-grid"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1.3fr 1fr",
+        gap: 48,
+        paddingBottom: 40,
+        borderBottom: "1px solid var(--np-rule)",
+      }}
+    >
+      <LeadStory lead={lead} kickerLabel={kickerLabel} kickerTime={kickerTime} locale={locale} />
+
+      <aside>
+        <RuleLabel
+          left={
+            locale === "zh"
+              ? activeTopic === "all"
+                ? `今日简报 · 共 ${briefs.length + (lead ? 1 : 0)} 条`
+                : `${leadMeta.label} · 最近 ${briefs.length + 1} 条`
+              : activeTopic === "all"
+                ? `TODAY'S BRIEFS · ${briefs.length + (lead ? 1 : 0)} STACKED`
+                : `${leadMeta.label.toUpperCase()} · RECENT ${briefs.length + 1}`
+          }
+        />
+
+        {briefs.length === 0 ? (
+          <p className="np-sans" style={{ color: "var(--np-ink3)", fontSize: 14, padding: "20px 0" }}>
+            {locale === "zh" ? "今日没有更多简报。" : "No more briefs for today."}
+          </p>
+        ) : (
+          briefs.map((entry) => <StoryRow key={articleId(entry)} entry={entry} locale={locale} />)
+        )}
+
+        {moreCount > 0 ? (
+          <Link
+            href={
+              activeTopic === "all" && todayDate && currentMonth
+                ? `/archive/${currentMonth}`
+                : activeTopic !== "all"
+                  ? `/news/${activeTopic}/${lead.date}`
+                  : "#"
+            }
+            className="np-btn-ghost"
+            style={{ marginTop: 18 }}
+          >
+            {locale === "zh"
+              ? `查看${activeTopic === "all" ? "今日" : leadMeta.label}全部 ${briefs.length + moreCount + 1} 条 →`
+              : `SEE ALL ${briefs.length + moreCount + 1} ${activeTopic === "all" ? "TODAY" : leadMeta.label.toUpperCase()} →`}
+          </Link>
+        ) : null}
+      </aside>
+    </section>
+  );
+}
+
+function LeadStory({
+  lead,
+  kickerLabel,
+  kickerTime,
+  locale,
+}: {
+  lead: NewsPreview;
+  kickerLabel: string;
+  kickerTime: string;
+  locale: "zh" | "en";
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={[
-        "rounded-full border px-3 py-2 text-xs font-medium transition sm:text-sm",
-        active
-          ? "border-(--color-border-strong) bg-(--color-text-primary) text-(--color-bg-primary)"
-          : "border-(--color-border) bg-(--color-surface-muted) text-(--color-text-secondary) hover:border-(--color-border-strong) hover:text-(--color-text-primary)",
-      ].join(" ")}
-    >
-      <span
-        className={[
-          "inline-flex items-center gap-2",
-          active ? "text-(--color-bg-primary)" : "",
-        ].join(" ")}
-      >
-        {topic === "all" ? (
+    <article>
+      <Link href={articleHref(lead)} style={{ display: "block" }}>
+        <div className="np-mono" style={styles.kicker}>
           <span
-            className="inline-grid h-[18px] w-[18px] grid-cols-2 gap-0.5 rounded-full border border-current/20 p-[3px]"
-            aria-hidden="true"
-          >
-            <span className="rounded-full bg-current/70" />
-            <span className="rounded-full bg-current/45" />
-            <span className="rounded-full bg-current/45" />
-            <span className="rounded-full bg-current/70" />
-          </span>
-        ) : (
-          <TopicIcon topic={topic} size={18} variant={active ? "muted" : "outline"} />
-        )}
-        <span>{label}</span>
-      </span>
-    </button>
+            style={{
+              width: 8,
+              height: 8,
+              background: "var(--np-ink-red)",
+              display: "inline-block",
+              marginRight: 2,
+            }}
+          />
+          {`${locale === "zh" ? "头条" : "LEAD"} · ${kickerTime} · ${kickerLabel}`}
+        </div>
+        <h2
+          className="np-serif np-lead-headline"
+          style={{
+            fontSize: 56,
+            lineHeight: 1.02,
+            letterSpacing: "-0.02em",
+            fontWeight: 600,
+            color: "var(--np-ink)",
+            margin: "0 0 18px",
+          }}
+        >
+          <InlineMarkdown content={lead.title} inline disableLinks />
+        </h2>
+        <div
+          className="np-serif"
+          style={{
+            fontStyle: "italic",
+            fontSize: 19,
+            lineHeight: 1.55,
+            color: "var(--np-ink2)",
+            maxWidth: 640,
+            margin: "0 0 20px",
+          }}
+        >
+          <InlineMarkdown content={lead.description} disableLinks />
+        </div>
+        <div
+          className="np-sans"
+          style={{ fontSize: 14, color: "var(--np-ink3)", display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 20 }}
+        >
+          <span>{formatDisplayDate(lead.date, locale)}</span>
+          <span>·</span>
+          <span>{locale === "zh" ? `${lead.readingMinutes} 分钟阅读` : `${lead.readingMinutes} min read`}</span>
+          {lead.articleCount ? (
+            <>
+              <span>·</span>
+              <span>{locale === "zh" ? `${lead.articleCount} 条要闻` : `${lead.articleCount} stories`}</span>
+            </>
+          ) : null}
+        </div>
+
+        <div
+          className="np-hero-placeholder"
+          style={{
+            aspectRatio: "16 / 8",
+            border: "1px solid var(--np-rule)",
+            position: "relative",
+          }}
+        >
+          {lead.takeaway ? (
+            <span
+              className="np-mono"
+              style={{
+                position: "absolute",
+                left: 12,
+                bottom: 10,
+                fontSize: 12,
+                color: "var(--np-ink3)",
+                background: "color-mix(in srgb, var(--np-paper) 85%, transparent)",
+                padding: "2px 6px",
+              }}
+            >
+              {stripInlineMarkdown(lead.takeaway).slice(0, 80)}
+            </span>
+          ) : null}
+        </div>
+      </Link>
+    </article>
   );
 }
+
+function RuleLabel({ left }: { left: string }) {
+  return (
+    <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 18 }}>
+      <span
+        className="np-mono"
+        style={{
+          fontSize: 11,
+          letterSpacing: "0.24em",
+          textTransform: "uppercase",
+          color: "var(--np-ink3)",
+        }}
+      >
+        {left}
+      </span>
+      <span style={{ flex: 1, height: 1, background: "var(--np-rule)" }} />
+    </div>
+  );
+}
+
+function StoryRow({ entry, locale }: { entry: NewsPreview; locale: "zh" | "en" }) {
+  const meta = getTopicMeta(entry.topic, locale)!;
+  return (
+    <Link href={articleHref(entry)} className="np-story-row">
+      <div>
+        <div
+          className="np-mono"
+          style={{
+            fontSize: 10,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: TOPIC_COLOR_VAR[entry.topic],
+            fontWeight: 600,
+          }}
+        >
+          {meta.shortLabel}
+        </div>
+        <div className="np-mono" style={{ fontSize: 11, color: "var(--np-ink3)", marginTop: 6 }}>
+          {formatDisplayDate(entry.date, locale)}
+        </div>
+      </div>
+      <div>
+        <h3
+          className="np-serif np-story-title"
+          style={{
+            fontSize: 22,
+            lineHeight: 1.2,
+            letterSpacing: "-0.01em",
+            fontWeight: 600,
+            color: "var(--np-ink)",
+            margin: 0,
+          }}
+        >
+          <InlineMarkdown content={entry.title} inline disableLinks />
+        </h3>
+        <div
+          className="np-sans"
+          style={{
+            fontSize: 14,
+            lineHeight: 1.65,
+            color: "var(--np-ink2)",
+            maxWidth: 560,
+            marginTop: 8,
+            marginBottom: 0,
+          }}
+        >
+          <InlineMarkdown content={entry.description} disableLinks />
+        </div>
+      </div>
+      <div
+        className="np-mono"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+          gap: 6,
+          fontSize: 11,
+          color: "var(--np-ink3)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <span>{locale === "zh" ? `${entry.readingMinutes} 分钟` : `${entry.readingMinutes} min`}</span>
+        <span className="np-story-go" style={{ color: "var(--np-ink)", opacity: 0.7 }}>
+          {locale === "zh" ? "读 →" : "READ →"}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function ContinueStrip({
+  session,
+  onDismiss,
+  locale,
+}: {
+  session: ReadingSession;
+  onDismiss: () => void;
+  locale: "zh" | "en";
+}) {
+  const pct = Math.round(session.progress * 100);
+  const meta = getTopicMeta(session.topic, locale);
+  const label = meta?.label ?? session.topic;
+  const body =
+    locale === "zh"
+      ? `昨日「${label}」读到 ${pct}% —— 回到原处继续。`
+      : `Paused on ${label} at ${pct}%. Pick up where you left off.`;
+
+  const href = `/news/${session.topic}/${session.articleId.split(":")[1] ?? ""}`;
+
+  return (
+    <section
+      style={{
+        padding: "24px 0",
+        borderBottom: "1px solid var(--np-rule)",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        gap: 24,
+        flexWrap: "wrap",
+      }}
+    >
+      <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+        <div
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: 999,
+            background: "var(--np-ink)",
+            color: "var(--np-paper)",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <RotateCcw size={20} />
+        </div>
+        <div>
+          <div
+            className="np-mono"
+            style={{
+              fontSize: 11,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "var(--np-ink3)",
+            }}
+          >
+            {locale === "zh" ? "继续阅读" : "CONTINUE READING"}
+          </div>
+          <div className="np-serif" style={{ fontSize: 20, color: "var(--np-ink)", marginTop: 4 }}>
+            {body}
+          </div>
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: 10 }}>
+        <Link href={href} className="np-btn-primary">
+          {locale === "zh" ? "继续阅读" : "Resume"}
+        </Link>
+        <button type="button" className="np-btn-secondary" onClick={onDismiss}>
+          {locale === "zh" ? "稍后" : "Later"}
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function YesterdayTabloid({
+  big,
+  small,
+  date,
+  locale,
+  readSet,
+  activeTopic,
+}: {
+  big: NewsPreview;
+  small: NewsPreview[];
+  date: string | null;
+  locale: "zh" | "en";
+  readSet: Set<string>;
+  activeTopic: TopicFilter;
+}) {
+  const month = date?.slice(0, 7);
+  const sectionLabel =
+    activeTopic === "all"
+      ? locale === "zh"
+        ? "昨日"
+        : "Yesterday"
+      : locale === "zh"
+        ? "更早"
+        : "Earlier";
+
+  const dateDisplay = date ? formatDisplayDate(date, locale) : "";
+
+  return (
+    <section style={{ padding: "40px 0 0" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          marginBottom: 20,
+          gap: 16,
+          flexWrap: "wrap",
+        }}
+      >
+        <h2
+          className="np-serif"
+          style={{
+            fontSize: 34,
+            letterSpacing: "-0.02em",
+            fontWeight: 600,
+            margin: 0,
+            color: "var(--np-ink)",
+          }}
+        >
+          {`${sectionLabel} · ${dateDisplay}`}
+        </h2>
+        {month ? (
+          <Link
+            href={`/archive/${month}`}
+            className="np-mono"
+            style={{ fontSize: 12, color: "var(--np-ink3)", letterSpacing: "0.06em" }}
+          >
+            {locale === "zh"
+              ? `查看 ${month} 全部 →`
+              : `SEE ALL ${MONTHS_EN[Number(month.split("-")[1]) - 1]} ${month.split("-")[0]} →`}
+          </Link>
+        ) : null}
+      </div>
+
+      <div className="np-tabloid">
+        <TabloidBig entry={big} locale={locale} isRead={readSet.has(articleId(big))} />
+
+        {small.map((entry, idx) => {
+          const top = idx < 2;
+          const left = idx % 2 === 0;
+          return (
+            <TabloidSmall
+              key={articleId(entry)}
+              entry={entry}
+              locale={locale}
+              isRead={readSet.has(articleId(entry))}
+              borderRight={left}
+              borderBottom={top}
+            />
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function TabloidBig({
+  entry,
+  locale,
+  isRead,
+}: {
+  entry: NewsPreview;
+  locale: "zh" | "en";
+  isRead: boolean;
+}) {
+  const meta = getTopicMeta(entry.topic, locale)!;
+  return (
+    <Link
+      href={articleHref(entry)}
+      className="np-tabloid-big"
+      data-read={isRead || undefined}
+      style={{ opacity: isRead ? 0.78 : 1, display: "block" }}
+    >
+      <div
+        className="np-mono"
+        style={{
+          fontSize: 10,
+          letterSpacing: "0.24em",
+          textTransform: "uppercase",
+          color: TOPIC_COLOR_VAR[entry.topic],
+          fontWeight: 600,
+        }}
+      >
+        {`${meta.shortLabel} · ${entry.readingMinutes} MIN`}
+      </div>
+      <h3
+        className="np-serif np-story-title"
+        style={{
+          fontSize: 30,
+          lineHeight: 1.12,
+          letterSpacing: "-0.02em",
+          fontWeight: 600,
+          color: "var(--np-ink)",
+          margin: "12px 0 12px",
+        }}
+      >
+        <InlineMarkdown content={entry.title} inline disableLinks />
+      </h3>
+      <div
+        className="np-sans"
+        style={{ fontSize: 14.5, lineHeight: 1.7, color: "var(--np-ink2)", margin: 0 }}
+      >
+        <InlineMarkdown content={entry.description} disableLinks />
+      </div>
+
+      {entry.takeaway ? (
+        <div
+          style={{
+            marginTop: 22,
+            padding: "16px 18px",
+            background: "var(--np-paper-warm)",
+            borderLeft: "3px solid var(--np-ink)",
+          }}
+        >
+          <div
+            className="np-mono"
+            style={{
+              fontSize: 10,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "var(--np-ink3)",
+              marginBottom: 8,
+            }}
+          >
+            {locale === "zh" ? "今日定性" : "TAKEAWAY"}
+          </div>
+          <div
+            className="np-serif"
+            style={{ fontStyle: "italic", fontSize: 16, lineHeight: 1.55, color: "var(--np-ink)", margin: 0 }}
+          >
+            <InlineMarkdown content={entry.takeaway} disableLinks />
+          </div>
+        </div>
+      ) : null}
+
+      <div
+        className="np-mono"
+        style={{
+          marginTop: 22,
+          display: "flex",
+          gap: 14,
+          fontSize: 11,
+          color: "var(--np-ink3)",
+          letterSpacing: "0.08em",
+        }}
+      >
+        {isRead ? (
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+            <Check size={12} /> READ
+          </span>
+        ) : (
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+            <Check size={12} style={{ opacity: 0.3 }} />
+            {locale === "zh" ? "未读" : "UNREAD"}
+          </span>
+        )}
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+          <Bookmark size={12} /> {locale === "zh" ? "收藏" : "SAVE"}
+        </span>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+          <ExternalLink size={12} /> {locale === "zh" ? "原文" : "OPEN"}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function TabloidSmall({
+  entry,
+  locale,
+  isRead,
+  borderRight,
+  borderBottom,
+}: {
+  entry: NewsPreview;
+  locale: "zh" | "en";
+  isRead: boolean;
+  borderRight: boolean;
+  borderBottom: boolean;
+}) {
+  const meta = getTopicMeta(entry.topic, locale)!;
+  return (
+    <Link
+      href={articleHref(entry)}
+      className="np-tabloid-small"
+      data-read={isRead || undefined}
+      style={{
+        borderRight: borderRight ? "1px solid var(--np-rule-soft)" : "none",
+        borderBottom: borderBottom ? "1px solid var(--np-rule-soft)" : "none",
+        display: "block",
+      }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span
+          className="np-mono"
+          style={{
+            fontSize: 10,
+            letterSpacing: "0.24em",
+            textTransform: "uppercase",
+            color: TOPIC_COLOR_VAR[entry.topic],
+            fontWeight: 600,
+          }}
+        >
+          {`${meta.shortLabel} · ${entry.readingMinutes} MIN`}
+        </span>
+        {isRead ? (
+          <span
+            className="np-mono"
+            style={{ fontSize: 10, color: "var(--np-ink3)", letterSpacing: "0.2em" }}
+          >
+            READ
+          </span>
+        ) : null}
+      </div>
+      <h4
+        className="np-serif np-story-title"
+        style={{
+          fontSize: 19,
+          lineHeight: 1.22,
+          letterSpacing: "-0.01em",
+          fontWeight: 600,
+          color: "var(--np-ink)",
+          margin: "10px 0 8px",
+        }}
+      >
+        <InlineMarkdown content={entry.title} inline disableLinks />
+      </h4>
+      <div
+        className="np-sans"
+        style={{ fontSize: 13.5, lineHeight: 1.6, color: "var(--np-ink2)", margin: 0 }}
+      >
+        <InlineMarkdown content={entry.description} disableLinks />
+      </div>
+    </Link>
+  );
+}
+
+// --- shared inline style shards -------------------------------------------
+
+const styles = {
+  kicker: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    fontSize: 11,
+    letterSpacing: "0.22em",
+    textTransform: "uppercase",
+    color: "var(--np-ink-red)",
+    marginBottom: 16,
+    fontWeight: 600,
+  } satisfies CSSProperties,
+};

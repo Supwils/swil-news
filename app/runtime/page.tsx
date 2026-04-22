@@ -5,6 +5,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowLeft, CheckCircle2, Loader2, Play, XCircle } from "lucide-react";
 
 import { useLocale } from "@/components/locale-context";
+import { NewspaperFooter } from "@/components/newspaper/footer";
+import { NewspaperMasthead } from "@/components/newspaper/masthead";
 import { getCopy } from "@/data/copy";
 import { TOPICS, getTopicMeta } from "@/lib/news-meta";
 import type { TopicKey } from "@/lib/news-meta";
@@ -116,160 +118,286 @@ export default function RuntimePage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-(--color-bg-primary) text-(--color-text-primary)">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(193,166,111,0.22),_transparent_30%),radial-gradient(circle_at_right,_rgba(96,161,255,0.18),_transparent_28%),radial-gradient(circle_at_bottom,_rgba(236,72,153,0.14),_transparent_25%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,_rgba(255,255,255,0.04),_transparent_18%),linear-gradient(to_right,_rgba(255,255,255,0.02)_1px,_transparent_1px),linear-gradient(to_bottom,_rgba(255,255,255,0.02)_1px,_transparent_1px)] bg-[size:auto,24px_24px,24px_24px] opacity-40" />
-
-      <div className="relative mx-auto flex w-full max-w-[1400px] flex-col px-4 py-4 sm:px-6 lg:px-8">
-        <header className="sticky top-0 z-20 mb-6 rounded-full border border-(--color-border) bg-[color-mix(in_srgb,var(--color-bg-primary)_75%,transparent)] px-4 py-3 backdrop-blur-xl sm:px-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <p className="font-display text-xl tracking-[0.18em] uppercase text-(--color-text-primary)">
-                {copy.runtime.siteTitle}
-              </p>
-              <p className="text-xs uppercase tracking-[0.25em] text-(--color-text-muted)">
-                {copy.runtime.siteSubtitle}
-              </p>
-            </div>
-            <nav className="flex flex-wrap items-center gap-2 text-xs text-(--color-text-secondary)">
-              <Link
-                href="/"
-                className="rounded-full border border-(--color-border) px-3 py-1.5 transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
+    <div className="np-root">
+      <NewspaperMasthead />
+      <main className="mx-auto w-full" style={{ maxWidth: 1280, padding: 40 }}>
+        {allowed !== true ? (
+          <section style={{ paddingBottom: 40, borderBottom: "1px solid var(--color-border)" }}>
+            <span
+              className="np-mono"
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "var(--np-ink-red)",
+                fontWeight: 600,
+              }}
+            >
+              RUNTIME · READ-ONLY
+            </span>
+            <h1
+              className="np-serif"
+              style={{
+                fontSize: 48,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.05,
+                fontWeight: 600,
+                margin: "14px 0 18px",
+                color: "var(--color-text-primary)",
+              }}
+            >
+              {copy.runtime.readOnlyHeading}
+            </h1>
+            <p
+              className="np-serif"
+              style={{
+                fontStyle: "italic",
+                fontSize: 18,
+                lineHeight: 1.55,
+                maxWidth: 640,
+                color: "var(--color-text-secondary)",
+                margin: "0 0 22px",
+              }}
+            >
+              {copy.runtime.readOnlyBody}
+            </p>
+            <Link href="/" className="np-btn-primary">
+              <ArrowLeft size={14} />
+              {copy.runtime.backToNews}
+            </Link>
+          </section>
+        ) : (
+          <>
+            <section style={{ paddingBottom: 32, borderBottom: "1px solid var(--color-border)" }}>
+              <span
+                className="np-mono"
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: "var(--np-ink-red)",
+                  fontWeight: 600,
+                }}
               >
-                {copy.runtime.navHome}
-              </Link>
-              <Link
-                href="/about"
-                className="rounded-full border border-(--color-border) px-3 py-1.5 transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
-              >
-                {copy.runtime.navAbout}
-              </Link>
-              <span className="rounded-full border border-(--color-border-strong) bg-(--color-surface-muted) px-3 py-1.5">
-                {copy.runtime.navRuntime}
+                RUNTIME · {copy.runtime.siteSubtitle}
               </span>
-            </nav>
-          </div>
-        </header>
-
-        <main className="space-y-8 pb-12">
-          {allowed !== true ? (
-            <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-6 shadow-(--shadow-hero) sm:p-8 lg:p-10">
-              <h1 className="font-display text-3xl leading-tight tracking-[-0.03em] text-(--color-text-primary) sm:text-4xl">
-                {copy.runtime.readOnlyHeading}
-              </h1>
-              <p className="mt-3 max-w-2xl text-(--color-text-secondary) sm:text-base">
-                {copy.runtime.readOnlyBody}
-              </p>
-              <Link
-                href="/"
-                className="mt-6 inline-flex items-center gap-2 rounded-full border border-(--color-border-strong) bg-(--color-text-primary) px-5 py-3 text-sm font-medium !text-(--color-bg-primary) transition hover:opacity-90"
+              <h1
+                className="np-serif"
+                style={{
+                  fontSize: 48,
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.05,
+                  fontWeight: 600,
+                  margin: "14px 0 18px",
+                  color: "var(--color-text-primary)",
+                }}
               >
-                <ArrowLeft size={18} />
-                {copy.runtime.backToNews}
-              </Link>
+                {copy.runtime.runHeading}
+              </h1>
+              <p
+                className="np-serif"
+                style={{
+                  fontStyle: "italic",
+                  fontSize: 18,
+                  lineHeight: 1.55,
+                  maxWidth: 640,
+                  color: "var(--color-text-secondary)",
+                  margin: 0,
+                }}
+              >
+                {copy.runtime.runBody}
+              </p>
             </section>
-          ) : (
-            <>
-              <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-6 shadow-(--shadow-hero) sm:p-8 lg:p-10">
-                <h1 className="font-display text-3xl leading-tight tracking-[-0.03em] text-(--color-text-primary) sm:text-4xl">
-                  {copy.runtime.runHeading}
-                </h1>
-                <p className="mt-3 max-w-2xl text-(--color-text-secondary) sm:text-base">
-                  {copy.runtime.runBody}
-                </p>
 
-                <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                  {runtimeOptions.map((opt) => {
-                    const isRunning = runningTopic === opt.value;
-                    const disabled = state === "running";
-                    return (
-                      <div
-                        key={opt.value}
-                        className="rounded-[28px] border border-(--color-border) bg-(--color-surface-muted) p-5 shadow-(--shadow-card) transition hover:border-(--color-border-strong)"
-                      >
-                        <p className="font-medium text-(--color-text-primary)">{opt.label}</p>
-                        <p className="mt-1 text-xs text-(--color-text-muted)">
-                          {opt.value === "all" ? "scripts/run_all_news.sh" : `scripts/run-${opt.value === "ai-tech" ? "aitech" : opt.value}-news.sh`}
-                        </p>
-                        <button
-                          type="button"
-                          onClick={() => run(opt.value)}
-                          disabled={disabled}
-                          className="mt-4 flex w-full items-center justify-center gap-2 rounded-full border border-(--color-border) bg-(--color-surface) px-4 py-3 text-sm font-medium text-(--color-text-primary) transition hover:border-(--color-border-strong) hover:bg-(--color-surface-muted) disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                          {isRunning ? (
-                            <>
-                              <Loader2 size={18} className="animate-spin" />
-                              {copy.runtime.runningLabel}
-                            </>
-                          ) : (
-                            <>
-                              <Play size={18} />
-                              {copy.runtime.runButton}
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {state === "running" && runProgress && (
-                  <div className="mt-6 rounded-[28px] border border-(--color-border) bg-(--color-surface-muted) p-5 shadow-(--shadow-card)">
-                    <p className="text-sm font-medium text-(--color-text-primary)">
-                      {copy.runtime.progressStep(runProgress.done + (runProgress.current ? 1 : 0), runProgress.total)}
-                      {runProgress.current && (
-                        <span className="ml-2 text-(--color-text-secondary)">
-                          {copy.runtime.progressRunning(getTopicMeta(runProgress.current as TopicKey, locale)?.label ?? runProgress.current)}
-                        </span>
-                      )}
-                    </p>
-                    <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-(--color-border-soft)">
-                      <div
-                        className="h-full rounded-full bg-(--color-accent-sky) transition-all duration-300"
+            <section style={{ padding: "32px 0", borderBottom: "1px solid var(--color-border)" }}>
+              <div className="runtime-grid">
+                {runtimeOptions.map((opt) => {
+                  const isRunning = runningTopic === opt.value;
+                  const disabled = state === "running";
+                  return (
+                    <div
+                      key={opt.value}
+                      style={{
+                        border: "1px solid var(--color-border)",
+                        background: "var(--color-surface)",
+                        padding: 20,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 10,
+                      }}
+                    >
+                      <p
+                        className="np-serif"
                         style={{
-                          width: `${runProgress.total ? Math.round((runProgress.done / runProgress.total) * 100) : 0}%`,
+                          fontSize: 19,
+                          fontWeight: 600,
+                          margin: 0,
+                          color: "var(--color-text-primary)",
                         }}
-                      />
+                      >
+                        {opt.label}
+                      </p>
+                      <p
+                        className="np-mono"
+                        style={{
+                          fontSize: 11,
+                          color: "var(--color-text-muted)",
+                          margin: 0,
+                          letterSpacing: "0.04em",
+                          wordBreak: "break-all",
+                        }}
+                      >
+                        {opt.value === "all"
+                          ? "scripts/run_all_news.sh"
+                          : `scripts/run-${opt.value === "ai-tech" ? "aitech" : opt.value}-news.sh`}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => run(opt.value)}
+                        disabled={disabled}
+                        className="np-btn-ghost"
+                        style={{
+                          marginTop: "auto",
+                          justifyContent: "center",
+                          opacity: disabled ? 0.5 : 1,
+                          cursor: disabled ? "not-allowed" : "pointer",
+                        }}
+                      >
+                        {isRunning ? (
+                          <>
+                            <Loader2 size={14} className="animate-spin" />
+                            {copy.runtime.runningLabel}
+                          </>
+                        ) : (
+                          <>
+                            <Play size={14} />
+                            {copy.runtime.runButton}
+                          </>
+                        )}
+                      </button>
                     </div>
-                    <p className="mt-2 text-xs text-(--color-text-muted)">
-                      {copy.runtime.progressPercent(runProgress.total ? Math.round((runProgress.done / runProgress.total) * 100) : 0)}
-                    </p>
-                  </div>
-                )}
-
-              </section>
-
-              {result && (
-            <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-6 shadow-(--shadow-card) sm:p-8">
-              <div className="flex items-center gap-3">
-                {result.ok ? (
-                  <CheckCircle2 size={24} className="text-(--color-accent-sky)" />
-                ) : (
-                  <XCircle size={24} className="text-(--color-accent-rose)" />
-                )}
-                <h2 className="font-display text-xl tracking-[-0.02em] text-(--color-text-primary)">
-                  {result.ok ? copy.runtime.resultSuccess : copy.runtime.resultError}
-                </h2>
+                  );
+                })}
               </div>
-              {result.topic && (
-                <p className="mt-2 text-sm text-(--color-text-muted)">{copy.runtime.topicLabel}: {result.topic}</p>
-              )}
-              {result.error && (
-                <p className="mt-2 text-sm text-(--color-accent-rose)">{result.error}</p>
-              )}
-              {(result.stdout || result.stderr) && (
-                <pre className="mt-4 max-h-[320px] overflow-auto rounded-2xl border border-(--color-border) bg-(--color-bg-secondary) p-4 text-xs leading-6 text-(--color-text-secondary) whitespace-pre-wrap">
-                  {result.stdout}
-                  {result.stderr}
-                </pre>
+
+              {state === "running" && runProgress && (
+                <div
+                  style={{
+                    marginTop: 24,
+                    border: "1px solid var(--color-border)",
+                    background: "var(--color-surface-muted)",
+                    padding: 20,
+                  }}
+                >
+                  <p className="np-sans" style={{ fontSize: 14, color: "var(--color-text-primary)", margin: 0 }}>
+                    {copy.runtime.progressStep(runProgress.done + (runProgress.current ? 1 : 0), runProgress.total)}
+                    {runProgress.current && (
+                      <span style={{ marginLeft: 8, color: "var(--color-text-secondary)" }}>
+                        {copy.runtime.progressRunning(
+                          getTopicMeta(runProgress.current as TopicKey, locale)?.label ?? runProgress.current,
+                        )}
+                      </span>
+                    )}
+                  </p>
+                  <div
+                    style={{
+                      marginTop: 12,
+                      height: 2,
+                      width: "100%",
+                      background: "var(--color-border-soft)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: "100%",
+                        background: "var(--color-text-primary)",
+                        transition: "width 300ms ease-out",
+                        width: `${runProgress.total ? Math.round((runProgress.done / runProgress.total) * 100) : 0}%`,
+                      }}
+                    />
+                  </div>
+                  <p
+                    className="np-mono"
+                    style={{ marginTop: 8, fontSize: 11, letterSpacing: "0.08em", color: "var(--color-text-muted)" }}
+                  >
+                    {copy.runtime.progressPercent(
+                      runProgress.total ? Math.round((runProgress.done / runProgress.total) * 100) : 0,
+                    )}
+                  </p>
+                </div>
               )}
             </section>
-              )}
-            </>
-          )}
-        </main>
-      </div>
+
+            {result && (
+              <section style={{ padding: "32px 0" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                  {result.ok ? (
+                    <CheckCircle2 size={18} style={{ color: "var(--color-accent-green)" }} />
+                  ) : (
+                    <XCircle size={18} style={{ color: "var(--np-ink-red)" }} />
+                  )}
+                  <h2
+                    className="np-serif"
+                    style={{
+                      fontSize: 22,
+                      letterSpacing: "-0.01em",
+                      fontWeight: 600,
+                      margin: 0,
+                      color: "var(--color-text-primary)",
+                    }}
+                  >
+                    {result.ok ? copy.runtime.resultSuccess : copy.runtime.resultError}
+                  </h2>
+                </div>
+                {result.topic && (
+                  <p
+                    className="np-mono"
+                    style={{
+                      fontSize: 11,
+                      letterSpacing: "0.08em",
+                      color: "var(--color-text-muted)",
+                      margin: "4px 0",
+                    }}
+                  >
+                    {copy.runtime.topicLabel}: {result.topic}
+                  </p>
+                )}
+                {result.error && (
+                  <p
+                    className="np-sans"
+                    style={{ fontSize: 13.5, color: "var(--np-ink-red)", margin: "6px 0" }}
+                  >
+                    {result.error}
+                  </p>
+                )}
+                {(result.stdout || result.stderr) && (
+                  <pre
+                    className="np-mono"
+                    style={{
+                      marginTop: 14,
+                      maxHeight: 320,
+                      overflow: "auto",
+                      border: "1px solid var(--color-border)",
+                      background: "var(--color-surface-muted)",
+                      padding: 16,
+                      fontSize: 12,
+                      lineHeight: 1.6,
+                      color: "var(--color-text-secondary)",
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {result.stdout}
+                    {result.stderr}
+                  </pre>
+                )}
+              </section>
+            )}
+          </>
+        )}
+
+        <NewspaperFooter />
+      </main>
     </div>
   );
 }

@@ -1,12 +1,11 @@
 "use client";
 
-import { ArrowUpRight, Clock3, FileText, Layers3 } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { SelectableLink } from "@/components/SelectableLink";
 
 import { useLocale } from "@/components/locale-context";
 import { InlineMarkdown } from "@/components/news-markdown";
-import { TopicIcon } from "@/components/topic-icon";
 import { getCopy } from "@/data/copy";
 import { formatDisplayDate } from "@/lib/news-client";
 import { getTopicMeta } from "@/lib/news-meta";
@@ -37,103 +36,142 @@ export function NewsCard({ entry, compact = false, className }: NewsCardProps) {
     >
       <article
         className={[
-          "group relative overflow-hidden rounded-[28px] border border-(--color-border) bg-(--color-surface)/92 p-5 shadow-(--shadow-card) transition duration-300 hover:-translate-y-[3px] hover:border-(--color-border-strong) hover:shadow-(--shadow-card-hover) sm:p-6",
+          "group relative np-card",
           className ?? "",
         ].join(" ")}
-      >
-      <div className="select-text">
-      <div
-        className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 translate-x-[-140%] bg-[linear-gradient(90deg,transparent,var(--color-card-sheen),transparent)] opacity-0 transition duration-500 group-hover:translate-x-[430%] group-hover:opacity-100"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-x-0 top-0 h-px opacity-80"
         style={{
-          background: `linear-gradient(90deg, transparent, ${topic.accent}, transparent)`,
+          border: "1px solid var(--color-border)",
+          background: "var(--color-surface)",
+          padding: 24,
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
         }}
-      />
+      >
+        <div className="select-text flex items-start justify-between gap-4">
+          <div style={{ display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
+            <span
+              className="np-mono"
+              style={{
+                fontSize: 10,
+                letterSpacing: "0.24em",
+                textTransform: "uppercase",
+                fontWeight: 600,
+                color: topic.accent,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: 6,
+                  height: 6,
+                  borderRadius: 999,
+                  background: topic.accent,
+                }}
+              />
+              {topic.shortLabel}
+            </span>
 
-      <div className="flex items-start justify-between gap-4">
-        <div className="space-y-3">
+            <h3
+              className="np-serif"
+              style={{
+                fontSize: 22,
+                lineHeight: 1.25,
+                letterSpacing: "-0.01em",
+                fontWeight: 600,
+                color: "var(--color-text-primary)",
+                margin: 0,
+              }}
+            >
+              <InlineMarkdown content={entry.title} inline disableLinks />
+            </h3>
+            <div
+              className="np-sans"
+              style={{
+                fontSize: 14,
+                lineHeight: 1.7,
+                color: "var(--color-text-secondary)",
+                maxWidth: 640,
+              }}
+            >
+              <InlineMarkdown content={entry.description} disableLinks />
+            </div>
+          </div>
+
           <span
-            className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em]"
+            aria-hidden
+            className="hidden sm:inline-flex np-card-arrow"
             style={{
-              color: topic.accent,
-              borderColor: topic.accent,
-              background: "color-mix(in srgb, var(--color-surface) 78%, transparent)",
+              border: "1px solid var(--color-border)",
+              padding: 8,
+              color: "var(--color-text-primary)",
             }}
           >
-            <TopicIcon
-              topic={entry.topic}
-              size={18}
-              variant="badge"
-              className="group-hover:translate-x-0.5"
-            />
-            {topic.shortLabel}
+            <ArrowUpRight size={15} />
           </span>
-
-          <div className="space-y-2">
-            <h3 className="max-w-3xl text-lg leading-tight font-semibold text-(--color-text-primary) sm:text-[1.35rem]">
-              {entry.title}
-            </h3>
-            <InlineMarkdown
-              content={entry.description}
-              className="max-w-3xl text-sm leading-7 text-(--color-text-secondary) sm:text-[0.98rem]"
-            />
-          </div>
         </div>
 
-        <span
-          className="hidden rounded-full border border-(--color-border) bg-(--color-surface-muted) p-3 text-(--color-text-primary) transition duration-200 group-hover:border-(--color-border-strong) group-hover:bg-(--color-surface) group-hover:translate-x-0.5 sm:inline-flex"
-          aria-hidden
+        <div
+          className="np-mono"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 18,
+            fontSize: 11,
+            letterSpacing: "0.08em",
+            color: "var(--color-text-muted)",
+            paddingTop: 12,
+            borderTop: "1px solid var(--color-border-soft)",
+          }}
         >
-          <ArrowUpRight size={16} />
-        </span>
-      </div>
-
-      <div className="mt-5 flex flex-wrap items-center gap-2 text-xs text-(--color-text-muted)">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-(--color-border) px-3 py-1.5">
-          <Clock3 size={13} />
-          {entry.readingMinutes} {copy.ui.newsCard.min}
-        </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-(--color-border) px-3 py-1.5">
-          <Layers3 size={13} />
-          {entry.sectionCount} {copy.ui.newsCard.sections}
-        </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-(--color-border) px-3 py-1.5">
-          <FileText size={13} />
-          {entry.articleCount} {copy.ui.newsCard.stories}
-        </span>
-        <span className="rounded-full border border-(--color-border) px-3 py-1.5">
-          {formatDisplayDate(entry.date, locale)}
-        </span>
-      </div>
-
-      {!compact && entry.highlights.length > 0 ? (
-        <div className="mt-5 space-y-2">
-          {entry.highlights.slice(0, 3).map((highlight) => (
-            <div
-              key={highlight}
-              className="rounded-2xl border border-(--color-border-soft) bg-(--color-surface-muted)/80 px-4 py-3 text-sm leading-6 text-(--color-text-secondary)"
-            >
-              <InlineMarkdown content={highlight} />
-            </div>
-          ))}
+          <span>{formatDisplayDate(entry.date, locale)}</span>
+          <span>·</span>
+          <span>{entry.readingMinutes} {copy.ui.newsCard.min}</span>
+          <span>·</span>
+          <span>{entry.sectionCount} {copy.ui.newsCard.sections}</span>
+          <span>·</span>
+          <span>{entry.articleCount} {copy.ui.newsCard.stories}</span>
         </div>
-      ) : null}
 
-      {entry.takeaway ? (
-        <div className="mt-5 border-l border-(--color-border-strong) pl-4 text-sm leading-7 text-(--color-text-primary)">
-          <InlineMarkdown content={entry.takeaway} />
-        </div>
-      ) : null}
+        {!compact && entry.highlights.length > 0 ? (
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {entry.highlights.slice(0, 3).map((highlight) => (
+              <div
+                key={highlight}
+                className="np-sans"
+                style={{
+                  fontSize: 13.5,
+                  lineHeight: 1.6,
+                  color: "var(--color-text-secondary)",
+                  paddingLeft: 14,
+                  borderLeft: "2px solid var(--color-border-soft)",
+                }}
+              >
+                <InlineMarkdown content={highlight} disableLinks />
+              </div>
+            ))}
+          </div>
+        ) : null}
 
-      <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-(--color-text-primary) transition group-hover:gap-3 sm:hidden">
-        {copy.ui.newsCard.readFull}
-        <ArrowUpRight size={15} />
-      </span>
-      </div>
-    </article>
+        {entry.takeaway ? (
+          <div
+            className="np-serif"
+            style={{
+              fontStyle: "italic",
+              fontSize: 14.5,
+              lineHeight: 1.6,
+              color: "var(--color-text-primary)",
+              paddingLeft: 14,
+              borderLeft: "3px solid var(--color-text-primary)",
+            }}
+          >
+            <InlineMarkdown content={entry.takeaway} disableLinks />
+          </div>
+        ) : null}
+      </article>
     </SelectableLink>
   );
 }

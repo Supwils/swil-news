@@ -1,25 +1,30 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Instrument_Sans } from "next/font/google";
+import { Source_Serif_4, Inter, JetBrains_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { LocaleProvider } from "@/components/locale-context";
-import { LocaleSwitch } from "@/components/locale-switch";
-import { ThemeSwitch } from "@/components/theme-switch";
 import "./global.css";
 import { absoluteUrl, getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 import { Analytics } from "@vercel/analytics/next";
 
-const displayFont = Cormorant_Garamond({
+const displayFont = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
   variable: "--font-display",
 });
 
-const bodyFont = Instrument_Sans({
+const bodyFont = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+});
+
+const monoFont = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-body",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -83,13 +88,9 @@ const themeScript = `
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
+      <body className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} antialiased`}>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <LocaleProvider>
-          <div className="fixed right-3 top-3 z-[9999] flex items-center gap-2 sm:right-6 sm:top-4 md:top-5" style={{ pointerEvents: "auto" }}>
-            <LocaleSwitch />
-            <ThemeSwitch />
-          </div>
           {children}
           <Analytics />
         </LocaleProvider>

@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 
 import { NewsCard } from "@/components/news-card";
 import { useLocale } from "@/components/locale-context";
-import { getCopy } from "@/data/copy";
+import { NewspaperFooter } from "@/components/newspaper/footer";
+import { NewspaperMasthead } from "@/components/newspaper/masthead";
 import { formatArchiveMonth, formatDisplayDate, groupPreviewsByDate } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
 
@@ -23,63 +23,78 @@ export function MonthArchivePageContent({
   nextMonth,
 }: MonthArchivePageContentProps) {
   const locale = useLocale();
-  const copy = getCopy(locale);
   const groups = groupPreviewsByDate(entries);
 
   return (
-    <main className="min-h-screen bg-(--color-bg-primary) px-4 py-6 text-(--color-text-primary) sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1200px] space-y-8">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-(--color-border) px-4 py-2 text-sm text-(--color-text-secondary) transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
+    <div className="np-root">
+      <NewspaperMasthead active="archive" archiveMonth={month} />
+      <main className="mx-auto w-full" style={{ maxWidth: 1280, padding: 40 }}>
+        <section
+          style={{
+            paddingBottom: 28,
+            borderBottom: "1px solid var(--color-border)",
+          }}
+        >
+          <p
+            className="np-mono"
+            style={{
+              fontSize: 11,
+              letterSpacing: "0.24em",
+              textTransform: "uppercase",
+              color: "var(--color-text-muted)",
+            }}
           >
-            <ArrowLeft size={16} />
-            {copy.ui.topicPage.backHome}
-          </Link>
+            {locale === "en" ? "Monthly archive" : "月度归档"}
+          </p>
+          <h1
+            className="np-serif"
+            style={{
+              fontSize: 48,
+              letterSpacing: "-0.02em",
+              fontWeight: 600,
+              margin: "12px 0 10px",
+              color: "var(--color-text-primary)",
+            }}
+          >
+            {formatArchiveMonth(month, locale)}
+          </h1>
+          <p className="np-sans" style={{ fontSize: 14, lineHeight: 1.7, color: "var(--color-text-secondary)", margin: 0 }}>
+            {locale === "en"
+              ? `${entries.length} digests archived this month.`
+              : `本月共归档 ${entries.length} 份日报。`}
+          </p>
 
-          <div className="flex flex-wrap gap-2">
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 18 }}>
             {nextMonth ? (
-              <Link
-                href={`/archive/${nextMonth}`}
-                className="rounded-full border border-(--color-border) px-3 py-1.5 text-sm text-(--color-text-secondary) transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
-              >
-                {locale === "en" ? "Newer month" : "较新的月份"}
+              <Link href={`/archive/${nextMonth}`} className="np-btn-secondary">
+                {locale === "en" ? "← Newer month" : "← 较新的月份"}
               </Link>
             ) : null}
             {previousMonth ? (
-              <Link
-                href={`/archive/${previousMonth}`}
-                className="rounded-full border border-(--color-border) px-3 py-1.5 text-sm text-(--color-text-secondary) transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
-              >
-                {locale === "en" ? "Older month" : "较早的月份"}
+              <Link href={`/archive/${previousMonth}`} className="np-btn-secondary">
+                {locale === "en" ? "Older month →" : "较早的月份 →"}
               </Link>
             ) : null}
           </div>
-        </div>
-
-        <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-6 shadow-(--shadow-card) sm:p-8">
-          <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">
-            {locale === "en" ? "Monthly archive" : "月度归档"}
-          </p>
-          <h1 className="font-display mt-3 text-4xl leading-none tracking-[-0.04em] sm:text-5xl">
-            {formatArchiveMonth(month, locale)}
-          </h1>
-          <p className="mt-4 text-base leading-8 text-(--color-text-secondary)">
-            {locale === "en"
-              ? `${entries.length} digests archived in this month.`
-              : `本月共归档 ${entries.length} 份日报。`}
-          </p>
         </section>
 
-        <section className="space-y-8">
+        <section style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 40 }}>
           {groups.map((group) => (
-            <div key={group.date} className="space-y-4">
-              <div>
-                <h2 className="font-display text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary)">
-                  {formatDisplayDate(group.date, locale)}
-                </h2>
-              </div>
+            <div key={group.date}>
+              <h2
+                className="np-serif"
+                style={{
+                  fontSize: 30,
+                  letterSpacing: "-0.02em",
+                  fontWeight: 600,
+                  margin: "0 0 16px",
+                  color: "var(--color-text-primary)",
+                  paddingBottom: 10,
+                  borderBottom: "1px solid var(--color-border-soft)",
+                }}
+              >
+                {formatDisplayDate(group.date, locale)}
+              </h2>
 
               <div className="grid gap-4 xl:grid-cols-2">
                 {group.entries.map((entry) => (
@@ -89,7 +104,9 @@ export function MonthArchivePageContent({
             </div>
           ))}
         </section>
-      </div>
-    </main>
+
+        <NewspaperFooter />
+      </main>
+    </div>
   );
 }

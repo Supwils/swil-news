@@ -62,23 +62,23 @@ function ThemeButton({
   const Icon = effective === "dark" ? Moon : effective === "light" ? Sun : Monitor;
 
   if (!mounted) {
-    return (
-      <div
-        className="h-10 w-10 rounded-full border border-(--color-border) bg-(--color-surface) opacity-0 sm:h-11 sm:w-11 md:h-12 md:w-12"
-        aria-hidden
-      />
-    );
+    return <div className="np-utility-btn" style={{ opacity: 0 }} aria-hidden />;
   }
+
+  const label = theme === "light" ? "LIGHT" : theme === "dark" ? "DARK" : "AUTO";
 
   return (
     <button
       type="button"
       onClick={cycleTheme}
-      className="flex h-10 w-10 min-w-10 cursor-pointer items-center justify-center rounded-full border border-(--color-border) bg-[color-mix(in_srgb,var(--color-surface)_90%,transparent)] text-(--color-text-primary) shadow-(--shadow-card) backdrop-blur-md transition-[transform,color,border-color,box-shadow] duration-200 hover:scale-105 hover:border-(--color-border-strong) hover:shadow-(--shadow-card-hover) focus:outline-none focus:ring-2 focus:ring-(--color-border-strong) focus:ring-offset-2 focus:ring-offset-(--color-bg-primary) active:scale-[0.98] sm:h-11 sm:w-11 md:h-12 md:w-12"
+      className="np-utility-btn"
       aria-label={ariaLabelFn(themeLabels[theme])}
       title={themeLabels[theme]}
     >
-      <Icon className="h-[18px] w-[18px] sm:h-5 sm:w-5" strokeWidth={1.75} aria-hidden />
+      <Icon size={15} strokeWidth={1.75} aria-hidden />
+      <span className="np-mono" style={{ fontSize: 10, letterSpacing: "0.1em" }}>
+        {label}
+      </span>
     </button>
   );
 }

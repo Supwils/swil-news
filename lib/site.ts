@@ -1,6 +1,6 @@
 import type { Locale } from "@/data/copy";
 
-export const SITE_NAME = "S-News";
+export const SITE_NAME = "Swil-News";
 export const SITE_DESCRIPTION =
   "Local-first daily news desk with archived multi-topic AI-generated digests.";
 export const SITE_DEFAULT_LOCALE: Locale = "zh";

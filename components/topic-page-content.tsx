@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-
 import { NewsCard } from "@/components/news-card";
 import { useLocale } from "@/components/locale-context";
+import { NewspaperFooter } from "@/components/newspaper/footer";
+import { NewspaperMasthead } from "@/components/newspaper/masthead";
 import { getCopy } from "@/data/copy";
 import type { NewsPreview } from "@/lib/news";
 import { getTopicMeta, type TopicKey } from "@/lib/news-meta";
@@ -24,32 +23,80 @@ export function TopicPageContent({ topic, entries }: TopicPageContentProps) {
   }
 
   return (
-    <main className="min-h-screen bg-(--color-bg-primary) px-4 py-6 text-(--color-text-primary) sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1200px] space-y-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 rounded-full border border-(--color-border) px-4 py-2 text-sm text-(--color-text-secondary) transition hover:border-(--color-border-strong) hover:text-(--color-text-primary)"
-        >
-          <ArrowLeft size={16} />
-          {copy.ui.topicPage.backHome}
-        </Link>
-
-        <section className="rounded-[32px] border border-(--color-border) bg-(--color-surface) p-6 shadow-(--shadow-card) sm:p-8">
-          <p className="text-sm uppercase tracking-[0.28em] text-(--color-text-muted)">{copy.ui.topicPage.badge}</p>
-          <h1 className="font-display mt-3 text-4xl leading-none tracking-[-0.04em] sm:text-5xl">
+    <div className="np-root">
+      <NewspaperMasthead active="topics" />
+      <main className="mx-auto w-full" style={{ maxWidth: 1280, padding: 40 }}>
+        <section style={{ paddingBottom: 28, borderBottom: "1px solid var(--color-border)" }}>
+          <p
+            className="np-mono"
+            style={{
+              fontSize: 11,
+              letterSpacing: "0.24em",
+              textTransform: "uppercase",
+              color: "var(--color-text-muted)",
+            }}
+          >
+            <span
+              style={{
+                display: "inline-block",
+                width: 6,
+                height: 6,
+                background: meta.accent,
+                borderRadius: 999,
+                marginRight: 8,
+                verticalAlign: "1px",
+              }}
+            />
+            {copy.ui.topicPage.badge}
+          </p>
+          <h1
+            className="np-serif"
+            style={{
+              fontSize: 56,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.02,
+              fontWeight: 600,
+              margin: "12px 0 12px",
+              color: "var(--color-text-primary)",
+            }}
+          >
             {meta.label}
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-(--color-text-secondary)">
+          <p
+            className="np-serif"
+            style={{
+              fontStyle: "italic",
+              fontSize: 18,
+              lineHeight: 1.55,
+              maxWidth: 640,
+              color: "var(--color-text-secondary)",
+              margin: 0,
+            }}
+          >
             {meta.description}
+          </p>
+          <p
+            className="np-mono"
+            style={{
+              marginTop: 18,
+              fontSize: 11,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "var(--color-text-muted)",
+            }}
+          >
+            {entries.length} {locale === "en" ? "ISSUES ARCHIVED" : "份归档"}
           </p>
         </section>
 
-        <section className="grid gap-4 xl:grid-cols-2">
+        <section className="grid gap-4 xl:grid-cols-2" style={{ marginTop: 32 }}>
           {entries.map((entry) => (
             <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
           ))}
         </section>
-      </div>
-    </main>
+
+        <NewspaperFooter />
+      </main>
+    </div>
   );
 }
