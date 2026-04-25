@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "build:news-index": "node scripts/build-news-index.mjs",
+    "validate:news-layout": "node scripts/validate-news-layout.mjs",
+    "translate:news": "node scripts/translate-news.mjs",
     "dev": "next dev --port 3011",
     "predev": "pnpm build:news-index",
     "prebuild": "pnpm build:news-index",

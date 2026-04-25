@@ -71,6 +71,10 @@ for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-sci
 done
 unset SKIP_NEWS_INDEX_REFRESH
 
+log_info "Step start: validate_news_layout"
+node "$SCRIPT_DIR/validate-news-layout.mjs"
+log_info "Step success: validate_news_layout"
+
 log_info "Step start: refresh_news_index"
 bash "$SCRIPT_DIR/refresh-news-index.sh"
 log_info "Step success: refresh_news_index"

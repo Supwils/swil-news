@@ -72,26 +72,31 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
     notFound();
   }
 
-  const entry = await getNewsEntry(topic, date, "zh");
-  const meta = getTopicMeta(topic, "zh");
-  const availableTopics = await getTopicsWithNewsForDate(date, "zh");
+  const [entryZh, entryEn, availableTopicsZh, availableTopicsEn] = await Promise.all([
+    getNewsEntry(topic, date, "zh"),
+    getNewsEntry(topic, date, "en"),
+    getTopicsWithNewsForDate(date, "zh"),
+    getTopicsWithNewsForDate(date, "en"),
+  ]);
 
-  if (!entry || !meta) {
+  const meta = getTopicMeta(topic, "zh");
+
+  if (!entryZh || !meta) {
     notFound();
   }
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
-    headline: entry.title,
-    description: entry.description,
+    headline: entryZh.title,
+    description: entryZh.description,
     url: absoluteUrl(`/news/${topic}/${date}`),
     datePublished: `${date}T08:00:00.000Z`,
     dateModified: `${date}T08:00:00.000Z`,
     articleSection: meta.label,
     inLanguage: "zh-CN",
     isAccessibleForFree: true,
-    wordCount: entry.content.split(/\s+/).filter(Boolean).length,
+    wordCount: entryZh.content.split(/\s+/).filter(Boolean).length,
     author: {
       "@type": "Organization",
       name: SITE_NAME,
@@ -110,12 +115,20 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
     },
   };
 
-  const { filePath: _filePath, ...clientEntry } = entry;
+  const { filePath: _filePath, ...clientEntry } = entryZh;
+  const clientEntryEn = entryEn ? (() => { const { filePath: _fp, ...e } = entryEn; return e; })() : null;
 
   return (
     <>
       <StructuredData data={structuredData} />
-      <NewsDetailContent topic={topic} date={date} entry={clientEntry} availableTopics={availableTopics} />
+      <NewsDetailContent
+        topic={topic}
+        date={date}
+        entry={clientEntry}
+        entryEn={clientEntryEn}
+        availableTopicsZh={availableTopicsZh}
+        availableTopicsEn={availableTopicsEn}
+      />
     </>
   );
 }

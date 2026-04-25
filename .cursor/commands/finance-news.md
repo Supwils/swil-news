@@ -94,10 +94,19 @@
 
 ---
 
-## 四、输出与保存
+## 四、输出与保存（双语）
 
-1. **在对话中**先输出完整日报（便于快速阅读）。
-2. **写入文件**：路径为 `NEWS/finance/YYYY-MM-DD_金融与股市新闻日报.md`（例如 `2026-03-06_金融与股市新闻日报.md`）。若 `NEWS/finance` 不存在则先创建。
+本命令**同时**生成中文版与英文版日报。
+
+### 4-A 中文版
+1. **在对话中**先输出完整中文日报。
+2. **写入文件**：`NEWS/finance/zh/YYYY-MM-DD_金融与股市新闻日报.md`
+
+### 4-B 英文版
+紧接中文版，生成完整英文翻译并写入：`NEWS/finance/en/YYYY-MM-DD_finance-digest.md`
+
+英文版要求：标题 `# MMM D, YYYY · Finance & Markets Daily Digest`；各条目（Summary / Commentary）翻译；`## Today's Summary` 替换 `## 今日小结`；`**Daily Framing:**` 替换 `**总体定性**：`；链接保留原 URL；格式与中文版一致。
+
 3. 不修改既有 `NEWS/finance` 下其他日期的文件。
 
 ---

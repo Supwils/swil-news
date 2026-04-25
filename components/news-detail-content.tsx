@@ -20,16 +20,23 @@ type NewsDetailContentProps = {
   topic: TopicKey;
   date: string;
   entry: NewsDetailViewEntry;
-  availableTopics: TopicKey[];
+  entryEn: NewsDetailViewEntry | null;
+  availableTopicsZh: TopicKey[];
+  availableTopicsEn: TopicKey[];
 };
 
 export function NewsDetailContent({
   topic,
   date,
   entry,
-  availableTopics,
+  entryEn,
+  availableTopicsZh,
+  availableTopicsEn,
 }: NewsDetailContentProps) {
   const locale = useLocale();
+  const activeEntry = locale === "en" && entryEn ? entryEn : entry;
+  const availableTopics = locale === "en" ? availableTopicsEn : availableTopicsZh;
+  const isShowingChineseFallback = locale === "en" && entryEn === null;
   const copy = getCopy(locale);
   const meta = getTopicMeta(topic, locale);
   const topicLabels = TOPICS.map((t) => ({ key: t.key, label: getTopicMeta(t.key, locale)!.label }));
@@ -83,7 +90,23 @@ export function NewsDetailContent({
               background: "var(--color-surface)",
             }}
           >
-            <NewsMarkdown content={entry.content} />
+            {isShowingChineseFallback ? (
+              <div
+                className="np-sans"
+                style={{
+                  marginBottom: 20,
+                  padding: "12px 14px",
+                  border: "1px solid var(--color-border)",
+                  background: "var(--color-surface-muted)",
+                  fontSize: 14,
+                  lineHeight: 1.6,
+                  color: "var(--color-text-secondary)",
+                }}
+              >
+                English translation is not available for this digest yet. Showing the Chinese original.
+              </div>
+            ) : null}
+            <NewsMarkdown content={activeEntry.content} />
           </article>
 
           <aside className="space-y-6 xl:sticky xl:top-6 xl:h-fit">
@@ -126,7 +149,7 @@ export function NewsDetailContent({
                   color: "var(--color-text-primary)",
                 }}
               >
-                {formatDisplayDate(entry.date, locale)}
+                {formatDisplayDate(activeEntry.date, locale)}
               </h2>
               <p
                 className="np-sans"
@@ -141,14 +164,14 @@ export function NewsDetailContent({
               </p>
 
               <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 8 }}>
-                <InfoRow icon={<Clock3 size={14} />} label={copy.ui.detailPage.minRead(entry.readingMinutes)} />
-                <InfoRow icon={<Layers3 size={14} />} label={`${entry.sectionCount} ${copy.ui.newsCard.sections}`} />
-                <InfoRow icon={<FileText size={14} />} label={`${entry.articleCount} ${copy.ui.newsCard.stories}`} />
+                <InfoRow icon={<Clock3 size={14} />} label={copy.ui.detailPage.minRead(activeEntry.readingMinutes)} />
+                <InfoRow icon={<Layers3 size={14} />} label={`${activeEntry.sectionCount} ${copy.ui.newsCard.sections}`} />
+                <InfoRow icon={<FileText size={14} />} label={`${activeEntry.articleCount} ${copy.ui.newsCard.stories}`} />
                 <InfoRow icon={<Command size={14} />} label={meta.commandPath} mono />
               </div>
             </section>
 
-            {entry.highlights.length > 0 ? (
+            {activeEntry.highlights.length > 0 ? (
               <section
                 style={{
                   border: "1px solid var(--color-border)",
@@ -168,7 +191,7 @@ export function NewsDetailContent({
                   {copy.ui.detailPage.keyHighlights}
                 </p>
                 <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 12 }}>
-                  {entry.highlights.map((highlight) => (
+                  {activeEntry.highlights.map((highlight) => (
                     <div
                       key={highlight}
                       className="np-sans"
@@ -187,7 +210,7 @@ export function NewsDetailContent({
               </section>
             ) : null}
 
-            {entry.takeaway ? (
+            {activeEntry.takeaway ? (
               <section
                 style={{
                   border: "1px solid var(--color-border)",
@@ -217,7 +240,7 @@ export function NewsDetailContent({
                     color: "var(--color-text-primary)",
                   }}
                 >
-                  <InlineMarkdown content={entry.takeaway} />
+                  <InlineMarkdown content={activeEntry.takeaway} />
                 </div>
               </section>
             ) : null}

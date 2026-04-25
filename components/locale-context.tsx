@@ -17,6 +17,11 @@ const LocaleContext = createContext<LocaleContextValue>({
 const STORAGE_KEY = "s-news-locale";
 const COOKIE_NAME = "s-news-locale";
 
+function syncLocaleOnDocument(locale: Locale) {
+  if (typeof document === "undefined") return;
+  document.documentElement.lang = locale === "en" ? "en-US" : "zh-CN";
+}
+
 function readLocaleFromDocument(): Locale | null {
   if (typeof document === "undefined") return null;
 
@@ -43,12 +48,18 @@ export function LocaleProvider({
   useEffect(() => {
     const nextLocale = readLocaleFromDocument();
     if (nextLocale) {
+      syncLocaleOnDocument(nextLocale);
       const frame = window.requestAnimationFrame(() => {
         setLocale(nextLocale);
       });
       return () => window.cancelAnimationFrame(frame);
     }
+    syncLocaleOnDocument("zh");
   }, []);
+
+  useEffect(() => {
+    syncLocaleOnDocument(locale);
+  }, [locale]);
 
   const value = useMemo(
     () => ({

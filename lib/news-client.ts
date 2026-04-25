@@ -1,6 +1,9 @@
 import type { Locale } from "@/data/copy";
 import { getTopicMeta, type TopicKey } from "@/lib/news-meta";
+import { TOPICS } from "@/lib/news-meta";
 import type { NewsPreview } from "@/lib/news";
+
+const TOPIC_ORDER = TOPICS.map((topic) => topic.key);
 
 export function groupPreviewsByDate(entries: NewsPreview[]) {
   return [...entries]
@@ -9,7 +12,7 @@ export function groupPreviewsByDate(entries: NewsPreview[]) {
         return right.date.localeCompare(left.date);
       }
 
-      return left.topic.localeCompare(right.topic);
+      return TOPIC_ORDER.indexOf(left.topic) - TOPIC_ORDER.indexOf(right.topic);
     })
     .reduce<
       Array<{

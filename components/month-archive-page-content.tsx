@@ -12,17 +12,20 @@ import type { NewsPreview } from "@/lib/news";
 type MonthArchivePageContentProps = {
   month: string;
   entries: NewsPreview[];
+  entriesEn: NewsPreview[];
   previousMonth: string | null;
   nextMonth: string | null;
 };
 
 export function MonthArchivePageContent({
   month,
-  entries,
+  entries: entriesZh,
+  entriesEn,
   previousMonth,
   nextMonth,
 }: MonthArchivePageContentProps) {
   const locale = useLocale();
+  const entries = locale === "en" ? entriesEn : entriesZh;
   const groups = groupPreviewsByDate(entries);
 
   return (
@@ -78,32 +81,42 @@ export function MonthArchivePageContent({
           </div>
         </section>
 
-        <section style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 40 }}>
-          {groups.map((group) => (
-            <div key={group.date}>
-              <h2
-                className="np-serif"
-                style={{
-                  fontSize: 30,
-                  letterSpacing: "-0.02em",
-                  fontWeight: 600,
-                  margin: "0 0 16px",
-                  color: "var(--color-text-primary)",
-                  paddingBottom: 10,
-                  borderBottom: "1px solid var(--color-border-soft)",
-                }}
-              >
-                {formatDisplayDate(group.date, locale)}
-              </h2>
+        {groups.length === 0 ? (
+          <section style={{ marginTop: 40 }}>
+            <p className="np-sans" style={{ fontSize: 15, lineHeight: 1.7, color: "var(--color-text-secondary)", margin: 0 }}>
+              {locale === "en"
+                ? "No English digests have been archived for this month yet."
+                : "该月份下暂时还没有可展示的日报。"}
+            </p>
+          </section>
+        ) : (
+          <section style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 40 }}>
+            {groups.map((group) => (
+              <div key={group.date}>
+                <h2
+                  className="np-serif"
+                  style={{
+                    fontSize: 30,
+                    letterSpacing: "-0.02em",
+                    fontWeight: 600,
+                    margin: "0 0 16px",
+                    color: "var(--color-text-primary)",
+                    paddingBottom: 10,
+                    borderBottom: "1px solid var(--color-border-soft)",
+                  }}
+                >
+                  {formatDisplayDate(group.date, locale)}
+                </h2>
 
-              <div className="grid gap-4 xl:grid-cols-2">
-                {group.entries.map((entry) => (
-                  <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
-                ))}
+                <div className="grid gap-4 xl:grid-cols-2">
+                  {group.entries.map((entry) => (
+                    <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </section>
+            ))}
+          </section>
+        )}
 
         <NewspaperFooter />
       </main>

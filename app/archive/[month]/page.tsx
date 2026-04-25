@@ -48,7 +48,10 @@ export default async function MonthArchivePage({ params }: MonthArchivePageProps
     notFound();
   }
 
-  const entries = await getEntryPreviewsByMonth(month);
+  const [entries, entriesEn] = await Promise.all([
+    getEntryPreviewsByMonth(month, "zh"),
+    getEntryPreviewsByMonth(month, "en"),
+  ]);
   if (entries.length === 0) {
     notFound();
   }
@@ -87,6 +90,7 @@ export default async function MonthArchivePage({ params }: MonthArchivePageProps
       <MonthArchivePageContent
         month={month}
         entries={entries}
+        entriesEn={entriesEn}
         previousMonth={previousMonth}
         nextMonth={nextMonth}
       />

@@ -11,10 +11,12 @@ import { getTopicMeta, type TopicKey } from "@/lib/news-meta";
 type TopicPageContentProps = {
   topic: TopicKey;
   entries: NewsPreview[];
+  entriesEn: NewsPreview[];
 };
 
-export function TopicPageContent({ topic, entries }: TopicPageContentProps) {
+export function TopicPageContent({ topic, entries: entriesZh, entriesEn }: TopicPageContentProps) {
   const locale = useLocale();
+  const entries = locale === "en" ? entriesEn : entriesZh;
   const copy = getCopy(locale);
   const meta = getTopicMeta(topic, locale);
 
@@ -89,11 +91,21 @@ export function TopicPageContent({ topic, entries }: TopicPageContentProps) {
           </p>
         </section>
 
-        <section className="grid gap-4 xl:grid-cols-2" style={{ marginTop: 32 }}>
-          {entries.map((entry) => (
-            <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
-          ))}
-        </section>
+        {entries.length === 0 ? (
+          <section style={{ marginTop: 32 }}>
+            <p className="np-sans" style={{ fontSize: 15, lineHeight: 1.7, color: "var(--color-text-secondary)", margin: 0 }}>
+              {locale === "en"
+                ? "No English digests have been archived for this topic yet."
+                : "该主题下暂时还没有可展示的日报。"}
+            </p>
+          </section>
+        ) : (
+          <section className="grid gap-4 xl:grid-cols-2" style={{ marginTop: 32 }}>
+            {entries.map((entry) => (
+              <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
+            ))}
+          </section>
+        )}
 
         <NewspaperFooter />
       </main>

@@ -6,7 +6,6 @@ import path from "node:path";
 const PROJECT_ROOT = process.cwd();
 const NEWS_ROOT = path.join(PROJECT_ROOT, "NEWS");
 const OUTPUT_DIR = path.join(PROJECT_ROOT, ".generated");
-const OUTPUT_PATH = path.join(OUTPUT_DIR, "news-index.json");
 
 const TOPICS = [
   { key: "general", folder: "general" },
@@ -35,7 +34,8 @@ function extractDescription(content, fallback) {
   return content.match(/^>\s+(.+)$/m)?.[1]?.trim() ?? fallback;
 }
 
-function extractTakeaway(content) {
+// Chinese extraction
+function extractTakeawayZh(content) {
   const match = content.match(/\*\*(总体定性|今日定性)(：\*\*|\*\*：)\s*(.+)/);
   if (match?.[3]) return match[3].trim();
 
@@ -47,14 +47,37 @@ function extractTakeaway(content) {
   return lastNonBullet?.trim() || undefined;
 }
 
-function extractHighlights(content) {
+function extractHighlightsZh(content) {
   const summaryHeading = content.match(/^##\s+今日小结$/m);
-  if (summaryHeading?.index === undefined) {
-    return [];
-  }
+  if (summaryHeading?.index === undefined) return [];
 
   const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
+  return summaryBlock
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith("- "))
+    .map((line) => line.replace(/^- /, "").trim())
+    .slice(0, 4);
+}
 
+// English extraction — headings: "## Today's Summary", takeaway: "**Daily Framing:**"
+function extractTakeawayEn(content) {
+  const match = content.match(/\*\*Daily Framing:\*\*\s*(.+)/);
+  if (match?.[1]) return match[1].trim();
+
+  const summaryHeading = content.match(/^##\s+Today's Summary$/m);
+  if (summaryHeading?.index === undefined) return undefined;
+  const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
+  const paragraphs = summaryBlock.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
+  const lastNonBullet = paragraphs.filter((p) => !p.startsWith("- ")).pop();
+  return lastNonBullet?.trim() || undefined;
+}
+
+function extractHighlightsEn(content) {
+  const summaryHeading = content.match(/^##\s+Today's Summary$/m);
+  if (summaryHeading?.index === undefined) return [];
+
+  const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
   return summaryBlock
     .split("\n")
     .map((line) => line.trim())
@@ -72,7 +95,6 @@ function sortEntries(entries) {
     if (left.date !== right.date) {
       return right.date.localeCompare(left.date);
     }
-
     return TOPIC_ORDER.indexOf(left.topic) - TOPIC_ORDER.indexOf(right.topic);
   });
 }
@@ -85,11 +107,17 @@ async function readDirectorySafe(directory) {
   }
 }
 
-async function buildIndex() {
+async function buildIndex(locale) {
+  const isEn = locale === "en";
+  const fallbackTitle = isEn ? "Untitled digest" : "未命名日报";
+  const fallbackDesc = isEn ? "No summary for this digest." : "本日报暂无摘要说明。";
+  const extractTakeaway = isEn ? extractTakeawayEn : extractTakeawayZh;
+  const extractHighlights = isEn ? extractHighlightsEn : extractHighlightsZh;
+
   const entries = [];
 
   for (const topic of TOPICS) {
-    const directory = path.join(NEWS_ROOT, topic.folder);
+    const directory = path.join(NEWS_ROOT, topic.folder, locale);
     const files = (await readDirectorySafe(directory)).filter((file) => file.endsWith(".md"));
 
     for (const fileName of files) {
@@ -97,39 +125,48 @@ async function buildIndex() {
       const content = await readFile(filePath, "utf8");
       const date = fileName.slice(0, 10);
 
+      const title = extractTitle(content, fallbackTitle);
+      const description = extractDescription(content, fallbackDesc);
+      const takeaway = extractTakeaway(content);
+      const highlights = extractHighlights(content);
+
       entries.push({
         topic: topic.key,
         date,
         fileName,
-        relativePath: path.posix.join("NEWS", topic.folder, fileName),
+        relativePath: path.posix.join("NEWS", topic.folder, locale, fileName),
         archiveMonth: date.slice(0, 7),
-        title: extractTitle(content, "未命名日报"),
-        description: extractDescription(content, "本日报暂无摘要说明。"),
+        title,
+        description,
         articleCount: countMatches(content, /^###\s+/gm),
         sectionCount: countMatches(content, /^##\s+/gm),
         readingMinutes: getReadingMinutes(content),
-        highlights: extractHighlights(content),
-        takeaway: extractTakeaway(content),
-        searchText: [
-          extractTitle(content, "未命名日报"),
-          extractDescription(content, "本日报暂无摘要说明。"),
-          extractTakeaway(content) ?? "",
-          ...extractHighlights(content),
-        ]
-          .join(" ")
-          .toLowerCase(),
+        highlights,
+        takeaway,
+        searchText: [title, description, takeaway ?? "", ...highlights].join(" ").toLowerCase(),
       });
     }
   }
 
   return {
-    version: 1,
+    version: 2,
+    locale,
     generatedAt: new Date().toISOString(),
     entries: sortEntries(entries),
   };
 }
 
-const index = await buildIndex();
 await mkdir(OUTPUT_DIR, { recursive: true });
-await writeFile(OUTPUT_PATH, `${JSON.stringify(index, null, 2)}\n`, "utf8");
-console.log(`Wrote ${index.entries.length} indexed news previews to ${path.relative(PROJECT_ROOT, OUTPUT_PATH)}`);
+
+const [zhIndex, enIndex] = await Promise.all([buildIndex("zh"), buildIndex("en")]);
+
+const zhPath = path.join(OUTPUT_DIR, "news-index.json");
+const enPath = path.join(OUTPUT_DIR, "news-index-en.json");
+
+await Promise.all([
+  writeFile(zhPath, `${JSON.stringify(zhIndex, null, 2)}\n`, "utf8"),
+  writeFile(enPath, `${JSON.stringify(enIndex, null, 2)}\n`, "utf8"),
+]);
+
+console.log(`zh: ${zhIndex.entries.length} entries → ${path.relative(PROJECT_ROOT, zhPath)}`);
+console.log(`en: ${enIndex.entries.length} entries → ${path.relative(PROJECT_ROOT, enPath)}`);

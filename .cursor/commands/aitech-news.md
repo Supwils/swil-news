@@ -91,11 +91,28 @@
 
 ---
 
-## 四、输出与保存
+## 四、输出与保存（双语）
 
-1. **在对话中**先输出完整日报（便于快速阅读）。
-2. **写入文件**：路径为 `NEWS/YYYY-MM-DD_AI与科技新闻日报.md`（例如 `2026-03-06_AI与科技新闻日报.md`）。若 `NEWS` 不存在则先创建。
-3. 不修改既有 NEWS 下其他日期的文件。
+本命令**同时**生成中文版与英文版日报，分别写入对应子目录。
+
+### 4-A 中文版
+1. **在对话中**先输出完整中文日报（便于快速阅读）。
+2. **写入文件**：`NEWS/ai-tech/zh/YYYY-MM-DD_AI与科技新闻日报.md`（例如 `NEWS/ai-tech/zh/2026-03-06_AI与科技新闻日报.md`）。
+
+### 4-B 英文版
+紧接中文版，生成完整英文翻译并写入：`NEWS/ai-tech/en/YYYY-MM-DD_ai-tech-digest.md`
+
+英文版结构要求：
+- 标题（`#`）：英文标题，格式如 `# Apr 23, 2026 · AI & Tech Daily Digest`
+- 摘要引用（`>`）：翻译为英文。
+- 各条新闻标题、摘要（Summary:）、链接（保留原 URL）、简评（Commentary:）全部翻译为英文。
+- 分类标题（`##`）翻译为英文（如 "## I. Safety, Compliance & Supply Chain Trust"）。
+- **将"## 今日小结"翻译为"## Today's Summary"**，bullet 点翻译为英文。
+- **将"**总体定性**："或"**今日定性**："翻译为"**Daily Framing:**"**。
+- 格式、层级、链接、分隔线（`---`）与中文版完全一致。
+- 结尾注释也翻译为英文（如 `*This digest is compiled from real-time search results and is for reference only.*`）。
+
+3. 不修改既有文件。
 
 ---
 

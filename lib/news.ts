@@ -36,9 +36,12 @@ type NewsIndex = {
 
 const TOPIC_ORDER = TOPICS.map((topic) => topic.key);
 const NEWS_ROOT = path.join(process.cwd(), "NEWS");
-const NEWS_INDEX_PATH = path.join(process.cwd(), ".generated", "news-index.json");
+const NEWS_INDEX_PATHS: Record<Locale, string> = {
+  zh: path.join(process.cwd(), ".generated", "news-index.json"),
+  en: path.join(process.cwd(), ".generated", "news-index-en.json"),
+};
 
-let cachedIndex: { mtimeMs: number; data: NewsIndex } | null = null;
+const indexCache: Partial<Record<Locale, { mtimeMs: number; data: NewsIndex }>> = {};
 
 function countMatches(content: string, pattern: RegExp) {
   return content.match(pattern)?.length ?? 0;
@@ -52,11 +55,22 @@ function extractDescription(content: string, fallback: string) {
   return content.match(/^>\s+(.+)$/m)?.[1]?.trim() ?? fallback;
 }
 
-function extractTakeaway(content: string) {
-  const match = content.match(/\*\*(总体定性|今日定性)(：\*\*|\*\*：)\s*(.+)/);
-  if (match?.[3]) return match[3].trim();
+function getSummaryHeading(content: string, locale: Locale) {
+  return locale === "en"
+    ? content.match(/^##\s+Today's Summary$/m)
+    : content.match(/^##\s+今日小结$/m);
+}
 
-  const summaryHeading = content.match(/^##\s+今日小结$/m);
+function extractTakeaway(content: string, locale: Locale = "zh") {
+  if (locale === "en") {
+    const match = content.match(/\*\*Daily Framing:\*\*\s*(.+)/);
+    if (match?.[1]) return match[1].trim();
+  } else {
+    const match = content.match(/\*\*(总体定性|今日定性)(：\*\*|\*\*：)\s*(.+)/);
+    if (match?.[3]) return match[3].trim();
+  }
+
+  const summaryHeading = getSummaryHeading(content, locale);
   if (summaryHeading?.index === undefined) return undefined;
   const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
   const paragraphs = summaryBlock.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
@@ -64,8 +78,8 @@ function extractTakeaway(content: string) {
   return lastNonBullet?.trim() || undefined;
 }
 
-function extractHighlights(content: string) {
-  const summaryHeading = content.match(/^##\s+今日小结$/m);
+function extractHighlights(content: string, locale: Locale = "zh") {
+  const summaryHeading = getSummaryHeading(content, locale);
   if (summaryHeading?.index === undefined) {
     return [];
   }
@@ -104,18 +118,18 @@ function getReadingMinutes(content: string) {
 
 type NewsFallbacks = { untitled: string; noDescription: string };
 
-function getRelativeNewsPath(topic: TopicMeta, fileName: string) {
-  return path.posix.join("NEWS", topic.folder, fileName);
+function getRelativeNewsPath(topic: TopicMeta, locale: Locale, fileName: string) {
+  return path.posix.join("NEWS", topic.folder, locale, fileName);
 }
 
 function resolveRelativeNewsPath(relativePath: string) {
   return path.join(process.cwd(), ...relativePath.split("/"));
 }
 
-function toIndexedPreview(entry: NewsEntry, topic: TopicMeta): IndexedNewsPreview {
+function toIndexedPreview(entry: NewsEntry, topic: TopicMeta, locale: Locale): IndexedNewsPreview {
   return {
     ...toNewsPreview(entry),
-    relativePath: getRelativeNewsPath(topic, entry.fileName),
+    relativePath: getRelativeNewsPath(topic, locale, entry.fileName),
     archiveMonth: entry.date.slice(0, 7),
   };
 }
@@ -125,29 +139,31 @@ function fromIndexedPreview(entry: IndexedNewsPreview): NewsPreview {
   return preview;
 }
 
-async function loadNewsIndex() {
+async function loadNewsIndex(locale: Locale = "zh") {
+  const indexPath = NEWS_INDEX_PATHS[locale];
   try {
-    const stat = await fs.stat(NEWS_INDEX_PATH);
-    if (cachedIndex && cachedIndex.mtimeMs === stat.mtimeMs) {
-      return cachedIndex.data;
+    const stat = await fs.stat(indexPath);
+    const cached = indexCache[locale];
+    if (cached && cached.mtimeMs === stat.mtimeMs) {
+      return cached.data;
     }
 
-    const raw = await fs.readFile(NEWS_INDEX_PATH, "utf8");
+    const raw = await fs.readFile(indexPath, "utf8");
     const parsed = JSON.parse(raw) as NewsIndex;
     const data = {
       ...parsed,
       entries: sortEntries(parsed.entries),
     };
-    cachedIndex = { mtimeMs: stat.mtimeMs, data };
+    indexCache[locale] = { mtimeMs: stat.mtimeMs, data };
     return data;
   } catch {
-    cachedIndex = null;
+    indexCache[locale] = undefined;
     return null;
   }
 }
 
-async function readTopicEntries(topic: TopicMeta, fallbacks: NewsFallbacks) {
-  const directory = path.join(NEWS_ROOT, topic.folder);
+async function readTopicEntries(topic: TopicMeta, fallbacks: NewsFallbacks, locale: Locale = "zh") {
+  const directory = path.join(NEWS_ROOT, topic.folder, locale);
   const files = (await readDirectorySafe(directory)).filter((file) => file.endsWith(".md"));
 
   const entries = await Promise.all(
@@ -167,8 +183,8 @@ async function readTopicEntries(topic: TopicMeta, fallbacks: NewsFallbacks) {
         articleCount: countMatches(content, /^###\s+/gm),
         sectionCount: countMatches(content, /^##\s+/gm),
         readingMinutes: getReadingMinutes(content),
-        highlights: extractHighlights(content),
-        takeaway: extractTakeaway(content),
+        highlights: extractHighlights(content, locale),
+        takeaway: extractTakeaway(content, locale),
       };
 
       return entry;
@@ -178,8 +194,8 @@ async function readTopicEntries(topic: TopicMeta, fallbacks: NewsFallbacks) {
   return sortEntries(entries);
 }
 
-async function readEntryFromTopicByDate(topic: TopicMeta, date: string, fallbacks: NewsFallbacks) {
-  const directory = path.join(NEWS_ROOT, topic.folder);
+async function readEntryFromTopicByDate(topic: TopicMeta, date: string, fallbacks: NewsFallbacks, locale: Locale = "zh") {
+  const directory = path.join(NEWS_ROOT, topic.folder, locale);
   const files = await readDirectorySafe(directory);
   const fileName = files.find((file) => file.startsWith(`${date}_`) && file.endsWith(".md"));
 
@@ -201,21 +217,21 @@ async function readEntryFromTopicByDate(topic: TopicMeta, date: string, fallback
     articleCount: countMatches(content, /^###\s+/gm),
     sectionCount: countMatches(content, /^##\s+/gm),
     readingMinutes: getReadingMinutes(content),
-    highlights: extractHighlights(content),
-    takeaway: extractTakeaway(content),
+    highlights: extractHighlights(content, locale),
+    takeaway: extractTakeaway(content, locale),
   } satisfies NewsEntry;
 }
 
 export async function getAllNewsEntries(locale: Locale = "zh") {
   const fallbacks = getCopy(locale).news;
   const nested = await Promise.all(
-    TOPICS.map((topic) => readTopicEntries(getTopicMeta(topic.key, locale)!, fallbacks)),
+    TOPICS.map((topic) => readTopicEntries(getTopicMeta(topic.key, locale)!, fallbacks, locale)),
   );
   return sortEntries(nested.flat());
 }
 
 export async function getAllNewsPreviews(locale: Locale = "zh") {
-  const index = await loadNewsIndex();
+  const index = await loadNewsIndex(locale);
   if (index) {
     return index.entries.map(fromIndexedPreview);
   }
@@ -231,11 +247,11 @@ export async function getEntriesByTopic(topic: TopicKey, locale: Locale = "zh") 
   }
 
   const fallbacks = getCopy(locale).news;
-  return readTopicEntries(meta, fallbacks);
+  return readTopicEntries(meta, fallbacks, locale);
 }
 
 export async function getEntryPreviewsByTopic(topic: TopicKey, locale: Locale = "zh") {
-  const index = await loadNewsIndex();
+  const index = await loadNewsIndex(locale);
   if (index) {
     return index.entries
       .filter((entry) => entry.topic === topic)
@@ -247,7 +263,7 @@ export async function getEntryPreviewsByTopic(topic: TopicKey, locale: Locale = 
 }
 
 export async function getEntryPreviewsByMonth(month: string, locale: Locale = "zh") {
-  const index = await loadNewsIndex();
+  const index = await loadNewsIndex(locale);
   if (index) {
     return index.entries
       .filter((entry) => entry.archiveMonth === month)
@@ -261,7 +277,7 @@ export async function getEntryPreviewsByMonth(month: string, locale: Locale = "z
 }
 
 export async function getArchiveMonths(locale: Locale = "zh") {
-  const index = await loadNewsIndex();
+  const index = await loadNewsIndex(locale);
   if (index) {
     return [...new Set(index.entries.map((entry) => entry.archiveMonth))].sort((left, right) => right.localeCompare(left));
   }
@@ -276,7 +292,7 @@ export async function getNewsEntry(topic: TopicKey, date: string, locale: Locale
     return null;
   }
 
-  const index = await loadNewsIndex();
+  const index = await loadNewsIndex(locale);
   const indexedEntry = index?.entries.find((entry) => entry.topic === topic && entry.date === date);
   if (indexedEntry) {
     const filePath = resolveRelativeNewsPath(indexedEntry.relativePath);
@@ -289,7 +305,7 @@ export async function getNewsEntry(topic: TopicKey, date: string, locale: Locale
   }
 
   const fallbacks = getCopy(locale).news;
-  return readEntryFromTopicByDate(meta, date, fallbacks);
+  return readEntryFromTopicByDate(meta, date, fallbacks, locale);
 }
 
 export async function getAllNewsParams() {
@@ -301,7 +317,7 @@ export async function getAllNewsParams() {
 }
 
 export async function getTopicsWithNewsForDate(date: string, locale: Locale = "zh"): Promise<TopicKey[]> {
-  const index = await loadNewsIndex();
+  const index = await loadNewsIndex(locale);
   if (index) {
     return sortEntries(
       index.entries
@@ -363,8 +379,8 @@ export async function getIndexedNewsPreviewsForBuild(locale: Locale = "zh") {
   const nested = await Promise.all(
     TOPICS.map(async (topicDef) => {
       const topic = getTopicMeta(topicDef.key, locale)!;
-      const entries = await readTopicEntries(topic, fallbacks);
-      return entries.map((entry) => toIndexedPreview(entry, topic));
+      const entries = await readTopicEntries(topic, fallbacks, locale);
+      return entries.map((entry) => toIndexedPreview(entry, topic, locale));
     }),
   );
 

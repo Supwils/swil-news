@@ -71,10 +71,17 @@
 
 ---
 
-## 四、输出与保存
+## 四、输出与保存（双语）
 
-1. 在对话中先输出完整日报。
-2. **写入文件**：`NEWS/supply-chain/YYYY-MM-DD_供应链与制造新闻日报.md`。若目录不存在则先创建。
+### 4-A 中文版
+1. 在对话中先输出完整中文日报。
+2. **写入文件**：`NEWS/supply-chain/zh/YYYY-MM-DD_供应链与制造新闻日报.md`
+
+### 4-B 英文版
+紧接中文版，生成完整英文翻译并写入：`NEWS/supply-chain/en/YYYY-MM-DD_supply-chain-digest.md`
+
+英文版要求：标题 `# MMM D, YYYY · Supply Chain & Manufacturing Daily Digest`；各条目（Summary / Commentary）翻译；`## Today's Summary` 替换 `## 今日小结`；`**Daily Framing:**` 替换 `**总体定性**：`；链接保留原 URL；格式一致。
+
 3. 不修改其他日期的文件。
 
 执行时请直接开始多轮 Web Search，再按上述结构整理并保存。

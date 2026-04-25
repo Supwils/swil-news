@@ -69,7 +69,10 @@ export default async function TopicPage({ params }: TopicPageProps) {
   }
 
   const meta = getTopicMeta(topic, "zh");
-  const entries = await getEntryPreviewsByTopic(topic);
+  const [entries, entriesEn] = await Promise.all([
+    getEntryPreviewsByTopic(topic, "zh"),
+    getEntryPreviewsByTopic(topic, "en"),
+  ]);
 
   if (!meta) {
     notFound();
@@ -103,7 +106,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
   return (
     <>
       <StructuredData data={structuredData} />
-      <TopicPageContent topic={topic} entries={entries} />
+      <TopicPageContent topic={topic} entries={entries} entriesEn={entriesEn} />
     </>
   );
 }

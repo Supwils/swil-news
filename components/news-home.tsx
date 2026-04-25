@@ -15,11 +15,7 @@ import { TOPICS, getTopicMeta, isTopicKey, type TopicKey } from "@/lib/news-meta
 
 type NewsHomeProps = {
   entries: NewsPreview[];
-  todayDate: string | null;
-  todayEntries: NewsPreview[];
-  previousDate: string | null;
-  previousEntries: NewsPreview[];
-  topicCounts: Partial<Record<TopicKey, number>>;
+  entriesEn: NewsPreview[];
 };
 
 type ReadingSession = {
@@ -69,8 +65,9 @@ function articleId(entry: Pick<NewsPreview, "topic" | "date">) {
 }
 
 export function NewsHome(props: NewsHomeProps) {
-  const { entries, todayDate, todayEntries, previousDate, previousEntries, topicCounts } = props;
+  const { entries: entriesZh, entriesEn } = props;
   const locale = useLocale();
+  const entries = locale === "en" ? entriesEn : entriesZh;
   const searchParams = useSearchParams();
   const topicParam = searchParams.get("topic");
   const activeTopic: TopicFilter = topicParam && isTopicKey(topicParam) ? topicParam : "all";
@@ -81,6 +78,37 @@ export function NewsHome(props: NewsHomeProps) {
   );
 
   const totalCount = entries.length;
+  const topicCounts = useMemo(
+    () =>
+      entries.reduce<Partial<Record<TopicKey, number>>>((acc, entry) => {
+        acc[entry.topic] = (acc[entry.topic] ?? 0) + 1;
+        return acc;
+      }, {}),
+    [entries],
+  );
+
+  const {
+    todayDate,
+    todayEntries,
+    previousDate,
+    previousEntries,
+  } = useMemo(() => {
+    const today = entries[0]?.date ?? null;
+    const todayItems = today ? entries.filter((entry) => entry.date === today) : [];
+    const previous = today
+      ? entries.find((entry) => entry.date !== today)?.date ?? null
+      : null;
+    const previousItems = previous
+      ? entries.filter((entry) => entry.date === previous)
+      : [];
+
+    return {
+      todayDate: today,
+      todayEntries: todayItems,
+      previousDate: previous,
+      previousEntries: previousItems,
+    };
+  }, [entries]);
 
   // Derive the sections for the current filter.
   const {
