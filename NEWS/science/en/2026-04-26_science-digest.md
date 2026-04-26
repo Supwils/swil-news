@@ -1,131 +1,138 @@
 # Apr 26, 2026 · Science & Research Daily Digest
 
-> Global highlights in discovery, space, biomedicine, and climate research for April 26, 2026, with summaries, links, and brief commentary.
+> Global highlights in science, space, biomedicine, and climate research for April 26, 2026, with summaries, links, and brief commentary.
 
 ---
 
-## I. Major prizes and public science
+## I. Space & Deep Space
 
-### 1. 2026 Breakthrough Prize laureates and worldwide premiere: gene therapies, Muon g‑2, mathematics, and a special prize for QCD (science communication)
-**Summary:** On **April 18, 2026**, in Los Angeles, the Breakthrough Prize Foundation announced the **2026** laureates—six **US$3 million** main prizes plus New Horizons and other awards, with total prize money of about **US$18.75 million** this cycle. Life sciences honors include teams behind the first **FDA‑approved** gene therapy for **RPE65**‑related inherited retinal disease; **BCL11A** regulation and **CRISPR**‑based therapy pathways for **sickle cell disease** and **β‑thalassemia** (including **Casgevy**); and discoverers of the **C9orf72** repeat expansion as a major genetic cause of **ALS** and **frontotemporal dementia**. The Fundamental Physics prize goes to the **Muon g‑2** collaborations at **CERN**, **Brookhaven National Laboratory**, and **Fermilab** for pushing the muon anomalous magnetic moment to **parts‑per‑billion** precision and stress‑testing the Standard Model. **Frank Merle** wins the mathematics prize for nonlinear evolution equations and singularity/soliton structure; **David J. Gross** receives a special Fundamental Physics prize for **QCD/asymptotic freedom** and broader theoretical leadership; the inaugural **Vera Rubin New Frontiers Prize** goes to **Carolina Figueiredo** for geometric structure in scattering amplitudes. The foundation scheduled the ceremony show premiere for **Sunday, April 26, 2026**, at **3:00 p.m. Eastern / 12:00 p.m. Pacific** on **YouTube**.
+### 1. NASA Advances ROSA Implementation for ESA’s Rosalind Franklin Mars Rover: Launch, Propulsion, and Payload Roles Clarified (Mars Exploration)
+**Summary:** On **April 16, 2026**, NASA’s science mission blog announced progress on the **Rosalind Franklin Support and Augmentation (ROSA)** project, which augments Europe’s ExoMars life-detection architecture with U.S. engineering and launch-side capabilities; public materials reference a **no earlier than late 2028** launch concept on a **SpaceX Falcon Heavy** from Kennedy Space Center and mention lander braking engines, radioisotope heater units, and mass-spectrometer components among the work-share items. The step moves U.S.–European Mars cooperation from statements toward auditable hardware and interface milestones.
 **Links:**
-- [Breakthrough Prize — Breakthrough Prize Announces 2026 Laureates](https://breakthroughprize.org/News/98)
-- [Nature — Magnetic muon measurements and gene-therapy advances win US$3-million Breakthrough prizes](https://www.nature.com/articles/d41586-026-01014-9)
-**Commentary:** As attention fragments, “prize stage + streaming” concentrates credible wins into a single public moment—yet scientific weight still lives in papers, data releases, and regulatory records.
+- [NASA Science — NASA Begins Implementation for ESA’s Rosalind Franklin Mission to Mars](https://science.nasa.gov/blogs/mars-rosa/2026/04/16/nasa-begins-implementation-for-esas-rosalind-franklin-mission-to-mars/)
+- [ESA — EnVision (context within ESA’s planetary science portfolio)](https://www.esa.int/Science_Exploration/Space_Science/Envision)
+**Commentary:** Martian life-detection bottlenecks increasingly sit in **deep-space supply chains, planetary protection, and launch-window economics that tolerate failure modes**—ROSA is where those issues are forced onto an engineering table.
 
 ---
 
-## II. Paleontology and advanced imaging
-
-### 2. Blood‑vessel–like healing structures in the largest T. rex “Scotty”: synchrotron tomography of a healing rib fracture (paleobiology × physics methods)
-**Summary:** Researchers studied **“Scotty,”** the largest documented **Tyrannosaurus rex** specimen housed at Canada’s **Royal Saskatchewan Museum**, focusing on a rib that fractured and was partially healing roughly **66 million years** ago. Dense fossil bone challenged conventional **CT** penetration, so the team used **synchrotron** high‑brightness **X‑rays** for nondestructive 3D imaging and elemental context, interpreting iron‑rich mineralized features as casts consistent with heightened vascular activity during repair. The primary paper appears in **Scientific Reports** (**2025**, **DOI 10.1038/s41598-025-06981-z**); popular summaries circulated prominently on **April 26, 2026**. The work highlights accelerator‑based imaging for “hard” fossils and suggests targeting injured specimens for soft‑tissue‑preservation prospects.
+### 2. ESA Confirms Artemis II Pacific Splashdown: European Service Module’s Role in Deep-Space Power and Propulsion Re-Highlighted (Crewed Lunar Flyby)
+**Summary:** ESA’s press release (**N° 19–2026**) summarizes the **Artemis II** crew’s **Orion** splashdown in the Pacific and emphasizes the **European Service Module (ESM)** as the backbone for power, propellant, and thermal resources; the mission’s lunar flyby and distance-from-Earth milestones were widely reported across agencies and outlets. The flight stress-tests the end-to-end “human–spacecraft–ground” chain ahead of later lunar-surface missions and cislunar infrastructure.
 **Links:**
-- [ScienceDaily — Blood vessels found in T. rex bones are rewriting dinosaur science (2026-04-26)](https://www.sciencedaily.com/releases/2026/04/260426012259.htm)
-- [Scientific Reports — In situ analysis of vascular structures in fractured Tyrannosaurus rex rib](https://www.nature.com/articles/s41598-025-06981-z)
-**Commentary:** The scientific increment is the coupled **injury–healing–mineral replacement** story that other specimens can try to falsify, not the headline adjective “rewrite.”
+- [ESA — Splashdown for Artemis II (press release)](https://www.esa.int/Newsroom/Press_Releases/Splashdown_for_Artemis_II)
+- [Phys.org — Space-camera cosmic-ray testing tied to Artemis II imagery work](https://phys.org/news/2026-04-contribution-artemis-ii-moon-mission.html)
+**Commentary:** While public attention chases “when boots return,” the engineering story that actually pays rent is **service-module reliability plus deep-space medical and communications redundancy**—without that spine, the surface is just a farther poster.
 
 ---
 
-## III. Spaceflight and skywatching
-
-### 3. NASA announces SpaceX **Crew‑13** assignments for ISS operations (human spaceflight)
-**Summary:** **NASA** issued an official news release naming astronauts and roles for **SpaceX Crew‑13**, the next **Commercial Crew** rotation supporting International Space Station (**ISS**) research and systems certification work that also feeds forward lunar and Mars exploration architectures.
+### 3. China Issues Its First Commercial Space Standard System: Rockets, Satellites, Launch Sites, and Governance Framed as Executable Rules (Industry & Policy)
+**Summary:** The State Council Information Office’s **China Voices** English channel published an explainer around **April 24, 2026** describing China’s **first commercial space standard system**, spanning carrier rockets, satellites, launch sites, application services, and industry governance; parallel notices from CAST continue to document the **2026 China Space Conference (Chengdu, April 22–28)** as an academic and industry venue. Standards matter because they align dispersed commercial trials with national safety, spectrum/orbit, and quality thresholds in auditable text.
 **Links:**
-- [NASA — NASA Shares SpaceX Crew-13 Assignments for Space Station Mission](https://www.nasa.gov/news-release/nasa-shares-spacex-crew-13-assignments-for-space-station-mission/)
-- [NASA — 2026 News Releases (index)](https://www.nasa.gov/2026-news-releases/)
-**Commentary:** With **ISS** retirement planning and lunar program retiming in play, each crew assignment is a checkpoint for training pipelines, manifest pressure, and downstream science queues.
+- [SCIO China Voices — China issues its first commercial space standard system](http://english.scio.gov.cn/m/chinavoices/2026-04/24/content_118461715.html)
+- [CAST — Announcement on the 2026 China Space Conference](https://www.cast.org.cn/xw/tzgg/DWHZ/art/2026/art_b7e2ad5ae8544c879d3d8c742cf29272.html)
+**Commentary:** The “second curve” of commercial space is rarely another funding press tour—it is **shared interface language**, the precondition for repeatable on-orbit services and insurable operations.
 
 ---
 
-### 4. Northern spring sky: comet **C/2025 R3**, meteor shower context, and planetary apparitions (public astronomy)
-**Summary:** **NASA Science’s** “What’s Up” briefing for **April 2026** highlights naked‑eye and binocular events, including a favorable window for **comet C/2025 R3** around late April (guides cite **April 27** for closest Earth approach—verify with current ephemerides) alongside routine Moon and planet schedules and notes on the **Lyrid** peak earlier in the month.
+## II. Biomedicine & Regulatory Science
+
+### 4. FDA Approves First Gene Therapy for Genetic Hearing Loss—Regeneron’s Otarmeni (OTOF-Related Profound SNHL) (Gene Therapy)
+**Summary:** On **April 23, 2026**, the FDA granted accelerated approval to **Regeneron’s Otarmeni™ (lunsotogene parvec-cwha)** for pediatric and adult patients with severe-to-profound sensorineural hearing loss associated with biallelic **OTOF** variants; agency materials highlight the product as the first gene therapy approved under the **Commissioner’s National Priority Voucher (CNPV)** pilot and cite **CHORD** trial hearing-improvement narratives among evaluable participants. Regeneron’s investor release describes **no-cost U.S. access** for eligible patients and a dual **AAV** vector mechanism restoring **otoferlin** signaling in inner hair cells.
 **Links:**
-- [NASA Science — What's Up: April 2026 Skywatching Tips from NASA](https://science.nasa.gov/solar-system/whats-up-april-2026-skywatching-tips-from-nasa/)
-**Commentary:** Comets and meteor showers return public attention to orbital mechanics and photometry—often the on‑ramp for students who later build spacecraft sensors.
+- [FDA — FDA Approves First-Ever Gene Therapy for Treatment of Genetic Hearing Loss (press announcement)](https://www.fda.gov/news-events/press-announcements/fda-approves-first-ever-gene-therapy-treatment-genetic-hearing-loss-under-national-priority-voucher)
+- [Regeneron — Otarmeni™ approval investor release](https://investor.regeneron.com/news-releases/news-release-details/otarmenitm-lunsotogene-parvec-cwha-approved-fda-first-and-only)
+**Commentary:** The inflection for auditory gene therapy is less “can we transduce?” than whether **dose, immunogenicity, and long-term hair-cell function** survive real-world follow-up—free access reframes the debate from list price to sustainability and public ethics.
 
 ---
 
-## IV. Particle physics and lab communications
-
-### 5. Fermilab and **CERN** spotlight **Muon g‑2** for the **2026** Breakthrough Prize in Fundamental Physics (precision experiments)
-**Summary:** **Fermilab** and **CERN** published releases confirming the **Muon g‑2** collaborations across **CERN**, **Brookhaven**, and **Fermilab** share the **2026** prize for decades of advances in measuring the muon’s anomalous magnetic moment—an observable sensitive to virtual quanta “foam” and a classic lever for Standard Model tests and possible new physics.
+### 5. FDA Approves Lilly’s Oral GLP-1 Foundayo (Orforglipron) for Chronic Weight Management in Obesity/Overweight (Metabolic Pharmacology)
+**Summary:** FDA’s **2026 novel approvals** list and Lilly’s investor release document **Foundayo (orforglipron)** approval on **April 1, 2026**, for chronic weight management in adults with obesity or overweight and weight-related comorbidities, positioned as a **once-daily oral GLP-1 receptor agonist**; public materials emphasize differentiated dosing route versus injectable peers and cite pivotal trial programs. The approval intensifies oral-access competition in obesity chronic care.
 **Links:**
-- [Fermilab News — Fermilab experiment receives prestigious Breakthrough Prize in Fundamental Physics](https://news.fnal.gov/2026/04/fermilab-experiment-receives-prestigious-breakthrough-prize-in-fundamental-physics/)
-- [CERN — Muon g-2 Experiment Pioneers Win Breakthrough Prize in Fundamental Physics](https://home.web.cern.ch/news/press-release/cern/muon-g-2-experiment-pioneers-win-breakthrough-prize-fundamental-physics)
-**Commentary:** The prize narrative is multi‑generation hardware; the field’s near‑term drama is whether lattice QCD and cross‑section inputs can shrink theory uncertainty enough to sit at the same table as experiment.
+- [FDA — Novel Drug Approvals for 2026 (official list)](https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026)
+- [Eli Lilly — FDA approves Foundayo™ (orforglipron) (press release)](https://investor.lilly.com/news-releases/news-release-details/fda-approves-lillys-foundayotm-orforglipron-only-glp-1-pill)
+**Commentary:** The scientific question for oral GLP-1 is not only magnitude of weight change but whether **cardiovascular and rebound-off-therapy trajectories** beat the monitoring costs of emerging safety signals at population scale.
 
 ---
 
-## V. Climate, energy, and policy‑relevant science
+### 6. FDA Notices to 2,200+ Sponsors on Missing ClinicalTrials.gov Results: Compliance Windows, Civil Monetary Penalties, and Transparency Governance (Trial Ecosystem)
+**Summary:** Law-firm and industry analyses cite FDA notices issued around **March 30, 2026** to **more than 2,200** trial sponsors concerning **3,000+** studies missing required results postings on **ClinicalTrials.gov**; materials outline potential civil monetary penalties on the order of **up to ~USD 15,107 per day** of continued noncompliance and broader enforcement pathways. The move reframes publication bias from an academic-norms issue into **priced compliance risk** spanning pharma, hospitals, and universities.
+**Links:**
+- [Greenberg Traurig — FDA Sends Notices to More Than 2,200 Sponsors Regarding Unpublished Clinical Trial Results](https://www.gtlaw.com/en/insights/2026/4/fda-sends-notices-to-more-than-2200-sponsors-regarding-unpublished-clinical-trial-results)
+- [FDA — Novel Drug Approvals for 2026 (regulatory context entry point)](https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026)
+**Commentary:** When disclosure is tightly coupled to capital events (M&A, licensing, IPOs), **transparency has to be internalized like a financial control**—otherwise regulatory letters are just delayed footnotes.
 
-### 6. *Science* policy forum: embed triple demand goals—efficiency, electrification, extreme‑use restraint—by **2035** (demand‑side climate governance)
-**Summary:** Authors argue climate diplomacy over‑indexes supply‑side milestones while under‑specifying measurable demand transformations; they propose integrating **energy efficiency acceleration**, **end‑use electrification**, and **checks on extreme energy consumption** into national accounting and **NDC**‑class commitments toward **2035**, linking each pillar to buildings, transport, and industry transitions. **Phys.org** and other outlets summarized the thesis for broader audiences.
+---
+
+## III. Climate, Energy & Global Governance
+
+### 7. *Science* Policy Piece Proposes “Triple Demand-Side Goals” for 2035: Efficiency, Electrification, and Extreme-Use Taxation (Energy Demand)
+**Summary:** *Science* publishes **“New demand goals for energy and climate resilience”** (DOI **10.1126/science.adz3492**), arguing energy **demand** should be treated as a governable variable alongside supply-side targets; Phys.org-style summaries condense a **2035** agenda into coordinated accelerations of efficiency gains, electricity’s share of final energy, and fairer taxation/pricing on extreme per-capita consumption bands. The framing pushes equity and resilience from slogans into annualized, rate-based planning language.
 **Links:**
 - [Science — New demand goals for energy and climate resilience](https://www.science.org/doi/10.1126/science.adz3492)
 - [Phys.org — Scientists call for integrating three energy demand goals into climate policy by 2035](https://phys.org/news/2026-04-scientists-energy-demand-goals-climate.html)
-**Commentary:** Demand metrics are politically sensitive; the paper’s value is pushing debate from slogans toward auditable indicators—where data fights begin.
+**Commentary:** If climate politics only tracks capacity additions and grid investment, it systematically underprices **demand-curve elasticity**—“use less, use more electrically” is infrastructure too.
 
 ---
 
-### 7. **SPGET** launches in **Santa Marta, Colombia**: a new panel framing fossil‑fuel transition roadmaps (climate governance)
-**Summary:** **Climate Home News** (**April 25, 2026**) reports the launch of the **Science Panel for the Global Energy Transition (SPGET)**, pitched as a faster, more focused scientific voice to help governments plan fossil‑fuel phaseout and just‑transition finance, against a backdrop of political pressure on consensus processes like the **IPCC**.
+### 8. Science Panel for the Global Energy Transition (SPGET) Launches in Colombia: Independent Evidence for Fossil-Fuel Exit Roadmaps (Science–Policy Interface)
+**Summary:** Climate Home News reports the **Science Panel for the Global Energy Transition (SPGET)** launched on **April 24, 2026**, in **Santa Marta, Colombia**, convening leading climate and energy scholars to supply **politics-resilient** evidence packages for whole-of-government fossil-fuel phaseout and just-transition roadmaps; coverage references a draft Colombia roadmap as an example use case. The panel reflects demand for complementary scientific supply alongside perceptions of politicized IPCC processes.
 **Links:**
-- [Climate Change News — New panel of top climate scientists calls for fossil fuel transition roadmaps](https://www.climatechangenews.com/2026/04/25/new-panel-of-top-climate-scientists-calls-for-fossil-fuel-transition-roadmaps/)
-**Commentary:** New panels succeed only if they institutionalize **transparency, conflict‑of‑interest rules, and peer‑reviewed products**—otherwise they risk becoming rapid‑fire position papers.
+- [Climate Home News — New panel of top climate scientists calls for fossil fuel transition roadmaps](https://www.climatechangenews.com/2026/04/25/new-panel-of-top-climate-scientists-calls-for-fossil-fuel-transition-roadmaps/)
+- [Carbon Brief — DeBriefed, 24 April 2026 (weekly energy–climate briefing)](https://www.carbonbrief.org/debriefed-24-april-2026-europes-energy-crisis-plan-renewables-overtake-coal-colombias-fossil-fuel-summit/)
+**Commentary:** The scarce asset is not “another report” but **model languages that finance ministries, mining ministries, and grid operators can execute as shared constraints**—SPGET lives or dies on touching those political hard cores.
 
 ---
 
-## VI. Earth systems and Anthropocene narratives
-
-### 8. Human societies as a coupled “force” reshaping Earth: an essay‑style synthesis (human–Earth systems)
-**Summary:** A **ScienceDaily** summary (**April 19, 2026**) highlights **University of Maryland, Baltimore County (UMBC)** materials on how **Erle Ellis** frames **Anthropocene** dynamics—social–ecological co‑evolution where cultural and institutional innovation becomes a dominant Earth‑system coupling—stressing both catastrophic pressures and collective capacity for stewardship. The page cites Ellis’s review thread in **Philosophical Transactions of the Royal Society B** (**DOI 10.1098/rstb.2022.0255**). Treat as synthesis/commentary rather than a single observational claim.
+### 9. European Commission JRC Updates Policy Briefing: Conflict Risk, Critical Minerals, and Fragile Petrostates in the Green Transition (Security Research)
+**Summary:** The Commission’s **Joint Research Centre (JRC)** issued/updated **April 8, 2026** decision-maker materials on climate, conflict, and energy transition, including critical-mineral competition and instability risks in hydrocarbon-dependent economies; the narrative sits beside European crisis-response measures and renewable records, highlighting desynchronization between **physical decarbonization** and **geopolitical stability** timescales.
 **Links:**
-- [ScienceDaily — A new force of nature is reshaping the planet, study finds (2026-04-19 release)](https://www.sciencedaily.com/releases/2026/04/260419054825.htm)
-- [Philosophical Transactions of the Royal Society B — The Anthropocene condition: evolving through social–ecological transformations](https://royalsocietypublishing.org/doi/10.1098/rstb.2022.0255)
-**Commentary:** Useful if it moves policy talk from “whether humans matter” to “which institutions move which feedbacks”—testable in sectoral models.
+- [European Commission JRC — Climate, conflict and the energy transition: security challenges ahead](https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/climate-conflict-and-energy-transition-security-challenges-ahead-2026-04-08_en)
+- [Science — New demand goals for energy and climate resilience (demand-side policy text)](https://www.science.org/doi/10.1126/science.adz3492)
+**Commentary:** When wind and solar become default answers, security studies remind us **the geography of those answers becomes a new conflict frontier**—that is not anti-green; it is anti-pretending there are no externalities.
 
 ---
 
-## VII. Biomedicine and regulation
+## IV. Foundational Science, Communication & Major Prizes
 
-### 9. **FDA** approves **Idvynso** (**doravirine; islatravir**) for regimen switch in virologically suppressed **HIV‑1** adults (infectious disease)
-**Summary:** **FDA’s** **Novel Drug Approvals for 2026** list records **Idvynso** (**doravirine and islatravir**) on **April 20, 2026**, as a complete regimen option for adults who are virologically suppressed on a stable antiretroviral regimen, without prior virologic failure and without known resistance‑associated substitutions to **doravirine**. Clinical use must follow current labeling and guidelines.
+### 10. 2026 Breakthrough Prize Unveiled: Muon g-2 Collaborations Win Fundamental Physics Alongside Life Sciences & Mathematics (Major Awards)
+**Summary:** The **Breakthrough Prize** foundation announced **2026** laureates in **Los Angeles on April 18, 2026**, spanning **life sciences, fundamental physics, and mathematics**; fundamental physics honors large collaborations advancing precision **Muon g-2** magnetic-moment measurements across **CERN, Brookhaven National Laboratory, and Fermilab**, in dialogue with theoretical predictions. Parallel life-science threads emphasize deliverable gene therapies and genetic disease mechanisms, while mathematics recognizes advances in nonlinear evolution equations, with extensive university news follow-ups.
 **Links:**
-- [FDA — Novel Drug Approvals for 2026](https://www.fda.gov/drugs/novel-drug-approvals-fda/novel-drug-approvals-2026)
-**Commentary:** Oral small‑molecule combinations still trade among adherence, resistance barrier, and drug–drug interaction surface area—the label is where that trade becomes enforceable text.
+- [Breakthrough Prize — Breakthrough Prize Announces 2026 Laureates](https://breakthroughprize.org/News/98)
+- [Brookhaven National Laboratory — Muon g-2 Experiment Pioneers Win Breakthrough Prize in Fundamental Physics](https://www.bnl.gov/newsroom/news.php?a=122877)
+**Commentary:** Muon g-2’s public meaning is turning “how much room remains in the Standard Model?” into **replicable transnational experiment politics**—the stage rewards instrument culture and data ethics, not a single headline p-value.
 
 ---
 
-### 10. **FDA** and **CMS** announce the **RAPID** coverage pathway for breakthrough devices (health policy)
-**Summary:** On **April 23, 2026**, **CMS** and **FDA** jointly announced the **Regulatory Alignment for Predictable and Immediate Device (RAPID)** pathway to align **Medicare** coverage planning with **FDA** marketing authorization for eligible **Breakthrough** devices—aiming to shrink the post‑approval reimbursement gap. Operational details will evolve through manuals and notices.
+### 11. *Nature* News: A Decade-Scale Push on Newton’s Gravitational Constant “Big G” Deepens the Disagreement Across Labs (Gravimetry)
+**Summary:** *Nature* news and comment pieces in **April 2026** survey roughly **decade**-scale efforts across labs to pin down the gravitational constant **G**, reporting that discrepancies between high-precision experimental pathways have not converged over time and sharpen the question of which value “nature chooses” at the metrology–fundamental-physics interface. The issue ripples into unit systems and cosmological parameter pipelines sensitive to baseline constants.
 **Links:**
-- [CMS — CMS and FDA Announce RAPID Coverage Pathway to Accelerate Patient Access to Life-Changing Medical Devices](https://www.cms.gov/newsroom/press-releases/cms-fda-announce-rapid-coverage-pathway-accelerate-patient-access-life-changing-medical-devices)
-- [FDA — CMS and FDA Announce RAPID Coverage Pathway to Accelerate Patient Access to Life-Changing Medical Devices](https://www.fda.gov/news-events/press-announcements/cms-and-fda-announce-rapid-coverage-pathway-accelerate-patient-access-life-changing-medical-devices)
-**Commentary:** If timelines truly compress, trial design and evidence generation strategies for devices will shift; the policy risk is coverage commitments running ahead of durable clinical evidence.
+- [Nature — How big is Big G? Mystery deepens after ten-year effort to nail down gravity’s strength](https://www.nature.com/articles/d41586-026-01284-3)
+- [Breakthrough Prize — 2026 Laureates (parallel precision-measurement narrative)](https://breakthroughprize.org/News/98)
+**Commentary:** When “we can’t agree” tracks different experimental families rather than one instrument’s noise, the field confronts an old question in a new suit: **is a constant a natural fact or a methods-cluster fact?**
 
 ---
 
-## VIII. Materials science community
-
-### 11. **2026 MRS Spring Meeting & Exhibit** opens in Honolulu (conference ecosystem)
-**Summary:** The **Materials Research Society** lists its **2026** spring meeting from **April 26 to May 1, 2026**, in **Honolulu, Hawaiʻi**, spanning energy, information, biointerfaces, and extreme‑environment materials in a large multi‑symposium program.
+### 12. Iron-Rich Vascular Structures in a Healed Fracture Zone of “Scotty” the *T. rex*: Synchrotron 3D Imaging Supports a Paleo-Physiology Narrative (Paleontology)
+**Summary:** *Scientific Reports* publishes synchrotron-based 3D analyses of vascular-like, iron-enriched microstructures associated with rib fracture healing in the iconic **“Scotty”** specimen; ScienceDaily’s **April 26, 2026** popular summary argues the find may revise how dinosaur trauma repair and soft-tissue preservation are interpreted. The fossil is curated by institutions including the **Royal Saskatchewan Museum**, and the work leans on accelerator-imaging capabilities.
 **Links:**
-- [MRS — 2026 MRS Spring Meeting & Exhibit](https://www.mrs.org/meetings-events/annual-meetings/2026-mrs-spring-meeting-exhibit)
-**Commentary:** Conferences don’t discover nature, but they standardize which sample‑prep and characterization workflows become “obvious” for the next product cycle.
+- [Scientific Reports — In situ analysis of vascular structures in fractured *Tyrannosaurus rex* rib](https://www.nature.com/articles/s41598-025-06981-z)
+- [ScienceDaily — Blood vessels found in T. rex bones are rewriting dinosaur science (2026-04-26)](https://www.sciencedaily.com/releases/2026/04/260426012259.htm)
+**Commentary:** Once “could this animal heal like a vertebrate?” is pinned by microstructure rather than cinema, the debate migrates to **shared physicochemical mechanisms of pathologic bone and mineralized preservation**.
 
 ---
 
 ## Today's Summary
 
-- The **2026 Breakthrough Prize** cycle bundles **gene therapies**, **Muon g‑2**, **mathematics**, and **QCD** leadership, with a **YouTube** premiere on **April 26** as the day’s major science‑communication beat.
-- Paleontology highlights **nondestructive synchrotron** evidence from **Scotty**’s healing rib, reinforcing “injured fossils first” sampling logic.
-- **NASA** pairs **Crew‑13** announcements with an **April** sky guide that foregrounds **comet C/2025 R3** and seasonal meteor/planet events.
-- Climate governance discourse runs on parallel tracks: a **Science** demand‑side framework toward **2035** and the **SPGET** panel launch in **Colombia**.
-- Regulators move on complementary fronts: **Idvynso** for **HIV‑1** switches and **RAPID** for breakthrough device **Medicare** coverage alignment.
+- **Mars cooperation on an engineering ledger:** NASA’s ROSA blog turns ESA’s Rosalind Franklin path into explicit launch and hardware work-share milestones.
+- **Crewed deep space debriefed:** Artemis II splashdown and the ESM storyline translate “lunar flyby success” into supply-chain and multinational responsibility language.
+- **Commercial space governance:** China’s first commercial space standard system and Space Conference week place rule text beside industrial expansion in the same window.
+- **Gene therapy to oral metabolic medicine:** Otarmeni and Foundayo in the same calendar week spotlight two different approval philosophies—**viral delivery systems** versus **chronic oral access**.
+- **Transparency as a compliance product:** FDA’s mass ClinicalTrials.gov reminders convert publication lag into a priced enforcement exposure for sponsors.
+- **Dual climate tracks:** A *Science* demand-side “triple goals” agenda and SPGET’s launch run in parallel as the field hunts **executable syntax for fossil exit**.
+- **Constants and deep time:** Big G disagreements and T. rex vascular imaging place precision metrology and deep-time preservation on the same Sunday reading rail.
 
-**Daily Framing:** Today is a “**prize spotlight meets payer‑system plumbing**” moment—public streaming amplifies laureate science while **FDA/CMS** rewrite how quickly innovation translates into insured access.
+**Daily Framing:** Today in the science calendar is “**interfaces, demand targets, and silence priced like efficacy**” day—Mars and cislunar programs align hardware on paper, climate politics aligns demand and roadmaps on paper, and regulatory letters raise trial-result disclosure to a line item as expensive as a pivotal endpoint.
 
 ---
 
-*This digest was assembled from live web search and public sources; verify facts at the links.*  
-*Date: April 26, 2026 (Sunday)*
+*This digest is compiled from real-time search results and is for reference only; verify facts with primary sources.*  
+*Date: Sunday, April 26, 2026*

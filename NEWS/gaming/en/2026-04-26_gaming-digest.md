@@ -135,13 +135,30 @@
 
 ---
 
+### 14. Morgan Stanley (via Reuters): AI-driven automation could unlock ~$22bn in annual profit upside for gaming—if pipelines actually compress
+**Summary:** **Reuters** relayed **Morgan Stanley** research arguing that **AI-assisted development and operations** could help the global games industry unlock on the order of **~$22 billion** in **annual profit** by **shortening production cycles** and **trimming cost bases**—framing automation as a **margin lever**, not only a **marketing gimmick**. The note landed **April 22, 2026**, making **late April** a natural window for **investor decks** to recycle the same **“efficiency vs. creative risk”** talking points.  
+**Links:**
+- [Reuters — Gaming industry could unlock $22 billion in profits on AI-driven cost cuts, says Morgan Stanley](https://www.reuters.com/business/gaming-industry-could-unlock-22-billion-profits-ai-driven-cost-cuts-morgan-2026-04-22/)
+**Commentary:** Wall Street’s **profit math** assumes **quality stays flat while velocity rises**—studios will still fight over **who owns the residual creative risk** when tools compress schedules.
+
+---
+
+### 15. Gunzilla Games: salary and contractor-payment allegations stack up around Off the Grid and Game Informer ownership
+**Summary:** **GamesIndustry.biz** and **PC Gamer** report escalating allegations from **current and former staff and contractors** that **Gunzilla Games**—developer of **Off the Grid** and owner of **Game Informer**—has **missed salary cycles** and accumulated **unpaid vendor bills**, with public fallout including **executive statements** that critics describe as **tone-deaf** amid labor anxiety. The story sits alongside broader **2026** chatter about **blockchain-adjacent AAA bets** and **media properties inside game studios**.  
+**Links:**
+- [GamesIndustry.biz — Off the Grid maker and Game Informer owner Gunzilla Games accused of missing staff salary payments](https://www.gamesindustry.biz/off-the-grid-maker-and-game-informer-owner-gunzilla-games-accused-of-missing-staff-salary-payments)
+- [PC Gamer — Gunzilla’s unpaid bills are piling up, say sources](https://www.pcgamer.com/gaming-industry/gunzillas-unpaid-bills-are-piling-up-say-sources-including-one-for-over-usd100-000/)
+**Commentary:** Owning **legacy press** does not **cash-flow the game**—when payroll stories go public, **publisher and platform partners** quietly reprice **delivery risk**.
+
+---
+
 ## Today's Summary
 - **Security & vendors:** The Rockstar incident foregrounds **third-party analytics and warehouse risk**, not just **credential theft**.  
 - **Cloud economics:** **Luna** retreating from third-party stores marks **aggregator cloud** giving way to **membership bundles**.  
 - **Regulatory countdowns:** **India’s OGAI** start line and **Indonesia’s Roblox safeguards** are twin reminders that **UGC + payments** now ship with **jurisdiction-specific childhood law**.  
-- **Market structure:** UK headlines pairing **record consumer spend** with **jobs pain** mirror a global **“revenue up, payroll flat/down”** pattern.  
+- **Market structure:** UK headlines pairing **record consumer spend** with **jobs pain** mirror a global **“revenue up, payroll flat/down”** pattern—**Morgan Stanley’s AI margin thesis** and **Gunzilla payroll allegations** are the same macro in **bull** vs. **bear** dialects.  
 - **Esports & household budgets:** **PUBG Nations Cup**, **PGL Wallachia**, and **streamflation** all compete for the same **discretionary entertainment envelope**.  
-- **Daily Framing:** Today behaves like a **“compliance countdown + vendor-risk week”**—a quieter **AAA launch slate** leaves oxygen for **policy, platforms, and breaches** to dominate the agenda.
+- **Daily Framing:** Today behaves like a **“compliance countdown + vendor-risk week”**—a quieter **AAA launch slate** leaves oxygen for **policy, platforms, breaches, and studio finance drama** to dominate the agenda.
 
 ---
 

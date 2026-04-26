@@ -6,60 +6,85 @@
 
 ## I. Electric vehicles & policy (China, US, Europe)
 
-### 1. Reuters: New EVs still debut around the New York Auto Show, but US BEV demand softens as the market adjusts to post‑incentive pricing (market · policy)
-**Summary:** Reuters reporting in early April 2026 frames the New York Auto Show season against a tougher US battery‑electric environment after federal purchase‑oriented clean‑vehicle tax credits ended, with automakers leaning on lower‑priced entries and mixed‑powertrain portfolios to defend share. Industry data cited in the coverage describes softer BEV penetration and more volatile pure‑electric sales lines for several legacy OEMs, while plans such as bringing Kia’s EV3 to the US later in 2026 are interpreted as volume plays aimed at price‑sensitive segments.
+### 1. Reuters: Around the New York Auto Show, OEMs still push entry and mixed‑powertrain EVs as the US market digests post‑incentive demand (market)
+**Summary:** Reuters reporting in early April 2026 frames the New York show season against a tougher US battery‑electric backdrop after federal purchase‑oriented clean‑vehicle tax credits ended, with brands still launching lower‑priced BEVs and hybrid portfolios to defend share. Coverage cites plans such as bringing Kia’s more affordable EV3 to the US later in 2026 as a volume play aimed at price‑sensitive segments.
 **Links:**
 - [Reuters — Automakers unveil new EVs for US market despite sales downturn](https://www.reuters.com/business/autos-transportation/kia-sell-lower-priced-electric-vehicle-us-2026-04-01/)
 - [Automotive News — Why automakers are taking different EV approaches in 2026](https://www.autonews.com/ev/an-ev-automakers-differing-approaches-0413/)
-**Commentary:** The US EV narrative is shifting from “credit‑led expansion” to “unit economics plus hybrid buffers,” and auto‑show launches mostly execute backlog rather than mark cyclical inflection points.
+**Commentary:** The US EV story is shifting from “credit‑led expansion” to “unit economics plus mixed powertrains,” and auto‑show launches mostly execute backlog rather than mark a cyclical inflection.
 
 ---
 
-### 2. China NEV retail weakens in the first half of April: auto‑show waitlists meet wholesale de‑stocking, while penetration stays elevated (market)
-**Summary:** Outlets such as CnEVPost cite China Passenger Car Association figures that put nationwide NEV passenger‑car retail for April 1–19, 2026 at about 387,000 units, down roughly 14% year on year, with analysts pointing to the Qingming holiday, consumers waiting for Beijing show debuts, and OEMs throttling wholesale to manage dealer inventory. Separate industry commentary notes sharper year‑on‑year drops in isolated early‑April weeks but continued NEV retail penetration in the high‑50% band, decoupling short‑term volume noise from structural electrification.
+### 2. Fortune: Ford’s CEO on Tesla’s cadence and Chinese rivals—strategy under tariffs and product‑freshness pressure (major OEMs)
+**Summary:** A Fortune article dated April 20, 2026 captures Ford CEO Jim Farley’s public commentary on the pace of competitive EV rollouts from Chinese players such as BYD and Xiaomi, perceptions of Tesla’s model freshness, and how the Trump administration’s tariff posture feeds through to input costs and strategic trade‑offs. The piece situates the debate around whether legacy OEMs can fund credible next‑generation volume EV platforms while defending ICE cash cows.
 **Links:**
-- [CnEVPost — China Apr 1-19 NEV retail sales fall 14% as buyers await auto show](https://cnevpost.com/2026/04/22/china-apr-1-19-nev-retail-sales-fall-buyers-await-auto-show/)
-- [Sina Finance — Outlook for April NEV retail (Chinese)](https://finance.sina.com.cn/roll/2026-04-07/doc-inhtsmhw3535844.shtml)
-**Commentary:** China’s market is shifting from “price‑war volume” to “post‑show model cadence plus precision trade‑in policy,” so weekly prints should be read next to policy implementation timing.
+- [Fortune — Ford CEO on Tesla, China’s BYD and tariffs](https://fortune.com/2026/04/20/ford-ceo-jim-farley-china-byd-xiaomi-donald-trump-tariffs-automakers-gm-toyota-tesla-updated-vehicle-elon-musk/)
+**Commentary:** C‑suite narratives are repricing around “platform freshness × geopolitical input costs,” not slogans—markets treat the sound bites as a stress test on pipeline credibility.
 
 ---
 
-### 3. China’s 2026 national vehicle trade‑in subsidy implementation rules continue to steer scrappage and replacement toward NEVs (policy)
+### 3. Reuters: Higher pump prices may lift US EV interest into summer, but charging gaps and incentive voids still cap conversion (market · energy)
+**Summary:** A Reuters analysis dated April 16, 2026 links rising gasoline prices to a potential uptick in US consumer attention on EVs, arguing that “pain at the pump” can be a marginal demand driver even after federal purchase incentives largely disappeared. The same coverage flags public‑charging build cadence, used‑EV supply, and fragmented state policy as frictions that blunt a pure oil‑price channel.
+**Links:**
+- [Reuters — Pain at the pump primed to give US EV sales a fresh lift this summer](https://www.reuters.com/business/energy/pain-pump-primed-give-us-ev-sales-fresh-lift-this-summer-2026-04-16/)
+**Commentary:** Oil is a catalyst, not a structural fix—without charging predictability and price clarity, curiosity rarely converts at scale.
+
+---
+
+### 4. China NEV retail volatility in April: auto‑show waitlists meet wholesale de‑stocking, while penetration stays elevated (market)
+**Summary:** Outlets such as CnEVPost cite China Passenger Car Association figures showing softer year‑on‑year NEV retail in early April 2026, with analysts pointing to the Qingming holiday, consumers waiting for Beijing show debuts, and OEMs throttling wholesale to manage inventory. Later April prints show some narrowing of the decline, with NEV retail penetration still quoted in the high‑50% band—decoupling weekly volume noise from structural electrification.
+**Links:**
+- [CnEVPost — China NEV retail sales drop 24% in first week of Apr](https://cnevpost.com/2026/04/09/china-nev-retail-drop-first-week-apr/)
+- [CnEVPost — China NEV retail sales fall 11% in first 12 days of Apr](https://cnevpost.com/2026/04/15/china-nev-retail-first-12-days-apr/)
+- [Sina Finance — Outlook for April NEV retail (Chinese)](https://finance.sina.com.cn/roll/2026-04-07/doc-inhtsmhw3535844.shtml)
+**Commentary:** China’s market is shifting from “price‑war volume” to “post‑show cadence plus precision trade‑in policy,” so weekly prints should be read next to subsidy implementation timing.
+
+---
+
+### 5. China’s 2026 national vehicle trade‑in subsidy implementation rules continue to steer scrappage and replacement toward NEVs (policy)
 **Summary:** China’s Ministry of Commerce published joint implementation rules for the 2026 automobile trade‑in subsidy program, defining percentage‑of‑vehicle‑price subsidies (with caps) for consumers who scrap or transfer older vehicles and then purchase qualifying new NEVs or eligible fuel vehicles, alongside documentation, review processes, and division of responsibilities across agencies. The rules align with the broader 2026 equipment renewal and consumer trade‑in package and aim to stabilize large‑ticket auto consumption while supporting upgrades.
 **Links:**
 - [Ministry of Commerce, P.R. China — 2026 Auto Trade‑in Subsidy Implementation Rules (Chinese)](https://www.mofcom.gov.cn/zcfb/gnmygl/art/2025/art_56cd7e5f1aae46178d6bade99d0a1a7a.html)
-**Commentary:** Trade‑in programs are a fiscal demand smoother; for OEMs the actionable signal is the shape of replacement demand, not any single subsidy headline.
+**Commentary:** Trade‑in programs are a fiscal replacement clock; for OEMs the actionable signal is the shape of replacement demand, not any single subsidy headline.
 
 ---
 
-### 4. Reuters: European registrations rise in March 2026 as BEV gains offset ICE declines (market)
-**Summary:** A Reuters article dated April 23, 2026 cites European industry association data showing year‑on‑year growth in new car registrations for March 2026, with battery‑electric registrations up sharply (on the order of 40%+) helping offset declines in gasoline and diesel vehicles. The piece stresses cross‑country dispersion, product‑cycle effects, and the interplay of incentives and fuel prices when interpreting any single month.
+### 6. Reuters: BEV demand strengthens across major European markets as expensive petrol reframes running costs (market)
+**Summary:** Reuters reporting around April 19–20, 2026 describes strengthening electric‑vehicle sales momentum across several large European markets, with elevated gasoline prices amplifying the “total cost of mobility” narrative. The coverage still stresses cross‑country dispersion, incentive design, and model‑cycle supply as co‑drivers alongside fuel prices.
 **Links:**
-- [Reuters — European car sales grow in March as EV rise offsets combustion engine decline](https://www.reuters.com/world/china/european-car-sales-grow-march-ev-rise-offsets-combustion-engine-decline-2026-04-23/)
-**Commentary:** European BEV curves remain a three‑factor system—policy, energy prices, and supply—so March strength still needs a private‑demand durability test.
+- [Reuters — EV sales soar in main European markets as drivers shun expensive petrol](https://www.reuters.com/sustainability/climate-energy/ev-sales-soar-main-european-markets-drivers-shun-expensive-petrol-2026-04-19/)
+**Commentary:** European BEV curves remain a three‑factor system—energy prices, policy, and supply—so any pump‑price pulse still needs a durability test against private willingness to pay.
 
 ---
 
-### 5. EU automotive “omnibus” reform debate and “Made in Europe” green‑procurement tilt: compliance load meets local‑content politics (policy)
-**Summary:** A European Parliamentary Research Service briefing summarizes the European Commission’s automotive regulatory omnibus directions—simplifying CO₂ rules for cars and vans and aligning type‑approval and testing burdens—while trade press tracks parallel debates on tying green public procurement and industrial support tools to stronger EU‑content tests for EVs and batteries. Together, the threads raise new boundary questions for non‑EU OEM footprints competing for subsidies and tenders.
+### 7. EU rules on EV charging and hydrogen refueling measurement enter force—transparency and cross‑border interoperability under test (regulation · charging)
+**Summary:** The European Commission announced that new rules on measurement and information for EV charging and hydrogen refueling stations entered into force on April 9, 2026, aiming to harmonize billing transparency, data publication, and metrology requirements so consumers can compare price and service quality across the Single Market. The infrastructure layer interacts with national incentive schemes and operator commercial terms, shaping cross‑border travel and fleet settlement experiences.
 **Links:**
-- [European Parliament — EU automotive omnibus (EPRS briefing PDF)](https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/785705/EPRS_BRI(2026)785705_EN.pdf)
-- [Automotive World — EU's “Made in Europe” law clears Commission after long delay](https://www.automotiveworld.com/news/eus-made-in-europe-law-clears-commission-after-long-delay/)
-**Commentary:** Europe is testing a combo of “regulatory simplification + industrial gatekeeping,” forcing Chinese and multinational OEMs alike to re‑model localization and compliance capital.
+- [European Commission — New rules for measuring EV charging and hydrogen stations](https://single-market-economy.ec.europa.eu/news/new-rules-measuring-electric-vehicle-charging-and-hydrogen-refilling-stations-eu-enter-force-today-2026-04-09_en)
+- [Euronews — Which European countries offer the most EV support in 2026](https://www.euronews.com/business/2026/04/17/electric-cars-which-european-countries-offer-the-most-support-in-2026)
+**Commentary:** Europe is simultaneously “pulling demand with money” and “reducing friction with rules”; standardized charging disclosure is base infrastructure for fleet scale and cross‑border trips.
+
+---
+
+### 8. European Parliamentary Research Service: Automotive regulatory “omnibus” directions and CO₂ pathway debate (policy)
+**Summary:** An EPRS briefing summarizes European Commission directions for an automotive regulatory omnibus—spanning CO₂ reduction pathways for cars and vans, compliance mechanisms, and administrative simplification—providing a framework reference for upcoming legislative bargaining. The document reflects the political economy of recalibrating auto policy amid energy‑security and industrial‑competitiveness goals.
+**Links:**
+- [European Parliament — CO₂ standards for cars and vans (EPRS briefing PDF)](https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/774751/EPRS_BRI(2026)774751_EN.pdf)
+**Commentary:** The legislative text phase sets depreciation speed for compliance capital over the next half‑decade; OEMs and battery suppliers must embed scenario ranges into capacity and mix decisions.
 
 ---
 
 ## II. Autonomous driving & mobility platforms
 
-### 6. Pony.ai unveils a next‑gen AD compute stack on NVIDIA DRIVE Hyperion / Thor with scaled robotaxi ambitions (AD · silicon)
+### 9. Pony.ai unveils a next‑gen AD compute stack on NVIDIA DRIVE Hyperion / Thor with scaled robotaxi ambitions (AD · silicon)
 **Summary:** Pony.ai announced a next‑generation autonomous‑driving compute platform built on NVIDIA’s DRIVE Hyperion reference architecture and DRIVE AGX Thor‑class hardware, pitching tighter integration of perception, prediction, and planning stacks. The release retraces prior collaboration milestones and states fleet and multi‑city expansion targets, underscoring how L4 players are racing through standardized high‑performance compute plus operating density.
 **Links:**
-- [PR Newswire — Pony.ai Announces New Generation Autonomous Driving Compute Platform Built on NVIDIA DRIVE Hyperion](https://www.prnewswire.com/news-releases/ponyai-announces-new-generation-autonomous-driving-compute-platform-built-on-nvidia-drive-hyperion-302753517.html)
+- [PR Newswire — Pony.ai next‑gen AD compute on NVIDIA DRIVE Hyperion](https://www.prnewswire.com/news-releases/ponyai-announces-new-generation-autonomous-driving-compute-platform-built-on-nvidia-drive-hyperion-302753517.html)
 **Commentary:** Autonomous driving is now a three‑line budget—domain compute, auditable safety stacks, and city ODD operations—with supply‑chain depth as moat.
 
 ---
 
-### 7. Forbes on XPeng’s VLA 2.0 rollout in China: end‑to‑end AD productization vs. cross‑border regulatory frictions (AD · markets)
+### 10. Forbes on XPeng’s VLA 2.0 rollout in China: end‑to‑end AD productization vs. cross‑border regulatory frictions (AD · markets)
 **Summary:** A Forbes analysis dated April 25, 2026 examines XPeng’s VLA 2.0 “vision‑language‑action” AD rollout in China, contrasting narrative velocity with Tesla FSD‑style approaches on domestic road data and iteration speed, while flagging Europe‑style gaps in data governance, feature definitions, and liability frameworks. The piece links AD positioning to domestic sales mix debates and is a useful slice of weekend global AD discourse.
 **Links:**
 - [Forbes — Tesla FSD Beware: XPENG Autonomous Driving Is Already Ahead In China](https://www.forbes.com/sites/jamesmorris/2026/04/25/tesla-fsd-beware-xpeng-autonomous-driving-is-already-ahead-in-china/)
@@ -67,42 +92,45 @@
 
 ---
 
-### 8. Waymo’s Nashville launch plus Lyft partnership: dual‑app access and fleet‑ops division continue the platform playbook (mobility · robotaxi)
-**Summary:** TechCrunch reported on April 7, 2026 that Waymo opened paid driverless robotaxi service in Nashville and detailed Lyft collaboration so riders can discover trips across both ecosystems, with operational hand‑offs around fleet, charging, and network integration. The pattern—AV developer plus ride‑hail distribution—is becoming the default template for Sun Belt scaling pushes.
+### 11. Waymo’s Nashville launch plus Lyft partnership: dual‑app access and platform expansion, with local policy friction surfacing (mobility · robotaxi)
+**Summary:** TechCrunch reported on April 7, 2026 that Waymo opened paid driverless robotaxi service in Nashville and detailed Lyft collaboration so riders can discover trips across both ecosystems, with operational hand‑offs around fleet, charging, and network integration. Local reporting later in April highlights viral incidents and municipal policy tensions, illustrating how state preemption and city governance collide during Sun Belt rollouts.
 **Links:**
 - [TechCrunch — Waymo opens robotaxi service in Nashville, partners with Lyft](https://techcrunch.com/2026/04/07/waymo-opens-robotaxi-service-in-nashville-partners-with-lyft/)
+- [Times Free Press — Waymo in Nashville: viral incidents and policy predicaments](https://www.timesfreepress.com/news/2026/apr/25/waymo-self-driving-cars-bring-viral-incidents-and/)
 **Commentary:** Robotaxi scale is increasingly constrained by insurance, municipal rules, and asset turns, not raw perception mileage alone.
 
 ---
 
-### 9. NHTSA maintains ADS/ADAS crash reporting under the Standing General Order and advances information‑collection updates (regulation)
-**Summary:** NHTSA continues to enforce the Standing General Order on crash reporting for ADS‑equipped vehicles and certain Level‑2 ADAS configurations, publishing downloadable incident datasets and methodological notes. Federal Register dockets also show procedural moves to extend and refine the underlying paperwork burden for manufacturers and operators, reflecting an ongoing calibration among transparency, comparability, and reporting cost.
+### 12. Uber doubles down on autonomous fleet economics: platforms enter a heavier‑asset, multi‑partner chapter (mobility platforms)
+**Summary:** TechCrunch’s Mobility column around April 19, 2026 discusses Uber’s capital and partnership posture in autonomy, describing a shift toward owning or financing more physical AV capacity alongside a widening partner roster. Parallel market commentary tracks Uber and Lyft investor narratives around robotaxi optionality and buybacks as both platforms reprice their roles in “network × AV developer” structures.
+**Links:**
+- [TechCrunch — Uber enters its asset‑heavy robotaxi era](https://techcrunch.com/2026/04/19/techcrunch-mobility-uber-enters-its-assetmaxxing-era/)
+- [24/7 Wall St. — Uber and Lyft: robotaxis and buybacks](https://247wallst.com/investing/2026/04/15/uber-and-lyft-gain-7-as-bold-bets-on-robotaxis-and-buybacks-reignite-investor-excitement/)
+**Commentary:** Platform economics in the AV era must answer “who owns fleet risk”; capital allocation order will determine which cities first reach economically viable driverless density.
+
+---
+
+### 13. NHTSA maintains ADS/ADAS crash reporting under the Standing General Order; federal dockets advance adjacent charger Buy America debates (regulation)
+**Summary:** NHTSA continues to enforce the Standing General Order on crash reporting for ADS‑equipped vehicles and certain Level‑2 ADAS configurations, publishing downloadable incident datasets and methodological notes. Separate Federal Register activity illustrates ongoing federal calibration between safety transparency goals and domestic‑content requirements for EV chargers used in highway programs.
 **Links:**
 - [NHTSA — Standing General Order on Crash Reporting](https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting)
-- [Regulations.gov — Example NHTSA docket entry on incident reporting](https://www.regulations.gov/document/NHTSA-2026-0529-0001)
+- [Federal Register — Buy America waiver modification for EV chargers (2026)](https://www.federalregister.gov/documents/2026/02/12/2026-02825/notice-of-proposed-modification-of-the-waiver-of-buy-america-requirements-for-electric-vehicle)
 **Commentary:** Without mandatory, comparable disclosure there is no durable public debate; NHTSA’s datasets are the lowest‑cost infrastructure for tracking robotaxi externalities.
 
 ---
 
 ## III. Batteries, charging, new models & supply chain
 
-### 10. Los Angeles Times: US public fast charging and truck‑stop rollouts accelerate as pump prices refocus fleets on electrons (charging · infrastructure)
-**Summary:** A mid‑April 2026 Los Angeles Times story describes growth in US public DC fast‑charging ports and charger deployments at truck‑stop style locations, tying investment to elevated gasoline prices, fleet TCO pressure, and private capital in charging networks. The article stresses that charger power classes, uptime, and grid hosting capacity—not sticker counts alone—set the ceiling for BEV adoption in long‑haul and mixed‑duty use cases.
+### 14. Los Angeles Times plus industry coverage: US fast‑charging build‑out responds to pump‑price spreads; CATL advances next‑gen cell and charging ecosystem narratives (batteries · charging)
+**Summary:** A mid‑April 2026 Los Angeles Times story describes growth in US public DC fast‑charging ports and deployments at retail and long‑haul style locations, tying investment to elevated gasoline prices and fleet TCO pressure. Trade press in April 2026 also tracks CATL unveiling a next‑generation EV battery and charging‑ecosystem portfolio, emphasizing ultra‑fast charging, sodium‑ion options, and charge‑swap narratives as OEMs demand simultaneous gains on cost, range, and refueling time.
 **Links:**
 - [Los Angeles Times — U.S. charging networks race to keep up as gas prices boost EVs](https://www.latimes.com/environment/story/2026-04-13/us-charging-networks-race-to-keep-up-as-gas-prices-boost-evs)
-**Commentary:** As purchase credits fade, the second growth curve is “fast, reliable, affordable electrons,” where site control and offtake contracts matter more than port totals.
+- [Electric Cars Report — CATL unveils next‑generation EV batteries and charging ecosystem](https://electriccarsreport.com/2026/04/catl-unveils-next-generation-ev-batteries-and-charging-ecosystem/)
+**Commentary:** Post‑credit competition collapses to a physics triangle—$/kWh, minutes to useful range, and grid hosting capacity—with cell makers and charge operators jointly constrained.
 
 ---
 
-### 11. South Coast AQMD opens ~$30M in charging‑resilience funding: public capital de‑risks critical corridors (charging · policy)
-**Summary:** The South Coast Air Quality Management District announced a roughly $30 million Electric Vehicle Charging Infrastructure Resiliency Program funding pool to harden and expand charging in priority geographies, pairing regional clean‑air goals with reliability concerns as EV load clusters on constrained grids. The initiative sits alongside federal discussions on installer‑side credits such as 30C eligibility windows, jointly shaping local investment calendars.
-**Links:**
-- [South Coast AQMD — $30 Million Available for New EV Charging Infrastructure](https://www.aqmd.gov/home/research/pubs-docs-reports/newsletters/mar-april-2026/30-million-available-for-new-ev-charging-infrastructure)
-**Commentary:** Public money is pivoting from “spray and pray stalls” to “resilience / grid co‑optimization,” consistent with renewable variability and depot charging risk.
-
----
-
-### 12. Volkswagen Group at Auto China 2026: four global premieres plus an “agentic AI” roadmap for China (new models · software)
+### 15. Volkswagen Group at Auto China 2026: four global premieres plus an “agentic AI” cockpit roadmap for China (new models · software)
 **Summary:** Automotive World reports that VW Group used Auto China 2026 in Beijing to debut four global premieres spanning joint‑venture and Group‑brand architectures, alongside a China‑focused intelligent cockpit and in‑vehicle “agentic AI” roadmap and a dense cadence of smart BEV launches for the year. The coverage frames multinational competition in China as simultaneous battles on electrification delivery, localized software, and brand portfolio depth.
 **Links:**
 - [Automotive World — VW debuts four premieres at Auto China 2026](https://www.automotiveworld.com/news/vw-debuts-four-premieres-at-auto-china-2026/)
@@ -110,37 +138,14 @@
 
 ---
 
-### 13. J.D. Power China NEV Initial Quality Study: rising software‑ and ADAS‑related complaints expand the quality battlefield (quality · UX)
-**Summary:** J.D. Power’s China operation released its 2026 New Energy Vehicle Initial Quality Study, highlighting shifts in problems‑per‑100 vehicles with growing weight from intelligent cockpit, ADAS, and connectivity annoyances alongside traditional defect categories. The study also discusses younger cohort expectations and the gap between feature richness and perceived reliability.
-**Links:**
-- [J.D. Power China — 2026 China New Energy Vehicle Initial Quality Study (NEV-IQS)](https://china.jdpower.com/press-releases/2026-china-new-energy-vehicle-initial-quality-study-nev-iqs)
-**Commentary:** As ADAS and smart cabins go mainstream, quality issues migrate from “broken hardware” to “confusing software,” raising the bar for OTA and service operations—not just BOM QA.
-
----
-
-### 14. Automotive News: Supplier confidence weakens as tariffs and input costs dominate earnings calls (supply chain)
-**Summary:** Automotive News coverage in late April 2026 summarizes a North American supplier sentiment index deteriorating amid steel, aluminum, and broader trade‑policy uncertainty, with executives flagging weaker visibility into second‑half orders and margins. The reporting layers macro trade tools atop volatile OEM electrification capex cycles to explain why component names are de‑risking guidance.
-**Links:**
-- [Automotive News — Auto supplier confidence drops as tariffs squeeze margins](https://www.autonews.com/manufacturing/suppliers/an-confidence-index-q1-2026-suppliers-0419/)
-**Commentary:** Suppliers are repricing a two‑factor shock—geopolitical tariffs times EV capex troughs—making cash cushions at Tier 1/2 more important than headline order wins.
-
----
-
-### 15. S&P Global Mobility: Automotive semiconductor pricing and mature‑node tightness remain a 2026 watch item (semiconductors · supply chain)
-**Summary:** An April 2026 S&P Global Mobility industry blog discusses automotive semiconductor pricing pressure on legacy nodes, memory and analog cost pass‑through into vehicle BOMs, and strategic responses such as long‑term agreements and rerating of feature content. The piece also notes AI datacenter demand as an externality squeezing both leading and mature capacity expectations.
-**Links:**
-- [S&P Global Mobility — 2026 Trends shaping the automotive semiconductor market](https://www.spglobal.com/automotive-insights/en/blogs/2026/04/automotive-semiconductor-market-trends)
-**Commentary:** Automotive chips are no longer “just schedule to fab”; they are cross‑elastic with AI capex, pushing OEMs toward bolder vertical integration or buyer consortia.
-
----
-
 ## Today's Summary
 
-- United States: softer BEV penetration post‑purchase credits meets a product response—hybrid buffers plus entry BEVs—while charging capex remains sensitive to pump‑price spreads.
-- China: mid‑April retail volatility sits atop still‑high NEV penetration; national trade‑in rules and technical tax thresholds set the replacement clock.
-- Europe: March registration strength coexists with regulatory simplification and local‑content industrial tools, raising compliance balance‑sheet work for all players.
-- Autonomous driving: silicon roadmaps, end‑to‑end AD narratives, and mandatory crash disclosures are advancing in parallel, commercializing through operations and regulator interfaces.
-- **Daily Framing:** A “policy afterglow + auto‑show debuts + tariff‑on‑supply‑chain anxiety” kind of Sunday—markets are hunting for demand and margin equilibrium without a unified subsidy umbrella.
+- United States: post‑purchase‑credit BEV demand meets a product and pricing response, while higher pump prices add a marginal summer tailwind that still bumps into charging and expectation frictions.
+- China: mid‑April retail volatility sits atop still‑high NEV penetration; national trade‑in rules and Beijing show cadence set the slope of Q2 replacement demand.
+- Europe: expensive petrol amplifies BEV relative attractiveness even as the EU layers infrastructure transparency rules atop national incentive heterogeneity.
+- Autonomy and platforms: silicon roadmaps, end‑to‑end AD narratives, and heavier platform balance sheets advance in parallel, while local governance friction around robotaxi launches becomes more visible.
+- Supply chain: North American suppliers are repricing a two‑factor shock—tariffs on steel and aluminum times volatile OEM electrification capex—pressuring second‑half visibility (see Automotive News coverage of supplier confidence indices).
+- **Daily Framing:** A Sunday where energy prices pull demand, auto shows and subsidy mechanics push supply, and tariffs squeeze margins—markets are hunting for equilibrium on demand, compliance, and cash flow without a unified federal subsidy umbrella.
 
 ---
 

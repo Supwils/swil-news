@@ -48,8 +48,8 @@
 ### 1. Intel Q1 2026: beats, margins, and AI datacenter momentum
 **Summary:** Intel reported first-quarter 2026 revenue of about **$13.6 billion**, with non-GAAP operating income near **$1.7 billion** and gross margin near **41%**; the Data Center and AI group posted revenue near **$5.1 billion**, up about **22%** year over year. Press and sell-side commentary described a sharp post-earnings equity reaction (on the order of **~30%** in some sessions) and positive read-throughs for AI-adjacent CPU demand.
 **Links:**
-- [Yahoo Finance — Intel earnings: CPU demand vs. competitive edge](https://finance.yahoo.com/markets/stocks/articles/intel-earnings-confirm-cpu-demand-153002223.html)
-- [Investopedia — Intel’s rally and peer lift](https://www.investopedia.com/intel-post-earnings-rally-sent-its-stock-to-new-highs-these-rivals-are-getting-a-lift-too-update-11957851)
+- [Intel — Q1 2026 financial results (IR)](https://www.intc.com/news-events/press-releases/detail/1767/intel-reports-first-quarter-2026-financial-results)
+- [Yahoo Finance — Intel Q1: CPU demand vs. competitive edge](https://finance.yahoo.com/markets/stocks/articles/intel-earnings-confirm-cpu-demand-153002223.html)
 **Commentary:** The print reframes the turnaround narrative toward execution; sustainability depends on roadmap delivery, foundry traction, and whether the multiple re-rates ahead of fundamentals.
 
 ---
@@ -58,7 +58,7 @@
 **Summary:** FactSet’s April 24, 2026, update showed about **28%** of S&P 500 companies having reported Q1 2026, with roughly **84%** beating EPS consensus and **81%** beating revenue. Blended year-over-year earnings growth was about **15.1%** and revenue growth about **10.3%**, marking a sixth consecutive quarter of double-digit earnings growth in FactSet’s methodology, with heavy report volume still ahead.
 **Links:**
 - [FactSet Insight — S&P 500 earnings season update: April 24, 2026](https://insight.factset.com/sp-500-earnings-season-update-april-24-2026)
-- [Motley Fool Money — Earnings season ramps up (2026-04-23)](https://www.fool.com/podcasts/motley-fool-money/2026-04-23-earnings-season-ramps-up-and-we-ve-seen-some-surprises/)
+- [TipRanks — Earnings this week, April 27 – May 1, 2026](https://www.tipranks.com/news/earnings-this-week-april-27-may-1-2026)
 **Commentary:** Positive breadth supports risk appetite, but **guidance deltas** will matter more than beat rates once mega-caps report.
 
 ---
@@ -128,7 +128,7 @@
 - **Indices:** S&P ~**7,165** and Nasdaq ~**24,837** at records on April 24; Dow ~**49,231** lower; tech-heavy indices on ~four-week winning streaks.
 - **Tech / semis:** Intel’s Q1 print catalyzed chips; SOX momentum and AI infrastructure narratives dominated sector leadership.
 - **Earnings data:** FactSet showed high beat rates and ~**15%** blended earnings growth for reported S&P 500 names, with a heavy calendar still to come.
-- **Macro / policy:** Fed funds near **3.5%–3.75%**; 10-year Treasuries near **4.3%**; DOJ closed the Powell criminal probe, modestly reducing Fed succession uncertainty.
+- **Macro / policy:** Fed funds near **3.5%–3.75%**; 10-year Treasuries near **4.3%**; ahead of the **Apr 28–29** FOMC, mainstream coverage broadly expects rates on **hold** ([CNBC — Fed and consumer credit, 2026-04-24](https://www.cnbc.com/2026/04/24/fed-likely-to-hold-rates-steady-april-consumer-impact.html)). The DOJ closed the Powell criminal probe, modestly reducing Fed succession uncertainty.
 - **Geopolitics / commodities:** Hormuz-related disruption and stalled diplomacy kept crude elevated, weighing on cyclicals versus growth.
 - **Sentiment:** VIX near **19** and CNN Fear & Greed near **67**, but concurrent hedging demand signals two-way risk into mega-cap earnings.
 
