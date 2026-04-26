@@ -77,11 +77,30 @@ export const metadata: Metadata = {
   },
 };
 
-const themeScript = `
+const bootScript = `
 (function(){
   var t=localStorage.getItem('s-news-theme');
   if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);
   else document.documentElement.removeAttribute('data-theme');
+
+  var cookieMatch=document.cookie.match(/(?:^|;\\s*)s-news-locale=(zh|en)(?:;|$)/);
+  var storedLocale=localStorage.getItem('s-news-locale');
+  var locale=(cookieMatch&&cookieMatch[1])||(storedLocale==='zh'||storedLocale==='en'?storedLocale:null);
+
+  if(!locale){
+    var candidates=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language])||[];
+    for(var i=0;i<candidates.length;i++){
+      var candidate=(candidates[i]||'').toLowerCase();
+      if(candidate.indexOf('zh')===0){ locale='zh'; break; }
+      if(candidate.indexOf('en')===0){ locale='en'; break; }
+    }
+  }
+
+  if(locale==='zh'||locale==='en'){
+    document.documentElement.lang=locale==='en'?'en-US':'zh-CN';
+    document.cookie='s-news-locale='+locale+'; path=/; max-age='+(60*60*24*365)+'; SameSite=Lax';
+    localStorage.setItem('s-news-locale', locale);
+  }
 })();
 `;
 
@@ -89,7 +108,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} antialiased`}>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <LocaleProvider>
           {children}
           <Analytics />
