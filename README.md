@@ -1,5 +1,7 @@
 # Swil-News
 
+中文 | [English](./README.en.md)
+
 **把 Cursor 生成的日报，变成一份真正值得每天打开的信息界面。**
 
 Swil-News 是一个本地优先的多主题日报阅读器。你用 Cursor 的 Command 生成通用、金融、AI 科技、运动健康营养等日报，以 Markdown 存盘；用本仓库里的 Next.js 应用按日期、主题浏览和检索，让「命令产出」从散落文件夹升级为可读、可查的每日信息中枢。
