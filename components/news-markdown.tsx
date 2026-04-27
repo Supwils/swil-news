@@ -2,7 +2,7 @@
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { ReactNode } from "react";
+import { Children, cloneElement, isValidElement, type ReactNode } from "react";
 
 type NewsMarkdownProps = {
   content: string;
@@ -97,6 +97,38 @@ function tokenizeInline(
   return nodes;
 }
 
+function reparseInlineChildren(
+  children: ReactNode,
+  disableLinks: boolean,
+  keyCounter: { n: number } = { n: 0 },
+): ReactNode {
+  return Children.map(children, (child) => {
+    if (typeof child === "string") {
+      return tokenizeInline(child, disableLinks, keyCounter);
+    }
+
+    if (!isValidElement<{ children?: ReactNode }>(child)) {
+      return child;
+    }
+
+    if (typeof child.type === "string" && (child.type === "code" || child.type === "pre")) {
+      return child;
+    }
+
+    if (child.props.children === undefined) {
+      return child;
+    }
+
+    return cloneElement(child, {
+      children: reparseInlineChildren(
+        child.props.children,
+        disableLinks || child.type === "a",
+        keyCounter,
+      ),
+    });
+  });
+}
+
 /** Renders short markdown (e.g. description, highlights, takeaway) so **bold** is displayed correctly, even adjacent to CJK characters. */
 export function InlineMarkdown({
   content,
@@ -108,14 +140,6 @@ export function InlineMarkdown({
   return <Wrapper className={className}>{tokenizeInline(content, disableLinks)}</Wrapper>;
 }
 
-/** Preprocess full-article markdown so CJK-adjacent `**bold**` is recognized by CommonMark. */
-function padCjkEmphasis(md: string): string {
-  const CJK = "\\u3000-\\u303f\\u3040-\\u309f\\u30a0-\\u30ff\\u3400-\\u4dbf\\u4e00-\\u9fff\\uff00-\\uffef";
-  const before = new RegExp(`([${CJK}])\\*\\*`, "gu");
-  const after = new RegExp(`\\*\\*([${CJK}])`, "gu");
-  return md.replace(before, "$1​**").replace(after, "**​$1");
-}
-
 export function NewsMarkdown({ content }: NewsMarkdownProps) {
   return (
     <div className="news-prose">
@@ -124,22 +148,22 @@ export function NewsMarkdown({ content }: NewsMarkdownProps) {
         components={{
           h1: ({ children }) => (
             <h1 className="font-display text-4xl leading-none tracking-[-0.04em] text-(--color-text-primary) sm:text-5xl">
-              {children}
+              {reparseInlineChildren(children, false)}
             </h1>
           ),
           h2: ({ children }) => (
             <h2 className="font-display mt-12 border-t border-(--color-border) pt-8 text-3xl leading-none tracking-[-0.03em] text-(--color-text-primary)">
-              {children}
+              {reparseInlineChildren(children, false)}
             </h2>
           ),
           h3: ({ children }) => (
             <h3 className="mt-8 text-xl leading-8 font-semibold text-(--color-text-primary) sm:text-2xl">
-              {children}
+              {reparseInlineChildren(children, false)}
             </h3>
           ),
           p: ({ children }) => (
             <p className="text-[15px] leading-8 text-(--color-text-secondary) sm:text-base">
-              {children}
+              {reparseInlineChildren(children, false)}
             </p>
           ),
           strong: ({ children }) => (
@@ -147,13 +171,13 @@ export function NewsMarkdown({ content }: NewsMarkdownProps) {
           ),
           blockquote: ({ children }) => (
             <blockquote className="border-l-[3px] border-(--color-text-primary) bg-(--color-surface-muted) px-5 py-4 text-(--color-text-secondary) italic">
-              {children}
+              {reparseInlineChildren(children, false)}
             </blockquote>
           ),
           ul: ({ children }) => <ul className="space-y-3">{children}</ul>,
           li: ({ children }) => (
             <li className="ml-4 list-disc pl-2 text-[15px] leading-8 text-(--color-text-secondary) sm:text-base">
-              {children}
+              {reparseInlineChildren(children, false)}
             </li>
           ),
           a: ({ href, children }) => (
@@ -163,13 +187,13 @@ export function NewsMarkdown({ content }: NewsMarkdownProps) {
               rel="noreferrer"
               className="underline decoration-(--color-border-strong) underline-offset-4 transition hover:text-(--color-text-primary)"
             >
-              {children}
+              {reparseInlineChildren(children, true)}
             </a>
           ),
           hr: () => <hr className="my-8 border-(--color-border)" />,
         }}
       >
-        {padCjkEmphasis(content)}
+        {content}
       </ReactMarkdown>
     </div>
   );
