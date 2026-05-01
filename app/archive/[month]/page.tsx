@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { MonthArchivePageContent } from "@/components/month-archive-page-content";
 import { StructuredData } from "@/components/structured-data";
+import { localizePath } from "@/lib/locale-routing";
 import { getArchiveMonths, getEntryPreviewsByMonth } from "@/lib/news";
 import { absoluteUrl, SITE_NAME } from "@/lib/site";
 
@@ -27,6 +28,10 @@ export async function generateMetadata({ params }: MonthArchivePageProps): Promi
     description: `Monthly archive for ${month} in ${SITE_NAME}.`,
     alternates: {
       canonical: `/archive/${month}`,
+      languages: {
+        "zh-CN": `/archive/${month}`,
+        "en-US": localizePath(`/archive/${month}`, "en"),
+      },
     },
   };
 }

@@ -6,6 +6,7 @@ import type { CSSProperties } from "react";
 import { useLocale } from "@/components/locale-context";
 import { LocaleSwitch } from "@/components/locale-switch";
 import { ThemeSwitch } from "@/components/theme-switch";
+import { localizePath } from "@/lib/locale-routing";
 
 const WEEKDAYS_EN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const MONTHS_EN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -39,7 +40,10 @@ export function NewspaperMasthead({ active = null, date, archiveMonth }: Masthea
   const fallbackDate = `${today.getUTCFullYear()}-${pad(today.getUTCMonth() + 1)}-${pad(today.getUTCDate())}`;
   const stampDate = date ?? fallbackDate;
   const stamp = formatStamp(stampDate);
-  const archiveHref = `/archive/${archiveMonth ?? stampDate.slice(0, 7)}`;
+  const archiveHref = localizePath(`/archive/${archiveMonth ?? stampDate.slice(0, 7)}`, locale);
+  const homeHref = localizePath("/", locale);
+  const topicsHref = localizePath("/#topics", locale);
+  const aboutHref = localizePath("/about", locale);
 
   return (
     <header
@@ -54,7 +58,7 @@ export function NewspaperMasthead({ active = null, date, archiveMonth }: Masthea
         style={{ maxWidth: 1280, gap: 16 }}
       >
         <div className="flex items-baseline" style={{ gap: 16 }}>
-          <Link href="/" className="np-serif" style={wordmark}>
+          <Link href={homeHref} className="np-serif" style={wordmark}>
             Swil-News
           </Link>
           {stamp ? (
@@ -65,16 +69,16 @@ export function NewspaperMasthead({ active = null, date, archiveMonth }: Masthea
         </div>
 
         <nav className="np-nav-hide flex items-center" style={{ gap: 20 }}>
-          <NavItem href="/" active={active === "today"}>
+          <NavItem href={homeHref} active={active === "today"}>
             {locale === "zh" ? "今日" : "Today"}
           </NavItem>
           <NavItem href={archiveHref} active={active === "archive"}>
             {locale === "zh" ? "归档" : "Archive"}
           </NavItem>
-          <NavItem href="/#topics" active={active === "topics"}>
+          <NavItem href={topicsHref} active={active === "topics"}>
             {locale === "zh" ? "主题" : "Topics"}
           </NavItem>
-          <NavItem href="/about" active={active === "about"}>
+          <NavItem href={aboutHref} active={active === "about"}>
             {locale === "zh" ? "关于" : "About"}
           </NavItem>
           <span

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { StructuredData } from "@/components/structured-data";
 import { TopicPageContent } from "@/components/topic-page-content";
 import { getCopy } from "@/data/copy";
+import { localizePath } from "@/lib/locale-routing";
 import { getEntryPreviewsByTopic } from "@/lib/news";
 import { getTopicMeta, isTopicKey, TOPICS } from "@/lib/news-meta";
 import { absoluteUrl, SITE_NAME } from "@/lib/site";
@@ -29,6 +30,10 @@ export async function generateMetadata({ params }: TopicPageProps): Promise<Meta
     description: meta?.description,
     alternates: {
       canonical: `/news/${topic}`,
+      languages: {
+        "zh-CN": `/news/${topic}`,
+        "en-US": localizePath(`/news/${topic}`, "en"),
+      },
       types: {
         "application/rss+xml": absoluteUrl(`/news/${topic}/feed.xml`),
       },

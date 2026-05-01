@@ -7,7 +7,7 @@ import { NewspaperFooter } from "@/components/newspaper/footer";
 import { NewspaperMasthead } from "@/components/newspaper/masthead";
 import { getCopy } from "@/data/copy";
 import { RuntimeNavLink } from "@/components/runtime-nav-link";
-import { getLocaleFromCookie } from "@/lib/get-locale";
+import { localizePath } from "@/lib/locale-routing";
 import { getAllNewsPreviews, formatDisplayDate } from "@/lib/news";
 import { TOPICS, getTopicMeta } from "@/lib/news-meta";
 import { SITE_NAME } from "@/lib/site";
@@ -17,11 +17,15 @@ export const metadata: Metadata = {
   description: `About ${SITE_NAME}, its editorial workflow, archive structure, and runtime generation flow.`,
   alternates: {
     canonical: "/about",
+    languages: {
+      "zh-CN": "/about",
+      "en-US": localizePath("/about", "en"),
+    },
   },
 };
 
 export default async function AboutPage() {
-  const locale = await getLocaleFromCookie();
+  const locale = "zh";
   const copy = getCopy(locale);
   const entries = await getAllNewsPreviews(locale);
   const latestDate = entries[0]?.date;

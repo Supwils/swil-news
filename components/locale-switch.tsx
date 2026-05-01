@@ -1,12 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Languages } from "lucide-react";
 
 import { useLocale, useSetLocale } from "@/components/locale-context";
+import { switchPathLocale } from "@/lib/locale-routing";
 
 export function LocaleSwitch() {
   const router = useRouter();
+  const pathname = usePathname();
   const locale = useLocale();
   const setLocale = useSetLocale();
   const nextLocale = locale === "zh" ? "en" : "zh";
@@ -16,7 +18,9 @@ export function LocaleSwitch() {
 
   const handleClick = () => {
     setLocale(nextLocale);
-    router.refresh();
+    const nextPath = switchPathLocale(pathname, nextLocale);
+    const query = typeof window === "undefined" ? "" : window.location.search;
+    router.push(query ? `${nextPath}${query}` : nextPath);
   };
 
   return (

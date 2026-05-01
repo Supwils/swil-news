@@ -6,6 +6,7 @@ import { NewsCard } from "@/components/news-card";
 import { useLocale } from "@/components/locale-context";
 import { NewspaperFooter } from "@/components/newspaper/footer";
 import { NewspaperMasthead } from "@/components/newspaper/masthead";
+import { localizePath } from "@/lib/locale-routing";
 import { formatArchiveMonth, formatDisplayDate, groupPreviewsByDate } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
 
@@ -69,12 +70,12 @@ export function MonthArchivePageContent({
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 18 }}>
             {nextMonth ? (
-              <Link href={`/archive/${nextMonth}`} className="np-btn-secondary">
+              <Link href={localizePath(`/archive/${nextMonth}`, locale)} className="np-btn-secondary">
                 {locale === "en" ? "← Newer month" : "← 较新的月份"}
               </Link>
             ) : null}
             {previousMonth ? (
-              <Link href={`/archive/${previousMonth}`} className="np-btn-secondary">
+              <Link href={localizePath(`/archive/${previousMonth}`, locale)} className="np-btn-secondary">
                 {locale === "en" ? "Older month →" : "较早的月份 →"}
               </Link>
             ) : null}

@@ -1,4 +1,5 @@
 import { type Locale } from "@/data/copy";
+import { localizePath } from "@/lib/locale-routing";
 import { getAllNewsPreviews, getEntryPreviewsByTopic, type NewsPreview } from "@/lib/news";
 import { getTopicMeta, isTopicKey, type TopicKey } from "@/lib/news-meta";
 import { absoluteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
@@ -16,8 +17,9 @@ function getEntryDate(entry: NewsPreview) {
   return new Date(`${entry.date}T08:00:00.000Z`).toUTCString();
 }
 
-function buildItemDescription(entry: NewsPreview) {
-  const highlights = entry.highlights.length > 0 ? ` | 要点：${entry.highlights.join(" / ")}` : "";
+function buildItemDescription(entry: NewsPreview, locale: Locale) {
+  const label = locale === "en" ? "Highlights" : "要点";
+  const highlights = entry.highlights.length > 0 ? ` | ${label}: ${entry.highlights.join(" / ")}` : "";
   return `${entry.description}${highlights}`;
 }
 
@@ -26,11 +28,13 @@ function buildFeedXml({
   description,
   feedPath,
   entries,
+  locale,
 }: {
   title: string;
   description: string;
   feedPath: string;
   entries: NewsPreview[];
+  locale: Locale;
 }) {
   const siteUrl = absoluteUrl("/");
   const feedUrl = absoluteUrl(feedPath);
@@ -45,7 +49,7 @@ function buildFeedXml({
         `<link>${escapeXml(url)}</link>`,
         `<guid isPermaLink="true">${escapeXml(url)}</guid>`,
         `<pubDate>${escapeXml(getEntryDate(entry))}</pubDate>`,
-        `<description>${escapeXml(buildItemDescription(entry))}</description>`,
+        `<description>${escapeXml(buildItemDescription(entry, locale))}</description>`,
         "</item>",
       ].join("");
     })
@@ -58,7 +62,7 @@ function buildFeedXml({
     `<title>${escapeXml(title)}</title>`,
     `<link>${escapeXml(siteUrl)}</link>`,
     `<description>${escapeXml(description)}</description>`,
-    "<language>zh-CN</language>",
+    `<language>${locale === "en" ? "en-US" : "zh-CN"}</language>`,
     `<atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml" />`,
     items,
     "</channel>",
@@ -71,8 +75,9 @@ export async function buildGlobalFeed(locale: Locale = "zh") {
   return buildFeedXml({
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    feedPath: "/feed.xml",
+    feedPath: localizePath("/feed.xml", locale),
     entries,
+    locale,
   });
 }
 
@@ -91,7 +96,8 @@ export async function buildTopicFeed(topicValue: string, locale: Locale = "zh") 
   return buildFeedXml({
     title: `${SITE_NAME} · ${meta.label}`,
     description: meta.description,
-    feedPath: `/news/${topic}/feed.xml`,
+    feedPath: localizePath(`/news/${topic}/feed.xml`, locale),
     entries,
+    locale,
   });
 }

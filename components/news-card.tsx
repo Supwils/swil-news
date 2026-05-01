@@ -7,6 +7,7 @@ import { SelectableLink } from "@/components/SelectableLink";
 import { useLocale } from "@/components/locale-context";
 import { InlineMarkdown } from "@/components/news-markdown";
 import { getCopy } from "@/data/copy";
+import { localizePath } from "@/lib/locale-routing";
 import { formatDisplayDate } from "@/lib/news-client";
 import { getTopicMeta } from "@/lib/news-meta";
 import type { NewsPreview } from "@/lib/news";
@@ -26,7 +27,7 @@ export function NewsCard({ entry, compact = false, className }: NewsCardProps) {
     return null;
   }
 
-  const newsHref = `/news/${entry.topic}/${entry.date}`;
+  const newsHref = localizePath(`/news/${entry.topic}/${entry.date}`, locale);
 
   return (
     <SelectableLink

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { useLocale } from "@/components/locale-context";
+import { localizePath } from "@/lib/locale-routing";
 import type { TopicKey } from "@/lib/news-meta";
 
 type QuickTopicLinksProps = {
@@ -37,6 +39,7 @@ export function QuickTopicLinks({
   topicLabels,
   copy,
 }: QuickTopicLinksProps) {
+  const locale = useLocale();
   const [noNewsMessage, setNoNewsMessage] = useState(false);
 
   const labelMap = new Map(topicLabels.map((t) => [t.key, t.label]));
@@ -87,7 +90,7 @@ export function QuickTopicLinks({
 
           if (hasNews) {
             return (
-              <Link key={key} href={`/news/${key}/${date}`} className="np-chip">
+              <Link key={key} href={localizePath(`/news/${key}/${date}`, locale)} className="np-chip">
                 {dot}
                 <span>{label}</span>
               </Link>

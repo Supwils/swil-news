@@ -28,58 +28,22 @@ function persistLocalePreference(locale: Locale) {
   window.localStorage.setItem(STORAGE_KEY, locale);
 }
 
-function inferLocaleFromNavigator(): Locale | null {
-  if (typeof navigator === "undefined") return null;
-
-  const candidates = navigator.languages?.length ? navigator.languages : [navigator.language];
-  for (const candidate of candidates) {
-    if (!candidate) continue;
-    const normalized = candidate.toLowerCase();
-    if (normalized.startsWith("zh")) return "zh";
-    if (normalized.startsWith("en")) return "en";
-  }
-
-  return null;
-}
-
-function readLocaleFromDocument(): Locale | null {
-  if (typeof document === "undefined") return null;
-
-  const cookieMatch = document.cookie.match(/(?:^|;\s*)s-news-locale=(zh|en)(?:;|$)/);
-  if (cookieMatch?.[1] === "zh" || cookieMatch?.[1] === "en") {
-    return cookieMatch[1];
-  }
-
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  if (stored === "zh" || stored === "en") {
-    return stored;
-  }
-
-  return inferLocaleFromNavigator();
-}
-
 export function LocaleProvider({
   children,
+  initialLocale = "zh",
 }: {
   children: ReactNode;
+  initialLocale?: Locale;
 }) {
-  const [locale, setLocale] = useState<Locale>("zh");
+  const [locale, setLocale] = useState<Locale>(initialLocale);
 
   useEffect(() => {
-    const nextLocale = readLocaleFromDocument();
-    if (nextLocale) {
-      syncLocaleOnDocument(nextLocale);
-      persistLocalePreference(nextLocale);
-      const frame = window.requestAnimationFrame(() => {
-        setLocale(nextLocale);
-      });
-      return () => window.cancelAnimationFrame(frame);
-    }
-    syncLocaleOnDocument("zh");
-  }, []);
+    setLocale(initialLocale);
+  }, [initialLocale]);
 
   useEffect(() => {
     syncLocaleOnDocument(locale);
+    persistLocalePreference(locale);
   }, [locale]);
 
   const value = useMemo(

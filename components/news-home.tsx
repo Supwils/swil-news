@@ -9,6 +9,7 @@ import { useLocale } from "@/components/locale-context";
 import { InlineMarkdown } from "@/components/news-markdown";
 import { NewspaperFooter } from "@/components/newspaper/footer";
 import { NewspaperMasthead } from "@/components/newspaper/masthead";
+import { localizePath } from "@/lib/locale-routing";
 import { formatDisplayDate } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
 import { TOPICS, getTopicMeta, isTopicKey, type TopicKey } from "@/lib/news-meta";
@@ -48,8 +49,8 @@ const TOPIC_COLOR_VAR: Record<TopicKey, string> = {
   "sports-health-nutrition": "var(--np-t-sports-health-nutrition)",
 };
 
-function articleHref(entry: NewsPreview) {
-  return `/news/${entry.topic}/${entry.date}`;
+function articleHref(entry: NewsPreview, locale: "zh" | "en") {
+  return localizePath(`/news/${entry.topic}/${entry.date}`, locale);
 }
 
 function stripInlineMarkdown(text: string) {
@@ -265,7 +266,7 @@ function TopicRail({
         style={{ maxWidth: 1280, gap: 6 }}
       >
         <Link
-          href="/"
+          href={localizePath("/", locale)}
           className="np-chip"
           data-active={activeTopic === "all" || undefined}
           style={{ ["--_dot" as string]: "var(--np-ink)" } as CSSProperties}
@@ -278,7 +279,7 @@ function TopicRail({
         {topics.map((t) => (
           <Link
             key={t.key}
-            href={`/?topic=${t.key}`}
+            href={localizePath(`/?topic=${t.key}`, locale)}
             className="np-chip"
             data-active={activeTopic === t.key || undefined}
             style={{ ["--_dot" as string]: TOPIC_COLOR_VAR[t.key] } as CSSProperties}
@@ -370,9 +371,9 @@ function HeroGrid({
           <Link
             href={
               activeTopic === "all" && todayDate && currentMonth
-                ? `/archive/${currentMonth}`
+                ? localizePath(`/archive/${currentMonth}`, locale)
                 : activeTopic !== "all"
-                  ? `/news/${activeTopic}/${lead.date}`
+                  ? localizePath(`/news/${activeTopic}/${lead.date}`, locale)
                   : "#"
             }
             className="np-btn-ghost"
@@ -401,7 +402,7 @@ function LeadStory({
 }) {
   return (
     <article>
-      <Link href={articleHref(lead)} style={{ display: "block" }}>
+      <Link href={articleHref(lead, locale)} style={{ display: "block" }}>
         <div className="np-mono" style={styles.kicker}>
           <span
             style={{
@@ -507,7 +508,7 @@ function RuleLabel({ left }: { left: string }) {
 function StoryRow({ entry, locale }: { entry: NewsPreview; locale: "zh" | "en" }) {
   const meta = getTopicMeta(entry.topic, locale)!;
   return (
-    <Link href={articleHref(entry)} className="np-story-row">
+    <Link href={articleHref(entry, locale)} className="np-story-row">
       <div>
         <div
           className="np-mono"
@@ -591,7 +592,7 @@ function ContinueStrip({
       ? `昨日「${label}」读到 ${pct}% —— 回到原处继续。`
       : `Paused on ${label} at ${pct}%. Pick up where you left off.`;
 
-  const href = `/news/${session.topic}/${session.articleId.split(":")[1] ?? ""}`;
+  const href = localizePath(`/news/${session.topic}/${session.articleId.split(":")[1] ?? ""}`, locale);
 
   return (
     <section
@@ -701,7 +702,7 @@ function YesterdayTabloid({
         </h2>
         {month ? (
           <Link
-            href={`/archive/${month}`}
+            href={localizePath(`/archive/${month}`, locale)}
             className="np-mono"
             style={{ fontSize: 12, color: "var(--np-ink3)", letterSpacing: "0.06em" }}
           >
@@ -746,7 +747,7 @@ function TabloidBig({
   const meta = getTopicMeta(entry.topic, locale)!;
   return (
     <Link
-      href={articleHref(entry)}
+      href={articleHref(entry, locale)}
       className="np-tabloid-big"
       data-read={isRead || undefined}
       style={{ opacity: isRead ? 0.78 : 1, display: "block" }}
@@ -861,7 +862,7 @@ function TabloidSmall({
   const meta = getTopicMeta(entry.topic, locale)!;
   return (
     <Link
-      href={articleHref(entry)}
+      href={articleHref(entry, locale)}
       className="np-tabloid-small"
       data-read={isRead || undefined}
       style={{

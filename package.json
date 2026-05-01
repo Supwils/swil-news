@@ -5,6 +5,8 @@
   "scripts": {
     "build:news-index": "node scripts/build-news-index.mjs",
     "validate:news-layout": "node scripts/validate-news-layout.mjs",
+    "validate:news-content": "node scripts/validate-news-content.mjs",
+    "validate:news-content:strict": "NEWS_CONTENT_VALIDATION_MODE=strict node scripts/validate-news-content.mjs",
     "translate:news": "node scripts/translate-news.mjs",
     "dev": "next dev --port 3011",
     "predev": "pnpm build:news-index",
@@ -12,7 +14,8 @@
     "build": "next build",
     "prestart": "pnpm build:news-index",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",

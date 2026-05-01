@@ -1,5 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
+
+import { useLocale } from "@/components/locale-context";
+import { localizePath } from "@/lib/locale-routing";
 
 type NewspaperFooterProps = {
   /** UTC timestamp for the "GENERATED …" stamp. Accepts any formatted string. */
@@ -7,6 +12,7 @@ type NewspaperFooterProps = {
 };
 
 export function NewspaperFooter({ generatedAt }: NewspaperFooterProps) {
+  const locale = useLocale();
   const stamp =
     generatedAt ??
     (() => {
@@ -16,6 +22,9 @@ export function NewspaperFooter({ generatedAt }: NewspaperFooterProps) {
         now.getUTCDate(),
       )} ${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())} UTC`;
     })();
+
+  const feedHref = localizePath("/feed.xml", locale);
+  const aboutHref = localizePath("/about", locale);
 
   return (
     <footer
@@ -36,8 +45,8 @@ export function NewspaperFooter({ generatedAt }: NewspaperFooterProps) {
       <span>SWIL-NEWS · LOCAL-FIRST DAILY DIGEST</span>
       <span style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
         <span>GENERATED {stamp}</span>
-        <FooterLink href="/feed.xml">RSS</FooterLink>
-        <FooterLink href="/about">ABOUT</FooterLink>
+        <FooterLink href={feedHref}>RSS</FooterLink>
+        <FooterLink href={aboutHref}>ABOUT</FooterLink>
         <FooterLink href="/runtime">RUNTIME</FooterLink>
       </span>
     </footer>

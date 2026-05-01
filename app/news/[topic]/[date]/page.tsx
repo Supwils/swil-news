@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { NewsDetailContent } from "@/components/news-detail-content";
 import { StructuredData } from "@/components/structured-data";
+import { localizePath } from "@/lib/locale-routing";
 import { getAllNewsParams, getNewsEntry, getTopicsWithNewsForDate } from "@/lib/news";
 import { getTopicMeta, isTopicKey } from "@/lib/news-meta";
 import { absoluteUrl, SITE_NAME } from "@/lib/site";
@@ -32,6 +33,10 @@ export async function generateMetadata({ params }: NewsDetailPageProps): Promise
     description: entry.description,
     alternates: {
       canonical: `/news/${topic}/${date}`,
+      languages: {
+        "zh-CN": `/news/${topic}/${date}`,
+        "en-US": localizePath(`/news/${topic}/${date}`, "en"),
+      },
     },
     openGraph: {
       type: "article",

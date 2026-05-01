@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
-# 依次执行全部主题的日报生成脚本（通用、金融、AI 科技、科学、加密、能源气候、汽车出行、游戏、供应链、运动健康营养）
+# 执行全部主题的日报生成脚本（通用、金融、AI 科技、科学、加密、能源气候、汽车出行、游戏、供应链、运动健康营养）
+# 默认 2 路并发；可通过 NEWS_PARALLELISM 覆盖。
 # 依赖：已安装并登录 Cursor CLI (agent)
 #
 
@@ -24,6 +25,11 @@ fi
 : "${NEWS_AGENT_MODEL_DEFAULT:=composer-2}"
 export NEWS_AGENT_MODEL="${NEWS_AGENT_MODEL:-$NEWS_AGENT_MODEL_DEFAULT}"
 export NEWS_AGENT_MODEL_DEFAULT
+: "${NEWS_PARALLELISM:=2}"
+if ! [[ "$NEWS_PARALLELISM" =~ ^[1-9][0-9]*$ ]]; then
+  echo "错误: NEWS_PARALLELISM 必须是正整数，当前值: $NEWS_PARALLELISM" >&2
+  exit 1
+fi
 
 LOG_TS() { date '+%Y-%m-%d %H:%M:%S'; }
 log_info() { echo "[$(LOG_TS)] [INFO] $*"; }
@@ -39,10 +45,24 @@ trim() {
 DEBUG_DIR="$PROJECT_ROOT/logs/debug"
 mkdir -p "$DEBUG_DIR"
 
-log_info "Generate all topics started model=${NEWS_AGENT_MODEL}"
+log_info "Generate all topics started model=${NEWS_AGENT_MODEL} parallelism=${NEWS_PARALLELISM}"
 
 export SKIP_NEWS_INDEX_REFRESH=1
-for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-science-news.sh run-crypto-news.sh run-energy-climate-news.sh run-auto-mobility-news.sh run-gaming-news.sh run-supply-chain-news.sh run-sports-health-nutrition-news.sh; do
+SCRIPTS=(
+  run-general-news.sh
+  run-finance-news.sh
+  run-aitech-news.sh
+  run-science-news.sh
+  run-crypto-news.sh
+  run-energy-climate-news.sh
+  run-auto-mobility-news.sh
+  run-gaming-news.sh
+  run-supply-chain-news.sh
+  run-sports-health-nutrition-news.sh
+)
+
+run_topic() {
+  local script="$1"
   path="$SCRIPT_DIR/$script"
   if [[ -x "$path" ]]; then
     topic="${script#run-}"
@@ -63,12 +83,60 @@ for script in run-general-news.sh run-finance-news.sh run-aitech-news.sh run-sci
       reason="$(awk 'NF{line=$0} END{print line}' "$debug_log" 2>/dev/null || true)"
       reason="$(trim "${reason:-unknown_error}")"
       log_error "Topic failed topic=${topic} duration_sec=${duration} exit_code=${exit_code} reason=${reason} debug_log=${debug_log}"
-      exit "$exit_code"
+      return "$exit_code"
     fi
   else
     log_warn "Topic skipped script=${script} reason=missing_or_not_executable"
   fi
+}
+
+TOKEN_DIR="$(mktemp -d "${TMPDIR:-/tmp}/swil-news-parallel.XXXXXX")"
+TOKEN_FIFO="$TOKEN_DIR/tokens"
+mkfifo "$TOKEN_FIFO"
+exec 9<>"$TOKEN_FIFO"
+rm -rf "$TOKEN_DIR"
+
+for ((i = 0; i < NEWS_PARALLELISM; i++)); do
+  printf '\n' >&9
 done
+
+PIDS=()
+TOPICS=()
+for script in "${SCRIPTS[@]}"; do
+  topic="${script#run-}"
+  topic="${topic%.sh}"
+  read -r -u 9
+  {
+    if run_topic "$script"; then
+      status=0
+    else
+      status="$?"
+    fi
+    printf '\n' >&9
+    exit "$status"
+  } &
+  PIDS+=("$!")
+  TOPICS+=("$topic")
+done
+
+failure=0
+for i in "${!PIDS[@]}"; do
+  pid="${PIDS[$i]}"
+  topic="${TOPICS[$i]}"
+  if wait "$pid"; then
+    :
+  else
+    exit_code="$?"
+    log_error "Topic process failed topic=${topic} exit_code=${exit_code}"
+    failure="$exit_code"
+  fi
+done
+exec 9>&-
+
+if [[ "$failure" != "0" ]]; then
+  unset SKIP_NEWS_INDEX_REFRESH
+  exit "$failure"
+fi
 unset SKIP_NEWS_INDEX_REFRESH
 
 log_info "Step start: validate_news_layout"

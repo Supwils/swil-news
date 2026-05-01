@@ -10,6 +10,7 @@ import { NewspaperMasthead } from "@/components/newspaper/masthead";
 import { QuickTopicLinks } from "@/components/quick-topic-links";
 import { useLocale } from "@/components/locale-context";
 import { getCopy } from "@/data/copy";
+import { localizePath } from "@/lib/locale-routing";
 import { formatDisplayDate } from "@/lib/news-client";
 import type { NewsEntry } from "@/lib/news";
 import { getTopicMeta, TOPICS, type TopicKey } from "@/lib/news-meta";
@@ -40,6 +41,8 @@ export function NewsDetailContent({
   const copy = getCopy(locale);
   const meta = getTopicMeta(topic, locale);
   const topicLabels = TOPICS.map((t) => ({ key: t.key, label: getTopicMeta(t.key, locale)!.label }));
+  const topicHref = localizePath(`/news/${topic}`, locale);
+  const homeHref = localizePath("/", locale);
 
   if (!meta) {
     return null;
@@ -70,11 +73,11 @@ export function NewsDetailContent({
             margin: "24px 0",
           }}
         >
-          <Link href={`/news/${topic}`} className="np-btn-secondary">
+          <Link href={topicHref} className="np-btn-secondary">
             <ArrowLeft size={14} />
             {copy.ui.topicPage.backToTopic(meta.label)}
           </Link>
-          <Link href="/" className="np-btn-secondary">
+          <Link href={homeHref} className="np-btn-secondary">
             {copy.ui.topicPage.backHome}
           </Link>
         </div>

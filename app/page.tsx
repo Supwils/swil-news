@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { StructuredData } from "@/components/structured-data";
 import { NewsHome } from "@/components/news-home";
+import { localizePath } from "@/lib/locale-routing";
 import { getAllNewsPreviews } from "@/lib/news";
 import { absoluteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
@@ -12,6 +13,10 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   alternates: {
     canonical: "/",
+    languages: {
+      "zh-CN": "/",
+      "en-US": localizePath("/", "en"),
+    },
     types: {
       "application/rss+xml": absoluteUrl("/feed.xml"),
     },
