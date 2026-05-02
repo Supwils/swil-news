@@ -2,7 +2,7 @@
 #
 # 执行全部主题的日报生成脚本（通用、金融、AI 科技、科学、加密、能源气候、汽车出行、游戏、供应链、运动健康营养）
 # 默认 2 路并发；可通过 NEWS_PARALLELISM 覆盖。
-# 依赖：已安装并登录 Cursor CLI (agent)
+# 后端通过 NEWS_AGENT_BACKEND 指定: cursor (默认) | claude | codex
 #
 
 set -Eeuo pipefail
@@ -12,13 +12,7 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 cd "$PROJECT_ROOT"
 
-if ! command -v agent &> /dev/null; then
-  echo "错误: 未找到 Cursor CLI (agent)。请先安装: curl https://cursor.com/install -fsS | bash" >&2
-  exit 1
-fi
-
-# 第一个参数若提供则视为模型名（覆盖 NEWS_AGENT_MODEL）。
-# 与 daily-news-and-commit.sh 一致：NEWS_AGENT_MODEL_DEFAULT 默认 composer-2，CLI 恢复 auto 后改为 auto。
+# 第一个参数若提供则视为模型名（覆盖 NEWS_AGENT_MODEL，仅对 cursor 后端有效）。
 if [[ -n "${1:-}" ]]; then
   export NEWS_AGENT_MODEL="$1"
 fi
