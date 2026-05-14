@@ -7,6 +7,7 @@ import "./global.css";
 import { absoluteUrl, getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const displayFont = Source_Serif_4({
   subsets: ["latin"],
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <LocaleProvider initialLocale="zh">
           {children}
           <Analytics />
+          <SpeedInsights />
         </LocaleProvider>
       </body>
     </html>

@@ -13,7 +13,7 @@ export function LocaleSwitch() {
   const setLocale = useSetLocale();
   const nextLocale = locale === "zh" ? "en" : "zh";
 
-  const label = locale === "zh" ? "中文" : "EN";
+  const label = locale === "zh" ? "EN" : "中文";
   const ariaLabel = locale === "zh" ? "Switch to English" : "切换到中文";
 
   const handleClick = () => {
