@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, Clock3, Command, FileText, Layers3 } from "lucide-react";
 import type { ReactNode } from "react";
 
-import { InlineMarkdown, NewsMarkdown } from "@/components/news-markdown";
+import { InlineMarkdown } from "@/components/news-markdown";
 import { NewspaperFooter } from "@/components/newspaper/footer";
 import { NewspaperMasthead } from "@/components/newspaper/masthead";
 import { QuickTopicLinks } from "@/components/quick-topic-links";
@@ -15,13 +15,15 @@ import { formatDisplayDate } from "@/lib/news-client";
 import type { NewsEntry } from "@/lib/news";
 import { getTopicMeta, TOPICS, type TopicKey } from "@/lib/news-meta";
 
-type NewsDetailViewEntry = Omit<NewsEntry, "filePath">;
+type NewsDetailViewEntry = Omit<NewsEntry, "filePath" | "content">;
 
 type NewsDetailContentProps = {
   topic: TopicKey;
   date: string;
   entry: NewsDetailViewEntry;
   entryEn: NewsDetailViewEntry | null;
+  articleBody: ReactNode;
+  articleBodyEn: ReactNode | null;
   availableTopicsZh: TopicKey[];
   availableTopicsEn: TopicKey[];
 };
@@ -31,11 +33,14 @@ export function NewsDetailContent({
   date,
   entry,
   entryEn,
+  articleBody,
+  articleBodyEn,
   availableTopicsZh,
   availableTopicsEn,
 }: NewsDetailContentProps) {
   const locale = useLocale();
   const activeEntry = locale === "en" && entryEn ? entryEn : entry;
+  const activeBody = locale === "en" && articleBodyEn ? articleBodyEn : articleBody;
   const availableTopics = locale === "en" ? availableTopicsEn : availableTopicsZh;
   const isShowingChineseFallback = locale === "en" && entryEn === null;
   const copy = getCopy(locale);
@@ -109,7 +114,7 @@ export function NewsDetailContent({
                 English translation is not available for this digest yet. Showing the Chinese original.
               </div>
             ) : null}
-            <NewsMarkdown content={activeEntry.content} />
+            {activeBody}
           </article>
 
           <aside className="space-y-6 xl:sticky xl:top-6 xl:h-fit">

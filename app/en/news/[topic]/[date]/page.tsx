@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { NewsDetailContent } from "@/components/news-detail-content";
+import { NewsMarkdown } from "@/components/news-markdown-block";
 import { StructuredData } from "@/components/structured-data";
 import { localizePath } from "@/lib/locale-routing";
 import { getAllNewsParams, getNewsEntry, getTopicsWithNewsForDate } from "@/lib/news";
@@ -126,13 +127,16 @@ export default async function EnglishNewsDetailPage({ params }: NewsDetailPagePr
     },
   };
 
-  const { filePath: _filePath, ...clientEntry } = entryZh;
+  const { filePath: _filePath, content: zhContent, ...clientEntry } = entryZh;
   const clientEntryEn = entryEn
     ? (() => {
-        const { filePath: _fp, ...entry } = entryEn;
+        const { filePath: _fp, content: _content, ...entry } = entryEn;
         return entry;
       })()
     : null;
+
+  const articleBody = <NewsMarkdown content={zhContent} />;
+  const articleBodyEn = entryEn ? <NewsMarkdown content={entryEn.content} /> : null;
 
   return (
     <>
@@ -142,6 +146,8 @@ export default async function EnglishNewsDetailPage({ params }: NewsDetailPagePr
         date={date}
         entry={clientEntry}
         entryEn={clientEntryEn}
+        articleBody={articleBody}
+        articleBodyEn={articleBodyEn}
         availableTopicsZh={availableTopicsZh}
         availableTopicsEn={availableTopicsEn}
       />

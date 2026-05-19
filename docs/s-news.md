@@ -33,20 +33,41 @@
 
 ### 2.2 已有 Command 与输出路径
 
-| Command 文件 | 输出目录 | 日报文件名示例 |
-|--------------|----------|----------------|
-| `general-news.md` | `NEWS/general/` | `YYYY-MM-DD_日常通用新闻日报.md` |
-| `finance-news.md` | `NEWS/finance/` | `YYYY-MM-DD_金融与股市新闻日报.md` |
-| `aitech-news.md` | `NEWS/ai-tech/` | `YYYY-MM-DD_AI与科技新闻日报.md` |
+10 个主题（按生成顺序）：
+
+| Command 文件 | 输出目录 | 中文文件名示例 | 英文文件名示例 |
+|--------------|----------|----------------|----------------|
+| `general-news.md` | `NEWS/general/{zh,en}/` | `YYYY-MM-DD_日常通用新闻日报.md` | `YYYY-MM-DD_general-digest.md` |
+| `finance-news.md` | `NEWS/finance/{zh,en}/` | `..._金融与股市新闻日报.md` | `..._finance-digest.md` |
+| `aitech-news.md` | `NEWS/ai-tech/{zh,en}/` | `..._AI与科技新闻日报.md` | `..._ai-tech-digest.md` |
+| `science-news.md` | `NEWS/science/{zh,en}/` | `..._科学研究新闻日报.md` | `..._science-digest.md` |
+| `crypto-news.md` | `NEWS/crypto/{zh,en}/` | `..._加密货币新闻日报.md` | `..._crypto-digest.md` |
+| `energy-climate-news.md` | `NEWS/energy-climate/{zh,en}/` | `..._能源气候新闻日报.md` | `..._energy-climate-digest.md` |
+| `auto-mobility-news.md` | `NEWS/auto-mobility/{zh,en}/` | `..._汽车出行新闻日报.md` | `..._auto-mobility-digest.md` |
+| `gaming-news.md` | `NEWS/gaming/{zh,en}/` | `..._游戏新闻日报.md` | `..._gaming-digest.md` |
+| `supply-chain-news.md` | `NEWS/supply-chain/{zh,en}/` | `..._供应链新闻日报.md` | `..._supply-chain-digest.md` |
+| `sports-health-nutrition-news.md` | `NEWS/sports-health-nutrition/{zh,en}/` | `..._运动健康营养新闻日报.md` | `..._sports-health-digest.md` |
+
+**双语产出由同一次 agent 会话完成**：每个 command 文件内部都规定"同时生成中文版与英文版日报，分别写入对应子目录"。无独立翻译步骤，无翻译模型调用。
 
 ### 2.3 数据流（当前）
 
 ```
-用户 / cron
-    → 执行 scripts/run-xxx-news.sh（或未来 Python 脚本）
-    → Cursor CLI (agent) 读取 .cursor/commands/xxx-news.md + 执行指令
-    → AI 多轮 Web Search + 整理
-    → 写入 NEWS/<topic>/YYYY-MM-DD_xxx.md
+launchd / 用户
+    → daily-news-and-commit.sh
+        → run_all_news.sh （2 路并发跑 10 个主题）
+            → run-<topic>-news.sh
+                → news-agent.sh （后端可选: cursor | claude | codex）
+                    → Cursor CLI: agent --model composer-2
+                        → 读取 .cursor/commands/<topic>-news.md + 执行指令
+                        → 多轮 Web Search + 整理 + 双语成文
+                        → 写入 NEWS/<topic>/zh/YYYY-MM-DD_*.md
+                        → 写入 NEWS/<topic>/en/YYYY-MM-DD_<slug>-digest.md
+    → validate-news-layout.mjs 校验结构
+    → build-news-index.mjs 生成 .generated/news-index{,-en}.json
+    → pnpm build （Next.js static export, 1300+ pages）
+    → git add NEWS/ && git commit && git push
+    → Vercel webhook 触发部署
 ```
 
 ---
@@ -94,15 +115,26 @@
 │       ├── general-news.md
 │       ├── finance-news.md
 │       └── aitech-news.md
-├── NEWS/                   # 日报产出目录
-│   ├── general/
-│   ├── finance/
-│   └── ai-tech/
+├── NEWS/                   # 日报产出目录（zh / en 双语子目录）
+│   ├── general/{zh,en}/
+│   ├── finance/{zh,en}/
+│   ├── ai-tech/{zh,en}/
+│   ├── science/{zh,en}/
+│   ├── crypto/{zh,en}/
+│   ├── energy-climate/{zh,en}/
+│   ├── auto-mobility/{zh,en}/
+│   ├── gaming/{zh,en}/
+│   ├── supply-chain/{zh,en}/
+│   └── sports-health-nutrition/{zh,en}/
 ├── scripts/                # 触发 Cursor CLI 的脚本
-│   ├── run-aitech-news.sh
-│   ├── run-general-news.sh # 可选
-│   ├── run-finance-news.sh  # 可选
-│   └── run_all_news.sh      # 可选：依次跑全部
+│   ├── daily-news-and-commit.sh   # 顶层入口（launchd 触发）
+│   ├── run_all_news.sh             # 并发跑 10 个主题
+│   ├── run-<topic>-news.sh × 10    # 单主题入口
+│   ├── news-agent.sh               # 后端适配器（cursor/claude/codex）
+│   ├── build-news-index.mjs        # 构建双语索引 JSON
+│   ├── refresh-news-index.sh
+│   ├── validate-news-layout.mjs
+│   └── validate-news-content.mjs
 ├── app/                    # Next.js App（待初始化）
 │   ├── app/                # App Router
 │   │   ├── layout.tsx
@@ -193,8 +225,12 @@
 
 ### 6.1 目录与命名
 
-- `NEWS/<topic>/`：topic 与 Command 输出路径一致（general / finance / ai-tech 等）。
-- 文件名：`YYYY-MM-DD_<主题名>日报.md`，例如 `2026-03-06_AI与科技新闻日报.md`。
+- `NEWS/<topic>/<locale>/`：每主题下 `zh/` 与 `en/` 两个子目录。
+- 中文文件名：`YYYY-MM-DD_<中文主题名>日报.md`，例如 `2026-03-06_AI与科技新闻日报.md`。
+- 英文文件名：`YYYY-MM-DD_<topic-slug>-digest.md`，例如 `2026-03-06_ai-tech-digest.md`。
+- 锚点约定（索引解析依赖）：
+  - 中文：`## 今日小结` / `**总体定性：**` / `**今日定性：**`
+  - 英文：`## Today's Summary` / `**Daily Framing:**`
 
 ### 6.2 日报结构（与现有 Command 一致）
 
