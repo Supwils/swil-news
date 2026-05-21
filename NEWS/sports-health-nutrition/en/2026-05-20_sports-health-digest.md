@@ -1,141 +1,126 @@
 # May 20, 2026 · Sports, Health & Nutrition Daily Digest
 
-> A same-day roundup of global sports, wellness, and nutrition headlines with summaries, sources, and brief commentary.
+> A curated digest of global sports, wellness, and nutrition headlines for May 20, 2026, with summaries, sources, and brief commentary.
 
 ---
 
 ## I. Sports & Fitness
 
-### 1. WNBA: Chicago Sky forward Rickea Jackson suffers a torn ACL in her left knee
-**Summary:** According to *The Washington Post* on May 19, 2026, Chicago Sky forward Rickea Jackson was injured during a game against the Minnesota Lynx and an MRI later confirmed a torn ACL in her left knee. The reporting situates the injury within season roster and recovery implications (return-to-play timelines should be followed via team and medical updates).
+### 1. NBA Eastern Conference finals: Knicks win Game 1 in overtime, lead series 1-0
+**Summary:** An Associated Press story distributed via Yahoo Sports, updated ahead of Wednesday night’s Game 2 in New York, reports that the Knicks defeated the Cavaliers 115-104 in overtime to open the Eastern Conference finals with a 1-0 series lead. The piece highlights a 38-point performance from Jalen Brunson and 29 points from Donovan Mitchell.
 **Links:**
-- [The Washington Post — Chicago Sky forward Rickea Jackson tears ACL in her left knee](https://www.washingtonpost.com/sports/wnba/2026/05/19/rickea-jackson-acl-sky-wnba/053c7014-538f-11f1-9c40-7a0a12d9e745_story.html)
-**Commentary:** Cutting and landing impose high knee loads in basketball; both elite and recreational players benefit from warm-ups, strength work, neuromuscular control training, and structured rehab after injury.
+- [Yahoo Sports — New York takes 1-0 lead into game 2 against Cleveland](https://sports.yahoo.com/articles/york-takes-1-0-lead-060355812.html)
+**Commentary:** Playoff-level intensity sharply increases load on knees, ankles, and the Achilles complex; recreational athletes should prioritize warm-ups, strength foundations, and gradual progression before mimicking high-intensity “hero ball” workloads.
 
 ---
 
-### 2. Cricket: India chief selector says Rohit Sharma and Hardik Pandya must pass fitness tests within a two-week window
-**Summary:** *The Indian Express* reports chief selector Ajit Agarkar outlining expectations for India’s squad planning, stating Rohit Sharma and Hardik Pandya must pass relevant fitness tests within an approximately two-week window to join upcoming series preparations and selection. The article notes recent workload and injury-recovery context for both players (final medical clearance should be treated as authoritative).
+### 2. NHL Western Conference finals: Avalanche star Cale Makar misses Game 1 vs. Golden Knights
+**Summary:** ESPN reported on Wednesday, May 20, 2026, that Colorado Avalanche defenseman Cale Makar missed Game 1 of the Western Conference finals against the Vegas Golden Knights. Head coach Jared Bednar described Makar as day-to-day, noted he had skated Monday and Wednesday morning, and referenced a collision late in the Minnesota series; the story adds Makar is managing more than one injury and that this was his first playoff absence due to injury.
 **Links:**
-- [The Indian Express — Chief selector Ajit Agarkar gives big update on Rohit Sharma and Hardik Pandya’s fitness](https://indianexpress.com/article/sports/cricket/chief-selector-agarkar-update-rohit-sharma-hardik-pandya-fitness-10699165/)
-**Commentary:** In elite team sports, return-to-competition is often governed by objective load tolerance; everyday athletes can apply the same principle: progressions should be guided by testing, not vibes alone.
+- [ESPN — Avs' Cale Makar sits out Game 1 of Western Conference finals](https://www.espn.com/nhl/story/_/id/48826925/avs-star-defender-makar-game-1-western-conference-finals)
+**Commentary:** Contact sports repeatedly stress shoulders, elbows, hips, and knees together; the episode underscores why pain-reduction and medical clearance should precede “playing through it,” especially in team settings.
 
 ---
 
-### 3. ACSM publishes updated resistance-training guidance: consistency and training all major muscle groups come first
-**Summary:** The American College of Sports Medicine (ACSM) website and related releases describe a major update to resistance-training recommendations, synthesizing evidence from many systematic reviews. Public-facing messaging emphasizes that regularly training all major muscle groups at least ~twice weekly and staying consistent typically outweighs chasing overly complex “perfect” programs; bands and bodyweight approaches can be effective when appropriately dosed.
+### 3. MLB: Ronald Acuña Jr. scores three times in return as Braves beat Marlins
+**Summary:** Yahoo Sports carried game coverage in which Ronald Acuña Jr., returning from a left hamstring strain that had sidelined him since May 2, doubled, walked twice, scored three times, and served as the leadoff designated hitter in an 8-4 Atlanta win over Miami. The article notes Atlanta pulled ahead in the eighth inning.
 **Links:**
-- [ACSM — ACSM Publishes Updated Resistance Training Guidelines](https://acsm.org/resistance-training-guidelines-update-2026/)
-- [Newswise — ACSM Unveils Landmark 2026 Resistance Training Guidelines](https://www.newswise.com/articles/acsm-unveils-landmark-2026-resistance-training-guidelines-first-update-in-17-years)
-**Commentary:** For general fitness and clinical exercise communication, “start with something sustainable” usually beats advanced programming that people quit within weeks.
+- [Yahoo Sports — Acuña scores 3 times in return as Braves bounce back against Marlins](https://sports.yahoo.com/articles/acu-scores-3-times-return-064107414.html)
+**Commentary:** Hamstring returns often begin with DH roles and controlled baserunning demands—useful context for soccer and sprint-heavy sports that rely on repeated maximal acceleration.
 
 ---
 
-### 4. *British Journal of Sports Medicine*: large network meta-analysis compares exercise modes and blood-pressure effects
-**Summary:** A BMJ Group summary and the linked *British Journal of Sports Medicine* paper describe a large network meta-analysis of randomized trials examining structured exercise and blood-pressure outcomes. Public reporting highlights differences across modalities (including combined training and HIIT) and discusses 24-hour ambulatory blood-pressure patterns; exact effect sizes and eligibility should be read from the primary paper and interpreted clinically.
+### 4. MLB: Yankees ace Gerrit Cole scheduled for Friday MLB return vs. Rays after elbow surgery
+**Summary:** The Associated Press, via Yahoo Sports, reports Gerrit Cole is scheduled to make his season debut Friday night at Yankee Stadium against Tampa Bay, his first MLB outing in nearly 19 months after Tommy John surgery. The story cites Tuesday comments at Yankee Stadium and manager Aaron Boone indicating Cole will be on a pitch count, alongside recent rehab outing workload and velocity notes.
 **Links:**
-- [BMJ Group — Combined exercise and HIIT linked to significant falls in blood pressure over 24 H](https://bmjgroup.com/combined-exercise-and-hiit-linked-to-significant-falls-in-blood-pressure-over-24-h/)
-- [British Journal of Sports Medicine — Exercise training and resting blood pressure: a large-scale pairwise and network meta-analysis of randomised controlled trials](https://bjsm.bmj.com/content/57/20/1317)
-**Commentary:** For hypertension risk, adherence matters; combined approaches also give clinicians practical options that map to real-world preferences and facility access.
+- [Yahoo Sports — Yankees ace Gerrit Cole to return from elbow surgery Friday night against the Rays](https://ca.sports.yahoo.com/news/yankees-ace-gerrit-cole-return-220518488.html)
+- [AP News — Gerrit Cole / Tommy John surgery (related coverage)](https://apnews.com/article/gerrit-cole-tommy-john-surgery-b18be137cd600253b9b2880addb4297d)
+**Commentary:** Return-to-throw pathways emphasize functional testing and staged volume for elite throwers; the same principle—restore capacity before chasing intensity—applies to overhead lifting in general fitness populations.
+
+---
+
+### 5. Asian Weightlifting Championships: Xinhua reports a multi-medal day for China
+**Summary:** Xinhua sports coverage dated May 17, 2026, describes competition in Gandhinagar, India, including a day in which Team China collected multiple gold medals. The report names Liao Guifang sweeping golds in the women’s 77 kg category, Tu Yi sweeping golds in the men’s 94 kg category, and Peng Cuiting earning two golds and one silver in the women’s 86 kg category (final results should be verified against official results books).
+**Links:**
+- [Xinhua — Asian Weightlifting Championships: China wins eight golds in one day](http://www.news.cn/sports/20260517/78eea4c6ad51495dabf2a9fad491726a/c.html)
+**Commentary:** Weightlifting rewards technical precision and disciplined periodization; recreational lifters benefit from the same mantra—technique first, then progressive loading.
 
 ---
 
 ## II. Health & Medicine
 
-### 5. Sunscreen season: CNN reports on EWG’s 2026 sunscreen guide and debates on real-world protection
-**Summary:** CNN reported on May 19, 2026, around the Environmental Working Group’s annual sunscreen guide and broader questions about ingredient choices, labeling, and whether stated UV protection always matches real-world use. The story underscores the value of dermatologist-guided selection and reapplication habits (read the underlying report and any cited studies for technical details).
+### 6. WHO: Director-General’s May 20 media briefing on Ebola (Bundibugyo) in DRC and Uganda
+**Summary:** WHO published the verbatim opening remarks for the Director-General’s May 20, 2026, media briefing on the Ebola disease outbreak caused by Bundibugyo virus in the Democratic Republic of the Congo and Uganda. The remarks explain a Public Health Emergency of International Concern was declared before convening an Emergency Committee—the first such sequence under the IHR—and clarify the situation is not classified as a “pandemic emergency.” WHO assesses risk as high nationally/regionally and low globally, reporting 51 laboratory-confirmed cases in specified areas of DRC, two confirmed cases in Kampala (including one death), and confirmation of an American national working in DRC who was transferred to Germany, alongside large suspected-case counts and the absence of approved vaccines/therapeutics specifically for this virus species.
 **Links:**
-- [CNN — Experts vet the safest and most effective sunscreens for 2026](https://www.cnn.com/2026/05/19/health/best-sunscreens-2026-wellness)
-**Commentary:** Outdoor endurance athletes should treat sun protection as a training habit—volume, timing, clothing/shade, and reapplication often matter more than a single SPF number.
+- [WHO — WHO Director-General's opening remarks at the media briefing on Ebola outbreak in DRC and Uganda – 20 May 2026](https://www.who.int/news-room/speeches/item/who-director-general-s-opening-remarks-at-the-media-briefing-on-ebola-outbreak-in-drc-and-uganda-20-may-2026)
+- [WHO — Ebola disease caused by Bundibugyo virus in DRC & Uganda determined a PHEIC](https://www.who.int/news/item/17-05-2026-epidemic-of-ebola-disease-in-the-democratic-republic-of-the-congo-and-uganda-determined-a-public-health-emergency-of-international-concern)
+**Commentary:** For the public, the actionable layer is official travel-health guidance; for global health, the story highlights surveillance, infection prevention/control, and R&D urgency in insecure settings with substantial population movement.
 
 ---
 
-### 6. Texas confirms its first human West Nile virus case of 2026; officials emphasize mosquito prevention
-**Summary:** ABC News reported on May 19, 2026, that Texas health authorities confirmed the state’s first human West Nile virus case of the year in Harris County (Houston area). The article links to state alerts and reminds residents to reduce standing water and prevent bites during warmer months, citing broader CDC surveillance context for prior seasons.
+### 7. ACC/AHA multisociety dyslipidemia guideline update (2026)
+**Summary:** On March 13, 2026, the American College of Cardiology and American Heart Association (with additional societies) released an updated guideline on managing blood cholesterol and dyslipidemia. Press materials summarize shifts toward earlier, more individualized risk assessment—including newer prevention equations and expanded discussion of lipoprotein(a)—while reinforcing lifestyle foundations (weight, physical activity, sleep, tobacco avoidance). Clinical details should be read in the full guideline documents.
 **Links:**
-- [ABC News — Texas reports state's 1st human case of West Nile virus this year](https://abcnews.go.com/Health/texas-reports-states-1st-human-case-west-nile/story?id=133117711)
-- [Texas DSHS — DSHS Confirms First West Nile Case in Texas for 2026](https://www.dshs.texas.gov/news-alerts/dshs-confirms-first-west-nile-case-texas-2026)
-**Commentary:** Night runs, camping, and water sports can increase exposure; bite prevention is both an individual habit and a neighborhood standing-water issue.
+- [ACC — ACC/AHA Issue Updated Guideline for Managing Lipids, Cholesterol](https://www.acc.org/About-ACC/Press-Releases/2026/03/13/18/01/ACCAHA-Issue-Updated-Guideline-for-Managing-Lipids-Cholesterol)
+- [AHA Newsroom — ACC/AHA Issue Updated Guideline for Managing Lipids, Cholesterol](https://newsroom.heart.org/news/accaha-issue-updated-guideline-for-managing-lipids-cholesterol)
+**Commentary:** High training volumes do not replace screening for blood pressure, lipids, or family history; updated risk tools can help align endurance athletes’ “fitness” with long-term cardiovascular prevention.
 
 ---
 
-### 7. Weill Cornell Medicine: perspective discusses implementing earlier, more proactive 2026 lipid-management pathways
-**Summary:** Weill Cornell Medicine’s newsroom published on May 19, 2026, a perspective tied to updated ACC/AHA cholesterol-management materials, emphasizing earlier risk identification and more proactive prevention before hard events. The article discusses practical primary-care implementation challenges and mentions additional risk stratification concepts such as Lp(a) and coronary artery calcium testing as discussed in guideline-related literature (follow guideline PDFs for formal recommendations).
+### 8. *The Lancet*: PUSH trial—intensive hydration adherence program did not significantly reduce symptomatic stone recurrence
+**Summary:** The PUSH randomized trial summary in *The Lancet* describes 1,658 participants aged 12 years and older with stone history and low 24-hour urine volumes randomized across six U.S. academic centers (Oct 26, 2017–Feb 18, 2022) to a multicomponent behavioral hydration program versus guideline-concordant care. Over roughly two years, symptomatic recurrence occurred in about 19% of intervention participants versus 20% of controls (non-significant difference), while 24-hour urine volume increased more in the intervention group; storage symptoms were higher at some time points. The interpretation emphasizes that promoting fluid intake alone did not materially change recurrence outcomes in this trial.
 **Links:**
-- [Weill Cornell Medicine — New Cholesterol Guidelines Aim to Stop Heart Disease Earlier](https://news.weill.cornell.edu/news/2026/05/new-cholesterol-guidelines-aim-to-stop-heart-disease-earlier)
-**Commentary:** Exercise and diet remain foundations of cardiometabolic risk reduction, but genetics and lifetime exposure mean screening and medications sometimes belong in the plan—under medical supervision.
-
----
-
-### 8. *The Washington Post*: reporting on a drug-combination research thread in suicide-risk treatment
-**Summary:** *The Washington Post*’s health desk published on May 19, 2026, coverage of research interest in pharmacologic approaches that could more rapidly address suicidal ideation in some patient contexts. The reporting frames clinical need, evidence gaps, and care-system implications (specific agents, trial designs, and regulatory status should be verified from primary scientific and regulatory sources).
-**Links:**
-- [The Washington Post — Surprising drug combo could reshape treatment for suicide risk](https://www.washingtonpost.com/health/2026/05/19/surprising-drug-combo-could-reshape-suicide-treatment/)
-**Commentary:** Severe suicide risk is a medical emergency; public-health messaging should not imply exercise or diet alone replaces urgent care and professional support networks.
-
----
-
-### 9. Chinese hospital messaging (May 20): summer blood-pressure dips are not a reason to stop antihypertensives on your own
-**Summary:** A Sina Finance article dated May 20, 2026, relays guidance attributed to Zhenjiang Hospital of Traditional Chinese Medicine: some patients’ daytime blood pressure may run lower in summer, but stopping or cutting medications without medical review can trigger rebound hypertension and raise cardiovascular risk. The piece stresses individualized titration based on monitoring and clinician judgment.
-**Links:**
-- [Sina Finance — 夏季血压易走低，镇江市中医院提醒：高血压患者切勿擅自减停降压药](https://finance.sina.com.cn/jjxw/2026-05-20/doc-inhyphnr7002332.shtml)
-**Commentary:** For athletes with hypertension, heat, hydration, sleep, and training load shift the blood-pressure curve; medication changes should follow longitudinal readings, not one-off “I feel fine.”
-
----
-
-### 10. Beijing Tongren Hospital expert on common eye-care myths: glasses updates, opened eye drops, and trendy “wash” products
-**Summary:** A Sina Finance rolling news item dated May 20, 2026, summarizes public-education points from a Beijing Tongren Hospital expert, including misconceptions about when to replace glasses, how long opened eye drops remain appropriate to use, and limitations of non-therapeutic “eye wash” products versus medical evaluation for symptoms.
-**Links:**
-- [Sina Finance — 开封眼药水一直用？网红洗眼液护眼？专家解读三大常见护眼误区](https://finance.sina.com.cn/roll/2026-05-20/doc-inhyptam6927443.shtml)
-**Commentary:** Screen-heavy work plus late training schedules increases dry-eye and fatigue risk; athletes exposed to wind, dust, or pool chlorine should separate comfort products from clinical care pathways.
+- [The Lancet — Prevention of urinary stones with hydration: a randomised clinical trial of an adherence intervention](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(25)02637-6/fulltext)
+- [Children's Hospital of Philadelphia — Behavioral Hydration Program in Landmark Kidney Stone Prevention Trial](https://www.chop.edu/news/behavioral-hydration-program-landmark-kidney-stone-prevention-trial-increased-urine-output)
+**Commentary:** Stone prevention is metabolic and dietary—not a single “drink more water” slogan—so people with recurrence should seek individualized evaluation beyond adherence gimmicks.
 
 ---
 
 ## III. Nutrition & Diet
 
-### 11. China Student Nutrition Day (May 20): People’s Daily Online reports expert discussion on upgrading school meals with data-informed governance
-**Summary:** People’s Daily Online’s health channel reported on May 20, 2026, around China Student Nutrition Day activities focused on improving school nutrition programs—moving beyond safety baselines toward better nutritional quality—and mentions expert views on using digital tools to support menu planning and oversight (policy citations should be read from the original article).
+### 9. PREDIMED-Plus analysis: energy-reduced Mediterranean diet plus activity cut diabetes incidence ~31% over six years
+**Summary:** A prespecified secondary analysis indexed in PubMed reports on 4,746 Spanish adults aged 55–75 with metabolic syndrome and overweight/obesity randomized to an energy-reduced Mediterranean pattern (~600 kcal/day deficit), increased physical activity, and behavioral weight-loss support versus ad libitum Mediterranean diet advice. Over a median ~6-year follow-up, absolute diabetes risk was about 12.0% in controls versus 9.5% in the intervention group, corresponding to roughly a 31% relative reduction (see paper for confidence intervals), alongside greater improvements in weight and waist circumference. Limitations include secondary-outcome framing, single-blinding, and self-reported adherence.
 **Links:**
-- [People’s Daily Online — 专家为校园营养餐提质升级支招](http://health.people.com.cn/n1/2026/0520/c14739-40723458.html)
-**Commentary:** Childhood overweight and undernutrition coexist in many systems; aligning school meals with home eating patterns is central to sustainable “food plus movement” habits.
-
----
-
-### 12. WHO launches an updated SHAKE technical package to support national salt-reduction programs
-**Summary:** WHO regional communications describe a May 12, 2026, launch of an updated “SHAKE the Salt Habit” technical package aimed at helping countries implement multi-component sodium-reduction strategies (surveillance, standards, industry measures, environments, and more). Background statistics on global sodium intake and policy coverage should be read directly from WHO source pages for exact wording and citations.
-**Links:**
-- [WHO — WHO launches revamped SHAKE package to help reduce salt intake](https://www.who.int/philippines/news/detail-global/12-05-2026-who-launches-revamped-shake-package-to-help-reduce-salt-intake)
-**Commentary:** Sports nutrition often discusses electrolytes after heavy sweating; public-health sodium targets still matter for chronic disease prevention in day-to-day eating patterns.
-
----
-
-### 13. PREDIMED-Plus: ScienceDaily summary highlights calorie-reduced Mediterranean diet plus exercise and support for diabetes prevention
-**Summary:** A May 19, 2026, ScienceDaily release summarizes University of Navarra–linked communications about PREDIMED-Plus, describing a long-term trial in adults with overweight/obesity and metabolic syndrome comparing an energy-reduced Mediterranean pattern plus physical activity and professional support versus a more traditional Mediterranean diet comparator. The public summary cites roughly a 31% relative reduction in type 2 diabetes incidence over six years alongside weight and waist changes (confirm statistics and models in the primary journal article).
-**Links:**
-- [ScienceDaily — Scientists found a smarter Mediterranean diet that slashes diabetes risk by 31%](https://www.sciencedaily.com/releases/2026/05/260519003103.htm)
-**Commentary:** The trial’s design mirrors what fails in real life when people change only one lever: sustained prevention usually requires diet, movement, and support systems together.
+- [PubMed — Energy-reduced Mediterranean diet and physical activity vs ad libitum Mediterranean diet for type 2 diabetes prevention](https://pubmed.ncbi.nlm.nih.gov/40854218/)
+- [ScienceDaily — Scientists found a smarter Mediterranean diet that slashes diabetes risk by 31%](http://www.sciencedaily.com/releases/2026/05/260519003103.htm)
+**Commentary:** Sustainable prevention usually pairs dietary pattern change with movement and coaching—not single “superfoods”; medical follow-up still matters for glucose risk.
 
 ---
 
 ## IV. Lifestyle
 
-### 14. Education Week: teen sleep shortfalls linked to academic and wellness pressures
-**Summary:** *Education Week* published in May 2026 a feature citing American Academy of Pediatrics reporting and related evidence threads on adolescent sleep duration, insufficient sleep trends, and consequences for learning, attention, and emotional well-being, including discussion of disparities across groups (verify survey years and definitions in the underlying AAP materials).
+### 10. *Nature* news: very large genetics-related study links ~6–8 hours of sleep to slower biological-aging signals
+**Summary:** A May 13, 2026, *Nature* news article interprets research in roughly 500,000 adults integrating multiple biological-age markers, reporting that about 6–8 hours of daily sleep associates with slower aging-related patterns versus both shorter and longer sleep. The piece also notes observational limitations and cautious causal interpretation.
 **Links:**
-- [Education Week — Teen Sleep Problems Are Hurting Academics and Wellness](https://www.edweek.org/leadership/teen-sleep-problems-are-hurting-academics-and-wellness/2026/05)
-**Commentary:** For youth athletes, the triangle of training, homework, and screens commonly steals sleep; protecting sleep is often a bigger performance lever than adding extra volume.
+- [Nature — Sleep linked to slower ageing: huge study pinpoints the right amount](https://www.nature.com/articles/d41586-026-01506-8)
+**Commentary:** Sleep is entangled with training adaptation, appetite regulation, and immunity—treat consistent sleep as part of the program, not a negotiable add-on.
+
+---
+
+### 11. Spring–summer insomnia: Xinhua summarizes expert tips on schedules, bedroom temperature, and naps
+**Summary:** A Xinhua science-and-technology article dated May 19, 2026, discusses seasonal sleep disruption, citing temperature swings and light exposure effects on melatonin rhythms, and summarizes expert guidance such as stable bed/wake timing, keeping bedrooms around 22–26°C, and limiting midday naps to about 20–30 minutes while avoiding long late-afternoon catch-up sleep.
+**Links:**
+- [Xinhua — Expert advice for sleepless spring–summer nights](https://www.news.cn/sci-tech/20260519/ce2bd0e5e09746c79f604f8e4e3609b5/c.html)
+**Commentary:** Evening trainees should also manage bright light and stimulating media before bed—small environmental edits often beat willpower alone.
+
+---
+
+### 12. CCTV.com commentary: beware “instant results” fitness marketing that turns training into injury risk
+**Summary:** On May 16, 2026, CCTV.com published a commentary warning that some rapid body-transformation messaging can increase injury risk and anxiety, urging science-based assessment, gradual progression, and qualified coaching rather than extreme short-term loading.
+**Links:**
+- [CCTV.com — The hidden risks of “instant” fitness](https://news.cctv.com/2026/05/16/ARTIKyTeS3aHGGQFWvaiWhSB260516.shtml)
+**Commentary:** Programs without recovery planning and movement quality control raise the odds of musculoskeletal injury and overtraining syndromes.
 
 ---
 
 ## Today's Summary
-- On-field injuries and national-team fitness gates are a reminder that return-to-sport should be evidence-led, not narrative-led.
-- Updated resistance-training guidance and exercise–blood-pressure evidence both push toward practical, adherable programming.
-- Sun protection, mosquito prevention, and summer blood-pressure messaging connect outdoor training to seasonal public-health risks.
-- Student Nutrition Day coverage and WHO’s salt-reduction toolkit link institutional meals to population-level dietary targets.
-- Long-term prevention trials continue to show that diet, exercise, and structured support work best as a bundle.
-- **Daily Framing:** A “back to real life” day—guidelines and headlines keep returning to the same theme: sustainable habits, measurable risk, and systems that make healthy choices easier to maintain.
+- WHO used a May 20 briefing to consolidate updated case counts, risk characterization, and operational notes for the Bundibugyo Ebola outbreak in DRC and Uganda, keeping global attention on border health, healthcare-associated transmission, and the lack of approved strain-specific vaccines/therapeutics.
+- North American playoff basketball and hockey entered conference-finals intensity, with a headline star defenseman ruled out and an overtime series opener setting the early narrative.
+- Preventive cardiology continues shifting toward earlier, individualized lipid risk assessment, while urology evidence cautions against oversimplifying stone prevention to “just hydrate.”
+- Nutrition evidence still supports combined diet pattern change, physical activity, and behavioral support for type 2 diabetes prevention at population scale.
+- **Daily Framing:** Today sits at the intersection of a **public-health information surge** (outbreak diplomacy and risk communication) and **peak-season elite sport load management**, alongside perennial lifestyle themes—sleep timing and safe training culture.
 
 ---
 
-*This digest is compiled from web sources for informational purposes; verify facts against primary reporting.*  
+*This digest is compiled from web sources for convenience; verify details against primary materials.*  
 *Date: Wednesday, May 20, 2026*
