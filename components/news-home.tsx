@@ -456,14 +456,30 @@ function LeadStory({
           ) : null}
         </div>
 
+        {/* Hero image: server-generated branded card via /api/hero */}
         <div
-          className="np-hero-placeholder"
           style={{
             aspectRatio: "16 / 8",
             border: "1px solid var(--np-rule)",
             position: "relative",
+            overflow: "hidden",
+            background: "var(--np-paper-warm)",
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`/api/hero?topic=${encodeURIComponent(lead.topic)}&date=${encodeURIComponent(lead.date)}&title=${encodeURIComponent(stripInlineMarkdown(lead.title))}&locale=${locale}&mins=${lead.readingMinutes}&count=${lead.articleCount ?? 0}`}
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              display: "block",
+            }}
+          />
           {lead.takeaway ? (
             <span
               className="np-mono"
@@ -475,6 +491,7 @@ function LeadStory({
                 color: "var(--np-ink3)",
                 background: "color-mix(in srgb, var(--np-paper) 85%, transparent)",
                 padding: "2px 6px",
+                zIndex: 1,
               }}
             >
               {stripInlineMarkdown(lead.takeaway).slice(0, 80)}
