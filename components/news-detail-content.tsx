@@ -8,11 +8,12 @@ import { InlineMarkdown } from "@/components/news-markdown";
 import { NewspaperFooter } from "@/components/newspaper/footer";
 import { NewspaperMasthead } from "@/components/newspaper/masthead";
 import { QuickTopicLinks } from "@/components/quick-topic-links";
+import { ReadingProgress } from "@/components/reading-progress";
 import { useLocale } from "@/components/locale-context";
 import { getCopy } from "@/data/copy";
 import { localizePath } from "@/lib/locale-routing";
 import { formatDisplayDate } from "@/lib/news-client";
-import type { NewsEntry } from "@/lib/news";
+import type { NewsEntry, NewsPreview } from "@/lib/news";
 import { getTopicMeta, TOPICS, type TopicKey } from "@/lib/news-meta";
 
 type NewsDetailViewEntry = Omit<NewsEntry, "filePath" | "content">;
@@ -26,6 +27,8 @@ type NewsDetailContentProps = {
   articleBodyEn: ReactNode | null;
   availableTopicsZh: TopicKey[];
   availableTopicsEn: TopicKey[];
+  relatedZh: NewsPreview[];
+  relatedEn: NewsPreview[];
 };
 
 export function NewsDetailContent({
@@ -37,17 +40,21 @@ export function NewsDetailContent({
   articleBodyEn,
   availableTopicsZh,
   availableTopicsEn,
+  relatedZh,
+  relatedEn,
 }: NewsDetailContentProps) {
   const locale = useLocale();
   const activeEntry = locale === "en" && entryEn ? entryEn : entry;
   const activeBody = locale === "en" && articleBodyEn ? articleBodyEn : articleBody;
   const availableTopics = locale === "en" ? availableTopicsEn : availableTopicsZh;
+  const related = locale === "en" ? relatedEn : relatedZh;
   const isShowingChineseFallback = locale === "en" && entryEn === null;
   const copy = getCopy(locale);
   const meta = getTopicMeta(topic, locale);
   const topicLabels = TOPICS.map((t) => ({ key: t.key, label: getTopicMeta(t.key, locale)!.label }));
   const topicHref = localizePath(`/news/${topic}`, locale);
   const homeHref = localizePath("/", locale);
+  const archiveHref = localizePath(`/archive/${date.slice(0, 7)}`, locale);
 
   if (!meta) {
     return null;
@@ -55,8 +62,19 @@ export function NewsDetailContent({
 
   return (
     <div className="np-root">
+      <ReadingProgress />
       <NewspaperMasthead date={date} archiveMonth={date.slice(0, 7)} />
       <main className="mx-auto w-full" style={{ maxWidth: 1280, padding: 40 }}>
+        <nav className="np-crumbs" aria-label="Breadcrumb">
+          <Link href={homeHref}>{locale === "zh" ? "首页" : "Home"}</Link>
+          <span className="np-crumbs-sep">/</span>
+          <Link href={archiveHref}>{date.slice(0, 7)}</Link>
+          <span className="np-crumbs-sep">/</span>
+          <Link href={topicHref}>{meta.label}</Link>
+          <span className="np-crumbs-sep">/</span>
+          <span style={{ color: "var(--color-text-secondary)" }}>{formatDisplayDate(date, locale)}</span>
+        </nav>
+
         <QuickTopicLinks
           date={date}
           currentTopic={topic}
@@ -92,6 +110,7 @@ export function NewsDetailContent({
           style={{ marginTop: 8 }}
         >
           <article
+            className="np-article-prose"
             style={{
               border: "1px solid var(--color-border)",
               padding: 32,
@@ -255,23 +274,108 @@ export function NewsDetailContent({
           </aside>
         </div>
 
-        <div style={{ marginTop: 32 }}>
-          <QuickTopicLinks
-            date={date}
-            currentTopic={topic}
-            availableTopics={availableTopics}
-            topicLabels={topicLabels}
-            copy={{
-              quickLinkHeading: copy.ui.detailPage.quickLinkHeading,
-              quickLinkCurrent: copy.ui.detailPage.quickLinkCurrent,
-              noNewsHint: copy.ui.detailPage.noNewsHint,
-            }}
+        {related.length > 0 ? (
+          <RelatedSection
+            related={related}
+            locale={locale}
+            topicLabel={meta.label}
           />
-        </div>
+        ) : null}
 
         <NewspaperFooter />
       </main>
     </div>
+  );
+}
+
+function RelatedSection({
+  related,
+  locale,
+  topicLabel,
+}: {
+  related: NewsPreview[];
+  locale: "zh" | "en";
+  topicLabel: string;
+}) {
+  return (
+    <section style={{ marginTop: 48, paddingTop: 24, borderTop: "1px solid var(--color-border)" }}>
+      <p
+        className="np-mono"
+        style={{
+          fontSize: 11,
+          letterSpacing: "0.24em",
+          textTransform: "uppercase",
+          color: "var(--color-text-muted)",
+          marginBottom: 16,
+        }}
+      >
+        {locale === "zh"
+          ? `${topicLabel} · 同主题其它日报`
+          : `MORE FROM ${topicLabel.toUpperCase()}`}
+      </p>
+      <div
+        style={{
+          display: "grid",
+          gap: 16,
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+        }}
+      >
+        {related.map((entry) => (
+          <Link
+            key={`${entry.topic}:${entry.date}`}
+            href={localizePath(`/news/${entry.topic}/${entry.date}`, locale)}
+            className="np-card"
+            style={{
+              display: "block",
+              padding: 18,
+              border: "1px solid var(--color-border)",
+              background: "var(--color-surface)",
+            }}
+          >
+            <div
+              className="np-mono"
+              style={{
+                fontSize: 10,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "var(--color-text-muted)",
+                marginBottom: 8,
+              }}
+            >
+              {formatDisplayDate(entry.date, locale)}
+            </div>
+            <h3
+              className="np-serif"
+              style={{
+                fontSize: 18,
+                lineHeight: 1.25,
+                letterSpacing: "-0.01em",
+                fontWeight: 600,
+                color: "var(--color-text-primary)",
+                margin: "0 0 8px",
+              }}
+            >
+              <InlineMarkdown content={entry.title} inline disableLinks />
+            </h3>
+            <div
+              className="np-sans"
+              style={{
+                fontSize: 13.5,
+                lineHeight: 1.6,
+                color: "var(--color-text-secondary)",
+                margin: 0,
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+              }}
+            >
+              <InlineMarkdown content={entry.description} disableLinks />
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 

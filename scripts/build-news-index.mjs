@@ -3,6 +3,16 @@
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import {
+  countArticles,
+  countSections,
+  extractDescription,
+  extractHighlights,
+  extractTakeaway,
+  extractTitle,
+  getReadingMinutes,
+} from "../lib/markdown-extract.mjs";
+
 const PROJECT_ROOT = process.cwd();
 const NEWS_ROOT = path.join(PROJECT_ROOT, "NEWS");
 const OUTPUT_DIR = path.join(PROJECT_ROOT, ".generated");
@@ -21,74 +31,6 @@ const TOPICS = [
 ];
 
 const TOPIC_ORDER = TOPICS.map((topic) => topic.key);
-
-function countMatches(content, pattern) {
-  return content.match(pattern)?.length ?? 0;
-}
-
-function extractTitle(content, fallback) {
-  return content.match(/^#\s+(.+)$/m)?.[1]?.trim() ?? fallback;
-}
-
-function extractDescription(content, fallback) {
-  return content.match(/^>\s+(.+)$/m)?.[1]?.trim() ?? fallback;
-}
-
-// Chinese extraction
-function extractTakeawayZh(content) {
-  const match = content.match(/\*\*(总体定性|今日定性)(：\*\*|\*\*：)\s*(.+)/);
-  if (match?.[3]) return match[3].trim();
-
-  const summaryHeading = content.match(/^##\s+今日小结$/m);
-  if (summaryHeading?.index === undefined) return undefined;
-  const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
-  const paragraphs = summaryBlock.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
-  const lastNonBullet = paragraphs.filter((p) => !p.startsWith("- ")).pop();
-  return lastNonBullet?.trim() || undefined;
-}
-
-function extractHighlightsZh(content) {
-  const summaryHeading = content.match(/^##\s+今日小结$/m);
-  if (summaryHeading?.index === undefined) return [];
-
-  const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
-  return summaryBlock
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.startsWith("- "))
-    .map((line) => line.replace(/^- /, "").trim())
-    .slice(0, 4);
-}
-
-// English extraction — headings: "## Today's Summary", takeaway: "**Daily Framing:**"
-function extractTakeawayEn(content) {
-  const match = content.match(/\*\*Daily Framing:\*\*\s*(.+)/);
-  if (match?.[1]) return match[1].trim();
-
-  const summaryHeading = content.match(/^##\s+Today's Summary$/m);
-  if (summaryHeading?.index === undefined) return undefined;
-  const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
-  const paragraphs = summaryBlock.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
-  const lastNonBullet = paragraphs.filter((p) => !p.startsWith("- ")).pop();
-  return lastNonBullet?.trim() || undefined;
-}
-
-function extractHighlightsEn(content) {
-  const summaryHeading = content.match(/^##\s+Today's Summary$/m);
-  if (summaryHeading?.index === undefined) return [];
-
-  const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
-  return summaryBlock
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.startsWith("- "))
-    .map((line) => line.replace(/^- /, "").trim())
-    .slice(0, 4);
-}
-
-function getReadingMinutes(content) {
-  return Math.max(3, Math.ceil(content.replace(/\s+/g, "").length / 900));
-}
 
 function sortEntries(entries) {
   return [...entries].sort((left, right) => {
@@ -111,8 +53,6 @@ async function buildIndex(locale) {
   const isEn = locale === "en";
   const fallbackTitle = isEn ? "Untitled digest" : "未命名日报";
   const fallbackDesc = isEn ? "No summary for this digest." : "本日报暂无摘要说明。";
-  const extractTakeaway = isEn ? extractTakeawayEn : extractTakeawayZh;
-  const extractHighlights = isEn ? extractHighlightsEn : extractHighlightsZh;
 
   const entries = [];
 
@@ -127,8 +67,8 @@ async function buildIndex(locale) {
 
       const title = extractTitle(content, fallbackTitle);
       const description = extractDescription(content, fallbackDesc);
-      const takeaway = extractTakeaway(content);
-      const highlights = extractHighlights(content);
+      const takeaway = extractTakeaway(content, locale);
+      const highlights = extractHighlights(content, locale);
 
       entries.push({
         topic: topic.key,
@@ -138,8 +78,8 @@ async function buildIndex(locale) {
         archiveMonth: date.slice(0, 7),
         title,
         description,
-        articleCount: countMatches(content, /^###\s+/gm),
-        sectionCount: countMatches(content, /^##\s+/gm),
+        articleCount: countArticles(content),
+        sectionCount: countSections(content),
         readingMinutes: getReadingMinutes(content),
         highlights,
         takeaway,

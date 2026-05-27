@@ -22,11 +22,11 @@ BACKEND="${NEWS_AGENT_BACKEND:-cursor}"
 case "$BACKEND" in
   cursor)
     MODEL="${NEWS_AGENT_MODEL:-${NEWS_AGENT_MODEL_DEFAULT:-composer-2}}"
-    if ! command -v agent &>/dev/null; then
-      echo "错误: 未找到 Cursor CLI (agent)。请安装: curl https://cursor.com/install -fsS | bash" >&2
+    if ! command -v cursor-agent &>/dev/null; then
+      echo "错误: 未找到 Cursor CLI (cursor-agent)。请安装: curl https://cursor.com/install -fsS | bash" >&2
       exit 1
     fi
-    agent -p --force --model "$MODEL" "@${COMMAND_FILE}" "${INSTRUCTION}"
+    cursor-agent -p --force --model "$MODEL" "@${COMMAND_FILE}" "${INSTRUCTION}"
     ;;
 
   claude)

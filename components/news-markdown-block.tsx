@@ -7,12 +7,45 @@ type NewsMarkdownProps = {
   content: string;
 };
 
+// Structural labels the cursor commands emit. Some legacy digests pack them
+// onto the same line as adjacent prose / list items (no blank line around
+// them), which CommonMark then folds into a single paragraph or list item.
+// We normalize before handing to react-markdown so each label always becomes
+// its own block.
+const STRUCTURAL_LABEL_GROUP =
+  "摘要|链接|简评|总体定性|今日定性|今日小结|Summary|Links?|Commentary|Daily Framing|Today's Summary";
+const STRUCTURAL_LABEL = `\\*\\*(?:${STRUCTURAL_LABEL_GROUP})[:：]\\*\\*`;
+
+function normalizeStructuralLabels(content: string): string {
+  let out = content;
+  // 1) Blank line BEFORE each label so it starts a fresh block, even when
+  //    the cursor output glued it onto the end of a list item or paragraph.
+  out = out.replace(new RegExp(STRUCTURAL_LABEL, "g"), (match) => `\n\n${match}`);
+  // 2) Blank line AFTER each label when it's followed inline by content
+  //    (e.g. "**简评：** 这是一段评论…").
+  out = out.replace(
+    new RegExp(`(${STRUCTURAL_LABEL})[ \\t]+(?=[^\\n])`, "g"),
+    "$1\n\n",
+  );
+  // 3) Blank line AFTER a label that sits on its own line but is immediately
+  //    followed by the next non-blank line (e.g. "**链接：**\n- ..."), so a
+  //    following list/paragraph is recognized as its own block.
+  out = out.replace(
+    new RegExp(`(${STRUCTURAL_LABEL})\\n(?!\\n)`, "g"),
+    "$1\n\n",
+  );
+  // 4) Collapse runs of newlines back to at most one blank line.
+  out = out.replace(/\n{3,}/g, "\n\n");
+  return out;
+}
+
 /**
  * Server-rendered article body. Renders the full markdown tree at build time
  * (every news detail page is `force-static`) so `react-markdown` + `remark-gfm`
  * never ship to the client. Do NOT import this from a client component.
  */
 export function NewsMarkdown({ content }: NewsMarkdownProps) {
+  const normalized = normalizeStructuralLabels(content);
   return (
     <div className="news-prose">
       <ReactMarkdown
@@ -65,7 +98,7 @@ export function NewsMarkdown({ content }: NewsMarkdownProps) {
           hr: () => <hr className="my-8 border-(--color-border)" />,
         }}
       >
-        {content}
+        {normalized}
       </ReactMarkdown>
     </div>
   );

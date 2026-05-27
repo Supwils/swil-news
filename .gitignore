@@ -8,3 +8,4 @@ dist
 .generated
 logs/
 *.plist
+tsconfig.tsbuildinfo

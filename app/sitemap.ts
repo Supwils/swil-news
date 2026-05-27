@@ -1,16 +1,23 @@
 import type { MetadataRoute } from "next";
 
 import { localizePath } from "@/lib/locale-routing";
-import { getAllNewsPreviews, getArchiveMonths } from "@/lib/news";
+import { getAllNewsPreviews } from "@/lib/news";
 import { TOPICS } from "@/lib/news-meta";
 import { absoluteUrl } from "@/lib/site";
 
+// Revalidate sitemap daily — content only changes when new digests land.
+export const revalidate = 86400;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Both calls are deduped by React.cache in lib/news.ts, so this is two
+  // index reads total (one per locale) instead of three.
   const [entriesZh, entriesEn] = await Promise.all([
     getAllNewsPreviews("zh"),
     getAllNewsPreviews("en"),
   ]);
-  const archiveMonths = await getArchiveMonths();
+  const archiveMonths = [
+    ...new Set(entriesZh.map((entry) => entry.date.slice(0, 7))),
+  ].sort((left, right) => right.localeCompare(left));
 
   const staticPagesZh: MetadataRoute.Sitemap = [
     {

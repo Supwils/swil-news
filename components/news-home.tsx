@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import { Bookmark, Check, ExternalLink, RotateCcw, Search } from "lucide-react";
 
 import { useLocale } from "@/components/locale-context";
 import { InlineMarkdown } from "@/components/news-markdown";
 import { NewspaperFooter } from "@/components/newspaper/footer";
 import { NewspaperMasthead } from "@/components/newspaper/masthead";
+import { SearchModal } from "@/components/search-modal";
 import { localizePath } from "@/lib/locale-routing";
 import { formatDisplayDate } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
@@ -32,7 +33,11 @@ type TopicFilter = TopicKey | "all";
 const READ_THRESHOLD = 0.9;
 const READING_SESSION_KEY = "s-news-reading-session";
 const READ_SET_KEY = "s-news-read-articles";
-const CONTINUE_DISMISSED_KEY = "s-news-continue-dismissed";
+// Stores which specific article-ids the user has dismissed the continue
+// banner for. Per-id + persistent (localStorage) so that dismissing today's
+// banner doesn't reappear on refresh, but a brand new session next time
+// will surface.
+const CONTINUE_DISMISSED_KEY = "s-news-continue-dismissed-ids";
 
 const MONTHS_EN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
@@ -162,14 +167,16 @@ export function NewsHome(props: NewsHomeProps) {
   const [clientState, setClientState] = useState<{
     readSet: Set<string>;
     session: ReadingSession | null;
-    continueDismissed: boolean;
-  }>({ readSet: new Set(), session: null, continueDismissed: false });
-  const { readSet, session, continueDismissed } = clientState;
+    dismissedIds: Set<string>;
+  }>({ readSet: new Set(), session: null, dismissedIds: new Set() });
+  const { readSet, session, dismissedIds } = clientState;
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     try {
       let readSetNext = new Set<string>();
       let sessionNext: ReadingSession | null = null;
+      let dismissedNext = new Set<string>();
       const readRaw = localStorage.getItem(READ_SET_KEY);
       if (readRaw) {
         readSetNext = new Set(JSON.parse(readRaw) as string[]);
@@ -179,19 +186,44 @@ export function NewsHome(props: NewsHomeProps) {
         const parsed = JSON.parse(sessRaw) as ReadingSession;
         if (parsed.progress < READ_THRESHOLD) sessionNext = parsed;
       }
-      const dismissed = sessionStorage.getItem(CONTINUE_DISMISSED_KEY) === "1";
+      const dismRaw = localStorage.getItem(CONTINUE_DISMISSED_KEY);
+      if (dismRaw) {
+        dismissedNext = new Set(JSON.parse(dismRaw) as string[]);
+      }
       // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot hydration from browser storage
-      setClientState({ readSet: readSetNext, session: sessionNext, continueDismissed: dismissed });
+      setClientState({ readSet: readSetNext, session: sessionNext, dismissedIds: dismissedNext });
     } catch {
       // ignore
     }
   }, []);
 
-  const handleDismissContinue = () => {
-    sessionStorage.setItem(CONTINUE_DISMISSED_KEY, "1");
-    setClientState((s) => ({ ...s, continueDismissed: true }));
-  };
+  const handleDismissContinue = useCallback(() => {
+    setClientState((s) => {
+      if (!s.session) return s;
+      const next = new Set(s.dismissedIds);
+      next.add(s.session.articleId);
+      try {
+        localStorage.setItem(CONTINUE_DISMISSED_KEY, JSON.stringify([...next]));
+      } catch {
+        // ignore
+      }
+      return { ...s, dismissedIds: next };
+    });
+  }, []);
 
+  // Cmd+K / Ctrl+K opens the search modal site-wide on home.
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  const continueBanner = session && !dismissedIds.has(session.articleId);
   const currentMonth = todayDate?.slice(0, 7) ?? null;
 
   return (
@@ -203,9 +235,14 @@ export function NewsHome(props: NewsHomeProps) {
         topicCounts={topicCounts}
         topics={topicsWithLocale}
         locale={locale}
+        onSearchClick={() => setSearchOpen(true)}
       />
 
-      <main className="mx-auto w-full" style={{ maxWidth: 1280, padding: 40 }}>
+      {searchOpen ? (
+        <SearchModal entries={entries} onClose={() => setSearchOpen(false)} />
+      ) : null}
+
+      <main className="mx-auto w-full np-home-main" style={{ maxWidth: 1280, padding: 40 }}>
         <HeroGrid
           lead={leadEntry}
           briefs={briefEntries}
@@ -216,7 +253,7 @@ export function NewsHome(props: NewsHomeProps) {
           todayDate={todayDate}
         />
 
-        {session && !continueDismissed ? (
+        {continueBanner && session ? (
           <ContinueStrip session={session} onDismiss={handleDismissContinue} locale={locale} />
         ) : null}
 
@@ -245,12 +282,14 @@ function TopicRail({
   topicCounts,
   topics,
   locale,
+  onSearchClick,
 }: {
   activeTopic: TopicFilter;
   totalCount: number;
   topicCounts: Partial<Record<TopicKey, number>>;
   topics: Array<{ key: TopicKey; shortLabel: string }>;
   locale: "zh" | "en";
+  onSearchClick: () => void;
 }) {
   return (
     <div
@@ -258,12 +297,12 @@ function TopicRail({
       style={{
         background: "var(--np-paper-warm)",
         borderBottom: "1px solid var(--np-rule)",
-        padding: "8px 40px",
+        padding: "8px 16px",
       }}
     >
       <div
-        className="mx-auto flex w-full flex-wrap items-center"
-        style={{ maxWidth: 1280, gap: 6 }}
+        className="mx-auto np-topic-rail"
+        style={{ maxWidth: 1280 }}
       >
         <Link
           href={localizePath("/", locale)}
@@ -290,10 +329,31 @@ function TopicRail({
           </Link>
         ))}
 
-        <span className="ml-auto np-mono" style={{ fontSize: 11, color: "var(--np-ink3)", letterSpacing: "0.14em" }}>
-          <Search size={12} style={{ display: "inline", verticalAlign: "-1px", marginRight: 6 }} />
-          {locale === "zh" ? "搜索归档" : "Search digests"}
-        </span>
+        <button
+          type="button"
+          className="np-search-trigger np-topic-rail-search"
+          style={{ marginLeft: "auto" }}
+          onClick={onSearchClick}
+          aria-label={locale === "zh" ? "搜索归档" : "Search digests"}
+        >
+          <Search size={12} aria-hidden />
+          <span>
+            {locale === "zh" ? "搜索归档" : "Search"}
+          </span>
+          <kbd
+            style={{
+              fontFamily: "inherit",
+              fontSize: 10,
+              padding: "1px 5px",
+              border: "1px solid var(--np-rule)",
+              color: "var(--np-ink3)",
+              borderRadius: 2,
+              marginLeft: 4,
+            }}
+          >
+            ⌘K
+          </kbd>
+        </button>
       </div>
     </div>
   );
@@ -456,50 +516,202 @@ function LeadStory({
           ) : null}
         </div>
 
-        {/* Hero image: server-generated branded card via /api/hero */}
+        <HeroPullQuoteCard lead={lead} locale={locale} kickerLabel={kickerLabel} />
+      </Link>
+    </article>
+  );
+}
+
+/**
+ * Hero card rendered with plain HTML + CSS (no external image, no edge
+ * function). Surfaces today's framing (takeaway) as a large editorial
+ * pull-quote — complementary to the H2 title above, not redundant.
+ */
+function HeroPullQuoteCard({
+  lead,
+  locale,
+  kickerLabel,
+}: {
+  lead: NewsPreview;
+  locale: "zh" | "en";
+  kickerLabel: string;
+}) {
+  const accent = TOPIC_COLOR_VAR[lead.topic];
+  const rawTakeaway = lead.takeaway ? stripInlineMarkdown(lead.takeaway) : "";
+  const fallback =
+    locale === "en"
+      ? "Today's framing. A daily lens on what moved, what mattered, and what's next."
+      : "今日定性。把今天发生的事、当下的影响和明日的走向，串成一句话。";
+  const quote = rawTakeaway || fallback;
+  const quoteFontSize = quote.length > 130 ? 22 : quote.length > 80 ? 26 : 30;
+
+  return (
+    <div
+      className="np-hero-card"
+      style={{
+        ["--hero-accent" as string]: accent,
+        position: "relative",
+        border: "1px solid var(--np-rule)",
+        background: "var(--np-paper-warm)",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: 320,
+      }}
+    >
+      {/* Top topic accent stripe */}
+      <div style={{ height: 6, background: accent, flexShrink: 0 }} />
+
+      {/* Right-edge accent shim */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          top: 6,
+          right: 0,
+          bottom: 0,
+          width: 3,
+          background: accent,
+          opacity: 0.18,
+        }}
+      />
+
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "24px 32px 22px",
+          gap: 16,
+        }}
+      >
+        {/* Row 1: kicker + wordmark */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span
+            className="np-mono"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 11,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: accent,
+              fontWeight: 700,
+            }}
+          >
+            <span
+              style={{
+                width: 7,
+                height: 7,
+                borderRadius: 999,
+                background: accent,
+                display: "inline-block",
+              }}
+            />
+            {kickerLabel}
+          </span>
+          <span
+            className="np-mono"
+            style={{
+              fontSize: 13,
+              letterSpacing: "0.18em",
+              color: "var(--np-ink2)",
+              fontWeight: 600,
+            }}
+          >
+            S—NEWS
+          </span>
+        </div>
+
+        {/* Row 2: pull-quote — the focal element */}
         <div
           style={{
-            aspectRatio: "16 / 8",
-            border: "1px solid var(--np-rule)",
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
             position: "relative",
-            overflow: "hidden",
-            background: "var(--np-paper-warm)",
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`/api/hero?topic=${encodeURIComponent(lead.topic)}&date=${encodeURIComponent(lead.date)}&title=${encodeURIComponent(stripInlineMarkdown(lead.title))}&locale=${locale}&mins=${lead.readingMinutes}&count=${lead.articleCount ?? 0}`}
-            alt=""
-            aria-hidden="true"
+          <span
+            aria-hidden
+            className="np-serif"
             style={{
               position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              display: "block",
+              left: -8,
+              top: -18,
+              fontSize: 76,
+              lineHeight: 1,
+              color: accent,
+              opacity: 0.32,
+              fontWeight: 400,
+              pointerEvents: "none",
             }}
-          />
-          {lead.takeaway ? (
+          >
+            &ldquo;
+          </span>
+
+          <blockquote
+            className="np-serif"
+            style={{
+              margin: 0,
+              fontStyle: "italic",
+              fontWeight: 500,
+              fontSize: quoteFontSize,
+              lineHeight: 1.35,
+              letterSpacing: "-0.005em",
+              color: "var(--np-ink)",
+              paddingLeft: 22,
+              borderLeft: `3px solid ${accent}`,
+              maxWidth: 760,
+            }}
+          >
+            {quote}
+          </blockquote>
+        </div>
+
+        {/* Row 3: rule + meta */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div style={{ width: "100%", height: 1, background: "var(--np-rule)" }} />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 16,
+              flexWrap: "wrap",
+            }}
+          >
             <span
               className="np-mono"
               style={{
-                position: "absolute",
-                left: 12,
-                bottom: 10,
-                fontSize: 12,
+                fontSize: 11,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
                 color: "var(--np-ink3)",
-                background: "color-mix(in srgb, var(--np-paper) 85%, transparent)",
-                padding: "2px 6px",
-                zIndex: 1,
               }}
             >
-              {stripInlineMarkdown(lead.takeaway).slice(0, 80)}
+              {locale === "en" ? "Today's framing" : "今日定性"}
+              {lead.articleCount
+                ? `  ·  ${lead.articleCount} ${locale === "en" ? "stories" : "条要闻"}`
+                : ""}
+              {`  ·  ${lead.readingMinutes} ${locale === "en" ? "min read" : "分钟阅读"}`}
             </span>
-          ) : null}
+            <span
+              className="np-mono"
+              style={{
+                fontSize: 10,
+                letterSpacing: "0.24em",
+                color: "var(--np-ink3)",
+              }}
+            >
+              DAILY DIGEST
+            </span>
+          </div>
         </div>
-      </Link>
-    </article>
+      </div>
+    </div>
   );
 }
 

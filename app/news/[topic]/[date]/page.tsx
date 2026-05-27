@@ -5,7 +5,12 @@ import { NewsDetailContent } from "@/components/news-detail-content";
 import { NewsMarkdown } from "@/components/news-markdown-block";
 import { StructuredData } from "@/components/structured-data";
 import { localizePath } from "@/lib/locale-routing";
-import { getAllNewsParams, getNewsEntry, getTopicsWithNewsForDate } from "@/lib/news";
+import {
+  getAllNewsParams,
+  getEntryPreviewsByTopic,
+  getNewsEntry,
+  getTopicsWithNewsForDate,
+} from "@/lib/news";
 import { getTopicMeta, isTopicKey } from "@/lib/news-meta";
 import { absoluteUrl, SITE_NAME } from "@/lib/site";
 
@@ -78,12 +83,21 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
     notFound();
   }
 
-  const [entryZh, entryEn, availableTopicsZh, availableTopicsEn] = await Promise.all([
+  const [entryZh, entryEn, availableTopicsZh, availableTopicsEn, topicPreviewsZh, topicPreviewsEn] = await Promise.all([
     getNewsEntry(topic, date, "zh"),
     getNewsEntry(topic, date, "en"),
     getTopicsWithNewsForDate(date, "zh"),
     getTopicsWithNewsForDate(date, "en"),
+    getEntryPreviewsByTopic(topic, "zh"),
+    getEntryPreviewsByTopic(topic, "en"),
   ]);
+
+  const relatedZh = topicPreviewsZh
+    .filter((entry) => entry.date !== date)
+    .slice(0, 3);
+  const relatedEn = topicPreviewsEn
+    .filter((entry) => entry.date !== date)
+    .slice(0, 3);
 
   const meta = getTopicMeta(topic, "zh");
 
@@ -144,6 +158,8 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
         articleBodyEn={articleBodyEn}
         availableTopicsZh={availableTopicsZh}
         availableTopicsEn={availableTopicsEn}
+        relatedZh={relatedZh}
+        relatedEn={relatedEn}
       />
     </>
   );

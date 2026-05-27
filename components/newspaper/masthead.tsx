@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 
 import { useLocale } from "@/components/locale-context";
 import { LocaleSwitch } from "@/components/locale-switch";
+import { MobileDrawer } from "@/components/newspaper/mobile-drawer";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { localizePath } from "@/lib/locale-routing";
 
@@ -91,6 +92,16 @@ export function NewspaperMasthead({ active = null, date, archiveMonth }: Masthea
           <LocaleSwitch />
           <ThemeSwitch />
         </nav>
+
+        <div className="np-nav-show-mobile">
+          <MobileDrawer
+            homeHref={homeHref}
+            archiveHref={archiveHref}
+            topicsHref={topicsHref}
+            aboutHref={aboutHref}
+            active={active}
+          />
+        </div>
       </div>
     </header>
   );

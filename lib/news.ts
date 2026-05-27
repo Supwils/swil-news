@@ -1,7 +1,17 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { cache } from "react";
 
 import { getCopy, type Locale } from "@/data/copy";
+import {
+  countArticles,
+  countSections,
+  extractDescription,
+  extractHighlights,
+  extractTakeaway,
+  extractTitle,
+  getReadingMinutes,
+} from "@/lib/markdown-extract.mjs";
 import { getTopicMeta, TOPICS, type TopicKey, type TopicMeta } from "@/lib/news-meta";
 
 export type NewsEntry = {
@@ -43,57 +53,6 @@ const NEWS_INDEX_PATHS: Record<Locale, string> = {
 
 const indexCache: Partial<Record<Locale, { mtimeMs: number; data: NewsIndex }>> = {};
 
-function countMatches(content: string, pattern: RegExp) {
-  return content.match(pattern)?.length ?? 0;
-}
-
-function extractTitle(content: string, fallback: string) {
-  return content.match(/^#\s+(.+)$/m)?.[1]?.trim() ?? fallback;
-}
-
-function extractDescription(content: string, fallback: string) {
-  return content.match(/^>\s+(.+)$/m)?.[1]?.trim() ?? fallback;
-}
-
-function getSummaryHeading(content: string, locale: Locale) {
-  return locale === "en"
-    ? content.match(/^##\s+Today's Summary$/m)
-    : content.match(/^##\s+今日小结$/m);
-}
-
-function extractTakeaway(content: string, locale: Locale = "zh") {
-  if (locale === "en") {
-    const match = content.match(/\*\*Daily Framing:\*\*\s*(.+)/);
-    if (match?.[1]) return match[1].trim();
-  } else {
-    const match = content.match(/\*\*(总体定性|今日定性)(：\*\*|\*\*：)\s*(.+)/);
-    if (match?.[3]) return match[3].trim();
-  }
-
-  const summaryHeading = getSummaryHeading(content, locale);
-  if (summaryHeading?.index === undefined) return undefined;
-  const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
-  const paragraphs = summaryBlock.split(/\n\n+/).map((p) => p.trim()).filter(Boolean);
-  const lastNonBullet = paragraphs.filter((p) => !p.startsWith("- ")).pop();
-  return lastNonBullet?.trim() || undefined;
-}
-
-function extractHighlights(content: string, locale: Locale = "zh") {
-  const summaryHeading = getSummaryHeading(content, locale);
-  if (summaryHeading?.index === undefined) {
-    return [];
-  }
-
-  const summaryBlock = content.slice(summaryHeading.index).split(/\n---/)[0] ?? "";
-
-  return summaryBlock
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.startsWith("- "))
-    .map((line) => line.replace(/^- /, "").trim())
-    .slice(0, 4);
-}
-
 async function readDirectorySafe(directory: string) {
   try {
     return await fs.readdir(directory);
@@ -110,10 +69,6 @@ function sortEntries<T extends { date: string; topic: TopicKey }>(entries: T[]) 
 
     return TOPIC_ORDER.indexOf(left.topic) - TOPIC_ORDER.indexOf(right.topic);
   });
-}
-
-function getReadingMinutes(content: string) {
-  return Math.max(3, Math.ceil(content.replace(/\s+/g, "").length / 900));
 }
 
 type NewsFallbacks = { untitled: string; noDescription: string };
@@ -139,7 +94,11 @@ function fromIndexedPreview(entry: IndexedNewsPreview): NewsPreview {
   return preview;
 }
 
-async function loadNewsIndex(locale: Locale = "zh") {
+// Request-scoped cache (via React.cache) on top of a long-lived process cache.
+// React.cache dedupes calls within a single render; the mtime-keyed Map
+// survives across renders inside the same Node process and avoids re-reading
+// the index file when it hasn't changed.
+const loadNewsIndex = cache(async (locale: Locale = "zh"): Promise<NewsIndex | null> => {
   const indexPath = NEWS_INDEX_PATHS[locale];
   try {
     const stat = await fs.stat(indexPath);
@@ -150,7 +109,7 @@ async function loadNewsIndex(locale: Locale = "zh") {
 
     const raw = await fs.readFile(indexPath, "utf8");
     const parsed = JSON.parse(raw) as NewsIndex;
-    const data = {
+    const data: NewsIndex = {
       ...parsed,
       entries: sortEntries(parsed.entries),
     };
@@ -160,7 +119,7 @@ async function loadNewsIndex(locale: Locale = "zh") {
     indexCache[locale] = undefined;
     return null;
   }
-}
+});
 
 async function readTopicEntries(topic: TopicMeta, fallbacks: NewsFallbacks, locale: Locale = "zh") {
   const directory = path.join(NEWS_ROOT, topic.folder, locale);
@@ -180,8 +139,8 @@ async function readTopicEntries(topic: TopicMeta, fallbacks: NewsFallbacks, loca
         content,
         title: extractTitle(content, fallbacks.untitled),
         description: extractDescription(content, fallbacks.noDescription),
-        articleCount: countMatches(content, /^###\s+/gm),
-        sectionCount: countMatches(content, /^##\s+/gm),
+        articleCount: countArticles(content),
+        sectionCount: countSections(content),
         readingMinutes: getReadingMinutes(content),
         highlights: extractHighlights(content, locale),
         takeaway: extractTakeaway(content, locale),
@@ -214,8 +173,8 @@ async function readEntryFromTopicByDate(topic: TopicMeta, date: string, fallback
     content,
     title: extractTitle(content, fallbacks.untitled),
     description: extractDescription(content, fallbacks.noDescription),
-    articleCount: countMatches(content, /^###\s+/gm),
-    sectionCount: countMatches(content, /^##\s+/gm),
+    articleCount: countArticles(content),
+    sectionCount: countSections(content),
     readingMinutes: getReadingMinutes(content),
     highlights: extractHighlights(content, locale),
     takeaway: extractTakeaway(content, locale),
