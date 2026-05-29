@@ -7,7 +7,7 @@
 # NEWS_AGENT_BACKEND  cursor (default) | claude | codex
 #
 # Per-backend model overrides:
-#   cursor  NEWS_AGENT_MODEL  (default: composer-2, via NEWS_AGENT_MODEL_DEFAULT)
+#   cursor  NEWS_AGENT_MODEL  (default: auto, via NEWS_AGENT_MODEL_DEFAULT)
 #   claude  NEWS_CLAUDE_MODEL (default: claude-opus-4-7)
 #   codex   NEWS_CODEX_MODEL  (default: codex-mini-latest)
 #
@@ -21,7 +21,7 @@ BACKEND="${NEWS_AGENT_BACKEND:-cursor}"
 
 case "$BACKEND" in
   cursor)
-    MODEL="${NEWS_AGENT_MODEL:-${NEWS_AGENT_MODEL_DEFAULT:-composer-2}}"
+    MODEL="${NEWS_AGENT_MODEL:-${NEWS_AGENT_MODEL_DEFAULT:-auto}}"
     if ! command -v cursor-agent &>/dev/null; then
       echo "错误: 未找到 Cursor CLI (cursor-agent)。请安装: curl https://cursor.com/install -fsS | bash" >&2
       exit 1

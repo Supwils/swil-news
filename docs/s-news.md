@@ -58,7 +58,7 @@ launchd / 用户
         → run_all_news.sh （2 路并发跑 10 个主题）
             → run-<topic>-news.sh
                 → news-agent.sh （后端可选: cursor | claude | codex）
-                    → Cursor CLI: agent --model composer-2
+                    → Cursor CLI: agent --model auto（默认；composer-2 已下线）
                         → 读取 .cursor/commands/<topic>-news.md + 执行指令
                         → 多轮 Web Search + 整理 + 双语成文
                         → 写入 NEWS/<topic>/zh/YYYY-MM-DD_*.md

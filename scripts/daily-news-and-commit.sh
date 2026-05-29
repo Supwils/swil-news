@@ -23,8 +23,8 @@ trap 'on_error "$?"' ERR
 log_info "Daily job started project_root=${PROJECT_ROOT}"
 
 # Cursor CLI agent --model：环境变量 NEWS_AGENT_MODEL；或把模型名作为本脚本第一个参数传给 run_all_news。
-# NEWS_AGENT_MODEL_DEFAULT 在未设置 NEWS_AGENT_MODEL 且未传参时生效；现为 composer-2（CLI 对 auto 不稳定），恢复后改为 auto。
-: "${NEWS_AGENT_MODEL_DEFAULT:=composer-2}"
+# NEWS_AGENT_MODEL_DEFAULT 在未设置 NEWS_AGENT_MODEL 且未传参时生效；composer-2 已被 Cursor 下线，默认改为 auto（由 Cursor 自动选模型）。
+: "${NEWS_AGENT_MODEL_DEFAULT:=auto}"
 export NEWS_AGENT_MODEL_DEFAULT
 
 LAST_STEP="generate_news"
