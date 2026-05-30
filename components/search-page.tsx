@@ -41,7 +41,8 @@ type Row = {
   excerptHtml: string;
 };
 
-const PAGE_SIZE = 30;
+const PAGE_SIZE_INITIAL = 30;
+const PAGE_SIZE_STEP = 30;
 
 function dataToRow(d: PagefindResultData, currentLocale: Locale): Row {
   const topic = d.meta.topic as TopicKey;
@@ -71,12 +72,20 @@ export function SearchPage({
   const [query, setQuery] = useState(initialQuery);
   const [selectedTopics, setSelectedTopics] = useState<TopicKey[]>(initialTopics);
   const [scope, setScope] = useState<"current" | "all">(initialLocaleScope);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(false);
   const [runtime, setRuntime] = useState<PagefindRuntime | null>(null);
   const [runtimeChecked, setRuntimeChecked] = useState(false);
   const [totalResults, setTotalResults] = useState<number | null>(null);
+  const [pageSize, setPageSize] = useState(PAGE_SIZE_INITIAL);
+  const pendingResults = useRef<Array<{ data: () => Promise<PagefindResultData> }>>([]);
   const queryToken = useRef(0);
+  // Marks the moment of the user's last keystroke in the input. The URL→state
+  // sync effect ignores incoming searchParams within USER_EDIT_WINDOW_MS so
+  // back/forward and external URL changes don't clobber an in-flight edit.
+  const lastUserEditAt = useRef(0);
+  const USER_EDIT_WINDOW_MS = 500;
 
   // Load Pagefind once
   useEffect(() => {
@@ -104,6 +113,16 @@ export function SearchPage({
     },
     [router, locale],
   );
+
+  // Debounced URL sync as user types — shareable / back-button-friendly URLs.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams(window.location.search);
+      if ((params.get("q") ?? "") === query.trim()) return; // no-op
+      syncUrl(query, selectedTopics, scope);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [query, selectedTopics, scope, syncUrl]);
 
   // Run query whenever inputs change.
   useEffect(() => {
@@ -133,17 +152,21 @@ export function SearchPage({
         const response = await runtime.search(normalized, { filters });
         if (token !== queryToken.current) return;
 
-        const slice = response.results.slice(0, PAGE_SIZE);
+        // Cache all result handles so "Load more" doesn't re-query Pagefind.
+        pendingResults.current = response.results;
+        const slice = response.results.slice(0, PAGE_SIZE_INITIAL);
         const data = await Promise.all(slice.map((r) => r.data()));
         if (token !== queryToken.current) return;
 
         setRows(data.map((d) => dataToRow(d, locale)));
         setTotalResults(response.results.length);
+        setPageSize(PAGE_SIZE_INITIAL);
       } catch (err) {
         console.warn("[pagefind] search-page error", err);
         if (token === queryToken.current) {
           setRows([]);
           setTotalResults(0);
+          pendingResults.current = [];
         }
       } finally {
         if (token === queryToken.current) setLoading(false);
@@ -153,8 +176,22 @@ export function SearchPage({
     return () => clearTimeout(timer);
   }, [query, selectedTopics, scope, runtime, runtimeChecked, locale]);
 
-  // Re-derive scope/topics if URL changes externally (back/forward).
+  const handleLoadMore = useCallback(async () => {
+    const total = pendingResults.current.length;
+    if (pageSize >= total) return;
+    const nextSize = Math.min(pageSize + PAGE_SIZE_STEP, total);
+    const slice = pendingResults.current.slice(pageSize, nextSize);
+    const token = queryToken.current;
+    const data = await Promise.all(slice.map((r) => r.data()));
+    if (token !== queryToken.current) return;
+    setRows((prev) => [...prev, ...data.map((d) => dataToRow(d, locale))]);
+    setPageSize(nextSize);
+  }, [pageSize, locale]);
+
+  // Re-derive scope/topics if URL changes externally (back/forward). Skip if
+  // the user just typed — they own the source of truth for USER_EDIT_WINDOW_MS.
   useEffect(() => {
+    if (Date.now() - lastUserEditAt.current < USER_EDIT_WINDOW_MS) return;
     const qParam = searchParams.get("q") ?? "";
     const topicParams = searchParams.getAll("topic").filter(isTopicKey) as TopicKey[];
     const scopeParam: "current" | "all" = searchParams.get("scope") === "all" ? "all" : "current";
@@ -181,6 +218,7 @@ export function SearchPage({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    // Cancel debounce and flush immediately on Enter.
     syncUrl(query, selectedTopics, scope);
   };
 
@@ -229,7 +267,10 @@ export function SearchPage({
               : "Search the full body of every digest…"
           }
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            lastUserEditAt.current = Date.now();
+            setQuery(e.target.value);
+          }}
           autoFocus
           aria-label={locale === "zh" ? "搜索框" : "Search query"}
         />
@@ -333,9 +374,15 @@ export function SearchPage({
               </ul>
               {totalResults != null && totalResults > rows.length ? (
                 <div className="np-search-results-more">
-                  {locale === "zh"
-                    ? `还有 ${totalResults - rows.length} 条结果，请细化关键字或筛选。`
-                    : `${totalResults - rows.length} more results — refine your query or filters.`}
+                  <button
+                    type="button"
+                    className="np-search-load-more"
+                    onClick={handleLoadMore}
+                  >
+                    {locale === "zh"
+                      ? `加载更多（剩余 ${totalResults - rows.length} 条）`
+                      : `Load more (${totalResults - rows.length} remaining)`}
+                  </button>
                 </div>
               ) : null}
             </>

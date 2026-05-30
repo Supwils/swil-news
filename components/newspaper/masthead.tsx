@@ -1,15 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import type { CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
+
+import { isTopicKey } from "@/lib/news-meta";
 
 import { useLocale } from "@/components/locale-context";
 import { LocaleSwitch } from "@/components/locale-switch";
 import { MobileDrawer } from "@/components/newspaper/mobile-drawer";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { localizePath } from "@/lib/locale-routing";
+import { prefetchPagefind } from "@/lib/pagefind-client";
+import { useShortcutLabel } from "@/lib/use-shortcut-label";
 
 const WEEKDAYS_EN = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const MONTHS_EN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -49,6 +53,8 @@ export function NewspaperMasthead({
 }: MastheadProps) {
   const locale = useLocale();
   const router = useRouter();
+  const pathname = usePathname();
+  const shortcutLabel = useShortcutLabel();
   const today = new Date();
   const pad = (n: number) => String(n).padStart(2, "0");
   const fallbackDate = `${today.getUTCFullYear()}-${pad(today.getUTCMonth() + 1)}-${pad(today.getUTCDate())}`;
@@ -63,10 +69,50 @@ export function NewspaperMasthead({
   const handleSearchClick = () => {
     if (onSearchClick) {
       onSearchClick();
-    } else {
-      router.push(searchHref);
+      return;
     }
+    // If we're on a /news/<topic>/<date> page, pre-fill the topic facet so
+    // search context follows the user.
+    const seg = (pathname ?? "").replace(/^\/en/, "").split("/").filter(Boolean);
+    const topicFromPath = seg[0] === "news" && seg[1] && isTopicKey(seg[1]) ? seg[1] : null;
+    const url = topicFromPath
+      ? `${searchHref}?topic=${encodeURIComponent(topicFromPath)}`
+      : searchHref;
+    router.push(url);
   };
+
+  // Site-wide ⌘K / Ctrl+K. Lives on the masthead because it's rendered on
+  // every route — keeps a single source of truth. Stable ref pattern lets the
+  // listener (mounted once) always call the latest handler without re-binding.
+  const handlerRef = useRef(handleSearchClick);
+  useEffect(() => {
+    handlerRef.current = handleSearchClick;
+  });
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        handlerRef.current();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // Warmup: pre-fetch the Pagefind runtime on idle so the first search opens
+  // instantly. Skips the network round-trip when the user finally hits ⌘K.
+  useEffect(() => {
+    const idle =
+      (window as Window & { requestIdleCallback?: (cb: () => void) => number })
+        .requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1500));
+    const handle = idle(() => prefetchPagefind());
+    return () => {
+      const cancel = (
+        window as Window & { cancelIdleCallback?: (h: number) => void }
+      ).cancelIdleCallback;
+      if (cancel && typeof handle === "number") cancel(handle);
+    };
+  }, []);
 
   return (
     <header
@@ -109,7 +155,8 @@ export function NewspaperMasthead({
             className="np-masthead-search"
             onClick={handleSearchClick}
             aria-label={locale === "zh" ? "搜索日报" : "Search digests"}
-            title={locale === "zh" ? "搜索 (⌘K)" : "Search (⌘K)"}
+            aria-keyshortcuts="Meta+K Control+K"
+            title={locale === "zh" ? `搜索 (${shortcutLabel})` : `Search (${shortcutLabel})`}
           >
             <Search size={14} aria-hidden />
           </button>
@@ -124,12 +171,23 @@ export function NewspaperMasthead({
           <ThemeSwitch />
         </nav>
 
-        <div className="np-nav-show-mobile">
+        <div className="np-nav-show-mobile" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <button
+            type="button"
+            className="np-masthead-search"
+            onClick={handleSearchClick}
+            aria-label={locale === "zh" ? "搜索日报" : "Search digests"}
+            aria-keyshortcuts="Meta+K Control+K"
+            title={locale === "zh" ? `搜索 (${shortcutLabel})` : `Search (${shortcutLabel})`}
+          >
+            <Search size={16} aria-hidden />
+          </button>
           <MobileDrawer
             homeHref={homeHref}
             archiveHref={archiveHref}
             topicsHref={topicsHref}
             aboutHref={aboutHref}
+            searchHref={searchHref}
             active={active}
           />
         </div>

@@ -14,7 +14,8 @@ type MobileDrawerProps = {
   archiveHref: string;
   topicsHref: string;
   aboutHref: string;
-  active: "today" | "archive" | "topics" | "about" | null;
+  searchHref: string;
+  active: "today" | "archive" | "topics" | "about" | "search" | null;
 };
 
 export function MobileDrawer({
@@ -22,6 +23,7 @@ export function MobileDrawer({
   archiveHref,
   topicsHref,
   aboutHref,
+  searchHref,
   active,
 }: MobileDrawerProps) {
   const locale = useLocale();
@@ -43,6 +45,7 @@ export function MobileDrawer({
 
   const items: Array<{ href: string; key: typeof active; label: string }> = [
     { href: homeHref, key: "today", label: locale === "zh" ? "今日" : "Today" },
+    { href: searchHref, key: "search", label: locale === "zh" ? "搜索" : "Search" },
     { href: archiveHref, key: "archive", label: locale === "zh" ? "归档" : "Archive" },
     { href: topicsHref, key: "topics", label: locale === "zh" ? "主题" : "Topics" },
     { href: aboutHref, key: "about", label: locale === "zh" ? "关于" : "About" },
@@ -118,5 +121,6 @@ export function buildDrawerHrefs(locale: "zh" | "en", archiveMonth: string) {
     archiveHref: localizePath(`/archive/${archiveMonth}`, locale),
     topicsHref: localizePath("/#topics", locale),
     aboutHref: localizePath("/about", locale),
+    searchHref: localizePath("/search", locale),
   };
 }

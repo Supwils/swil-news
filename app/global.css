@@ -1052,11 +1052,26 @@ select {
 .np-search-results-more {
   margin-top: 16px;
   padding: 10px 12px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 12.5px;
-  color: var(--color-text-muted);
   text-align: center;
   border-top: 1px dashed var(--color-border);
+}
+
+.np-search-load-more {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: border-color 120ms, background 120ms;
+}
+
+.np-search-load-more:hover,
+.np-search-load-more:focus-visible {
+  border-color: var(--color-text-primary);
+  outline: none;
 }
 
 .np-search-hero {

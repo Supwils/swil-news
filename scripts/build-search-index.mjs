@@ -17,11 +17,13 @@
 
 import { mkdir, readdir, readFile, rm } from "node:fs/promises";
 import path from "node:path";
-import process from "node:process";
+import { fileURLToPath } from "node:url";
 
 import { createIndex, close as closePagefind } from "pagefind";
 
-const PROJECT_ROOT = process.cwd();
+// Resolve relative to this script, not the caller's CWD — robust against hooks
+// or wrappers that cd elsewhere before exec.
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const NEWS_ROOT = path.join(PROJECT_ROOT, "NEWS");
 const OUT_DIR = path.join(PROJECT_ROOT, "public", "pagefind");
 
@@ -57,8 +59,12 @@ function markdownToSearchable(markdown) {
       .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
       // inline links: [text](url) -> text  (URLs are noise for search)
       .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-      // bare urls
-      .replace(/https?:\/\/\S+/g, " ")
+      // bare urls — keep the hostname (so "techcrunch" / "bloomberg.com"
+      // matches), drop the path. Stop at the first '/' '#' '?' '\s'.
+      .replace(/https?:\/\/([^\/\s#?]+)\S*/g, " $1 ")
+      // raw html — should never appear in our markdown but defends the
+      // dangerouslySetInnerHTML excerpt rendering against future drift.
+      .replace(/<[^>]+>/g, " ")
       // bold/italic
       .replace(/\*\*([^*]+)\*\*/g, "$1")
       .replace(/\*([^*]+)\*/g, "$1")

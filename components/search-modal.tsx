@@ -85,11 +85,18 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
   const queryToken = useRef(0);
 
   useEffect(() => {
+    // Remember the element that opened the modal so we can return focus on
+    // close — keyboard users otherwise lose their place.
+    const previouslyFocused = document.activeElement as HTMLElement | null;
     inputRef.current?.focus();
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = previousOverflow;
+      // Defer to next frame so React's unmount finishes first.
+      if (previouslyFocused && typeof previouslyFocused.focus === "function") {
+        requestAnimationFrame(() => previouslyFocused.focus());
+      }
     };
   }, []);
 
@@ -147,6 +154,8 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
     router.push(row.href);
   };
 
+  const panelRef = useRef<HTMLDivElement>(null);
+
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Escape") {
       event.preventDefault();
@@ -169,6 +178,24 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
         event.preventDefault();
         handleNavigate(target);
       }
+      return;
+    }
+    if (event.key === "Tab" && panelRef.current) {
+      // Focus trap: keep keyboard navigation inside the dialog.
+      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
+        'input, button, [href], [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
   };
 
@@ -186,7 +213,7 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
       }}
       onKeyDown={handleKeyDown}
     >
-      <div className="np-search-panel" onClick={(e) => e.stopPropagation()}>
+      <div ref={panelRef} className="np-search-panel" onClick={(e) => e.stopPropagation()}>
         <input
           ref={inputRef}
           type="text"
@@ -201,9 +228,22 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
             setQuery(e.target.value);
             setActiveIndex(0);
           }}
+          aria-label={locale === "zh" ? "搜索关键词" : "Search query"}
+          role="combobox"
+          aria-controls="np-search-listbox"
+          aria-expanded={results.length > 0}
+          aria-activedescendant={
+            results.length > 0 ? `np-search-row-${activeIndex}` : undefined
+          }
+          aria-autocomplete="list"
         />
 
-        <div className="np-search-list">
+        <div
+          className="np-search-list"
+          role="listbox"
+          id="np-search-listbox"
+          aria-label={locale === "zh" ? "搜索结果" : "Search results"}
+        >
           {results.length === 0 ? (
             <div className="np-search-empty">
               {isPagefindEmpty
@@ -218,10 +258,12 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
             results.map((row, idx) => (
               <Link
                 key={row.key}
+                id={`np-search-row-${idx}`}
                 href={row.href}
+                role="option"
+                aria-selected={idx === activeIndex}
                 className="np-search-row"
                 data-active={idx === activeIndex || undefined}
-                onMouseEnter={() => setActiveIndex(idx)}
                 onClick={() => onClose()}
               >
                 <div className="np-search-row-meta">

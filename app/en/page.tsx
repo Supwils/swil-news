@@ -27,10 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default async function EnglishHomePage() {
-  const [entries, entriesEn] = await Promise.all([
-    getAllNewsPreviews("zh"),
-    getAllNewsPreviews("en"),
-  ]);
+  const entries = await getAllNewsPreviews("en");
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -65,7 +62,7 @@ export default async function EnglishHomePage() {
   return (
     <>
       <StructuredData data={structuredData} />
-      <NewsHome entries={entries} entriesEn={entriesEn} />
+      <NewsHome entries={entries} />
     </>
   );
 }

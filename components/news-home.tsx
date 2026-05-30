@@ -14,10 +14,10 @@ import { localizePath } from "@/lib/locale-routing";
 import { formatDisplayDate } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
 import { TOPICS, getTopicMeta, isTopicKey, type TopicKey } from "@/lib/news-meta";
+import { useShortcutLabel } from "@/lib/use-shortcut-label";
 
 type NewsHomeProps = {
   entries: NewsPreview[];
-  entriesEn: NewsPreview[];
 };
 
 type ReadingSession = {
@@ -71,9 +71,8 @@ function articleId(entry: Pick<NewsPreview, "topic" | "date">) {
 }
 
 export function NewsHome(props: NewsHomeProps) {
-  const { entries: entriesZh, entriesEn } = props;
+  const { entries } = props;
   const locale = useLocale();
-  const entries = locale === "en" ? entriesEn : entriesZh;
   const searchParams = useSearchParams();
   const topicParam = searchParams.get("topic");
   const activeTopic: TopicFilter = topicParam && isTopicKey(topicParam) ? topicParam : "all";
@@ -211,17 +210,8 @@ export function NewsHome(props: NewsHomeProps) {
     });
   }, []);
 
-  // Cmd+K / Ctrl+K opens the search modal site-wide on home.
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        setSearchOpen(true);
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  // ⌘K / Ctrl+K is handled centrally by NewspaperMasthead (via onSearchClick),
+  // which makes it work on every page, not just home.
 
   const continueBanner = session && !dismissedIds.has(session.articleId);
   const currentMonth = todayDate?.slice(0, 7) ?? null;
@@ -297,6 +287,7 @@ function TopicRail({
   locale: "zh" | "en";
   onSearchClick: () => void;
 }) {
+  const shortcutLabel = useShortcutLabel();
   return (
     <div
       id="topics"
@@ -341,6 +332,7 @@ function TopicRail({
           style={{ marginLeft: "auto" }}
           onClick={onSearchClick}
           aria-label={locale === "zh" ? "搜索归档" : "Search digests"}
+          aria-keyshortcuts="Meta+K Control+K"
         >
           <Search size={12} aria-hidden />
           <span>
@@ -357,7 +349,7 @@ function TopicRail({
               marginLeft: 4,
             }}
           >
-            ⌘K
+            {shortcutLabel}
           </kbd>
         </button>
       </div>
@@ -374,16 +366,22 @@ function SearchHero({
   totalCount: number;
   onClick: () => void;
 }) {
+  const shortcutLabel = useShortcutLabel();
   return (
     <div className="np-search-hero">
-      <button type="button" className="np-search-hero-button" onClick={onClick}>
+      <button
+        type="button"
+        className="np-search-hero-button"
+        onClick={onClick}
+        aria-keyshortcuts="Meta+K Control+K"
+      >
         <Search size={16} aria-hidden style={{ flexShrink: 0 }} />
         <span className="np-search-hero-text">
           {locale === "zh"
             ? `搜索 ${totalCount} 期日报 · 标题、正文、主题、日期`
             : `Search ${totalCount} digests · titles, body, topics, dates`}
         </span>
-        <kbd className="np-search-hero-kbd">⌘K</kbd>
+        <kbd className="np-search-hero-kbd">{shortcutLabel}</kbd>
       </button>
     </div>
   );

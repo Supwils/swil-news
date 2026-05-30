@@ -6,9 +6,10 @@
  * resolves to `null` and callers degrade to their fallback path — never throw.
  */
 
+import type { Locale } from "@/data/copy";
 import type { TopicKey } from "@/lib/news-meta";
 
-export type Locale = "zh" | "en";
+export type { Locale };
 
 export type PagefindFilters = {
   topic?: TopicKey[];
@@ -57,22 +58,26 @@ export type PagefindRuntime = {
 
 let loaderPromise: Promise<PagefindRuntime | null> | null = null;
 
+// Pagefind's runtime is a static asset, not part of the bundle. Routing the
+// import through new Function keeps both TypeScript and the Next bundler out
+// of the resolution path. Built once at module load, reused per call.
+const dynamicImport = new Function("u", "return import(u)") as (
+  u: string,
+) => Promise<PagefindRuntime>;
+
+const PAGEFIND_URL = "/pagefind/pagefind.js";
+
 export function loadPagefind(): Promise<PagefindRuntime | null> {
   if (typeof window === "undefined") return Promise.resolve(null);
   if (loaderPromise) return loaderPromise;
 
   loaderPromise = (async () => {
     try {
-      // The Pagefind runtime is a static asset (built by scripts/build-search-index.mjs).
-      // TypeScript / the Next bundler cannot statically resolve it; route the import
-      // through a runtime-only path so neither tries to bundle or type-check it.
-      const url = "/pagefind/pagefind.js";
-      const dynamicImport = new Function("u", "return import(u)") as (
-        u: string,
-      ) => Promise<PagefindRuntime>;
-      const mod = await dynamicImport(url);
+      const mod = await dynamicImport(PAGEFIND_URL);
       if (typeof mod.options === "function") {
-        await mod.options({ excerptLength: 30 });
+        // excerptLength is in tokens; 60 reads well for both CJK (≈60 chars,
+        // ~2 lines) and English (≈60 words, ~3 lines clamped to 3 in CSS).
+        await mod.options({ excerptLength: 60 });
       }
       return mod;
     } catch (err) {
@@ -83,4 +88,14 @@ export function loadPagefind(): Promise<PagefindRuntime | null> {
   })();
 
   return loaderPromise;
+}
+
+/**
+ * Fire-and-forget warmup. Triggers the dynamic import without awaiting,
+ * letting the browser fetch + parse Pagefind during idle time so the first
+ * modal/page open is instant. Safe to call multiple times (single-flight).
+ */
+export function prefetchPagefind(): void {
+  if (typeof window === "undefined") return;
+  void loadPagefind();
 }
