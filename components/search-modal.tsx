@@ -8,7 +8,8 @@ import { useLocale } from "@/components/locale-context";
 import { localizePath } from "@/lib/locale-routing";
 import { formatDisplayDate } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
-import { getTopicMeta } from "@/lib/news-meta";
+import { getTopicMeta, type TopicKey } from "@/lib/news-meta";
+import { loadPagefind, type PagefindResultData, type PagefindRuntime } from "@/lib/pagefind-client";
 
 type SearchModalProps = {
   entries: NewsPreview[];
@@ -17,8 +18,59 @@ type SearchModalProps = {
 
 const MAX_RESULTS = 20;
 
-function buildHref(entry: NewsPreview, locale: "zh" | "en") {
+type DisplayRow = {
+  key: string;
+  href: string;
+  topicLabel: string;
+  date: string;
+  title: string;
+  excerptHtml?: string;
+};
+
+function buildHref(entry: { topic: TopicKey; date: string }, locale: "zh" | "en") {
   return localizePath(`/news/${entry.topic}/${entry.date}`, locale);
+}
+
+function fallbackRows(
+  entries: NewsPreview[],
+  query: string,
+  locale: "zh" | "en",
+): DisplayRow[] {
+  const normalized = query.trim().toLowerCase();
+  const source = normalized
+    ? entries.filter((entry) => {
+        const topicLabel = (getTopicMeta(entry.topic, locale)?.label ?? "").toLowerCase();
+        return (
+          entry.searchText.includes(normalized) ||
+          topicLabel.includes(normalized) ||
+          entry.date.includes(normalized)
+        );
+      })
+    : entries;
+  return source.slice(0, MAX_RESULTS).map((entry) => ({
+    key: `${entry.topic}:${entry.date}`,
+    href: buildHref(entry, locale),
+    topicLabel: getTopicMeta(entry.topic, locale)?.shortLabel ?? entry.topic,
+    date: formatDisplayDate(entry.date, locale),
+    title: entry.title,
+  }));
+}
+
+function pagefindRowsFromData(data: PagefindResultData[], locale: "zh" | "en"): DisplayRow[] {
+  return data
+    .filter((d) => d?.meta?.locale === locale)
+    .slice(0, MAX_RESULTS)
+    .map((d) => {
+      const topic = d.meta.topic as TopicKey;
+      return {
+        key: `${topic}:${d.meta.date}`,
+        href: d.url,
+        topicLabel: getTopicMeta(topic, locale)?.shortLabel ?? topic,
+        date: formatDisplayDate(d.meta.date, locale),
+        title: d.meta.title,
+        excerptHtml: d.excerpt,
+      };
+    });
 }
 
 export function SearchModal({ entries, onClose }: SearchModalProps) {
@@ -27,6 +79,10 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [runtime, setRuntime] = useState<PagefindRuntime | null>(null);
+  const [runtimeReady, setRuntimeReady] = useState(false);
+  const [remoteRows, setRemoteRows] = useState<DisplayRow[] | null>(null);
+  const queryToken = useRef(0);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -37,25 +93,58 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
     };
   }, []);
 
-  const results = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    if (!normalized) return entries.slice(0, MAX_RESULTS);
-    return entries
-      .filter((entry) => {
-        const topicLabel = (getTopicMeta(entry.topic, locale)?.label ?? "").toLowerCase();
-        return (
-          entry.searchText.includes(normalized) ||
-          topicLabel.includes(normalized) ||
-          entry.date.includes(normalized)
+  useEffect(() => {
+    let cancelled = false;
+    void loadPagefind().then((pf) => {
+      if (cancelled) return;
+      setRuntime(pf);
+      setRuntimeReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Pagefind-backed live search; debounced via query token to avoid races.
+  // Effect body intentionally never calls setState synchronously — only the
+  // async then-branch updates state once the search resolves for this query.
+  useEffect(() => {
+    if (!runtime) return;
+    const normalized = query.trim();
+    if (!normalized) return;
+    const token = ++queryToken.current;
+    const timer = setTimeout(async () => {
+      try {
+        const response = await runtime.search(normalized, {
+          filters: { locale: [locale] },
+        });
+        if (token !== queryToken.current) return;
+        const data = await Promise.all(
+          response.results.slice(0, MAX_RESULTS * 2).map((r) => r.data()),
         );
-      })
-      .slice(0, MAX_RESULTS);
-  }, [entries, locale, query]);
+        if (token !== queryToken.current) return;
+        setRemoteRows(pagefindRowsFromData(data, locale));
+      } catch (err) {
+        console.warn("[pagefind] search error", err);
+        if (token === queryToken.current) setRemoteRows([]);
+      }
+    }, 80);
+    return () => clearTimeout(timer);
+  }, [query, runtime, locale]);
 
+  const results = useMemo<DisplayRow[]>(() => {
+    if (runtime && query.trim()) {
+      // remoteRows is keyed implicitly by `query`: when a new query arrives,
+      // the previous remoteRows briefly shows under the new query string. The
+      // 80ms debounce keeps that window tight enough not to be visible.
+      return remoteRows ?? [];
+    }
+    return fallbackRows(entries, query, locale);
+  }, [entries, locale, query, runtime, remoteRows]);
 
-  const handleNavigate = (entry: NewsPreview) => {
+  const handleNavigate = (row: DisplayRow) => {
     onClose();
-    router.push(buildHref(entry, locale));
+    router.push(row.href);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -83,6 +172,9 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
     }
   };
 
+  const isPagefindEmpty =
+    !!runtime && !!query.trim() && remoteRows !== null && remoteRows.length === 0;
+
   return (
     <div
       className="np-search-backdrop"
@@ -101,8 +193,8 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
           className="np-search-input"
           placeholder={
             locale === "zh"
-              ? "搜索标题、摘要、主题或日期 (YYYY-MM-DD)…"
-              : "Search titles, summaries, topics, or dates (YYYY-MM-DD)…"
+              ? "搜索标题、正文、主题或日期 (YYYY-MM-DD)…"
+              : "Search titles, body, topics, or dates (YYYY-MM-DD)…"
           }
           value={query}
           onChange={(e) => {
@@ -114,27 +206,36 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
         <div className="np-search-list">
           {results.length === 0 ? (
             <div className="np-search-empty">
-              {locale === "zh" ? "没有匹配的日报。" : "No matching digests."}
+              {isPagefindEmpty
+                ? locale === "zh"
+                  ? "未匹配到任何日报。"
+                  : "No digests match this query."
+                : locale === "zh"
+                ? "没有匹配的日报。"
+                : "No matching digests."}
             </div>
           ) : (
-            results.map((entry, idx) => {
-              const meta = getTopicMeta(entry.topic, locale);
-              return (
-                <Link
-                  key={`${entry.topic}:${entry.date}`}
-                  href={buildHref(entry, locale)}
-                  className="np-search-row"
-                  data-active={idx === activeIndex || undefined}
-                  onMouseEnter={() => setActiveIndex(idx)}
-                  onClick={() => onClose()}
-                >
-                  <div className="np-search-row-meta">
-                    {`${meta?.shortLabel ?? entry.topic} · ${formatDisplayDate(entry.date, locale)}`}
-                  </div>
-                  <div className="np-search-row-title">{entry.title}</div>
-                </Link>
-              );
-            })
+            results.map((row, idx) => (
+              <Link
+                key={row.key}
+                href={row.href}
+                className="np-search-row"
+                data-active={idx === activeIndex || undefined}
+                onMouseEnter={() => setActiveIndex(idx)}
+                onClick={() => onClose()}
+              >
+                <div className="np-search-row-meta">
+                  {`${row.topicLabel} · ${row.date}`}
+                </div>
+                <div className="np-search-row-title">{row.title}</div>
+                {row.excerptHtml ? (
+                  <div
+                    className="np-search-row-excerpt"
+                    dangerouslySetInnerHTML={{ __html: row.excerptHtml }}
+                  />
+                ) : null}
+              </Link>
+            ))
           )}
         </div>
 
@@ -142,6 +243,19 @@ export function SearchModal({ entries, onClose }: SearchModalProps) {
           <span>↑↓ {locale === "zh" ? "选择" : "navigate"}</span>
           <span>↵ {locale === "zh" ? "打开" : "open"}</span>
           <span>esc {locale === "zh" ? "关闭" : "close"}</span>
+          <span style={{ marginLeft: "auto", opacity: 0.7 }}>
+            {runtimeReady
+              ? runtime
+                ? locale === "zh"
+                  ? "全文索引"
+                  : "full-text"
+                : locale === "zh"
+                ? "简化模式"
+                : "lite mode"
+              : locale === "zh"
+              ? "加载中…"
+              : "loading…"}
+          </span>
         </div>
       </div>
     </div>

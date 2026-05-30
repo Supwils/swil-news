@@ -228,7 +228,13 @@ export function NewsHome(props: NewsHomeProps) {
 
   return (
     <div className="np-root">
-      <NewspaperMasthead active="today" date={todayDate ?? undefined} archiveMonth={currentMonth ?? undefined} />
+      <NewspaperMasthead
+        active="today"
+        date={todayDate ?? undefined}
+        archiveMonth={currentMonth ?? undefined}
+        onSearchClick={() => setSearchOpen(true)}
+      />
+      <SearchHero locale={locale} totalCount={totalCount} onClick={() => setSearchOpen(true)} />
       <TopicRail
         activeTopic={activeTopic}
         totalCount={totalCount}
@@ -355,6 +361,30 @@ function TopicRail({
           </kbd>
         </button>
       </div>
+    </div>
+  );
+}
+
+function SearchHero({
+  locale,
+  totalCount,
+  onClick,
+}: {
+  locale: "zh" | "en";
+  totalCount: number;
+  onClick: () => void;
+}) {
+  return (
+    <div className="np-search-hero">
+      <button type="button" className="np-search-hero-button" onClick={onClick}>
+        <Search size={16} aria-hidden style={{ flexShrink: 0 }} />
+        <span className="np-search-hero-text">
+          {locale === "zh"
+            ? `搜索 ${totalCount} 期日报 · 标题、正文、主题、日期`
+            : `Search ${totalCount} digests · titles, body, topics, dates`}
+        </span>
+        <kbd className="np-search-hero-kbd">⌘K</kbd>
+      </button>
     </div>
   );
 }

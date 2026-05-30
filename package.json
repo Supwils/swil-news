@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "build:news-index": "node scripts/build-news-index.mjs",
+    "build:search-index": "node scripts/build-search-index.mjs",
     "validate:news-layout": "node scripts/validate-news-layout.mjs",
     "validate:news-content": "node scripts/validate-news-content.mjs",
     "validate:news-content:strict": "NEWS_CONTENT_VALIDATION_MODE=strict node scripts/validate-news-content.mjs",
     "dev": "next dev --port 3011",
     "predev": "pnpm build:news-index",
-    "prebuild": "pnpm build:news-index",
+    "prebuild": "pnpm build:news-index && pnpm build:search-index",
     "build": "next build",
     "prestart": "pnpm build:news-index",
     "start": "next start",
@@ -34,6 +35,7 @@
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.1.6",
+    "pagefind": "^1.5.2",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
   }

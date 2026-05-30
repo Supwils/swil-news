@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Search } from "lucide-react";
 import type { CSSProperties } from "react";
 
 import { useLocale } from "@/components/locale-context";
@@ -21,6 +23,11 @@ type MastheadProps = {
   date?: string;
   /** Archive month for the "Archive" link (YYYY-MM). Defaults to current month. */
   archiveMonth?: string;
+  /**
+   * Click handler for the search button. If provided (e.g. on the home page),
+   * opens the in-page SearchModal. Otherwise the button links to `/search`.
+   */
+  onSearchClick?: () => void;
 };
 
 function formatStamp(date: string) {
@@ -34,8 +41,14 @@ function formatStamp(date: string) {
   return `${weekday} · ${monthLabel} ${dayStr} · ${year} · ISSUE № ${year}.${monthStr}.${dayStr}`;
 }
 
-export function NewspaperMasthead({ active = null, date, archiveMonth }: MastheadProps) {
+export function NewspaperMasthead({
+  active = null,
+  date,
+  archiveMonth,
+  onSearchClick,
+}: MastheadProps) {
   const locale = useLocale();
+  const router = useRouter();
   const today = new Date();
   const pad = (n: number) => String(n).padStart(2, "0");
   const fallbackDate = `${today.getUTCFullYear()}-${pad(today.getUTCMonth() + 1)}-${pad(today.getUTCDate())}`;
@@ -45,6 +58,15 @@ export function NewspaperMasthead({ active = null, date, archiveMonth }: Masthea
   const homeHref = localizePath("/", locale);
   const topicsHref = localizePath("/#topics", locale);
   const aboutHref = localizePath("/about", locale);
+  const searchHref = localizePath("/search", locale);
+
+  const handleSearchClick = () => {
+    if (onSearchClick) {
+      onSearchClick();
+    } else {
+      router.push(searchHref);
+    }
+  };
 
   return (
     <header
@@ -82,6 +104,15 @@ export function NewspaperMasthead({ active = null, date, archiveMonth }: Masthea
           <NavItem href={aboutHref} active={active === "about"}>
             {locale === "zh" ? "关于" : "About"}
           </NavItem>
+          <button
+            type="button"
+            className="np-masthead-search"
+            onClick={handleSearchClick}
+            aria-label={locale === "zh" ? "搜索日报" : "Search digests"}
+            title={locale === "zh" ? "搜索 (⌘K)" : "Search (⌘K)"}
+          >
+            <Search size={14} aria-hidden />
+          </button>
           <span
             className="np-mono"
             style={{ ...stampStyle, letterSpacing: "0.06em", marginLeft: 4, marginRight: 4 }}
