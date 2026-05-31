@@ -13,14 +13,49 @@ log_info() { echo "[$(LOG_TS)] [INFO] $*"; }
 log_warn() { echo "[$(LOG_TS)] [WARN] $*"; }
 log_error() { echo "[$(LOG_TS)] [ERROR] $*" >&2; }
 
+# Notification helpers (macOS desktop + Resend email). Sourced — never fatal.
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/notify.sh"
+
+JOB_STARTED_AT_EPOCH=$(date +%s)
+export NOTIFY_JOB_STARTED_AT="$(date '+%Y-%m-%d %H:%M:%S')"
+
 LAST_STEP="init"
+LAST_DEBUG_LOG=""
 on_error() {
   local exit_code="$1"
+  local reason="exit_code=${exit_code}"
   log_error "Daily job failed at step=${LAST_STEP} exit_code=${exit_code}"
+  notify_failure "${LAST_STEP}" "${reason}" "${LAST_DEBUG_LOG}"
 }
 trap 'on_error "$?"' ERR
 
 log_info "Daily job started project_root=${PROJECT_ROOT}"
+
+# --- Network preflight --------------------------------------------------------
+# A bad wifi / DNS at 09:00 is the dominant historical failure mode (often
+# 90+ minutes wasted on cursor-agent's internal retries). Verify Cursor's API
+# host resolves before launching the pipeline; if it doesn't after a short
+# bounded wait, abort cleanly with a notification.
+LAST_STEP="network_preflight"
+log_info "Step start: network_preflight host=api2.cursor.sh"
+NET_OK=0
+for attempt in 1 2 3 4 5 6; do
+  if host api2.cursor.sh >/dev/null 2>&1 || nslookup api2.cursor.sh >/dev/null 2>&1; then
+    NET_OK=1
+    break
+  fi
+  log_warn "Preflight DNS attempt ${attempt}/6 failed; sleeping 20s"
+  sleep 20
+done
+if [[ "$NET_OK" != "1" ]]; then
+  log_error "Network preflight failed: api2.cursor.sh unresolvable after 6 attempts (~2 min)"
+  notify_failure "network_preflight" "DNS for api2.cursor.sh unresolvable after 6 attempts" ""
+  # Exit 0 explicitly: this is an environment skip, not a job failure — avoids
+  # the ERR trap double-notifying and keeps launchd's failure stats clean.
+  exit 0
+fi
+log_info "Step success: network_preflight"
 
 # Cursor CLI agent --model：环境变量 NEWS_AGENT_MODEL；或把模型名作为本脚本第一个参数传给 run_all_news。
 # NEWS_AGENT_MODEL_DEFAULT 在未设置 NEWS_AGENT_MODEL 且未传参时生效；composer-2 已被 Cursor 下线，默认改为 auto（由 Cursor 自动选模型）。
@@ -49,4 +84,6 @@ else
   log_warn "Step skipped: git_commit_push reason=no_changes"
 fi
 
-log_info "Daily job finished status=success"
+JOB_DURATION=$(( $(date +%s) - JOB_STARTED_AT_EPOCH ))
+log_info "Daily job finished status=success duration_sec=${JOB_DURATION}"
+notify_success "${JOB_DURATION}" "Pushed to origin/main."
