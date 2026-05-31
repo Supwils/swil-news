@@ -6,162 +6,163 @@
 
 ## I. Policy & Carbon Markets
 
-### 1. IEA: Global energy investment to hit $3.4 trillion in 2026; clean spending roughly double fossil fuels
-**Summary:** The International Energy Agency released *World Energy Investment 2026* on May 28. Amid Middle East conflict and Strait of Hormuz disruptions, global energy investment is projected to rise about 5% year-on-year to $3.4 trillion. Roughly $2.2 trillion is expected for grids, storage, nuclear, renewables, efficiency, and electrification, versus about $1.2 trillion for oil, gas, and coal. Despite higher oil prices, upstream oil investment is forecast to fall for a third straight year, below $500 billion, while gas investment rises to about $330 billion—the highest in a decade. Renewable power investment is put near $665 billion (including about $365 billion for solar); grid spending approaches $550 billion and battery storage exceeds $100 billion. The report also notes clean investments helped major importers avoid roughly $260 billion in fossil fuel import costs in 2025.
+### 1. U.S. SEC Proposes Full Rescission of 2024 Climate Disclosure Rule (Policy)
+**Summary:** On May 29, the U.S. Securities and Exchange Commission (SEC) formally proposed rescinding the 2024 climate-related disclosure rule, arguing it exceeds the agency's statutory authority and imposes costs on public companies and shareholders disproportionate to any informational benefit for investors. The rule would have required some companies to report greenhouse gas emissions and climate-related risks; it was stayed in April 2024 and never took effect. Chair Paul Atkins said the SEC should focus on disclosures material to investors. A 60-day public comment period now opens—another major climate-finance rollback in President Trump's second term.
 
 **Links:**
 
-- [IEA — Impacts of Middle East conflict set to reshape energy investment plans (May 28, 2026)](https://www.iea.org/news/impacts-of-middle-east-conflict-set-to-reshape-energy-investment-plans-as-disruptions-put-focus-on-security)
-- [IEA — World Energy Investment 2026](https://www.iea.org/reports/world-energy-investment-2026)
+- [AP / Tri-City Record — SEC moves to repeal rule that requires companies to report greenhouse gas emissions and climate risk](https://www.tricityrecordnm.com/articles/sec-moves-to-repeal-rule-that-requires-companies-to-report-greenhouse-gas-emissions-and-climate-risk/)
+- [Newsmax — SEC Advances Repeal of Climate Risk Rule](https://www.newsmax.com/newsfront/sec-climate-gop/2026/05/29/id/1257974/)
 
-**Commentary:** The crisis has not crowded out clean capital—it has rewritten “security” into investment functions—but reallocation within fossil fuels (less oil, more gas, coal rebound) shows derisking can still run through brown lanes.
+**Commentary:** Federal retreat does not erase California, the EU, and other jurisdictions' disclosure requirements—multinationals will increasingly comply to the highest standard, not Washington's.
 
 ---
 
-### 2. California carbon auction settles slightly higher; CARB hears cap-and-invest amendments May 28–29
-**Summary:** Results for the year's second California–Québec Western Climate Initiative auction were released May 27: all current- and future-vintage allowances sold out at $28.81/t and $28.76/t respectively—up less than $1 from the February floor of $27.94/t. Proceeds to the Greenhouse Gas Reduction Fund are estimated near $770 million, well below the roughly $1.1 billion raised in May 2024. The California Air Resources Board held a public hearing May 28–29 on amendments renaming cap-and-trade as cap-and-invest and implementing AB 1207's extension through 2045. Disputed items include a proposed Manufacturing Decarbonization Incentive Fund and a separate reserve of 118 million industrial allowances; advocates warn of weaker 2030 targets and lower GGRF revenue.
+### 2. New York Enacts Budget Rollbacks to Landmark 2019 Climate Law (Policy)
+**Summary:** Governor Kathy Hochul signed New York's $268.5 billion 2026–27 budget on May 28, including major changes to the Climate Leadership and Community Protection Act (CLCPA): the mandatory 40% emissions cut by 2030 is replaced with a 60% reduction by 2040 target "to the maximum extent feasible and cost effective"; greenhouse gas accounting shifts from a 20-year to a 100-year timeframe (significantly lowering methane's weight); and the deadline for emissions regulations moves from early 2024 to December 31, 2028. Environmental groups strongly opposed the changes; some business groups welcomed relief on cost concerns.
 
 **Links:**
 
-- [EDF Climate 411 — California’s latest Cap-and-Invest auction (May 27, 2026)](https://blogs.edf.org/climate411/2026/05/27/californias-latest-cap-and-invest-auction-shows-whats-at-stake-with-upcoming-carb-vote/)
-- [CARB — Notice of Public Hearing on Cap-and-Invest amendments (May 28–29, 2026)](https://content.govdelivery.com/accounts/CARB/bulletins/402e475)
+- [THE CITY — Hochul Finally Signs $268.5 Billion State Spending Plan](https://www.thecity.nyc/2026/05/28/hochul-state-budget-2026-climate-childcare/)
+- [WXXI News — State Legislature votes to roll back NY's landmark climate law](https://www.wxxinews.org/new-york-public-news-network/2026-05-26/state-legislature-votes-to-roll-back-nys-landmark-climate-law)
 
-**Commentary:** Soft carbon prices and a major rule rewrite arriving together signal state climate tools shifting from hard caps toward affordability framing and industrial incentives.
+**Commentary:** Softening legal mandates through accounting methods and "feasibility" language is a familiar path for state climate ambition under electricity-price and election pressure.
 
 ---
 
-### 3. New York budget weakens 2019 climate law's binding 2030 emissions target
-**Summary:** Reporting from Canary Media and NYS Focus indicates New York's Democratic legislature approved a state budget that effectively weakens the Climate Leadership and Community Protection Act's mandatory 40% cut from 1990 levels by 2030, replacing it with a 60% reduction by 2040 pursued only "to the maximum extent feasible and cost effective." Governor Kathy Hochul pushed the changes during budget talks, citing federal renewable policy swings and energy affordability pressures. State data show emissions down only about 14% from 1990 and renewables supplying roughly 23% of electricity. The budget still includes about $1 billion for climate mitigation and adaptation through the Sustainable Future program and utility regulatory reforms.
+### 3. China's Ministry of Finance Issues RMB 6 Billion Green Sovereign Bonds in Hong Kong (Carbon Markets)
+**Summary:** At a May 29 ceremony at the Hong Kong Monetary Authority, China's Ministry of Finance announced the successful May 28 issuance of RMB 6 billion in green sovereign bonds in Hong Kong, with total subscriptions of RMB 62.4 billion—10.4 times the offering. The issuance comprised RMB 3 billion each in 3-year (1.42%) and 5-year (1.56%) tranches, with broad geographic and investor-type participation; all bonds listed on the Hong Kong Stock Exchange. This is the Ministry's second RMB green sovereign bond issuance, aimed at expanding cross-border green finance channels.
 
 **Links:**
 
-- [Canary Media — New York state gives up on its most ambitious climate targets](https://www.canarymedia.com/articles/emissions-reduction/new-york-gives-up-ambitious-climate-targets)
-- [NYS Focus — New York State Budget Thrashes Landmark Climate Law](https://nysfocus.com/2026/05/27/clcpa-climate-change-rollbacks-hochul-new-york-emissions)
+- [China Economic Net / Xinhua — Ministry of Finance successfully issued RMB 6 billion green sovereign bonds in Hong Kong](http://www.ce.cn/xwzx/gnsz/gdxw/202605/t20260529_2998148.shtml)
 
-**Commentary:** When oil and power bills hurt voters simultaneously, even deep-blue states recast climate statutes from legal iron rules into conditional aspirations—widening federal–state–local decarbonization misalignment.
+**Commentary:** Oversubscription shows sustained international demand for China's green sovereign credit, providing benchmark pricing for "15th Five-Year Plan" green projects.
 
 ---
 
-### 4. China's first mechanism-price auctions across 16 provinces show 0.19–0.41 yuan/kWh spread
-**Summary:** According to industry statistics cited by 36Kr, 16 provincial-level regions have completed the first round of "mechanism price" auctions for incremental renewable projects. Gansu cleared at 0.19 yuan/kWh—far below local coal-benchmark levels—while Shanghai matched its coal benchmark at 0.4155 yuan/kWh, the highest mechanism price reported nationwide. Anhui, Yunnan, Hainan, Fujian, Guangdong, and others clustered near coal benchmarks; Shandong, Heilongjiang, and Qinghai saw sharp discounts. Analysts note mechanism prices are struggling to secure reasonable returns while low bids in some provinces approach spot-market levels for renewables.
+## II. Clean Power & Storage
+
+### 4. German Regulator Confirms BESS Grid-Fee Exemption Through August 4, 2029 (Storage)
+**Summary:** Bundesnetzagentur (BNetzA) President Klaus Müller confirmed to Handelsblatt that under the AgNeS grid-fee reform, battery energy storage system (BESS) projects commissioned by August 4, 2029 will remain exempt from charging and discharging grid fees; projects must reach final investment decision (FID) before new regulations take effect. Fluence and others said the decision "restored investor confidence," helping keep billions in private capital flowing into Germany's storage market. A formal draft regulation is expected this summer; industry attention focuses on grandfathering and FID criteria.
 
 **Links:**
 
-- [36Kr — 16 provinces' mechanism electricity prices: 0.19–0.41 yuan/kWh](https://36kr.com/p/3583765979502725)
+- [Energy-Storage.News — German regulator's grid fee decision 'restores investor confidence' in energy storage market](https://www.energy-storage.news/german-regulators-grid-fee-decision-restores-investor-confidence-in-energy-storage-market/)
 
-**Commentary:** The same policy instrument producing a two-fold regional spread shows China's power "single market" still needs inter-provincial trade and capacity mechanisms to close gaps.
+**Commentary:** Grid-fee uncertainty is European storage's biggest "invisible tax"—a near-term exemption unlocks project finance faster than long-term rhetoric.
 
 ---
 
-## II. Renewables & Storage
-
-### 5. South Australia's first FERM tender awards 1.33 GW / 5.3 GWh across six BESS projects
-**Summary:** Scheme administrator ASL announced on May 29 that the first Firm Energy Reliability Mechanism (FERM) tender awarded Firm Energy Reliability Mechanism Agreements to six lithium-ion battery projects totaling 1,334 MW and 5,336 MWh (517 MW / 4,136 MWh under committed obligations requiring at least eight hours of continuous dispatch). Winners include Neoen (Goyder stages 1–2), Ampyr (Northern Battery), Iberdrola (Tungkillo), Akaysha (Brinkworth), and ZEBRE (Dartmoor), with partial capacity due online by November 2028. FERM targets long-duration firm capacity as South Australia pursues net 100% renewable electricity by 2027, with renewables already above 70% of supply.
+### 5. Antora Commissions 5 GWh Industrial Thermal Storage System in South Dakota (Storage)
+**Summary:** U.S. startup Antora Energy and POET, the world's largest biofuels producer, commissioned Project Big Stone at POET's Big Stone City, South Dakota bioprocessing facility—a 5 gigawatt-hour (GWh), multi-day thermal energy storage system using 200+ solid carbon blocks heated to roughly 2,400°C to supply 24/7 industrial steam. The project went from construction to commissioning in under 12 months; Antora worked with Otter Tail Power on a dedicated tariff enabling rapid charging during local wind surplus periods. Antora says the system ranks among the world's largest of its kind; full operation is expected later this year.
 
 **Links:**
 
-- [Energy-Storage.News — South Australia awards 1.3GW+ of BESS in first FERM tender (May 29, 2026)](https://www.energy-storage.news/south-australia-awards-1-3gw-of-battery-storage-in-first-firm-energy-reliability-mechanism-tender/)
+- [Antora — Antora and POET Commission 5 Gigawatt-Hour Thermal Battery Project](https://www.antora.com/insights/big-stone-release)
+- [Energies Media — Antora Energy just fired up the world's largest thermal battery](https://energiesmedia.com/antora-energy-thermal-battery-south-dakota/)
 
-**Commentary:** Above 70% renewable penetration, policy is now pricing long-duration storage as a reliability product—not just energy—marking a new phase for renewable-led grids.
+**Commentary:** Industrial heat drives a large share of global emissions—thermal storage bridging curtailed wind and factory demand may decarbonize hard-to-abate sectors more directly than electrochemical batteries.
 
 ---
 
 ## III. Climate & Disasters
 
-### 6. France's May heatwave still peaking May 29; Paris remains on orange alert
-**Summary:** Connexion France and Sortiraparis report the "heat dome" over Western Europe kept France's national average near 25.3°C on May 28–29—among the highest May national means on record, roughly 8°C above late-May normals—with localized highs up to 37°C in the southwest and more than 900 May heat records broken since May 25. Paris and inner suburbs remained on Météo-France orange heatwave alert May 29 with daytime highs of 34–35°C and nighttime lows of 22–23°C meeting official heatwave criteria. Cooling is expected from May 30, with a return toward seasonal norms early June.
+### 6. Unusually Early May Heatwave Persists Across Europe, Breaking Records and Causing Deaths (Extreme Weather)
+**Summary:** On May 29, Western and Southern Europe remained under a high-pressure "heat dome," with temperatures 10–15°C above seasonal norms. France reported at least seven deaths linked directly or indirectly to the heat, including drownings and heat-related incidents during sporting events, and recorded its hottest May temperatures on record; the UK had earlier seen 35.1°C at Kew Gardens—the highest May temperature on record—with Ireland also breaking May records; Spain's Zamora reached 36°C for the first time in spring; Rome, Florence, and other Italian cities were under red heat alerts. Swiss overnight minimums on May 28 may also set May records. Authorities warn the heat arrived too early for lifeguard and cooling-center systems to be fully operational.
 
 **Links:**
 
-- [Connexion France — France heatwave peaks as 17 departments face orange alert](https://www.connexionfrance.com/news/french-heatwave-continues-with-more-records-likely-to-be-set/793171)
-- [Sortiraparis — Heatwave in Paris: orange alert on Friday, May 29, 2026](https://www.sortiraparis.com/en/news/in-paris/articles/346047-heatwave-in-paris-orange-alert-will-continue-friday-when-will-it-end)
+- [Anadolu Agency — Europe experiences unusually early heatwave as temperatures shatter May records](https://www.aa.com.tr/en/europe/europe-experiences-unusually-early-heatwave-as-temperatures-shatter-may-records/3951013)
+- [Babel Insight — Severe Heatwave Breaks Records in Europe as Thunderstorms Strike Australia](https://en.babelinsight.id/heatwave-breaks-records-europe-thunderstorms-australia)
 
-**Commentary:** May extremes front-load air-conditioning demand and public-health risk before summer's official peak—Europe's grid and water stress tests start early.
+**Commentary:** "Mid-summer" heat in May pushes grid peak load, healthcare systems, and outdoor labor protections onto emergency agendas simultaneously.
 
 ---
 
-### 7. China Meteorological Administration issues blue rainstorm alert for May 29
-**Summary:** CMA's May 29 bulletin continues a blue rainstorm warning: from 08:00 May 29 to 08:00 May 30, parts of southern Sichuan, eastern Yunnan, southern Guizhou, southwestern Hunan, Guangxi, Guangdong, southern Fujian, and eastern Taiwan face heavy to torrential rain, with localized downpours of 100–140 mm in northeastern Yunnan, plus short-lived intense rainfall and severe convection. The bulletin also flags monitoring of Tropical Storm No. 6 "Kulap." Heavy rain may affect agriculture, transport, and urban operations.
+### 7. WMO: 86% Probability a Year in 2026–2030 Will Break the Hottest-Year Record (Climate Science)
+**Summary:** The World Meteorological Organization released the Global Annual to Decadal Update on May 28, led by the UK Met Office, projecting global mean near-surface temperatures in 2026–2030 will be 1.3–1.9°C above pre-industrial (1850–1900) levels; there is an 86% probability that one year in that period will exceed 2024 as the hottest on record. The report also projects Arctic winter temperatures 2.8°C above the 1991–2020 average—about 3.5 times the global increase; tropical Pacific temperature trends point toward El Niño development, with El Niño possible by late 2026, raising the odds of another record year in 2027.
 
 **Links:**
 
-- [Sina Finance — CMA Weather Bulletin (May 29, 2026)](https://finance.sina.com.cn/money/future/hyxh/2026-05-29/doc-inhzpfxv9664620.shtml)
+- [Xinhua — WMO: More high-temperature weather likely in next five years](https://www.news.cn/world/20260528/78b99bc1b20c45f7a4cc6d5ce3653832/c.html)
+- [Sina Finance — WMO warns hottest year on record is approaching](https://finance.sina.com.cn/roll/2026-05-29/doc-inhzpfxz7775116.shtml)
 
-**Commentary:** Heat domes over Europe and rain belts over China's south on the same calendar day highlight divergent energy-security and disaster priorities across regions.
+**Commentary:** WMO's probabilistic framing of "record-breaking years" provides a quantitative anchor between national adaptation planning and the 1.5°C long-term target.
 
 ---
 
-### 8. Vietnam's northern heat ends May 29; central heat eases gradually
-**Summary:** Per Vietnam.vn and the national hydro-meteorological center, a major May 22–27 heatwave brought Hanoi to 41.1°C at Lang station on May 26. Widespread extreme heat in the north and north-central regions ended May 29, shifting to afternoon-evening showers with localized totals above 80 mm. Central areas from Quang Tri to Da Nang and eastern provinces from Quang Ngai to Dak Lak still saw highs above 35–36°C on May 29, with broader relief expected from May 30. Authorities had warned prolonged heat and low humidity raise power demand and fire risk.
+### 8. China CMA: El Niño Has Formed; Moderate-or-Greater Event Expected in Summer–Autumn (Climate Alert)
+**Summary:** At a May 29 press briefing for June forecasts, National Climate Center Deputy Director Gao Rong said equatorial central-eastern Pacific sea surface temperatures entered El Niño conditions in May; a moderate-or-greater El Niño event is expected to develop in summer–autumn, peak in autumn–winter, with rising probability of a strong event, then decay in spring next year. Historical statistics indicate this background favors above-normal summer–autumn rainfall south of the Yangtze and above-normal temperatures across most of China; Niño3.4 index readings for May weeks 1–5 were 1.00°C, 0.90°C, 0.98°C, 1.01°C, and 0.97°C.
 
 **Links:**
 
-- [Vietnam.vn — Heavy rain in the North, Central heat above 36°C (May 29)](https://www.vietnam.vn/en/mien-bac-mua-lon-mien-trung-con-nang-nong-tren-36c)
-- [VnExpress — Vietnam's 6-day heatwave breaks May records](https://e.vnexpress.net/news/news/environment/vietnam-s-6-day-heatwave-breaks-multiple-may-temperature-records-as-hanoi-hits-41-1-c-5078977.html)
+- [NetEase — China Meteorological Administration: Rising probability of strong El Niño event](https://m.163.com/dy/article_cambrian/KU3JJ2KE051492T3.html)
 
-**Commentary:** Southeast Asia's rapid heat-to-rain switches test hydro scheduling and cross-border flows—another data point in a year of extremes.
+**Commentary:** El Niño layered on existing European and South Asian heat signals means global "heat plus moisture" compound risks need to be built into 2026 H2 agriculture and energy dispatch.
+
+---
+
+### 9. Study: Arctic Ocean Likely Crossed Ecological Tipping Point Around 2009 as Nitrate Levels Decline (Climate Science)
+**Summary:** Researchers from the University of Edinburgh and others, publishing in Communications Earth & Environment, analyzed roughly 20 years of data and found the Arctic Ocean ecosystem likely crossed a tipping point around 2009: rapid sea-ice loss exposed shallow continental shelves to more sunlight, intensifying benthic denitrification that converts nitrate to nitrogen gas and removes it from seawater. The system shifted from light-limited to nitrate-limited; nitrate levels in Fram Strait outflow have fallen steadily since 2009, potentially weakening phytoplankton productivity and cascading up food chains while reducing the Arctic Ocean's carbon uptake. Authors say the change, linked to ongoing warming and sea-ice loss, may be irreversible on human timescales.
+
+**Links:**
+
+- [Phys.org — Arctic Ocean food chain is disrupted as a key tipping point has now been passed](https://phys.org/news/2026-05-arctic-ocean-food-chain-disrupted.html)
+- [Nature — Sea ice loss drives a regime shift in Arctic Ocean nitrogen biogeochemistry](https://www.nature.com/articles/s43247-026-03569-x)
+
+**Commentary:** This is a "slow-variable" tipping point—unlike sudden ice collapse, it rewrites high-latitude economics and security through fisheries and North Atlantic carbon cycling over decades.
 
 ---
 
 ## IV. Oil, Gas & Energy Security
 
-### 9. US gasoline and distillate stocks near "operational critical" as Hormuz drawdown continues
-**Summary:** The Deep Dive, citing EIA's May Short-Term Energy Outlook and weekly data, reports US gasoline and distillate commercial inventories keep falling since the Strait of Hormuz effectively closed in late February. For the week ending May 22, gasoline stocks fell 2.6 million barrels and distillates 2.1 million barrels; distillate inventories sit about 11% below the five-year average. Analysts estimate only ~9 million barrels of buffer remain before a single outage could strain the system. The IEA estimates global oil supply losses of roughly 12.8 mb/d since the conflict began. The US and IEA members agreed in March to release 400 million barrels from strategic stocks, but domestic draws continue alongside export support for allies.
+### 10. Strait of Hormuz Crisis Continues; Exxon Warns Brent Could Reach $160 (Oil & Gas)
+**Summary:** The Middle East conflict-driven blockade of the Strait of Hormuz has lasted roughly 90 days, affecting about 20% of global oil and gas supply and removing roughly one billion barrels from the market—widely called the worst supply shock since the 1970s. Exxon Mobil warns that if the strait does not reopen soon, Brent crude (around $92/barrel in late May) could spike to $150–160 within weeks; the IEA's March release of 400 million barrels of strategic reserves is seen as insufficient. High oil prices are feeding through supply chains into inflation; the U.S. 30-year Treasury yield touched 5.19% on May 19—its highest since 2007.
 
 **Links:**
 
-- [The Deep Dive — US Gasoline and Distillate Stocks Near Critical Low as Hormuz Drawdown Accelerates](https://thedeepdive.ca/us-gasoline-and-distillate-stocks-near-critical-low-as-hormuz-drawdown-accelerates/)
-- [EIA — Press Release on May 2026 Short-Term Energy Outlook (May 12, 2026)](https://www.eia.gov/pressroom/releases/press588.php)
+- [World Economic Forum — World facing 'biggest' energy crisis – and more energy stories](https://www.weforum.org/stories/2026/05/world-facing-biggest-ever-energy-crisis-and-more-top-energy-stories/)
+- [Stillwater Associates — Stop Waiting for Normal: Fuel Market Decisions in the New Equilibrium](https://stillwaterassociates.com/stop-waiting-for-normal-fuel-market-decisions-in-the-new-equilibrium/)
 
-**Commentary:** Strategic reserves buy time but cannot replace refinery and pipeline redundancy—energy security still lands in physical stocks and logistics, not slogans.
+**Commentary:** The crisis simultaneously raises fossil dependence and transition urgency—short-term scramble for oil and long-term scramble for power run in parallel news cycles.
 
 ---
 
-### 10. China's refined-fuel price adjustment cycle points to ~¥370/t cut on June 4
-**Summary:** NetEase reporting on May 29 notes the 11th 2026 retail fuel adjustment window opens June 4 at 24:00. By the fifth working day (May 28), the composite crude change rate was about -7.82%, with institutions estimating gasoline and diesel cuts near ¥370 per tonne—roughly ¥0.3/liter for 92-octane in a 50-liter fill. International prices fell more than 5% on May 27 (WTI near $88.68/bbl, Brent near $94.29/bbl) amid US–Iran negotiation signals and Hormuz outlook shifts; further declines are possible if shipping normalizes.
+### 11. Canada and Germany Sign 20-Year LNG Offtake Deal for Ksi Lisims Project (Energy Transition)
+**Summary:** On May 27, Canada announced that German state energy company SEFE signed a 20-year offtake agreement for one million tonnes per year of LNG from the planned Ksi Lisims project in British Columbia, expected to drive over $30 billion in investment and $15 billion in GDP. Ksi Lisims is designed for 12 million tonnes per year export capacity—Canada's second-largest LNG project—and has not yet reached final investment decision (target mid-2026). Federal Energy Minister Tim Hodgson said the deal addresses availability, security, and transition; environmental groups called expanding LNG exports under high costs and climate risk an "increasingly risky gamble."
 
 **Links:**
 
-- [NetEase — Retail fuel prices May 29, 2026](https://www.163.com/dy/article/KU3KNU6O055615RY.html)
+- [Canada's National Observer — Canada seals first European LNG deal — but economic and climate hazards loom](https://www.nationalobserver.com/2026/05/27/news/canada-seals-first-european-lng-deal-economic-climate-hazards-loom)
 
-**Commentary:** Retail prices lag geopolitical premia—consumers still pay conflict costs short term, but futures are beginning to feed through to pump expectations.
+**Commentary:** Europe trades long-term LNG contracts for supply security amid the strait crisis, but shifts carbon-lock-in risk to project sponsors and importing consumers into the 2040s.
 
 ---
 
-### 11. Energy Transitions Commission: Hormuz crisis should accelerate clean alternatives, not lock in fossil dependence
-**Summary:** The ETC Secretariat's May 15 brief *Lessons on Energy Security after the Hormuz Crisis* warns crisis responses that expand oil and gas infrastructure risk locking in higher long-term costs and vulnerability. It outlines five levers—renewable power, transport electrification, heat pumps, green fuels and fertilizers, and economy-wide efficiency—and argues coordinated action could displace Hormuz oil and gas export volumes by 2035. ETC stresses clean deployment as the most resilient response to fossil price volatility and import dependence.
+## V. International Cooperation
+
+### 12. India–Germany Climate Talks: Germany Launches Up-to €20 Million Resilience Project (International)
+**Summary:** India and Germany held a high-level climate dialogue at the German Embassy in New Delhi titled "From Risk to Resilience: Advancing Adaptation Policy Pathways," focusing on India's forthcoming National Adaptation Plan (NAP) and industrial decarbonization. German State Secretary Jochen Flasbarth announced a new International Climate Initiative (IKI) Large Grant project for India worth up to €20 million, supporting ecosystem-based adaptation in vulnerable regions including the Himalayas, Western Ghats, Northeast India, and the Lower Gangetic floodplains—covering forest restoration, biodiversity corridors, and blended finance mechanisms.
 
 **Links:**
 
-- [Energy Transitions Commission — Hormuz crisis shows clean energy is key to reducing economic cost of fossil fuel dependence](https://www.energy-transitions.org/hormuz-crisis-clean-energy-key-to-reducing-economic-cost-of-fossil-fuel-dependence/)
+- [The Economic Times — India-Germany climate talk sees discussions on strengthening resilience and adaptation](https://economictimes.indiatimes.com/news/india/india-germany-climate-talk-sees-discussions-on-strengthening-resilience-and-adaptation/articleshow/128799857.cms)
 
-**Commentary:** The gap between think-tank narratives and politics is that crisis windows often trigger "burn what you have" logic first—clean investment must prove jobs and bills to win domestic debates.
-
----
-
-### 12. WEF roundup: IEA calls today's shock the largest energy security crisis; diversification accelerates
-**Summary:** A World Economic Forum May energy roundup cites IEA Executive Director Fatih Birol on the Middle East conflict producing one of history's largest energy security crises, while UN climate chief Simon Stiell says the shock is "supercharging" renewables. The piece also notes Korea–Australia supply-chain cooperation, record US crude net exports, Abu Dhabi National Oil Company's planned US gas expansion, and continued work from 50+ countries after the Santa Marta fossil-fuel transition conference on roadmaps and trade measures.
-
-**Links:**
-
-- [World Economic Forum — World facing ‘biggest’ energy crisis and more top energy stories (May 2026)](https://www.weforum.org/stories/2026/05/world-facing-biggest-ever-energy-crisis-and-more-top-energy-stories/)
-
-**Commentary:** One crisis is producing both "exit fossil" and "grab fossil" policy products—the emissions trajectory over the next five years depends on which path gets more capital and permits.
+**Commentary:** As advanced economies roll back climate regulation, North–South adaptation finance remains a key chip for maintaining global climate cooperation credibility.
 
 ---
 
 ## Today's Summary
 
-- IEA's May 28 investment report frames 2026 at $3.4 trillion global spend, with clean investment roughly double fossil fuels but diverging trends inside oil, gas, and coal.
-- California's carbon auction ticked up slightly while CARB's two-day hearing weighs cap-and-invest reform; New York's budget softens 2030 climate mandates toward affordability politics.
-- China's first mechanism-price auctions expose extreme regional spreads; South Australia awarded 1.3+ GW of long-duration storage on May 29 as high-renewable grids buy reliability explicitly.
-- France's May heatwave peaked May 29; China issued a blue rainstorm alert while Vietnam's north cooled and the center remained hot.
-- US gasoline and distillate stocks approach operational critical levels; China's next retail fuel cut around June 4 could partly reflect recent oil price declines.
-- Think tanks and multilateral platforms urge clean acceleration, yet LNG, strategic releases, and fossil exports still dominate real-world crisis response.
-
-**Daily Framing:** Today in the energy–climate cycle is an "IEA investment ledger defines the security race, extreme weather and Hormuz shocks run in parallel, and state climate politics yield to power bills" day—clean capital has not exited, but it must now compete on the same terms as inventories, mechanism prices, and voter pocketbooks.
+- The U.S. SEC and New York State together show federal and state climate policy "dual retreat"—corporate disclosure and emissions obligations will increasingly depend on local and overseas rules.
+- Germany's storage grid-fee exemption and Antora's 5 GWh thermal storage commissioning show flexibility investment and industrial decarbonization hardware still accelerating.
+- Europe's May heatwave, WMO's five-year high-temperature outlook, and China's El Niño forecast form overlapping signals—adaptation and supply-security pressures are rising together.
+- Arctic nitrate tipping-point research reminds us climate impacts are moving from "temperature numbers" into slow variables like fisheries and carbon sinks.
+- The Hormuz crisis and the Canada–Germany LNG deal reflect the hard trade-off between short-term energy security pain and long-term transition pain.
+- **Daily Framing:** Today is a "regulatory ebb and physical-risk flood" day in the energy-climate cycle—policy rhetoric softens in Washington and Albany even as heatwaves, El Niño, strait disruptions, and Arctic ecological tipping points deliver harder physical constraints: the bill for delayed transition is coming due faster.
 
 ---
 
-*This digest is compiled from real-time search and is for reference only; facts are subject to original sources.*  
+*This digest is compiled from real-time search and is for reference only; facts are subject to source reports.*  
 *Date: May 29, 2026 (Friday)*

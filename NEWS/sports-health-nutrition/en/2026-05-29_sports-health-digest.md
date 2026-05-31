@@ -6,182 +6,204 @@
 
 ## I. Sports & Fitness
 
-### 1. CBA Finals Game 2: Goodwin steal-and-buzzer-beater lifts Shanghai 91–88 (series 2–0)
-**Summary:** Chinese outlets timestamped **May 29, 2026** report that in Game 2 of the 2026 CBA Finals on the evening of **May 28** in Shanghai, the shorthanded Shanghai Sharks beat defending champion Zhejiang Guangsha **91–88**. Guangsha import Brown scored **50 points**, but import **Tremont Waters (Goodwin)** stole the ball and hit a full-court, buzzer-beating three for the win—described in coverage as a historic Finals finish combining steal, transition, and game-winner. Goodwin finished with **31 points and 11 assists**.
+### 1. French Open, R3: 19-year-old Fonseca rallies past Djokovic; men's draw has no Slam champion left
+**Summary:** Per **BBC**, **France 24**, and **TSN** on **May 29, 2026**, Brazil's **João Fonseca (19)** beat **Novak Djokovic (39)** in Paris **4-6, 4-6, 6-3, 7-5, 7-5** after **4 hours 53 minutes**. Djokovic led two sets to love before Fonseca became the first teenager to beat him at a Grand Slam. With world No. 1 **Jannik Sinner** already out (illness on **May 28**), the 2026 Roland Garros men's title will go to a first-time major champion in a field with temperatures around **33°C**.
 
 **Links:**
 
-- [NetEase — Shanghai edges Guangsha 91–88 (May 29 coverage)](https://www.163.com/dy/article/KU3EC0UM0556639U.html?f=post2020_dy_recommends)
-- [NetEase — Goodwin buzzer-beater headlines](https://www.163.com/dy/article/KU2BEJQT05566T90.html?f=post2020_dy_recommends)
+- [BBC Sport — Djokovic beaten by Fonseca](https://www.bbc.com/sport/tennis/articles/c1521xnnxewo)
+- [France 24 — Fonseca knocks Djokovic out](https://www.france24.com/en/live-news/20260529-fonseca-blasts-djokovic-out-of-french-open-after-epic-comeback)
 
-**Commentary:** Playoff load, roster depth, and clutch decision-making under fatigue are live case studies for coaches and fans tracking elite basketball.
+**Commentary:** Long matches in heat demand hydration, electrolytes, and recovery planning—relevant for amateur tennis in summer conditions.
 
 ---
 
-### 2. NBA West Finals, Game 6: Spurs 118, Thunder 91 — series goes to Game 7
-**Summary:** Per **Pounding The Rock** (posted **May 29, 2026**) and NBA.com, San Antonio routed Oklahoma City **118–91** in Game 6 to tie the Western Conference finals **3–3**. **Victor Wembanyama** had **28 points and 10 rebounds**, rookie **Dylan Harper** added **18 points**, and the Spurs closed the third quarter on a **20–0** run; **Shai Gilgeous-Alexander** was held to **15 points**. **Game 7** is scheduled for **Saturday, May 30, 2026** in Oklahoma City. The East is already set: New York swept Cleveland **4–0** on **May 25**.
+### 2. French Open: Sinner exits ill; Sabalenka, Gauff advance; de Minaur out same day
+**Summary:** **Taipei Times** and **ABC** report defending champion **Jannik Sinner** lost to **Juan Manuel Cerúndolo** after feeling dizzy and taking a medical timeout—his earliest Slam exit since **2023**. **Aryna Sabalenka** and **Coco Gauff** advanced on the women's side; **Alex de Minaur** was also eliminated by **Jakub Mensík**. **Sinner's match was on May 28 local time; follow-up coverage continued May 29–30.**
+
+**Links:**
+
+- [Taipei Times — Ailing Sinner exits](https://www.taipeitimes.com/News/sport/archives/2026/05/30/2003858231)
+- [ABC News — De Minaur and Djokovic out in heat](https://www.abc.net.au/news/2026-05-30/tennis-de-minaur-djokovic-out-of-french-open-roland-garros/106740386)
+
+**Commentary:** Acute illness plus heat stress can end elite campaigns abruptly—a reminder to monitor body temperature in outdoor sport.
+
+---
+
+### 3. NBA West Finals, Game 6: Spurs 118, Thunder 91 — Game 7 on May 30; Knicks in Finals
+**Summary:** Per **Pounding The Rock** and the **Boston Globe**, San Antonio routed Oklahoma City **118–91** in Game 6 to tie the series **3–3**. **Victor Wembanyama** had **28 points, 10 rebounds, and 3 blocks**; the Spurs closed the third on a **20–0** run while **Shai Gilgeous-Alexander** scored **15**. **Game 7** is **Saturday, May 30, 2026**, in Oklahoma City per **NBA.com (updated May 29)**. New York already swept Cleveland **4–0** on **May 25**; the **2026 Finals** open **June 3**.
 
 **Links:**
 
 - [Pounding The Rock — Spurs force Game 7](https://www.poundingtherock.com/game-recaps/103219/san-antonio-vs-oklahoma-city-final-score-spurs-extend-series-to-game-7-with-dominant-118-91-win)
-- [NBA.com — 2026 West Finals hub](https://www.nba.com/playoffs/2026/west-final)
+- [NBA.com — 2026 playoffs schedule](https://www.nba.com/news/2026-nba-playoffs-schedule)
 
-**Commentary:** Bench scoring and defensive identity can swing winner-take-all games—useful context for understanding high-level rotation and matchup chess.
+**Commentary:** Bench scoring and third-quarter defense often decide seven-game series—useful context for load management at the elite level.
 
 ---
 
-### 3. England captain Nat Sciver-Brunt targets T20 World Cup opener despite calf injury
-**Summary:** Sports wires report that **Nat Sciver-Brunt**, sidelined since late **April** with a calf injury sustained in domestic 50-over cricket, says rehab is on schedule toward England's **June 12** T20 World Cup opener vs Sri Lanka. She has not resumed bowling and will miss India's series, but may prove fitness in warm-ups if selectors agree.
+### 4. Japan men's volleyball: national player Satō arrested on cannabis charge
+**Summary:** **CNA (May 29, 2026)** reports Japan middle blocker **Shunichiro Satō (26)** was arrested **May 27** for allegedly possessing dried cannabis in Tokyo; he was transferred to prosecutors **May 29**. The Japan Volleyball Association removed him from the national roster; four teammates who visited the same venue tested negative on urine screening. **FIVB Nations League** play in China begins in **June** during Japan's buildup.
+
+**Links:**
+
+- [CNA — Japan volleyball player arrested](https://www.cna.com.tw/news/aspt/202605290137.aspx)
+
+**Commentary:** Anti-doping and conduct rules directly affect team readiness and public trust in elite sport.
+
+---
+
+### 5. England captain Nat Sciver-Brunt targets T20 World Cup opener despite calf injury
+**Summary:** Sports wires say **Nat Sciver-Brunt**, out since late **April** with a calf strain in domestic 50-over cricket, reports rehab is on track for England's **June 12** T20 World Cup opener vs Sri Lanka. She has not resumed bowling and will miss India's series but may prove fitness in warm-ups.
 
 **Links:**
 
 - [New Kerala — Sciver-Brunt injury update](https://www.newkerala.com/news/a/everything-going-plan-sciver-brunt-confident-playing-t20-wc-722.htm)
 
-**Commentary:** Calf strains in multi-format athletes need staged return-to-bowling protocols—relevant caution for amateur cricketers and field-sport players.
-
----
-
-### 4. Pilot trial: collagen peptides linked to higher bone-formation marker, lower IL-6 in female distance runners
-**Summary:** A randomized, double-blind pilot in ***Frontiers in Nutrition*** (**published May 14, 2026**) assigned **22** premenopausal women running **>35 miles/week** to **20 g/day** collagen peptides or placebo for **four weeks**. The intervention group showed higher serum **P1NP** (bone formation) and lower **IL-6**, without significant change in bone-resorption marker **CTX-1**; authors call for larger trials with structural bone endpoints.
-
-**Links:**
-
-- [Frontiers in Nutrition — Full article](https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2026.1825906/full)
-- [NutraIngredients — Summary (May 20, 2026)](https://www.nutraingredients.com/Article/2026/05/20/study-vital-proteins-collagen-intake-may-modulate-bone-turnover-in-female-endurance-athletes/)
-
-**Commentary:** Endurance women face bone-stress and low-energy-availability risks; early biomarker shifts are not yet proof of injury prevention.
+**Commentary:** Calf injuries in multi-format athletes need staged return-to-bowling protocols for amateurs in cricket and field sports.
 
 ---
 
 ## II. Health & Medicine
 
-### 1. Shenzhen heat wave: 48 heat-related EMS calls in seven days; yellow alert issued
-**Summary:** **Southern Metropolis Daily** coverage dated **May 29, 2026** says Shenzhen issued a territory-wide **high-temperature yellow warning** with highs around **33–35 °C**, and **48** people had called **120** for heat illness in seven days, including complex rescues requiring air transport. Reports stress heatstroke core temperatures **>40 °C**, high mortality, and first-aid priorities: **cool first, transport second**, aiming to drop core temperature below **39 °C within ~30 minutes**, while avoiding alcohol rubs and routine antipyretics for heat illness.
+### 1. GSK/Ionis: bepirovirsen Phase 3 shows ~19% functional cure in chronic hepatitis B; FDA review ongoing
+**Summary:** **ScienceAlert (May 29, 2026)** and **GSK (May 28)** report that in two Phase 3 **B-Well** trials (~**1,838** adults), six months of **bepirovirsen** plus standard care led to a **functional cure** (virus and HBsAg undetectable ≥6 months off all treatment) in about **19%** vs **0%** on placebo; ~**26%** in lower baseline HBsAg subgroups. The FDA accepted the NDA for priority review with a **PDUFA** date of **October 26, 2026**; findings were also reported in ***NEJM*** and by **AP**.
 
 **Links:**
 
-- [NetEase — Shenzhen EMS heat cases (May 29)](https://www.163.com/dy/article/KU3Q6FQM05129QAF.html?f=post2020_dy_recommends)
-- [China NCD Prevention Center — Heat-wave public health guidance](https://www.ndcpa.gov.cn/jbkzzx/c100008/common/content/content_1683807837287215104.html)
+- [ScienceAlert — Functional cure for hepatitis B](https://www.sciencealert.com/new-drug-offers-functional-cure-for-dangerous-liver-virus)
+- [GSK — Phase 3 press release](https://www.gsk.com/en-gb/media/press-releases/bepirovirsen-achieves-unprecedented-functional-cure-rates-with-potential-to-redefine-treatment-for-chronic-hepatitis-b/)
 
-**Commentary:** Early-summer surges remind outdoor workers and athletes to treat exertional heat illness as an emergency skill, not a footnote.
+**Commentary:** If durability holds, chronic HBV care could shift from lifelong pills—but response heterogeneity and injection-site effects still need close follow-up.
 
 ---
 
-### 2. NutriNet-Santé: common preservatives tied to higher hypertension and cardiovascular risk
-**Summary:** An **ESC** press release and ***European Heart Journal*** paper (**May 21, 2026**) followed **~112,395** French adults for roughly **7–8 years**. Highest vs lowest non-antioxidant preservative intake was linked to about **29%** higher hypertension risk and **16%** higher cardiovascular disease risk; **eight** of **17** frequently consumed preservatives were individually associated with hypertension, and **ascorbic acid (E300)** with cardiovascular disease. The design is observational.
+### 2. Shenzhen heat wave: 48 heat-stroke EMS calls in seven days
+**Summary:** **Southern Metropolis Daily** coverage on **May 29, 2026** (via NetEase) says Shenzhen issued a **yellow heat alert** with temperatures around **33–35°C**, and **48** people called **120** for heat illness from **May 24** onward, including complex air-rescue cases. Reports stress heatstroke core temperatures above **40°C**, high mortality, and rapid cooling within ~**30 minutes** as first aid priority.
 
 **Links:**
 
-- [ESC — Press release](https://www.escardio.org/news/press/press-releases/common-food-preservatives-linked-to-high-blood-pressure-and-heart-disease/)
-- [SciTechDaily — Lay summary](https://scitechdaily.com/study-warns-widely-used-food-preservatives-linked-to-high-blood-pressure-and-heart-disease/)
+- [NetEase — Shenzhen heat-stroke EMS surge (May 29)](https://www.163.com/dy/article/KU3Q6FQM05129QAF.html?f=post2020_dy_recommends)
 
-**Commentary:** Label literacy on ultra-processed foods matters for people already managing blood pressure or ASCVD risk.
+**Commentary:** Early-summer heat demands workplace and sports emergency plans that prioritize cooling before transport.
 
 ---
 
-### 3. JAMA Psychiatry pilot: tocilizumab shows signal in inflammation-linked, treatment-resistant depression
-**Summary:** A **University of Bristol**–led proof-of-concept RCT (**published May 20, 2026** in ***JAMA Psychiatry***) enrolled **30** adults with moderate-to-severe depression failing standard antidepressants and showing low-grade inflammation on blood tests. After **four weeks**, remission was **~54%** with **tocilizumab** (IL-6 receptor blockade) vs **~31%** with placebo (NNT **~5**); primary endpoints were not statistically significant, as expected at this size. Investigators seek a phase III trial.
+### 3. Registry study: celiac disease linked to higher CV events and mortality
+**Summary:** **Medical Xpress (May 29, 2026)** summarizes a **Karolinska Institutet**–led U.S. registry analysis (**2005–2025**) in ***The Lancet Regional Health—Americas***: ~**200,000+** adults with celiac disease had about **18%** higher all-cause mortality and modestly higher major cardiovascular events vs matched controls; non-Hodgkin lymphoma risk rose without a consistent solid-tumor signal. Observational design limits causality.
 
 **Links:**
 
-- [University of Bristol — News release](https://www.bristol.ac.uk/news/2026/may/pilot-trial-suggests-anti.html)
-- [ScienceDaily — Coverage (May 28, 2026)](https://www.sciencedaily.com/releases/2026/05/260527023204.htm)
+- [MedicalXpress — Celiac disease and cardiovascular risk](https://medicalxpress.com/news/2026-05-celiac-disease-heart-early-death.html)
 
-**Commentary:** Immune phenotyping may eventually stratify psychiatric care, but this is not yet a replacement for first-line antidepressants.
+**Commentary:** Beyond gluten-free diets, long-term BP, lipids, and cancer surveillance should be part of chronic care for autoimmune enteropathy.
 
 ---
 
-### 4. Mosquitoes can learn to approach DEET after paired blood meals, lab study finds
-**Summary:** **ScienceAlert** on **May 29, 2026** covers a ***Journal of Experimental Biology*** study led by **Claudio Lazzari** (University of Tours): when mosquitoes experienced **DEET during feeding**, some later showed **higher biting attempts** toward DEET-treated skin in a human-hand assay, unlike naive mosquitoes that avoided DEET. Authors stress controlled lab conditions and that adequate DEET concentration remains highly protective in the field.
+### 4. Shenzhou-21 crew lands after record 210 days; space-medicine and exercise-fatigue data
+**Summary:** China's human spaceflight agency and **Xinhua** report that **Zhang Lu, Wu Fei, and Zhang Hongzhang** landed safely on **May 29, 2026** at **20:11** Beijing time after **210 days** aboard the space station—a national single-mission duration record. Experiments included non-contact physiology via facial micro-movement recognition, a preliminary **exercise-fatigue model**, and lower-limb stimulation during workouts.
 
 **Links:**
 
-- [ScienceAlert — DEET and mosquito learning (May 29, 2026)](https://www.sciencealert.com/your-insect-repellent-might-attract-mosquitoes-that-learn-to-associate-it-with-food)
+- [Xinhua — Shenzhou-21 returns](https://english.news.cn/20260530/a89b90d44f9047e99d9f46037b1080c2/c.html)
+- [China Daily — Crew returns after seven months](https://www.chinadaily.com.cn/a/202605/30/WS6a19c441a310d6866eb4b81a.html)
 
-**Commentary:** Understanding cognitive as well as sensory repellent mechanisms could inform future formulations without undermining current vector-control advice.
+**Commentary:** Long-duration microgravity exercise prescriptions inform terrestrial sarcopenia and rehabilitation research.
+
+---
+
+### 5. WHO: Bundibugyo Ebola—906 suspected cases in DRC; trial candidates prioritized
+**Summary:** **UN News** and **ABC (May 29, 2026)** cite WHO figures of **906 suspected** cases and **223 suspected deaths** in the DRC (testing backlog clearing), **134 confirmed** across DRC and Uganda with **18 confirmed deaths**, and **no approved** Bundibugyo-specific vaccine or therapy. WHO prioritized **MBP134**, **maftivimab**, and **remdesivir** for trials plus post-exposure **obeldesivir**; **Dr Tedros** visited the DRC **May 28**.
+
+**Links:**
+
+- [UN News — WHO on Ebola frontline](https://news.un.org/en/story/2026/05/1167602)
+- [WHO — DON605 outbreak update](https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON605)
+
+**Commentary:** Without strain-specific tools, infection control, community trust, and cross-border coordination remain as critical as therapeutics.
 
 ---
 
 ## III. Nutrition & Diet
 
-### 1. Global analysis: higher legume and soy intake linked to lower hypertension risk
-**Summary:** A **May 7, 2026** paper in ***BMJ Nutrition, Prevention & Health***, widely summarized in late May, reports pooled observational data: highest vs lowest legume intake ≈ **16%** lower hypertension risk; soy foods ≈ **19%** lower. Larger associations appeared near **~170 g/day** cooked legumes and **~60–80 g/day** soy foods—far above typical Western intakes. Grading suggests probable causality but remains observational.
+### 1. 1,110-person RCT: natto–red yeast capsule lowered LDL-C in mild–moderate dyslipidemia
+**Summary:** Coverage of the **20th Oriental Cardiology Congress (Shanghai, May 29, 2026)** reports a multicenter randomized double-blind trial (**JACC Asia** online): **1,110** adults aged **35–74** with dyslipidemia took **natto–red yeast** capsules for **3 months**. LDL-C fell about **13.21%** vs dual-placebo controls; total cholesterol about **9.26%**. Adding the capsule to simvastatin for **1 month** gave an extra **~5.05%** LDL drop (not statistically significant at **3 months**). Industry-funded—interpret with conflict-of-interest awareness.
 
 **Links:**
 
-- [US Insider — Study roundup](https://usinsider.com/beans-lentils-tofu-high-blood-pressure-study-2026/)
+- [NetEase — Trial presentation summary (May 29)](https://c.m.163.com/news/a/KU46PNMB051494RM.html)
 
-**Commentary:** "Swap in a cup of beans" is more actionable than vague plant-versus-animal debates for blood-pressure prevention.
+**Commentary:** Offers discussable nutrition support for mild hyperlipidemia but does not replace individualized drug therapy and lifestyle foundations.
 
 ---
 
-### 2. Inserm: three NutriNet-Santé studies link additives to cardiometabolic and cancer signals
-**Summary:** An **Inserm** bulletin on **May 21, 2026** summarizes three publications from the same French cohort on **preservatives, colorings, and related additives**, reporting higher risks of **hypertension, type 2 diabetes, cardiovascular disease, and some cancers** among high consumers—for example **~29%** higher hypertension with high non-antioxidant preservative intake. Findings are associative; authors emphasize overall dietary pattern.
+### 2. SHARE cohort: lower protein intake linked to functional decline after 50
+**Summary:** **News-Medical (May 28, 2026)** covers a ***Nutrients*** analysis of **38,000+** Europeans **≥50** in **SHARE**: those eating less protein-rich food (eggs, legumes, fish, poultry) over time were more likely to lose strength and struggle with daily activities, with age/sex-specific patterns. Observational only.
 
 **Links:**
 
-- [Inserm Newsroom — Additives briefing](https://presse.inserm.fr/en/colorants-conservateurs-trois-nouvelles-etudes-pointent-des-liens-entre-additifs-alimentaires-et-risque-accru-de-cancer-de-maladies-cardiovasculaires-et-dhypertension/72881/)
+- [News-Medical — Protein and aging](https://www.news-medical.net/news/20260528/Low-protein-intake-linked-to-declining-physical-function-with-age.aspx)
+- [Nutrients — Full article](https://www.mdpi.com/2072-6643/18/7/1058)
 
-**Commentary:** Pair additive awareness with whole-food meal building rather than chasing single E-numbers in isolation.
+**Commentary:** Aging diets should pair adequate high-quality protein with resistance training—not carb counting alone.
 
 ---
 
-### 3. Observational link: Mediterranean-style eating and higher mitochondrial "longevity microproteins"
-**Summary:** Chinese popular-health media summarize a small observational study in **49** atrial-fibrillation patients: higher Mediterranean diet adherence correlated with higher circulating **humanin** and **SHMOOSE** microproteins; olive oil, fish, and legumes tracked positively, refined bread negatively. Mechanistic confirmation and causality are not established.
+### 3. China kindergarten food-safety rules effective June 1
+**Summary:** A **SAMR press briefing on May 29, 2026** (via **Southern Metropolis Daily**/NetEase) says rules co-issued with the Ministry of Education apply to **~250,000** kindergartens and **35.8 million** children: stricter catering access, daily/weekly/monthly risk checks, encouraged **"internet + bright kitchen"** monitoring, physical dishware disinfection (no off-site reusable ware), and heavier penalties including **personal liability**.
 
 **Links:**
 
-- [Family Doctor CN — Mediterranean diet & microproteins explainer](https://www.familydoctor.cn/news/xin-yanjiu-jiang-zhezhong-liuxing-yinshi-changshou-danbai-lianxiqilai-zheyiweizhe-shenme-427865.html)
+- [NetEase — Kindergarten food-safety rules (May 29)](https://www.163.com/dy/article/KU49GKFM05129QAF.html)
 
-**Commentary:** Framing diet as activating endogenous repair pathways may motivate olive oil, legumes, and whole grains beyond macronutrient counting.
+**Commentary:** Preschoolers are highly vulnerable to foodborne illness—accountability and visibility matter as much as menu design.
 
 ---
 
 ## IV. Lifestyle
 
-### 1. Poor sleep hygiene tracks with depression and daytime sleepiness
-**Summary:** **mindbodygreen** (**May 26, 2026**) cites research where **>50%** of participants reported poor sleep hygiene, associated with more sleep complaints, daytime sleepiness, and depressive symptoms (reported **~75.8%** with poor hygiene showing depressive symptoms). Clinicians recommend stable bed/wake times, dim light and less screen use in the hour before bed, and calming wind-down rituals.
+### 1. Shift work tied to thalamus/amygdala volume loss; stabilizes ~2.4 years after stopping
+**Summary:** **Inc.com** and **PsyPost (May 29, 2026)** report a UK Biobank longitudinal MRI study in ***NeuroImage*** (~**14,198** workers): shift workers showed small bilateral volume loss in the **right thalamus** and **left amygdala** (Cohen's **d ≈ -0.10 to -0.11**). Loss plateaued within **~2.4 years** after leaving shift work, with slight recovery signals; shift work also correlated with lower memory and processing-speed scores.
 
 **Links:**
 
-- [mindbodygreen — Bedtime routine & mental health](https://www.mindbodygreen.com/articles/why-your-bedtime-routine-could-be-key-to-better-mental-health-small-changes-big-payoff)
+- [Inc.com — Shift work and brain volume](https://www.inc.com/lucia-auerbach/neuroscientists-just-discovered-a-link-between-irregular-work-hours-and-brain-tissue-loss/91351803)
+- [PubMed — Longitudinal study record](https://pubmed.ncbi.nlm.nih.gov/41308939/)
 
-**Commentary:** Pre-sleep behavior is a low-cost, high-leverage lever for urban knowledge workers battling fatigue and mood dips.
+**Commentary:** Night-shift economies need scheduling reform, sleep hygiene, and nutrition policy—not just fatigue management.
 
 ---
 
-### 2. PLOS Biology framework: age-related dysbiosis may reflect failing immune surveillance
-**Summary:** Researchers from the **Leibniz Institute on Aging (FLI)** and partners argue in ***PLOS Biology*** (**May 20, 2026**) that late-life microbiome instability may stem more from **immunosenescence**—loss of host control over dominant microbes—than passive microbial drift, proposing interventions that restore surveillance alongside ecological management. **Medical Xpress** covered the piece on **May 27, 2026**.
+### 2. Exercise-induced liver enzyme GPLD1 may aid blood–brain barrier and memory (mice)
+**Summary:** The **Simons Foundation (May 28, 2026)** highlights ***Cell*** work showing exercise-induced **GPLD1** from the liver may repair the blood–brain barrier and improve memory behavior in Alzheimer's model mice; boosting GPLD1 or blocking **TNAP** lowered amyloid-beta expression. **Animal data only—not a human therapy.**
 
 **Links:**
 
-- [PLOS Biology — Open-access article](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3003815)
-- [Medical Xpress — Summary](https://medicalxpress.com/news/2026-05-aging-immune-gut-microbiome.html)
+- [Simons Foundation — GPLD1 and memory](https://www.simonsfoundation.org/2026/05/28/a-liver-enzyme-produced-during-exercise-might-reverse-memory-loss/)
 
-**Commentary:** Healthy aging nutrition may need an immune–microbiome lens, not probiotics alone.
+**Commentary:** Strengthens the case for exercise prescriptions without turning early mechanistic science into commercial "brain boosters."
 
 ---
 
-### 3. Texas A&M: intranasal stem-cell EV spray improves memory in aged animal models
-**Summary:** **ScienceDaily** (**May 26, 2026**) reports a ***Journal of Extracellular Vesicles*** study: human neural stem cell–derived extracellular vesicles delivered nasally suppressed inflammatory microglial pathways (**NLRP3**, **cGAS-STING**) and improved object-recognition memory in aged rodents after **two doses**, with effects lasting months. A U.S. patent has been filed; **human trials have not started**.
+### 3. Summer insomnia with AC on? Clinician stresses core body-temperature drop
+**Summary:** **SETN (May 29, 2026, 15:10)** quotes pulmonologist **Huang Hsuan**: trouble sleeping may reflect failure to lower **core temperature**, not unwillingness to sleep. Suggested bedroom temps ~**16–20°C** for adults (~**20–25°C** for older adults), a **40–42.5°C** bath **10+ minutes** **1–2 hours** before bed, and no vigorous exercise within **1 hour** of sleep.
 
 **Links:**
 
-- [ScienceDaily — Nasal spray & brain aging](https://www.sciencedaily.com/releases/2026/05/260526022018.htm)
-- [Texas A&M Stories — University release](https://stories.tamu.edu/news/2026/04/14/scientists-reverse-brain-aging-with-a-nasal-spray/)
+- [SETN — AC, temperature, and sleep (May 29)](https://www.setn.com/News.aspx?NewsID=1847105)
 
-**Commentary:** Non-invasive neuro-repair hype must stay clearly separated from clinical availability.
+**Commentary:** Adjusting temperature, bathing, and exercise timing is a low-risk sleep intervention before escalating sedatives.
 
 ---
 
 ## Today's Summary
-- **Arena drama:** a historic CBA Finals buzzer-beater and an NBA West Game 7 on **May 30** headline sports pages, with the Knicks already in the Finals.
-- **Public health:** southern China heat emergencies underscore heatstroke cooling protocols and common first-aid myths.
-- **Evidence pipeline:** preservative cohort risks, IL-6–targeted depression immunotherapy, DEET learning science, immune–microbiome aging theory, and intranasal EV animal data all drew coverage around late May.
-- **Nutrition:** legumes/soy, Mediterranean patterns, and additive research reinforced "whole foods first, fewer ultra-processed items."
-- **Daily Framing:** A day where **playoff cliffhangers, heat-wave EMS surges, and additive–immune–sleep science** shared the front page.
+- Sports: Fonseca's French Open upset and Sinner's illness exit reshaped the men's draw; NBA West heads to a **May 30** Game 7; Japan volleyball faces a doping-related roster crisis before **VNL**.
+- Health: Hepatitis B functional-cure data, celiac long-term CV risk, Shenzhen heat-stroke surge, Shenzhou crew return, and Bundibugyo Ebola response dominated clinical and public-health headlines.
+- Nutrition: Natto–red yeast RCT results, low-protein aging risk, and stricter kindergarten food-safety rules linked evidence, regulation, and the plate.
+- Lifestyle: Shift-work brain imaging, exercise–GPLD1 mechanisms, and summer thermoregulation for sleep underscored how schedules and environment anchor chronic-disease prevention.
+- **Daily Framing:** A day of **Grand Slam upsets and Game 7 suspense, infectious-disease and chronic-disease evidence in parallel, and nutrition trials meeting child food-safety policy.**
 
 ---
 
-*This digest is compiled from real-time search results for informational purposes only; verify critical facts against primary sources.*  
-*Date: Friday, May 29, 2026*
+*This digest is compiled from live web search and is for reference only; verify facts at the source.*  
+*Date: May 29, 2026 (Friday)*
