@@ -6,205 +6,183 @@
 
 ## I. Sports & Fitness
 
-### 1. NBA Finals Game 3: Wembanyama's 32 Points Lift Spurs to 115-111 Win; Knicks Lead 2-1
-**Summary:** Per NY1 and NBA.com on **June 8–9**, **Game 3** of the **2026 NBA Finals** at Madison Square Garden saw the **San Antonio Spurs** defeat the New York Knicks **115-111**, cutting the series deficit to **2-1** (Knicks still ahead). **Victor Wembanyama** posted **32 points, eight rebounds, and six assists** for his first career Finals win; **Stephon Castle** added **23 points**. **Jalen Brunson** scored **32** and **OG Anunoby 28** for New York. The loss ended the Knicks' **13-game** postseason winning streak (first defeat since **April 23**). Game 4 is set for **Wednesday, June 10**, again at MSG.
+### 1. China Draw 0-0 with Thailand: Shao Jiayi's Home Debut, Wu Lei's 100th Cap
+**Summary:** Xinhua reported on **June 9** that China drew **0-0** with Thailand in an international friendly in Jinhua, Zhejiang, despite **24 shots** (6 on target) and **66%** possession. It was head coach **Shao Jiayi**'s home debut; **Zhang Yuning** hit the post in the first half. A pre-match ceremony marked **Wu Lei**'s **100th** national-team appearance; he came on in the **86th** minute and missed a late lob over an empty goal. Thailand managed only **3** shots, none on target.
 
 **Links:**
 
-- [NY1 — Wembanyama carries Spurs to 115-111 win (June 9, 2026)](https://ny1.com/nyc/manhattan/sports/2026/06/09/knicks-spurs-nba-finals-game-3)
-- [NBA.com — 2026 NBA Playoffs Schedule (Finals Game 3 result)](https://www.nba.com/news/2026-nba-playoffs-schedule)
+- [Xinhua via NetEase — China 0-0 Thailand friendly (2026-06-09)](https://www.163.com/dy/article/KV1C87A80514DG98.html)
 
-**Commentary:** Finals-level intensity tests peak fitness and mental resilience; recreational athletes should prioritize recovery and sleep before key events.
+**Commentary:** Dominance without conversion exposes finishing and mental-edge gaps — recreational squads should prioritize shot quality and post-match recovery, not just volume.
 
 ---
 
-### 2. One Week Before the World Cup: Spain's Big Three Stay at Base; Brazil's Wesley Ruled Out
-**Summary:** Per beIN SPORTS and Sportstar on **June 8–9**, with the **2026 World Cup** opening **June 11**, several top sides face fitness concerns. Spain's **Lamine Yamal, Nico Williams, and Víctor Muñoz** did not travel to Mexico for the Peru friendly, remaining at the **Chattanooga** base to recover; coach **Luis de la Fuente** said barring setbacks, all three could be available for the **June 15** opener vs. Cape Verde. Brazil right-back **Wesley** suffered a left adductor injury in the **June 7** win over Egypt, was ruled out of the **26-man squad**, and **Ederson** was called up; **Neymar's** latest calf MRI showed positive progress, though his **June 13** opener vs. Morocco status remains uncertain. **Lionel Messi**, managing left hamstring fatigue, sat out the Honduras win but could see minutes in the **June 9** friendly vs. Iceland.
+### 2. 48 Hours to World Cup Kickoff: Spain Beat Peru 3-1; Injury Lists Keep Shifting
+**Summary:** Per ESPN and Yahoo Sports on **June 8–9**, with the **2026 World Cup** opening **June 11** (Mexico vs. South Africa), teams wrapped final friendlies. **Spain** beat Peru **3-1** in Puebla, Mexico (**Mikel Oyarzabal**, **Pedri**, plus a **Pedro Gallese** own goal), while **Lamine Yamal**, **Nico Williams**, and **Víctor Muñoz** stayed at the Tennessee base with injuries — coach **Luis de la Fuente** hopes all three are fit for the **June 15** opener. **Netherlands** defender **Jurriën Timber** was ruled out with a groin injury; **Iran** shifted its base camp to Tijuana; the **USMNT**, after a **1-2** loss to Germany in Chicago on **June 6**, still awaited clarity on center back **Chris Richards**'s ankle.
 
 **Links:**
 
-- [beIN SPORTS — Spain without three stars for Peru friendly (June 8, 2026)](https://www.beinsports.com/en-us/soccer/fifa-world-cup-2026/articles/spain-without-three-of-its-biggest-stars-for-peru-friendly-ahead-of-the-2026-world-cup-2026-06-08)
-- [Sportstar — Wesley ruled out of Brazil's World Cup squad (June 2026)](https://sportstar.thehindu.com/football/international-football/wesley-thigh-injury-ruled-out-brazil-fifa-world-cup-2026-squad-updates-ederson/article71074037.ece)
+- [ESPN — Spain finalize WC preparations with win over Peru (June 9, 2026)](https://www.espn.com/soccer/report/_/gameId/401867679)
+- [Yahoo Sports — 2026 World Cup news live updates (June 2026)](https://sports.yahoo.com/soccer/live/2026-world-cup-news-live-updates-injuries-squads-storylines-as-the-tournament-looms-200000776.html)
 
-**Commentary:** Pre-tournament injury management shapes squad depth; amateur players should taper and avoid training through niggles before big competitions.
+**Commentary:** The final pre-tournament week is a critical window for injury management and tactical tuning — amateur runners should taper and avoid pushing through new pain before big events.
 
 ---
 
-### 3. China Hosts Thailand Tonight in Jinhua; Shao Jiayi Stresses Stability Before Kickoff
-**Summary:** Per the Chinese Football Association and Toutiao on **June 8–9**, the **2026 CFA Team China · Jinhua International Friendly** kicks off **tonight at 19:35** at **Jinhua Sports Center Stadium**, Zhejiang — China vs. Thailand (FIFA **Category A**). At a **June 8** press conference, head coach **Shao Jiayi** said the squad focused on recovery after the **June 5** away match in Singapore and aims for a stable, competitive performance; captain **Zhang Yuning** urged hunger and commitment. This is Shao's first home match in charge and a key tune-up for the **2027 Saudi Arabia Asian Cup**.
+### 3. NBA Finals Game 3: Wembanyama's 32 Points Lift Spurs to 115-111 Win; Series 2-1
+**Summary:** ESPN reported on **June 9** that in **2026 NBA Finals** Game 3 at Madison Square Garden, the **San Antonio Spurs** beat the New York Knicks **115-111**, cutting the series deficit to **2-1** (Knicks still lead). **Victor Wembanyama** had **32 points, 8 rebounds, and 6 assists** for his first Finals win; **Stephon Castle** added **23**. **Jalen Brunson** scored **32** and **OG Anunoby 28** for New York. The loss ended the Knicks' **13-game** playoff winning streak dating to **April 23**.
 
 **Links:**
 
-- [CFA — 2026 Jinhua International Friendly media notice](https://www.thecfa.cn/mttz/20260527/37732.html)
-- [Toutiao — Shao Jiayi pre-match press conference (2026-06-08)](https://www.toutiao.com/article/7648965890788131355/)
+- [ESPN — Spurs 115-111 Knicks Game Recap (June 9, 2026)](https://www.espn.com/nba/recap/_/gameId/401859965)
 
-**Commentary:** Recovery and tactical execution matter on congested international windows; check official post-match reports for final scores and stats.
+**Commentary:** Finals-level intensity demands elite recovery and composure — recreational athletes should prioritize sleep and active recovery during congested schedules.
 
 ---
 
-### 4. VNL Quebec: Japan Beats Canada 3-2 for Fourth Straight Win, Rises to World No. 4
-**Summary:** Per Sina Sports on **June 9**, at the **2026 Women's Nations League** Quebec stop, Japan rallied in five sets **3-2** (**29-27, 25-20, 23-25, 28-30, 15-12**) over Canada for a **fourth straight win**, climbing to **world No. 4** (**352.80** points, a team high). Balanced offense from **Ishikawa Mayu, Sato Shizuno**, and others powered a fast, varied attack. Analysts say resurgent Japan is now China's top rival for the **Asian Championship**.
+### 4. Hardik Pandya Cleared by BCCI; Kohli Ruled Out of Afghanistan ODIs
+**Summary:** Rediff Cricket and NewsX reported on **June 9** that India all-rounder **Hardik Pandya** received full fitness clearance from the BCCI Centre of Excellence in Bengaluru for the three-match ODI series against Afghanistan starting **June 13**. Pandya missed several IPL matches with back spasms, returned **June 2**, and completed **10-over** bowling simulations. **Rohit Sharma** also passed fitness tests. **Virat Kohli** remains sidelined with a hamstring injury from the IPL final; **Yashasvi Jaiswal** was named as replacement.
 
 **Links:**
 
-- [Sina Sports — Japan volleyball four straight wins, world No. 4 (2026-06-09)](https://sports.sina.cn/others/2026-06-09/detail-iniauvau3262034.d.html)
+- [Rediff Cricket — Hardik Pandya Cleared For Afghanistan ODIs (June 9, 2026)](https://www.rediff.com/cricket/report/hardik-pandya-fitness-update-india-star-all-rounder-cleared-for-afghanistan-odis/20260609.htm)
+- [NewsX — Team India Fitness Update (June 9, 2026)](https://www.newsx.com/sports/team-india-fitness-update-for-ind-vs-afg-odi-series-rohit-sharma-hardik-pandya-cleared-to-play-virat-kohli-remains-ruled-out-232266/)
 
-**Commentary:** Asia's volleyball landscape is shifting; China must study Japan's tempo system while building fitness and in-match stability.
+**Commentary:** Structured rehab and graded return-to-play after a congested season is a model recreational athletes can apply to their own injury management.
 
 ---
 
-### 5. Jiangsu "Yangtze River Belt" Mass Fitness Event Launches in Wuxi Hongshan
-**Summary:** Per China News Service Jiangsu on **June 9**, a mass fitness linkage event marking the **74th anniversary** of the "develop sports, enhance people's physique" motto opened at **Lianghong National Wetland Park** in Wuxi. **1,000** walkers completed a **5 km** eco-trail route. On-site services included body-composition screening, blood-pressure checks, and exercise guidance, plus a local market — blending sport, ecology, and tourism.
+### 5. ESSA Consensus: Exercise Physiologists Should Be Integrated into Mental Health Care
+**Summary:** A **2026 ESSA Consensus Statement** published in the **British Journal of Sports Medicine** defines the role of accredited exercise physiologists (AEPs) in mental health support. Developed via a four-step Delphi process with **24 experts** (≥**80%** agreement on 12 items), it sets six practice principles: person-centred, strength-based, recovery-oriented, culturally responsive, trauma-informed, and behaviour-change strategies — covering referral, assessment, intervention, review, and discharge across multidisciplinary teams.
 
 **Links:**
 
-- [China News Service Jiangsu — Yangtze River Belt mass fitness launch in Wuxi Hongshan (2026-06-09)](http://www.js.chinanews.com.cn/news/2026/0609/233983.html)
+- [BJSM — Role of exercise physiologists in mental health support and recovery: 2026 ESSA Consensus Statement](https://bjsm.bmj.com/content/60/8/568)
+- [PubMed — 2026 ESSA Consensus Statement](https://pubmed.ncbi.nlm.nih.gov/41850728/)
 
-**Commentary:** Community events are effective gateways to regular activity and basic fitness screening.
+**Commentary:** Embedding structured exercise in mental health teams offers an international template for institutionalizing "exercise prescriptions" in depression and anxiety care.
 
 ---
 
 ## II. Health & Medicine
 
-### 1. Even One Daily Drink No Longer Looks Harmless, Rutgers Study Finds
-**Summary:** Per Medical Xpress on **June 9**, research in the **Journal of Studies on Alcohol and Drugs** — the **Alcohol Intake and Health Study**, federally commissioned to inform U.S. Dietary Guidelines — found that socially "moderate" drinking is linked to higher risks of death, disability, and chronic disease including cancer and heart disease. Average **14 drinks per week** carried roughly a **1-in-25** alcohol-attributable mortality risk; up to **seven drinks per week** showed only small elevations for most conditions, but potential cardiovascular benefits were outweighed by cancer and other risks. No significant overall protective effect was observed at any consumption level.
+### 1. First-Ever Clinical Guideline for Cardiovascular-Kidney-Metabolic (CKM) Syndrome
+**Summary:** Medical Xpress and the AHA reported on **June 9** that the **AHA**, **ACC**, **ADA**, and **ASN** released the **2026 CKM Syndrome Guideline** — the first dedicated clinical guideline for this interconnected metabolic-kidney-cardiovascular risk spectrum, published in **Circulation** and **JACC**. It emphasizes interdisciplinary care and lifestyle management (physical activity, nutrition, weight, blood pressure, glucose, lipids), recommends GLP-1-based therapies for select patients with obesity and/or type 2 diabetes to reduce cardiovascular events, and introduces **PREVENT** risk equations with life-course CKM staging.
 
 **Links:**
 
-- [Medical Xpress — One daily drink no longer looks harmless (June 9, 2026)](https://medicalxpress.com/news/2026-06-daily-longer-harmless-alcohol-rewrite.html)
-- [Rutgers CAS — Review of Evidence on Alcohol and Health](https://alcoholstudies.rutgers.edu/review-of-evidence-on-alcohol-and-health-2025-2/)
+- [Medical Xpress — First-ever guideline on cardiovascular-kidney-metabolic syndrome (June 9, 2026)](https://medicalxpress.com/news/2026-06-guideline-cardiovascular-kidney-metabolic-syndrome.html)
+- [AHA Professional Heart Daily — 2026 CKM Syndrome Guideline](https://professional.heart.org/en/science-news/2026-guideline-for-the-prevention-detection-evaluation-and-management-of-ckm-syndrome)
 
-**Commentary:** Quantifiable benchmarks can reshape public-health messaging; individuals should reassess social drinking given family history and medications.
+**Commentary:** Framing obesity, diabetes, CKD, and cardiovascular disease in one framework gives the public an evidence-based path for integrated chronic-disease prevention.
 
 ---
 
-### 2. World Women's Reproductive Health Day: Experts Urge Tracking Menstruation as a Health Barometer
-**Summary:** Per Shenyang health calendars and Sina Finance on **June 8–9**, **June 9** is **World Women's Reproductive Health Day**. Guidance stresses logging cycle length, flow, and symptoms; warm-water external cleansing, avoiding overuse of intimate washes, regular screening, and lifestyle habits. Systematic reviews also show **strength training three or more times weekly, 30+ minutes per session, for at least eight weeks** can significantly ease primary dysmenorrhea.
+### 2. Study Warns: Glucosamine Supplements May Be Linked to Faster Alzheimer's Progression
+**Summary:** UF Health and Neuroscience News reported on **June 9** that University of Florida researchers, publishing in **Nature Metabolism**, combined AI audits of **UF Health** electronic records (**2012–2024**), post-mortem brain assays, and animal models. The common joint supplement **glucosamine** crosses the blood-brain barrier and may fuel dysregulated protein glycosylation. After adjusting for age and sex, glucosamine use was associated with roughly **25%** higher odds of progression from mild cognitive impairment (MCI) to dementia; among established ADRD patients, a **25%** higher mortality risk was also observed. Authors stress these are observational associations requiring clinical trial validation.
 
 **Links:**
 
-- [Shenyang Health Commission — 2026 health awareness calendar (June 9)](https://wjw.shenyang.gov.cn/xwzx/gzyw/202512/t20251231_4963041.html)
-- [Sina Finance — Protect reproductive health; don't ignore menstruation as a barometer (2026-06-08)](https://finance.sina.com.cn/wm/2026-06-08/doc-iniasscu3881641.shtml)
+- [UF Health — Study links joint pain supplement to accelerating dementia (June 9, 2026)](https://ufhealth.org/news/2026/study-links-joint-pain-supplement-to-accelerating-dementia-2)
+- [Neuroscience News — Glucosamine Supplement Linked to Accelerated Alzheimer's Progression](https://neurosciencenews.com/glucosamine-joint-supplement-alzheimers-30853/)
 
-**Commentary:** Reproductive health intersects with exercise, sleep, and anti-inflammatory eating; sudden cycle changes warrant clinical evaluation.
+**Commentary:** Older adults at cognitive risk should not treat OTC joint supplements as harmless — supplement decisions warrant physician consultation.
 
 ---
 
-### 3. Apitegromab May Curb Muscle Loss on GLP-1 Weight-Loss Drugs ("Ozempic Butt")
-**Summary:** Per the BBC recently, **Nature Medicine** research suggests roughly **one-third** of weight lost on GLP-1 obesity drugs can come from muscle, not fat. In a **six-month** trial of **102 adults** (mostly women) on **Mounjaro**, those also given **apitegromab** retained about **1.9 kg (55%)** more lean mass; muscle accounted for **14.6%** of total weight loss vs. **30.2%** with placebo. The infusion-only drug blocks a muscle-breakdown protein; experts call for larger, longer trials before routine use.
+### 3. WHO and China Advance Physical Activity Partnership; Praises Parks and Fitness Infrastructure
+**Summary:** Xinhua reported on **June 9** that WHO Representative to China **Martin Taylor** praised China's investment in parks, fitness trails, and outdoor gyms, noting "any physical activity is better than none" and citing WHO guidance: adults need at least **150–300 minutes** of moderate or **75–150 minutes** of vigorous activity weekly. The China Institute of Sport Science and WHO signed a letter of intent in Beijing that day, focusing on physical activity promotion and community sports-medicine integration.
 
 **Links:**
 
-- [BBC — New drug to stop 'Ozempic butt' muscle loss side effect](https://www.bbc.com/news/articles/c62r285l46eo)
+- [Xinhua via NetEase — WHO Representative praises China's physical activity efforts (2026-06-09)](https://www.163.com/dy/article/KV151JJV05346RC6.html)
 
-**Commentary:** Preserving lean mass during weight loss demands resistance training and adequate protein — especially for GLP-1 users.
+**Commentary:** Accessible exercise spaces are public-health infrastructure — population activity levels depend on systems design, not willpower alone.
 
 ---
 
-### 4. Persistent Childhood Short Sleep May Roughly Double Teenage Depression Risk
-**Summary:** Per Medical Xpress and **The Independent** in **June**, University of Birmingham work in **European Child & Adolescent Psychiatry** followed **1,756** participants: the **~2%** with persistently shortest sleep from **ages six months to seven** showed an odds ratio near **1.99** for depression from **ages 13–22**. Authors frame sleep as a modifiable factor; chronic short sleep may act via inflammation and other pathways. Fixes include consistent bedtimes, less pre-sleep screen time, and daytime physical activity.
+### 4. FDA Approves Oral GLP-1 Weight-Loss Drugs, Offering Needle-Free Options
+**Summary:** International Business Times reported on **June 9** that the FDA approved the first oral GLP-1 receptor agonists for chronic weight management, offering needle-free alternatives to injectable Wegovy and Zepbound. Novo Nordisk's oral **semaglutide** (Wegovy pill) showed **13.6%** average weight loss over **64 weeks** in OASIS 4 (up to **16.6%** at peak efficacy); Eli Lilly's once-daily **orforglipron** (Foundayo) achieved **12.4%** average loss in ATTAIN-1, with **54.6%** of participants losing **≥10%**. Lilly's self-pay price is about **$149/month**.
 
 **Links:**
 
-- [Medical Xpress — Childhood short sleep doubles teenage depression risk (June 2026)](https://medicalxpress.com/news/2026-06-childhood-short-teenage-depression.html)
-- [The Independent — Poor childhood sleep doubles teenage depression risk](https://www.independent.co.uk/news/health/child-sleep-depression-parenting-mental-health-b2991347.html)
+- [IBTimes SG — What Are Oral GLP-1 Drugs? New FDA Approvals (June 9, 2026)](https://www.ibtimes.sg/what-are-oral-glp-1-drugs-new-fda-approvals-offer-needle-free-weight-loss-treatment-87620)
 
-**Commentary:** Family sleep hygiene is a low-cost, high-yield prevention tool; schools can reinforce regular routines.
+**Commentary:** Oral dosing may improve adherence, but weight management still requires lifestyle change — drugs are not a substitute for exercise and balanced eating.
 
 ---
 
 ## III. Nutrition & Diet
 
-### 1. 73 U.S. Medical Schools Pledge Stronger Nutrition Training; Licensing Exams to Weight It Heavier
-**Summary:** Per Inside Higher Ed on **June 9**, HHS announced **19 more** medical schools will require at least **40 hours** of nutrition education starting **fall 2026**, bringing the total to **73 programs in 32 states** alongside a **March** cohort of **50**. The National Board of Medical Examiners agreed roughly **15%** of content across its three-step exam sequence will assess nutrition competencies. Secretary **Robert F. Kennedy Jr.** framed the pledges as voluntary steps under the "Make America Healthy Again" agenda.
+### 1. 27-Year Danish Cohort: Dietary Nitrate *Source* Matters More Than Total Intake for Dementia Risk
+**Summary:** ScienceDaily and EurekAlert reported on **June 8** that Edith Cowan University and the Danish Cancer Research Institute analyzed **54,804** adults over up to **27 years** (published in **Alzheimer's & Dementia**). Higher plant-sourced nitrate (roughly one cup of baby spinach daily) was linked to lower dementia incidence (Q5 vs. Q1 HR **0.90**); higher nitrate from animal foods, processed meats, and tap water was linked to higher risk, with stronger associations for early-onset dementia. Antioxidants in vegetables may promote beneficial nitric oxide while blocking harmful N-nitrosamines — but the study is observational and cannot prove causation.
 
 **Links:**
 
-- [Inside Higher Ed — More Medical Schools Embrace RFK Jr.'s Nutrition Push (June 9, 2026)](https://www.insidehighered.com/news/faculty/curriculum/2026/06/09/more-medical-schools-examiners-back-rfk-jr-nutrition-push)
+- [ScienceDaily — Dementia risk linked to nitrate in drinking water (June 8, 2026)](https://www.sciencedaily.com/releases/2026/06/260606075852.htm)
+- [EurekAlert — Nitrate in drinking water linked to increased dementia risk (2026)](https://e3.eurekalert.org/news-releases/1114139)
 
-**Commentary:** Better clinician nutrition literacy should improve chronic-disease counseling; patients should still seek registered dietitians for personalized plans.
+**Commentary:** "What you eat" beats isolated nutrient counts — more vegetables and less processed meat is a practical brain-and-metabolism strategy.
 
 ---
 
-### 2. AstraZeneca Oral Drug Elecoglipron: 11.8% Weight Loss at 36 Weeks in Phase 2
-**Summary:** Per WION on **June 9**, **The Lancet** published Phase 2 results for AstraZeneca's oral GLP-1 **elecoglipron** in **310** overweight or obese adults without diabetes: the highest-dose group averaged **10.5%** loss at **26 weeks** and **11.8%** at **36 weeks**; nausea was the most common adverse event. The pill enters a crowded field vs. Novo Nordisk's oral Wegovy and Lilly's Foundayo; Cambridge researchers note the trial was not a head-to-head comparison and Phase 3 is still needed.
+### 2. China Study: Nutrition Literacy and Dietary Diversity Linked to Lower Frailty in Older Adults
+**Summary:** A **BMC Geriatrics** study published **June 6** analyzed **1,187** Chinese older adults; frailty prevalence was about **13.7%**. Higher nutrition literacy was associated with lower frailty odds (OR **0.98**, 95% CI **0.96–0.99**) and greater dietary diversity (β **0.06**); dietary diversity may mediate the literacy-frailty relationship. Authors recommend interventions targeting both nutrition literacy and dietary variety.
 
 **Links:**
 
-- [WION — AstraZeneca's daily pill delivers 11.8% weight loss (June 9, 2026)](https://www.wionews.com/science/next-weight-loss-breakthrough-astrazeneca-tests-a-daily-pill-1780986473092)
+- [BMC Geriatrics — Nutrition literacy, dietary diversity, and frailty among older adults in China (June 6, 2026)](https://link.springer.com/article/10.1186/s12877-026-07726-x)
 
-**Commentary:** Oral agents may lower access barriers, but lifestyle change remains foundational; medical supervision is essential.
+**Commentary:** "Eating well" is a practical skill, not just knowledge — community nutrition education should reach older adults directly.
 
 ---
 
-### 3. "Enough Produce" May Not Mean Enough Flavanols for Heart Protection
-**Summary:** Per **Food & Function** and the University of Reading in **June**, analyses of U.S. **COSMOS** (**n=6,509**) and U.K. **EPIC-Norfolk** (**n=24,154**) found fewer than **25%** of people meeting standard fruit-and-vegetable guidance reached the **500 mg/day** flavanol intake linked to cardiovascular benefit in COSMOS. The Academy of Nutrition and Dietetics suggests **400–600 mg/day**; top sources include green tea (~**200 mg/cup**), fava beans, berries, and skin-on apples. Total produce volume poorly predicts flavanol intake — food choice matters more.
+### 3. Summer Peaches: Hydration, Potassium, and Carotenoids — Eat the Skin
+**Summary:** The New York Times (Chinese edition) reported on **June 9** that peaches are high in water and provide electrolyte **potassium** (about **180 mg** per small peach, ~**5%** of daily needs), useful after summer exercise. They also contain flavonoids and carotenoids with antioxidant effects; carotenoids convert to vitamin A. Experts recommend eating peaches **with the skin** to maximize fiber and polyphenols; frozen or canned versions without added sugar are acceptable but lose skin benefits.
 
 **Links:**
 
-- [Food & Function — Dietary guidelines do not yield protective flavanol levels (2026)](https://pubs.rsc.org/en/content/articlelanding/2026/fo/d6fo00867d)
-- [University of Reading — Not all five-a-days are equal for heart health (2026)](https://www.reading.ac.uk/news/2026/Research-News/Not-all-five-a-days-are-equal-for-heart-health)
+- [NYT Chinese — How Healthy Are Peaches? (2026-06-09)](https://cn.nytimes.com/health/20260609/peaches-health-benefits-recipes/)
 
-**Commentary:** Upgrade "five a day" to "pick the right kinds" — berries, apples, legumes, and unsweetened tea are practical wins.
-
----
-
-### 4. In Chinese Older Adults, Nutrition Literacy and Dietary Diversity Tie to Lower Frailty Risk
-**Summary:** Per **BMC Geriatrics** published **June 6**, a Chinese cross-sectional study of **1,187** older adults (frailty prevalence ~**13.7%**) found higher nutrition literacy linked to lower frailty odds (OR **0.98**, 95% CI **0.96–0.99**) and greater dietary diversity (β **0.06**); diversity may partly mediate the literacy–frailty link. Authors recommend interventions targeting both literacy and varied diets.
-
-**Links:**
-
-- [BMC Geriatrics — Nutrition literacy, dietary diversity, and frailty in China (June 6, 2026)](https://link.springer.com/article/10.1186/s12877-026-07726-x)
-
-**Commentary:** For aging populations, knowing how to eat well matters as much as access to diverse foods.
+**Commentary:** Seasonal fruit is a natural summer hydration source — a peach plus water beats sugary sports drinks for casual recovery.
 
 ---
 
 ## IV. Lifestyle
 
-### 1. Poor Midlife Sleep in Women Linked to Lower Psychological Well-Being Nine Years Later
-**Summary:** Per Medical Xpress in **June**, research to be presented at **SLEEP 2026** (**June 17**, Baltimore) tracked adults for **nine years**: midlife sleep problems predicted lower later well-being scores, with a stronger association in **women** after adjusting for age, education, illness, and baseline well-being. Lead author **Fumiko Hamada** (University of South Florida) said sleep may be a particularly important long-term risk factor for women's mental health.
+### 1. Persistent Childhood Short Sleep Doubles Odds of Teenage Depression
+**Summary:** The University of Bristol and Medical Xpress reported on **June 9** that **Isabel Morales-Muñoz**'s team, publishing in **European Child & Adolescent Psychiatry**, analyzed **1,756** participants with complete sleep and depression data. Children persistently in the shortest nighttime-sleep quartile (~**2%** of the cohort) had an odds ratio of **1.99** for depression between ages **13–22**. Inflammation (e.g., IL-6) may be one biological pathway; recommended measures include consistent bedtimes, less pre-sleep screen time, daytime physical activity, and calm sleep environments.
 
 **Links:**
 
-- [Medical Xpress — Poor sleep in middle-aged women and later well-being (June 2026)](https://medicalxpress.com/news/2026-06-poor-middle-aged-women-psychological.html)
+- [University of Bristol — Children with persistent shorter sleep face twice the risk of ongoing depression (June 9, 2026)](https://www.bristol.ac.uk/news/2026/june/children-with-persistent-shorter-sleep-face-twice-the-risk-of-ongoing-depression.html)
+- [Medical Xpress — Childhood of short sleep doubles risk of teenage depression (June 2026)](https://medicalxpress.com/news/2026-06-childhood-short-teenage-depression.html)
 
-**Commentary:** Sleep screening should be routine around menopause — not dismissed as something to endure.
+**Commentary:** Sleep is a long-term investment in children's mental health — family routines and screen limits pay dividends comparable to extracurricular enrichment.
 
 ---
 
-### 2. Online CBT for Insomnia in Montreal Seniors: 11.46% Sleep-Efficiency Gain
-**Summary:** Per CityNews Montreal on **June 8**, CRIUGM's online program for older adults with insomnia and anxiety, published in **Age and Ageing**, improved sleep efficiency by **11.46%**. Lead investigator **Thanh Dang-Vu** linked insomnia to depression, anxiety, hypertension, diabetes, and cognitive decline; online tools complement — not replace — clinicians. A memory-outcomes phase and wider free deployment depend on funding.
+### 2. Grain in Ear (Mangzhong) Wellness: Manage Damp-Heat, Support Spleen, Stay Cool
+**Summary:** Sina Finance reported on **June 9** that during the Grain in Ear solar term, rising heat and humidity call for **spleen-strengthening, dampness-clearing, and heart-calming** habits, per TCM physician **Yan Yun** of Nanjing Tongren Street Community Health Center. Diet should be light and not greasy — bitter greens (bitter melon, endive, lotus seed) and dampness-reducing foods (winter melon, barley, red beans); avoid over-chilled foods. Exercise is best in early morning or evening (walking, jogging, Baduanjin), with light sweating only — avoid midday heat and excessive perspiration.
 
 **Links:**
 
-- [CityNews Montreal — Online therapy reducing insomnia in Montreal seniors (June 8, 2026)](https://montreal.citynews.ca/2026/06/08/online-therapy-reducing-insomnia-montreal-seniors/)
+- [Sina Finance — Grain in Ear: focus on clearing dampness and calming the heart (2026-06-09)](https://finance.sina.com.cn/jjxw/2026-06-09/doc-iniattqy8344232.shtml)
 
-**Commentary:** Digital sleep interventions expand access for seniors; consistent schedules and activity remain baseline habits.
-
----
-
-### 3. Irregular Sleep Patterns Linked to Depression in U.S. Adults — Even When Duration Meets Guidelines
-**Summary:** Per a **June** **Sleep Medicine: X** NHANES accelerometer study, objectively measured **sleep irregularity** associated with higher depression odds even among those meeting recommended sleep duration. Interventions should target **schedule consistency**, not just hours in bed.
-
-**Links:**
-
-- [ScienceDirect — Sleep irregularity and depression: NHANES accelerometer study (2026)](https://www.sciencedirect.com/science/article/abs/pii/S2352721826000768)
-
-**Commentary:** A fixed wake time often beats chasing extra hours; shift workers should monitor circadian disruption closely.
+**Commentary:** Seasonal wellness is about aligning sleep, diet, and exercise intensity with climate — damp-heat seasons especially demand spleen protection and emotional steadiness.
 
 ---
 
 ## Today's Summary
 
-- **Competition:** NBA Finals Game 3 Spurs win, World Cup injury updates, China–Thailand friendly tonight, Japan volleyball's fourth straight victory — today's sports spine.
-- **Public health:** **June 9** World Women's Reproductive Health Day and fresh alcohol evidence challenge "moderate benefit" narratives.
-- **Medical frontiers:** GLP-1 muscle-preservation research and childhood sleep–teen depression links broaden metabolic and mental-health crossovers.
-- **Nutrition policy & industry:** U.S. medical-school nutrition reforms and AstraZeneca oral weight-loss data reflect dual momentum in "food as medicine" and anti-obesity therapeutics.
-- **Evidence-based eating:** Flavanol intake gaps and Chinese older-adult nutrition-literacy data show food **quality** beats quantity alone.
-- **Daily Framing:** A "pre-World Cup + Finals suspense + women's health awareness" day where competition prep and preventive science resonate together.
+- **Sports**: China's home draw with Thailand, the Spurs cutting the NBA Finals deficit, and World Cup squads finalizing rosters 48 hours before kickoff — elite sport enters its last pre-tournament tuning phase.
+- **Health policy and alerts**: The first CKM syndrome guideline unifies metabolic-kidney-cardiovascular risk management; glucosamine-cognition findings spark OTC supplement safety debate.
+- **Physical activity governance**: WHO-China cooperation affirms accessible exercise spaces as public-health infrastructure.
+- **Nutrition science**: Nitrate food sources and dementia risk, plus nutrition literacy and frailty in Chinese older adults, reinforce long-term dietary patterns over fads.
+- **Lifestyle**: Chronic childhood short sleep links to teenage depression; Grain in Ear season reminds us to adjust for damp-heat.
+- **Daily Framing:** Today reads as a **pre-tournament health systems calibration day** — competition prep, chronic-disease guidelines, sleep research, and seasonal wellness all point to the same conclusion: structured, sustainable lifestyle habits underpin both athletic performance and long-term health.
 
 ---
 
-*This digest is compiled from live search and is for reference only; facts are subject to original sources.*  
+*This digest is compiled from live web search and is for reference only; facts are subject to original sources.*  
 *Date: June 9, 2026 (Tuesday)*
