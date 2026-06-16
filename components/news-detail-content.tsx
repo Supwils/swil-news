@@ -21,34 +21,32 @@ type NewsDetailViewEntry = Omit<NewsEntry, "filePath" | "content">;
 type NewsDetailContentProps = {
   topic: TopicKey;
   date: string;
+  /** Already resolved for the current route's locale by the server page. */
   entry: NewsDetailViewEntry;
-  entryEn: NewsDetailViewEntry | null;
+  /** Already resolved for the current route's locale by the server page. */
   articleBody: ReactNode;
-  articleBodyEn: ReactNode | null;
-  availableTopicsZh: TopicKey[];
-  availableTopicsEn: TopicKey[];
-  relatedZh: NewsPreview[];
-  relatedEn: NewsPreview[];
+  availableTopics: TopicKey[];
+  related: NewsPreview[];
+  /**
+   * True on the /en route when no English translation exists and we are
+   * rendering the Chinese original as a fallback.
+   */
+  isChineseFallback?: boolean;
 };
 
 export function NewsDetailContent({
   topic,
   date,
   entry,
-  entryEn,
   articleBody,
-  articleBodyEn,
-  availableTopicsZh,
-  availableTopicsEn,
-  relatedZh,
-  relatedEn,
+  availableTopics,
+  related,
+  isChineseFallback = false,
 }: NewsDetailContentProps) {
   const locale = useLocale();
-  const activeEntry = locale === "en" && entryEn ? entryEn : entry;
-  const activeBody = locale === "en" && articleBodyEn ? articleBodyEn : articleBody;
-  const availableTopics = locale === "en" ? availableTopicsEn : availableTopicsZh;
-  const related = locale === "en" ? relatedEn : relatedZh;
-  const isShowingChineseFallback = locale === "en" && entryEn === null;
+  const activeEntry = entry;
+  const activeBody = articleBody;
+  const isShowingChineseFallback = isChineseFallback;
   const copy = getCopy(locale);
   const meta = getTopicMeta(topic, locale);
   const topicLabels = TOPICS.map((t) => ({ key: t.key, label: getTopicMeta(t.key, locale)!.label }));

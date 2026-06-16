@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { NewsCard } from "@/components/news-card";
 import { useLocale } from "@/components/locale-context";
 import { NewspaperFooter } from "@/components/newspaper/footer";
@@ -10,19 +12,28 @@ import { getTopicMeta, type TopicKey } from "@/lib/news-meta";
 
 type TopicPageContentProps = {
   topic: TopicKey;
+  /** Already resolved for the current route's locale by the server page. */
   entries: NewsPreview[];
-  entriesEn: NewsPreview[];
 };
 
-export function TopicPageContent({ topic, entries: entriesZh, entriesEn }: TopicPageContentProps) {
+// Only the first window is rendered into the static HTML; the rest are revealed
+// client-side on demand. Keeps the prerendered payload small for topics with a
+// long archive without dropping any data.
+const INITIAL_CARDS = 36;
+const CARDS_STEP = 36;
+
+export function TopicPageContent({ topic, entries }: TopicPageContentProps) {
   const locale = useLocale();
-  const entries = locale === "en" ? entriesEn : entriesZh;
   const copy = getCopy(locale);
   const meta = getTopicMeta(topic, locale);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_CARDS);
 
   if (!meta) {
     return null;
   }
+
+  const visibleEntries = entries.slice(0, visibleCount);
+  const remaining = entries.length - visibleEntries.length;
 
   return (
     <div className="np-root">
@@ -100,11 +111,26 @@ export function TopicPageContent({ topic, entries: entriesZh, entriesEn }: Topic
             </p>
           </section>
         ) : (
-          <section className="grid gap-4 xl:grid-cols-2" style={{ marginTop: 32 }}>
-            {entries.map((entry) => (
-              <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
-            ))}
-          </section>
+          <>
+            <section className="grid gap-4 xl:grid-cols-2" style={{ marginTop: 32 }}>
+              {visibleEntries.map((entry) => (
+                <NewsCard key={`${entry.topic}-${entry.date}`} entry={entry} />
+              ))}
+            </section>
+            {remaining > 0 ? (
+              <div style={{ marginTop: 28, display: "flex", justifyContent: "center" }}>
+                <button
+                  type="button"
+                  className="np-btn-secondary"
+                  onClick={() => setVisibleCount((count) => count + CARDS_STEP)}
+                >
+                  {locale === "en"
+                    ? `Load more (${remaining} remaining)`
+                    : `加载更多（剩余 ${remaining} 篇）`}
+                </button>
+              </div>
+            ) : null}
+          </>
         )}
 
         <NewspaperFooter />

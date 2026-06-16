@@ -73,15 +73,37 @@ pnpm build
 log_info "Step success: build"
 
 LAST_STEP="git_commit_push"
+COMMITTED=0
 if [[ -n $(git status -s) ]]; then
   log_info "Step start: git_commit_push changes_detected=true"
   git add NEWS/
   git add -u
   git commit -m "feat(content): adding daily news"
   git push
+  COMMITTED=1
   log_info "Step success: git_commit_push result=committed_and_pushed"
 else
   log_warn "Step skipped: git_commit_push reason=no_changes"
+fi
+
+# Warm the edge cache for the hot set (home pages + newest day's articles) once
+# the new deploy is live. A fresh deploy leaves Vercel's edge cache cold, so the
+# first organic visitor otherwise pays the origin fetch (the main driver of the
+# high TTFB on /news/[topic]/[date]). Best-effort and non-fatal: a failed warmup
+# must never fail the daily content job.
+LAST_STEP="warm_cache"
+WARM_TARGET="${SITE_URL:-${NEXT_PUBLIC_SITE_URL:-}}"
+if [[ "$COMMITTED" == "1" && -n "$WARM_TARGET" ]]; then
+  WARM_DEPLOY_WAIT="${WARM_DEPLOY_WAIT:-150}"
+  log_info "Step start: warm_cache wait=${WARM_DEPLOY_WAIT}s target=${WARM_TARGET}"
+  sleep "$WARM_DEPLOY_WAIT"
+  if bash "$SCRIPT_DIR/warm-cache.sh" "$WARM_TARGET"; then
+    log_info "Step success: warm_cache"
+  else
+    log_warn "Step warn: warm_cache failed (non-fatal)"
+  fi
+else
+  log_warn "Step skipped: warm_cache reason=$([[ "$COMMITTED" == "1" ]] && echo no_SITE_URL || echo no_changes)"
 fi
 
 JOB_DURATION=$(( $(date +%s) - JOB_STARTED_AT_EPOCH ))

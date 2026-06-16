@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { StructuredData } from "@/components/structured-data";
 import { NewsHome } from "@/components/news-home";
 import { localizePath } from "@/lib/locale-routing";
-import { getAllNewsPreviews } from "@/lib/news";
+import { getHomePreviews } from "@/lib/news";
 import { absoluteUrl, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default async function EnglishHomePage() {
-  const entries = await getAllNewsPreviews("en");
+  const { entries, topicCounts, totalCount } = await getHomePreviews("en");
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -62,7 +62,7 @@ export default async function EnglishHomePage() {
   return (
     <>
       <StructuredData data={structuredData} />
-      <NewsHome entries={entries} />
+      <NewsHome entries={entries} topicCounts={topicCounts} totalCount={totalCount} />
     </>
   );
 }

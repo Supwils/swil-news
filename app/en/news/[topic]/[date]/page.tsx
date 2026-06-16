@@ -86,30 +86,30 @@ export default async function EnglishNewsDetailPage({ params }: NewsDetailPagePr
     notFound();
   }
 
-  const [entryZh, entryEn, availableTopicsZh, availableTopicsEn, topicPreviewsZh, topicPreviewsEn] = await Promise.all([
-    getNewsEntry(topic, date, "zh"),
+  // This route renders English. Only fall back to the Chinese original when
+  // no English translation exists — loading the Chinese body unconditionally
+  // doubles the prerendered payload for every page that *does* have a
+  // translation (the common case).
+  const [entryEn, availableTopicsEn, topicPreviewsEn] = await Promise.all([
     getNewsEntry(topic, date, "en"),
-    getTopicsWithNewsForDate(date, "zh"),
     getTopicsWithNewsForDate(date, "en"),
-    getEntryPreviewsByTopic(topic, "zh"),
     getEntryPreviewsByTopic(topic, "en"),
   ]);
 
-  const relatedZh = topicPreviewsZh
-    .filter((entry) => entry.date !== date)
-    .slice(0, 3);
+  const entryZh = entryEn ? null : await getNewsEntry(topic, date, "zh");
+
   const relatedEn = topicPreviewsEn
     .filter((entry) => entry.date !== date)
     .slice(0, 3);
 
   const meta = getTopicMeta(topic, "en");
+  const activeEntry = entryEn ?? entryZh;
 
-  if (!entryZh || !meta) {
+  if (!activeEntry || !meta) {
     notFound();
   }
 
   const canonicalPath = localizePath(`/news/${topic}/${date}`, "en");
-  const activeEntry = entryEn ?? entryZh;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -141,16 +141,8 @@ export default async function EnglishNewsDetailPage({ params }: NewsDetailPagePr
     },
   };
 
-  const { filePath: _filePath, content: zhContent, ...clientEntry } = entryZh;
-  const clientEntryEn = entryEn
-    ? (() => {
-        const { filePath: _fp, content: _content, ...entry } = entryEn;
-        return entry;
-      })()
-    : null;
-
-  const articleBody = <NewsMarkdown content={zhContent} />;
-  const articleBodyEn = entryEn ? <NewsMarkdown content={entryEn.content} /> : null;
+  const { filePath: _filePath, content, ...clientEntry } = activeEntry;
+  const articleBody = <NewsMarkdown content={content} />;
 
   return (
     <>
@@ -159,13 +151,10 @@ export default async function EnglishNewsDetailPage({ params }: NewsDetailPagePr
         topic={topic}
         date={date}
         entry={clientEntry}
-        entryEn={clientEntryEn}
         articleBody={articleBody}
-        articleBodyEn={articleBodyEn}
-        availableTopicsZh={availableTopicsZh}
-        availableTopicsEn={availableTopicsEn}
-        relatedZh={relatedZh}
-        relatedEn={relatedEn}
+        availableTopics={availableTopicsEn}
+        related={relatedEn}
+        isChineseFallback={!entryEn}
       />
     </>
   );

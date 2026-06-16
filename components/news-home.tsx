@@ -17,7 +17,12 @@ import { TOPICS, getTopicMeta, isTopicKey, type TopicKey } from "@/lib/news-meta
 import { useShortcutLabel } from "@/lib/use-shortcut-label";
 
 type NewsHomeProps = {
+  /** Slim union of previews (see getHomePreviews) — NOT the full archive. */
   entries: NewsPreview[];
+  /** True per-topic counts over the whole archive (for the topic chips). */
+  topicCounts: Partial<Record<TopicKey, number>>;
+  /** True total count over the whole archive. */
+  totalCount: number;
 };
 
 type ReadingSession = {
@@ -71,7 +76,7 @@ function articleId(entry: Pick<NewsPreview, "topic" | "date">) {
 }
 
 export function NewsHome(props: NewsHomeProps) {
-  const { entries } = props;
+  const { entries, topicCounts, totalCount } = props;
   const locale = useLocale();
   const searchParams = useSearchParams();
   const topicParam = searchParams.get("topic");
@@ -80,16 +85,6 @@ export function NewsHome(props: NewsHomeProps) {
   const topicsWithLocale = useMemo(
     () => TOPICS.map((t) => getTopicMeta(t.key, locale)!),
     [locale],
-  );
-
-  const totalCount = entries.length;
-  const topicCounts = useMemo(
-    () =>
-      entries.reduce<Partial<Record<TopicKey, number>>>((acc, entry) => {
-        acc[entry.topic] = (acc[entry.topic] ?? 0) + 1;
-        return acc;
-      }, {}),
-    [entries],
   );
 
   const {
@@ -147,6 +142,9 @@ export function NewsHome(props: NewsHomeProps) {
     }
 
     const topicEntries = entries.filter((e) => e.topic === activeTopic);
+    // `entries` is a slim union (≤ ~11 per topic), so derive the "more" count
+    // from the true archive total for this topic, not the truncated slice.
+    const topicTotal = topicCounts[activeTopic] ?? topicEntries.length;
     const lead = topicEntries[0] ?? null;
     const briefs = topicEntries.slice(1, 6);
     const tabBig = topicEntries[6] ?? null;
@@ -154,12 +152,12 @@ export function NewsHome(props: NewsHomeProps) {
     return {
       leadEntry: lead,
       briefEntries: briefs,
-      briefMoreCount: Math.max(0, topicEntries.length - 1 - briefs.length),
+      briefMoreCount: Math.max(0, topicTotal - 1 - briefs.length),
       tabloidBig: tabBig,
       tabloidSmall: tabSmall,
       tabloidDate: tabBig?.date ?? null,
     };
-  }, [activeTopic, entries, previousDate, previousEntries, todayEntries]);
+  }, [activeTopic, entries, previousDate, previousEntries, todayEntries, topicCounts]);
 
   // localStorage-backed client state. Kept in a single object so we can hydrate
   // in one setState call.

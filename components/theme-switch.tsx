@@ -62,7 +62,17 @@ function ThemeButton({
   const Icon = effective === "dark" ? Moon : effective === "light" ? Sun : Monitor;
 
   if (!mounted) {
-    return <div className="np-utility-btn" style={{ opacity: 0 }} aria-hidden />;
+    // Reserve the exact footprint of the resolved button (icon + label) so
+    // hydration doesn't change the masthead's width and reflow the row, which
+    // would shift the page below it (CLS).
+    return (
+      <div className="np-utility-btn" style={{ opacity: 0 }} aria-hidden>
+        <Sun size={15} strokeWidth={1.75} aria-hidden />
+        <span className="np-mono" style={{ fontSize: 10, letterSpacing: "0.1em" }}>
+          LIGHT
+        </span>
+      </div>
+    );
   }
 
   const label = theme === "light" ? "LIGHT" : theme === "dark" ? "DARK" : "AUTO";

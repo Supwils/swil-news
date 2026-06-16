@@ -55,13 +55,10 @@ export default async function EnglishMonthArchivePage({ params }: MonthArchivePa
     notFound();
   }
 
-  const [entries, entriesEn] = await Promise.all([
-    getEntryPreviewsByMonth(month, "zh"),
-    getEntryPreviewsByMonth(month, "en"),
-  ]);
-  if (entries.length === 0) {
-    notFound();
-  }
+  // The month's existence is already guaranteed by the monthIndex check above.
+  // Load English previews only; an empty list renders the "no English digests"
+  // state rather than 404ing.
+  const entries = await getEntryPreviewsByMonth(month, "en");
 
   const previousMonth = months[monthIndex + 1] ?? null;
   const nextMonth = months[monthIndex - 1] ?? null;
@@ -82,8 +79,8 @@ export default async function EnglishMonthArchivePage({ params }: MonthArchivePa
     mainEntity: {
       "@type": "ItemList",
       itemListOrder: "https://schema.org/ItemListOrderDescending",
-      numberOfItems: entriesEn.length,
-      itemListElement: entriesEn.slice(0, 50).map((entry, index) => ({
+      numberOfItems: entries.length,
+      itemListElement: entries.slice(0, 50).map((entry, index) => ({
         "@type": "ListItem",
         position: index + 1,
         url: absoluteUrl(localizePath(`/news/${entry.topic}/${entry.date}`, "en")),
@@ -97,8 +94,7 @@ export default async function EnglishMonthArchivePage({ params }: MonthArchivePa
       <StructuredData data={structuredData} />
       <MonthArchivePageContent
         month={month}
-        entries={entries}
-        entriesEn={entriesEn}
+        entries={entries.map((e) => ({ ...e, searchText: "" }))}
         previousMonth={previousMonth}
         nextMonth={nextMonth}
       />

@@ -16,15 +16,19 @@ const displayFont = Source_Serif_4({
   variable: "--font-display",
 });
 
+// Only the weights actually applied in the UI are declared, so next/font
+// doesn't preload unused font files. Body text is Chinese (system fonts); these
+// Latin faces only render the chrome. Inter uses 400/600/700, JetBrains Mono
+// uses 400/600 — the previously declared 500 weights were never referenced.
 const bodyFont = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
   variable: "--font-body",
 });
 
 const monoFont = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "600"],
   variable: "--font-mono",
 });
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import { NewsCard } from "@/components/news-card";
 import { useLocale } from "@/components/locale-context";
@@ -10,24 +11,30 @@ import { localizePath } from "@/lib/locale-routing";
 import { formatArchiveMonth, formatDisplayDate, groupPreviewsByDate } from "@/lib/news-client";
 import type { NewsPreview } from "@/lib/news";
 
+// Only the first few day-groups are rendered into the static HTML; the rest are
+// revealed client-side on demand so a busy month doesn't bloat the payload.
+const INITIAL_GROUPS = 8;
+const GROUPS_STEP = 8;
+
 type MonthArchivePageContentProps = {
   month: string;
+  /** Already resolved for the current route's locale by the server page. */
   entries: NewsPreview[];
-  entriesEn: NewsPreview[];
   previousMonth: string | null;
   nextMonth: string | null;
 };
 
 export function MonthArchivePageContent({
   month,
-  entries: entriesZh,
-  entriesEn,
+  entries,
   previousMonth,
   nextMonth,
 }: MonthArchivePageContentProps) {
   const locale = useLocale();
-  const entries = locale === "en" ? entriesEn : entriesZh;
   const groups = groupPreviewsByDate(entries);
+  const [visibleGroups, setVisibleGroups] = useState(INITIAL_GROUPS);
+  const shownGroups = groups.slice(0, visibleGroups);
+  const remainingGroups = groups.length - shownGroups.length;
 
   return (
     <div className="np-root">
@@ -92,7 +99,7 @@ export function MonthArchivePageContent({
           </section>
         ) : (
           <section style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 40 }}>
-            {groups.map((group) => (
+            {shownGroups.map((group) => (
               <div key={group.date}>
                 <h2
                   className="np-serif"
@@ -116,6 +123,20 @@ export function MonthArchivePageContent({
                 </div>
               </div>
             ))}
+
+            {remainingGroups > 0 ? (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <button
+                  type="button"
+                  className="np-btn-secondary"
+                  onClick={() => setVisibleGroups((count) => count + GROUPS_STEP)}
+                >
+                  {locale === "en"
+                    ? `Load more (${remainingGroups} more day${remainingGroups === 1 ? "" : "s"})`
+                    : `加载更多（剩余 ${remainingGroups} 天）`}
+                </button>
+              </div>
+            ) : null}
           </section>
         )}
 

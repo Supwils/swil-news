@@ -53,10 +53,7 @@ export default async function MonthArchivePage({ params }: MonthArchivePageProps
     notFound();
   }
 
-  const [entries, entriesEn] = await Promise.all([
-    getEntryPreviewsByMonth(month, "zh"),
-    getEntryPreviewsByMonth(month, "en"),
-  ]);
+  const entries = await getEntryPreviewsByMonth(month, "zh");
   if (entries.length === 0) {
     notFound();
   }
@@ -92,10 +89,10 @@ export default async function MonthArchivePage({ params }: MonthArchivePageProps
   return (
     <>
       <StructuredData data={structuredData} />
+      {/* searchText is only used by full-text search, never by the cards here. */}
       <MonthArchivePageContent
         month={month}
-        entries={entries}
-        entriesEn={entriesEn}
+        entries={entries.map((e) => ({ ...e, searchText: "" }))}
         previousMonth={previousMonth}
         nextMonth={nextMonth}
       />

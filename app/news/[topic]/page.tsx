@@ -74,10 +74,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
   }
 
   const meta = getTopicMeta(topic, "zh");
-  const [entries, entriesEn] = await Promise.all([
-    getEntryPreviewsByTopic(topic, "zh"),
-    getEntryPreviewsByTopic(topic, "en"),
-  ]);
+  const entries = await getEntryPreviewsByTopic(topic, "zh");
 
   if (!meta) {
     notFound();
@@ -111,7 +108,9 @@ export default async function TopicPage({ params }: TopicPageProps) {
   return (
     <>
       <StructuredData data={structuredData} />
-      <TopicPageContent topic={topic} entries={entries} entriesEn={entriesEn} />
+      {/* searchText is only used by full-text search (Pagefind / home modal),
+          never by the cards rendered here — drop it to shrink the payload. */}
+      <TopicPageContent topic={topic} entries={entries.map((e) => ({ ...e, searchText: "" }))} />
     </>
   );
 }

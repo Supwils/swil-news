@@ -77,10 +77,7 @@ export default async function EnglishTopicPage({ params }: TopicPageProps) {
   }
 
   const meta = getTopicMeta(topic, "en");
-  const [entries, entriesEn] = await Promise.all([
-    getEntryPreviewsByTopic(topic, "zh"),
-    getEntryPreviewsByTopic(topic, "en"),
-  ]);
+  const entries = await getEntryPreviewsByTopic(topic, "en");
 
   if (!meta) {
     notFound();
@@ -103,8 +100,8 @@ export default async function EnglishTopicPage({ params }: TopicPageProps) {
     mainEntity: {
       "@type": "ItemList",
       itemListOrder: "https://schema.org/ItemListOrderDescending",
-      numberOfItems: entriesEn.length,
-      itemListElement: entriesEn.slice(0, 20).map((entry, index) => ({
+      numberOfItems: entries.length,
+      itemListElement: entries.slice(0, 20).map((entry, index) => ({
         "@type": "ListItem",
         position: index + 1,
         url: absoluteUrl(localizePath(`/news/${entry.topic}/${entry.date}`, "en")),
@@ -116,7 +113,7 @@ export default async function EnglishTopicPage({ params }: TopicPageProps) {
   return (
     <>
       <StructuredData data={structuredData} />
-      <TopicPageContent topic={topic} entries={entries} entriesEn={entriesEn} />
+      <TopicPageContent topic={topic} entries={entries.map((e) => ({ ...e, searchText: "" }))} />
     </>
   );
 }

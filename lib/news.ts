@@ -199,6 +199,50 @@ export async function getAllNewsPreviews(locale: Locale = "zh") {
   return entries.map(toNewsPreview);
 }
 
+export type HomePreviews = {
+  /**
+   * A slim union of previews — the latest few overall (covers the "today" and
+   * "yesterday" sections plus the search modal's default list) and the latest
+   * per topic (covers the `?topic=` filtered view). Far smaller than the full
+   * archive, which would otherwise be serialized into the home page payload.
+   */
+  entries: NewsPreview[];
+  /** True per-topic counts over the whole archive (chips show these). */
+  topicCounts: Partial<Record<TopicKey, number>>;
+  /** True total count over the whole archive. */
+  totalCount: number;
+};
+
+const HOME_OVERALL_LIMIT = 30;
+const HOME_PER_TOPIC_LIMIT = 11;
+
+export async function getHomePreviews(locale: Locale = "zh"): Promise<HomePreviews> {
+  const all = await getAllNewsPreviews(locale); // sorted date-desc, then topic order
+  const totalCount = all.length;
+
+  const topicCounts: Partial<Record<TopicKey, number>> = {};
+  const perTopicSeen: Partial<Record<TopicKey, number>> = {};
+  const keep = new Set<string>();
+  const keyOf = (entry: NewsPreview) => `${entry.topic}:${entry.date}`;
+
+  all.forEach((entry, index) => {
+    topicCounts[entry.topic] = (topicCounts[entry.topic] ?? 0) + 1;
+
+    const seen = perTopicSeen[entry.topic] ?? 0;
+    if (index < HOME_OVERALL_LIMIT || seen < HOME_PER_TOPIC_LIMIT) {
+      keep.add(keyOf(entry));
+    }
+    if (seen < HOME_PER_TOPIC_LIMIT) {
+      perTopicSeen[entry.topic] = seen + 1;
+    }
+  });
+
+  // Filtering `all` preserves the original date-desc ordering.
+  const entries = all.filter((entry) => keep.has(keyOf(entry)));
+
+  return { entries, topicCounts, totalCount };
+}
+
 export async function getEntriesByTopic(topic: TopicKey, locale: Locale = "zh") {
   const meta = getTopicMeta(topic, locale);
   if (!meta) {

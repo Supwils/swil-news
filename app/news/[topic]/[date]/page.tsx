@@ -83,19 +83,16 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
     notFound();
   }
 
-  const [entryZh, entryEn, availableTopicsZh, availableTopicsEn, topicPreviewsZh, topicPreviewsEn] = await Promise.all([
+  // This route always renders Chinese. Switching to English navigates to the
+  // dedicated /en/* route tree, so loading any English data here is dead
+  // weight that only bloats the prerendered payload.
+  const [entryZh, availableTopicsZh, topicPreviewsZh] = await Promise.all([
     getNewsEntry(topic, date, "zh"),
-    getNewsEntry(topic, date, "en"),
     getTopicsWithNewsForDate(date, "zh"),
-    getTopicsWithNewsForDate(date, "en"),
     getEntryPreviewsByTopic(topic, "zh"),
-    getEntryPreviewsByTopic(topic, "en"),
   ]);
 
   const relatedZh = topicPreviewsZh
-    .filter((entry) => entry.date !== date)
-    .slice(0, 3);
-  const relatedEn = topicPreviewsEn
     .filter((entry) => entry.date !== date)
     .slice(0, 3);
 
@@ -136,15 +133,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   };
 
   const { filePath: _filePath, content: zhContent, ...clientEntry } = entryZh;
-  const clientEntryEn = entryEn
-    ? (() => {
-        const { filePath: _fp, content: _content, ...e } = entryEn;
-        return e;
-      })()
-    : null;
-
   const articleBody = <NewsMarkdown content={zhContent} />;
-  const articleBodyEn = entryEn ? <NewsMarkdown content={entryEn.content} /> : null;
 
   return (
     <>
@@ -153,13 +142,9 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
         topic={topic}
         date={date}
         entry={clientEntry}
-        entryEn={clientEntryEn}
         articleBody={articleBody}
-        articleBodyEn={articleBodyEn}
-        availableTopicsZh={availableTopicsZh}
-        availableTopicsEn={availableTopicsEn}
-        relatedZh={relatedZh}
-        relatedEn={relatedEn}
+        availableTopics={availableTopicsZh}
+        related={relatedZh}
       />
     </>
   );
