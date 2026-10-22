@@ -8608,6 +8608,88 @@
         }
       ],
       "source": "measured"
+    },
+    {
+      "date": "2026-10-22",
+      "published": true,
+      "total": 10,
+      "succeeded": [
+        "auto-mobility-news",
+        "aitech-news",
+        "science-news",
+        "energy-climate-news",
+        "supply-chain-news",
+        "crypto-news",
+        "finance-news",
+        "sports-health-nutrition-news",
+        "gaming-news",
+        "general-news"
+      ],
+      "failed": [],
+      "durationSec": 2640,
+      "topics": [
+        {
+          "topic": "aitech-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 434
+        },
+        {
+          "topic": "auto-mobility-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 498
+        },
+        {
+          "topic": "crypto-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 204
+        },
+        {
+          "topic": "energy-climate-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 490
+        },
+        {
+          "topic": "finance-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 768
+        },
+        {
+          "topic": "gaming-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 648
+        },
+        {
+          "topic": "general-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 438
+        },
+        {
+          "topic": "science-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 583
+        },
+        {
+          "topic": "sports-health-nutrition-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 601
+        },
+        {
+          "topic": "supply-chain-news",
+          "status": "ok",
+          "attempts": 1,
+          "durationSec": 613
+        }
+      ],
+      "source": "measured"
     }
   ]
 }
